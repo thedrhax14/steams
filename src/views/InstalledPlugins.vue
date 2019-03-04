@@ -10,9 +10,9 @@
 import InstalledPlugins from '@/components/InstalledPlugins.vue'
 
 export default {
-  name: 'home',
-  components: {
-    InstalledPlugins
-  }
+	name: 'home',
+	components: {
+		InstalledPlugins
+	}
 }
 </script>
