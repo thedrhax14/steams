@@ -11,7 +11,7 @@ It only works if you have vue installed. It is recommended to use UI because it 
 ```
 vue ui
 ```
-
+However, if you like code and bash you can use these:
 ### Compiles and hot-reloads for development
 ```
 npm run serve
