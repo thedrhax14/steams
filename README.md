@@ -1,4 +1,4 @@
-# vue-training
+# steams
 
 ## Project setup
 ```
