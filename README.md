@@ -12,6 +12,7 @@ It only works if you have vue installed. It is recommended to use UI because it 
 ```
 vue ui
 ```
+However, if you like code and bash (terminal or command promopt) then check section below.
 
 ### Compiles and hot-reloads for development
 ```
