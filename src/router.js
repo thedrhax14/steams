@@ -8,6 +8,7 @@ import Bikes from './views/Bikes.vue'
 import Profile from './views/Profile.vue'
 import Login from './views/Login.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
+import StationsMap from './views/StationsMap.vue'
 
 Vue.use(Router)
 
@@ -17,8 +18,8 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'home',
-			component: Home
+			name: 'StationsMap',
+			component: StationsMap
 		},
 		{
 			path: '/about',

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import './assets/style.css'
 import mapbox from 'mapbox-gl-vue'
 import router from './router'
 import { store } from './store.js'

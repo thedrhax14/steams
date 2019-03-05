@@ -1,4 +1,5 @@
 # STEAMS
+Following commands were tested only on Mac OS X. If someone finds a way to change it, then please update README.md file
 
 ## Project setup
 Make sure you have node.js installed.
