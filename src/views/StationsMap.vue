@@ -68,7 +68,6 @@ export default {
 			console.log('Map is loaded')
 		},
 		mapClicked (map, e) {
-			// console.log('Clicked. e.point is ', e.point)
 			this.addPopUp(map, e)
 		},
 		geolocateError (control, positionError) {
