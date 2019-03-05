@@ -30,6 +30,7 @@ npm run test
 ```
 
 ### Lints and fixes files
+This may fix your life problems:) The same function available in the vue ui.
 ```
 npm run lint
 ```
