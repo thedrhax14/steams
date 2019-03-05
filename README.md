@@ -1,5 +1,5 @@
 # STEAMS
-Following commands were tested only on Mac OS X. If someone finds a commands for Windows, then please update README.md file
+Following commands were tested only on Mac OS X. If someone finds commands for Windows, then please update README.md file
 
 ## Project setup
 Make sure you have node.js installed.
