@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import About from './views/About.vue'
 import Home from './views/Home.vue'
 import Bikes from './views/Bikes.vue'
+import PlaceReservation from './views/PlaceReservation.vue'
 import Profile from './views/Profile.vue'
 import Login from './views/Login.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
@@ -30,6 +31,11 @@ const router = new Router({
 			path: '/bikes',
 			name: 'Bikes',
 			component: Bikes
+		},
+		{
+			path: '/placeres',
+			name: 'PlaceReservation',
+			component: PlaceReservation
 		},
 		{
 			path: '/installedplugins',

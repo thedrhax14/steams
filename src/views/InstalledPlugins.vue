@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/images/logo.png">
     <InstalledPlugins msg="Welcome to STEAMS"/>
   </div>
 </template>
