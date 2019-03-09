@@ -15,7 +15,7 @@
     <small style="font-size:20px; font-weight:bold;">£3.00/hr</small>
  </div>
  <button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
- <img src="images/standard_bike1.png" style="width:95.75px; height:54.25px; margin-left: -5px;">
+ <img src="../assets/images/standard_bike1.png" style="width:95.75px; height:54.25px; margin-left: -5px;">
 </li>
 <li style="cursor:pointer;" class="list-group-item list-group-item-action">
  <div class="d-flex w-100 justify-content-between">
@@ -23,7 +23,7 @@
     <small style="font-size:20px; font-weight:bold;">£7.50/hr</small>
  </div>
  <button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
-<img src="images/road_bike1.png" style="width:96px; height:55.75px; margin-left: -5px;">
+<img src="../assets/images/road_bike1.png" style="width:96px; height:55.75px; margin-left: -5px;">
 </li>
 <li style="cursor:pointer;" class="list-group-item list-group-item-action">
  <div class="d-flex w-100 justify-content-between">
@@ -31,7 +31,7 @@
     <small style="font-size:20px; font-weight:bold;">£10.00/hr</small>
  </div>
  <button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
- <img src="images/mtn_bike1.png" style="width:95.75px; height:53px; margin-left: -5px;">
+ <img src="../assets/images/mtn_bike1.png" style="width:95.75px; height:53px; margin-left: -5px;">
 </li>
 <li style="cursor:pointer;" class="list-group-item list-group-item-action">
  <div class="d-flex w-100 justify-content-between">
@@ -39,7 +39,7 @@
     <small style="font-size:20px; font-weight:bold;">£5.00/hr</small>
  </div>
  <a href="bikes.html"><button style="float:right; margin-top:30px;" class="btn btn-danger">More info</button></a>
-<img src="images/tandem_bike1.png" style="width:84.5px; height:36.75px; margin-left: -5px;">
+<img src="../assets/images/tandem_bike1.png" style="width:84.5px; height:36.75px; margin-left: -5px;">
 </li>
 </div>
   <br/>
