@@ -44,3 +44,8 @@ In particular, learn how to register new components, pass data to components, re
 ### Practice
 It is reccomended to have local project on personal machine for learning and experimentation purposes.
 
+## FAQ
+```
+Also I don't get what a pull request means?
+```
+In simple terms it is a button on the website and in the app, which on click tells collabortors that specific branch is ready to be reviewed and merged with another branch. Very useful when people are working on the file and doing a lot of changes.
