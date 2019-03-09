@@ -1,5 +1,6 @@
 <template>
   <body>
+    <div class="wrap" style="margin-top: 50px; width:600px;">
     <h2 style="text-align:center;"> FAQs </h2>
       <hr>
       <h5 style="font-weight:bold;">Q: Are there any rate changes during holidays?</h5>
@@ -24,5 +25,6 @@
       <p style="font-size:20px;">A: All reserved/booked bikes must be picked up based on the chosen date during reservation. If you experience any delays with collecting your bike, please seek help from customer service, additionally, there is no change in rates when collecting the bike.</p>
       <br/>
       <br/>
+    </div>
   </body>
 </template>
