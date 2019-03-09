@@ -1,5 +1,6 @@
 <template>
   <body>
+    <div class="wrap" style="margin-top: 50px; width:600px;">
   <h2>Place reservation</h2>
 <hr>
   <form action="action.php">
@@ -58,5 +59,6 @@
   <a href="makepayement.html"> <button id = "submitBtn" onclick="submitClick()" style=" width:200px;" type="button" class="btn btn-success">Make payement &nbsp;<i class="fas fa-check fa-sm"></i></button></a>
   <br/>
   <br/>
+</div>
 </body>
 </template>
