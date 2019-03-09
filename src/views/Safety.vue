@@ -1,5 +1,6 @@
 <template>
   <body>
+    <div class="wrap" style="margin-top: 50px; width:600px;">
   <h2 style="text-align:center;"> Safety </h2>
     <hr>
     <article>
@@ -37,5 +38,6 @@
     </article>
 
     <br/>
+  </div>
   </body>
 </template>
