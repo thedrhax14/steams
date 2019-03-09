@@ -48,5 +48,15 @@
      <span><h4 style="font-size:20px; float: left;">From: &nbsp;</h4> <input class="form-control form-control-sm" style="width: 120px; float:left;" type="time" name="usr_time" required>
      <h4 style="font-size: 20px; float: left; margin-left: 60px;">Till: </h4><input class="form-control form-control-sm" style="width:120px; float: right; margin-right:90px;" type="time" name="usr_time" required></span>
   </form>
+  <br/>
+<br/>
+<hr>
+<br/>
+
+  <a href="reservebike.html"> <button style="margin-left: 490px; width:100px;" type="button" class="btn btn-danger">Discard</button></a>
+  &nbsp;
+  <a href="makepayement.html"> <button id = "submitBtn" onclick="submitClick()" style=" width:200px;" type="button" class="btn btn-success">Make payement &nbsp;<i class="fas fa-check fa-sm"></i></button></a>
+  <br/>
+  <br/>
 </body>
 </template>
