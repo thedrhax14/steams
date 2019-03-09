@@ -4,7 +4,7 @@
   <h2 style="text-align:center;"> Safety </h2>
     <hr>
     <article>
-      <img src="../asssets/images/helmet.png" style="width:100px; height:100px; float:left; margin-left: 10px;">
+      <img src="../assets/images/helmet.png" style="width:100px; height:100px; float:left; margin-left: 10px;">
 
       <h4 style="font-weight:bold;">Wear a helmet!</h4>
       Always wear a helmet at all cost for safety regardless the environment you will be cycling in.
