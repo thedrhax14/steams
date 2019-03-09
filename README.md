@@ -35,5 +35,12 @@ This may fix your life problems:) The same function available in the vue ui.
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Usefull notes
+### Component-oriented programming
+Since we are doing components, please everyone read [this](https://vuejs.org/v2/guide/components.html) and check Components in depth. I added one very simple example of it called InstalledPlugins.vue, which can be found in folders "components" and "views". Tomorrow I will finish moving complex auth and popuo components, so you could use them as examples or validation of your code.
+
+In particular, learn how to register new components, pass data to components, reuse components in views, create new views and edit router. Don't forget the [basics](https://vuejs.org/v2/guide/index.html) too.
+
+### Practice
+It is reccomended to have local project on personal machine for learning and experimentation purposes.
+
