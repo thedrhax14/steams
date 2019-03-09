@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import About from './views/About.vue'
 import Home from './views/Home.vue'
 import Bikes from './views/Bikes.vue'
+import TOS from './views/TOS.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
 import Profile from './views/Profile.vue'
 import Login from './views/Login.vue'
@@ -49,6 +50,11 @@ const router = new Router({
 			meta: {
 				requiresAuth: true
 			}
+		},
+		{
+			path: '/termsofservice',
+			name: 'TOS',
+			component: TOS,
 		},
 		{
 			path: '/login',
