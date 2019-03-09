@@ -1,7 +1,7 @@
 <template>
   <div id="home">
-    <img alt="Vue logo" src="../assets/images/logo.png">
-    <InstalledPlugins msg="Welcome to STEAMS"/>
+    <img alt="Vue logo" src="../assets/images/SPINlogowhite.png">
+    <InstalledPlugins msg="STEAMS "/>
   </div>
 </template>
 
