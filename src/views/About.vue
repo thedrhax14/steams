@@ -1,15 +1,5 @@
 <template>
   <body>
-    <nav class="navbar">
-      <span class="open-slide">
-        <a href="#" onclick="openSlideMenu()">
-          <i class="fas fa-bars fa-2x"></i>
-        </a>
-      </span>
-      <div class="logo" style="position: absolute; margin-left: 100px;" >
-              <img src="../assets/images/SPINlogowhite.png">
-          </div>
-    </nav>
       <div class="wrap" style="margin-top: 50px; width:600px;">
         <h2>About Us</h2>
         <hr/>
