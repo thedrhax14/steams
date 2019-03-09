@@ -1,6 +1,6 @@
 <template>
   <body>
-    <div class="wrap" style="margin-top: 50px; width:600px;">
+    <div class="wrap" style="margin-top: 50px;">
   <h2>Place reservation</h2>
 <hr>
   <form action="action.php">
@@ -53,7 +53,6 @@
 <br/>
 <hr>
 <br/>
-
   <a href="reservebike.html"> <button style="margin-left: 490px; width:100px;" type="button" class="btn btn-danger">Discard</button></a>
   &nbsp;
   <a href="makepayement.html"> <button id = "submitBtn" onclick="submitClick()" style=" width:200px;" type="button" class="btn btn-success">Make payement &nbsp;<i class="fas fa-check fa-sm"></i></button></a>
