@@ -4,17 +4,181 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="icon" href="<%= BASE_URL %>favicon-96x96.png">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.0/mapbox-gl-draw.js'></script>
    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.css' type='text/css' />
    <title>STEAMS</title>
   </head>
   <body>
+    <nav class="navbar">
+      <span class="open-slide">
+        <a href="#" onclick="openSlideMenu()">
+          <i class="fas fa-bars fa-2x"></i>
+        </a>
+      </span>
+      <div class="logo" style="position: absolute; margin-left: 100px;" >
+              <img src="../src/assets/images/SPINlogowhite.png">
+          </div>
+    </nav>
+    <div id="side-menu" class="side-nav">
+      <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+      <div id="accountpic">
+      <a href="myaccount.html"><img src="../src/assets/images/danny-pej.png"></a>
+    </div>
+      <section>
+          <h2>Full Name</h2><br/>
+      </section>
+      <a href='/placeres' class="current"><i class="fas fa-bicycle fa-sm"></i>&nbsp;&nbsp;Reserve a bike</a>
+      <a href="myreservations.html"><i class="fas fa-bell fa-sm"></i>&nbsp;&nbsp;My reservations</a>
+      <a href="recenttrips.html"><i class="far fa-clock fa-sm"></i>&nbsp;&nbsp;Recent trips</a>
+      <a href="payement.html"><i class="fas fa-credit-card fa-sm"></i>&nbsp;&nbsp;Payement</a>
+      <a href="help.html"><i class="fas fa-question-circle fa-sm"></i>&nbsp;&nbsp;Help</a>
+      <br/>
+      <a href="reportissue.html"><i class="fas fa-exclamation fa-sm"></i>&nbsp;&nbsp;Report an issue</a>
+      <a href="settings.html"><i class="fas fa-cog fa-sm"></i>&nbsp;&nbsp;Settings</a>
+    </div>
     <noscript>
       <strong>We're sorry but vue-training doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+
+
+    <script>
+      function openSlideMenu(){
+        document.getElementById('side-menu').style.width = '250px';
+      }
+
+      function closeSlideMenu(){
+        document.getElementById('side-menu').style.width = '0';
+      }
+    </script>
+
+    <footer class="page-footer font-small mdb-color pt-4" style="background-color: black; color: #696969;">
+
+      <!-- Footer Links -->
+      <div class="container text-center text-md-left">
+
+        <!-- Footer links -->
+        <div class="row text-center text-md-left mt-3 pb-3">
+
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none">
+
+
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+            <p>
+              <a href="/login">Your Account</a>
+            </p>
+            <p>
+              <a href="#">Help</a>
+            </p>
+            <p>
+              <a href="#!">License Agreement</a>
+            </p>
+            <p>
+              <a href="/termsofservice">Terms of Service</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Support</h6>
+            <p>
+              <a href="/FAQ">FAQ</a>
+            </p>
+            <p>
+              <a href="/safety">Safety</a>
+            </p>
+            <p>
+              <a href="#!">License Agreement</a>
+            </p>
+
+          </div>
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p>
+              <i class="fas fa-envelope mr-3"></i> spin@gmail.com</p>
+            <p>
+              <i class="fas fa-phone mr-3"></i> 04 74 567 88</p>
+            <p>
+               <i class="fas fa-calendar mr-3"></i>Friday – Thursday: 8am to 10pm</p>
+            <p>
+                <i class="fas fa-map-marker-alt mr-3"></i>Edinburgh, United Kingdom</p>
+          </div>
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Company</h6>
+
+          <p>
+            <a href="/about">About Us</a>
+          </p>
+        </div>
+        </div>
+        <!-- Grid row -->
+        <div class="row d-flex align-items-center">
+
+          <!-- Grid column -->
+          <div class="col-md-7 col-lg-8">
+
+            <!--Copyright-->
+            <p class="text-center text-md-left">&copy; 2019 Copyright:
+              <a href="https://mdbootstrap.com/education/bootstrap/">
+                <strong>Spin.com</strong>
+              </a>
+            </p>
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-5 col-lg-4 ml-lg-0">
+
+            <!-- Social buttons -->
+            <div class="text-center text-md-right">
+              <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                  <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-google-plus-g"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Footer Links -->
+
+    </footer>
   </body>
 </html>

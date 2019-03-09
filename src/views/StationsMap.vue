@@ -1,4 +1,5 @@
 <template>
+	<body>
 	<div id="map">
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
@@ -37,6 +38,7 @@
 		@geolocate-error="geolocateError">
 		</mapbox>
 </div>
+</body>
 </template>
 
 <script>

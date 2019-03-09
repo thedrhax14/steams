@@ -5,6 +5,10 @@ import firebase from 'firebase'
 import About from './views/About.vue'
 import Home from './views/Home.vue'
 import Bikes from './views/Bikes.vue'
+import TOS from './views/TOS.vue'
+import FAQ from './views/FAQ.vue'
+import Safety from './views/Safety.vue'
+import PlaceReservation from './views/PlaceReservation.vue'
 import Profile from './views/Profile.vue'
 import Login from './views/Login.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
@@ -32,6 +36,11 @@ const router = new Router({
 			component: Bikes
 		},
 		{
+			path: '/placeres',
+			name: 'PlaceReservation',
+			component: PlaceReservation
+		},
+		{
 			path: '/installedplugins',
 			name: 'InstalledPlugins',
 			component: InstalledPlugins
@@ -43,6 +52,21 @@ const router = new Router({
 			meta: {
 				requiresAuth: true
 			}
+		},
+		{
+			path: '/termsofservice',
+			name: 'TOS',
+			component: TOS,
+		},
+		{
+			path: '/Safety',
+			name: 'Safety',
+			component: Safety,
+		},
+		{
+			path: '/FAQ',
+			name: 'FAQ',
+			component: FAQ,
 		},
 		{
 			path: '/login',
