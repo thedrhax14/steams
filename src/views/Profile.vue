@@ -2,7 +2,7 @@
 	<div class="profile">
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
-				<p>Loading...</p>
+				<p>Loading prfile...</p>
 			</div>
 		</transition>
 		<h1>Profile</h1>
