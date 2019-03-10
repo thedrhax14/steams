@@ -44,6 +44,9 @@ In particular, learn how to register new components, pass data to components, re
 ### Practice
 It is reccomended to have local project on personal machine for learning and experimentation purposes.
 
+### Version Control and COP
+Even if we are working on different components, we still need to test them, which can be done in two ways. Either create a local project and maintain your own copy of the group project or create your own branch and do whatever you want there.
+
 ## FAQ
 ```
 Also I don't get what a pull request means?
