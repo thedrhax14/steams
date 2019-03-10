@@ -8,6 +8,10 @@ import Bikes from './views/Bikes.vue'
 import TOS from './views/TOS.vue'
 import FAQ from './views/FAQ.vue'
 import License from './views/LicenseAgreement.vue'
+import Recents from './views/Recents.vue'
+import Report from './views/Report.vue'
+import Reservations from './views/Reservations.vue'
+import Payement from './views/Payement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
 import Profile from './views/Profile.vue'
@@ -32,9 +36,24 @@ const router = new Router({
 			component: About
 		},
 		{
-			path: '/Licenseagreement',
+			path: '/licenseagreement',
 			name: 'License',
 			component: License
+		},
+		{
+			path: '/recents',
+			name: 'Recents',
+			component: Recents
+		},
+		{
+			path: '/reservations',
+			name: 'Reservations',
+			component: Reservations
+		},
+		{
+			path: '/report',
+			name: 'Report',
+			component: Report
 		},
 		{
 			path: '/bikes',
@@ -42,7 +61,12 @@ const router = new Router({
 			component: Bikes
 		},
 		{
-			path: '/placeres',
+			path: '/payement',
+			name: 'Payement',
+			component: Payement
+		},
+		{
+			path: '/reserve',
 			name: 'PlaceReservation',
 			component: PlaceReservation
 		},
@@ -60,12 +84,12 @@ const router = new Router({
 			}
 		},
 		{
-			path: '/Termsofservice',
+			path: '/termsofservice',
 			name: 'TOS',
 			component: TOS,
 		},
 		{
-			path: '/Safety',
+			path: '/safety',
 			name: 'Safety',
 			component: Safety,
 		},
