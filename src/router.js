@@ -7,6 +7,7 @@ import Home from './views/Home.vue'
 import Bikes from './views/Bikes.vue'
 import TOS from './views/TOS.vue'
 import FAQ from './views/FAQ.vue'
+import License from './views/LicenseAgreement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
 import Profile from './views/Profile.vue'
@@ -29,6 +30,11 @@ const router = new Router({
 			path: '/about',
 			name: 'About',
 			component: About
+		},
+		{
+			path: '/Licenseagreement',
+			name: 'License',
+			component: License
 		},
 		{
 			path: '/bikes',
@@ -54,7 +60,7 @@ const router = new Router({
 			}
 		},
 		{
-			path: '/termsofservice',
+			path: '/Termsofservice',
 			name: 'TOS',
 			component: TOS,
 		},
