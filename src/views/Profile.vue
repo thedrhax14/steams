@@ -2,7 +2,7 @@
 	<div class="profile">
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
-				<p>Loading prfile...</p>
+				<p>..</p>
 			</div>
 		</transition>
 		<h1>Profile</h1>
@@ -18,6 +18,7 @@
 				<td><a @click="returnBike(bike.id)">{{ bike.data()['Bike Type'] }}</a></td>
 				<td>{{ bike.data()['Cost per hour'] }}</td>
 			</tr>
+			<button @click="returnBike">Return Bike</button>
 		</table>
 	</div>
 </template>

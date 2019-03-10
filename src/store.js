@@ -64,12 +64,6 @@ export const store = new Vuex.Store({
 		},
 		returnBike ({ dispatch, state }) {
 			state.performingRequest = true
-			fb.bikeHistoryCollection.doc(state.selectedBikeId).delete().then(function () {
-				alert('Returned ' + state.selectedBikeId)
-				console.log('Document successfully deleted!')
-				state.performingRequest = false
-				dispatch('fetchUserHistory')
-			})
 		}
 	},
 	mutations: {
