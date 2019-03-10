@@ -37,15 +37,20 @@ npm run lint
 
 ## Usefull notes
 ### Component-oriented programming
-Since we are doing components, please everyone read [this](https://vuejs.org/v2/guide/components.html) and check Components in depth. I added one very simple example of it called InstalledPlugins.vue, which can be found in folders "components" and "views". Tomorrow I will finish moving complex auth and popuo components, so you could use them as examples or validation of your code.
+Since we are doing components, please everyone read [this](https://vuejs.org/v2/guide/components.html) and check Components in depth. I added one very simple example of it called InstalledPlugins.vue, which can be found in folders "components" and "views". Tomorrow I will finish moving complex auth and popup components, so you could use them as examples or validation of your code.
 
 In particular, learn how to register new components, pass data to components, reuse components in views, create new views and edit router. Don't forget the [basics](https://vuejs.org/v2/guide/index.html) too.
+
+#### General code requirements (Subject to change)
+When you design a component, think of its use cases. It have to be flexible, easy to use and reusable.
 
 ### Practice
 It is reccomended to have local project on personal machine for learning and experimentation purposes.
 
 ### Version Control and COP
-Even if we are working on different components, we still need to test them, which can be done in two ways. Either create a local project and maintain your own copy of the group project or create your own branch and do whatever you want there.
+Even if we are working on different components, we still need to test them, which can be done in two ways. Either create a local project and maintain your own copy of the group project or create your own branch and do whatever you want there. 
+
+Another brain instensive alternative is to rely on the logic and code under assumptions. It is safe for the project, but may be risky for the component you work on.
 
 ## FAQ
 ```
