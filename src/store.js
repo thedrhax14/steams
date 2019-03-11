@@ -63,7 +63,6 @@ export const store = new Vuex.Store({
 			})
 		},
 		returnBike ({ dispatch, state }) {
-			state.performingRequest = true
 		}
 	},
 	mutations: {
