@@ -62,7 +62,12 @@ export const store = new Vuex.Store({
 				})
 			})
 		},
-		returnBike ({ dispatch, state }) {
+		returnBike ({ dispatch, state }, biketypeId, bikeId) {
+			fb.bikesCollection.doc(biketypeId).get().then(bikeTypeSnapShot => {
+				bikeTypeSnapShot.collection("Bikes").doc(bikeId).get().then(bikeSnapShot => {
+					bikeSnapShot.update({ Reserved: null})
+				})
+			})
 		}
 	},
 	mutations: {
