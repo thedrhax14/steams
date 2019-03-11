@@ -86,17 +86,17 @@ const router = new Router({
 		{
 			path: '/termsofservice',
 			name: 'TOS',
-			component: TOS,
+			component: TOS
 		},
 		{
 			path: '/safety',
 			name: 'Safety',
-			component: Safety,
+			component: Safety
 		},
 		{
 			path: '/FAQ',
 			name: 'FAQ',
-			component: FAQ,
+			component: FAQ
 		},
 		{
 			path: '/login',
