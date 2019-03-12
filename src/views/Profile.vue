@@ -2,36 +2,35 @@
 	<div class="profile">
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
-				<p>Loading...</p>
+				<p>..</p>
 			</div>
 		</transition>
 		<h1>Profile</h1>
 		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
 		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
 		<h1>Bike history</h1>
-		<table>
-			<tr>
-				<th>Name</th>
-				<th>Price</th>
-			</tr>
-			<tr v-for="bike in this.$store.state.userhistory" :key="bike.id">
-				<td><a @click="returnBike(bike.id)">{{ bike.data()['Bike Type'] }}</a></td>
-				<td>{{ bike.data()['Cost per hour'] }}</td>
-			</tr>
-		</table>
+		<button @click='returnDefaultBike'>Return default bike</button>
+		<button @click='bookDefaultBike'>Book default bike</button>
 	</div>
 </template>
 
 <script>
 export default {
-	methods: {
-		returnBike (id) {
-			this.$store.dispatch('selectBike', id)
-			this.$store.dispatch('returnBike')
+	data () {
+		return {
+			defaultBikeData: {
+				biketypeId: 'BJUocgao1XSIYR2LnkWp',
+				bikeId: 'A04OkMgvxO12QSjTD5pK'
+			}
 		}
 	},
-	created () {
-		this.$store.dispatch('fetchUserHistory')
+	methods: {
+		returnDefaultBike () {
+			this.$store.dispatch('returnBike', this.defaultBikeData)
+		},
+		bookDefaultBike () {
+			this.$store.dispatch('bookBike', this.defaultBikeData)
+		}
 	},
 	beforeCompile () {
 		console.log('beforeCompile', this)
