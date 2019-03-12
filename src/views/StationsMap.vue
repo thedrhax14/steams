@@ -84,8 +84,9 @@ export default {
 				return
 			}
 			const feature = features[0]
+			console.log('Feature data =>', feature);
 			const Popup = new window.mapboxgl.Popup()
-			Popup.setLngLat(feature.geometry.coordinates).setHTML('<div id="vue-popup-content">your content</div>').addTo(map)
+			Popup.setLngLat(feature.geometry.coordinates).setHTML(feature).addTo(map)
 		}
 	},
 	created () {
