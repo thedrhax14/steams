@@ -1,15 +1,11 @@
 <template>
 	<div class="login">
 		<transition name="fade">
-			<div v-if="performingRequest" class="loading">
+			<div v-if="$store.state.performingRequest" class="loading">
 				<p>Loading...</p>
 			</div>
 		</transition>
 		<section>
-			<div class="col1">
-				<h1>Login</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
 			<div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword }">
 				<form v-if="showLoginForm" @submit.prevent>
 					<Login/>
@@ -27,11 +23,7 @@
 				</form>
 				<form v-if="showForgotPassword" @submit.prevent class="password-reset">
 					<div v-if="!passwordResetSuccess">
-						<h1>Reset Password</h1>
-						<p>We will send you an email to reset your password</p>
-						<label for="email3">Email</label>
-						<input v-model.trim="passwordForm.email" type="text" placeholder="you@email.com" id="email3" />
-						<button @click="resetPassword" class="button">Submit</button>
+						<RestorePass/>
 						<div class="extras">
 							<a @click="togglePasswordReset">Back to Log In</a>
 						</div>
@@ -52,29 +44,21 @@
 	</div>
 </template>
 <script>
+import Login from '@/components/Login.vue'
+import Register from '@/components/Register.vue'
+import RestorePass from '@/components/RestorePass.vue'
 const fb = require('../firebaseConfig.js')
-import Login from '@/components/Auth components/Login.vue'
-import Register from '@/components/Auth components/Register.vue'
 
 export default {
 	components: {
 		Login,
-		Register
+		Register,
+		RestorePass
 	},
 	data () {
 		return {
-			signupForm: {
-				name: '',
-				email: '',
-				password: ''
-			},
-			passwordForm: {
-				email: ''
-			},
 			showLoginForm: true,
 			showForgotPassword: false,
-			passwordResetSuccess: false,
-			performingRequest: false,
 			errorMsg: ''
 		}
 	},
@@ -92,19 +76,6 @@ export default {
 				this.showLoginForm = false
 				this.showForgotPassword = true
 			}
-		},
-		resetPassword () {
-			this.performingRequest = true
-
-			fb.auth.sendPasswordResetEmail(this.passwordForm.email).then(() => {
-				this.performingRequest = false
-				this.passwordResetSuccess = true
-				this.passwordForm.email = ''
-			}).catch(err => {
-				console.log(err)
-				this.performingRequest = false
-				this.errorMsg = err.message
-			})
 		}
 	}
 }
