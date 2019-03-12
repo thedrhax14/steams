@@ -51,23 +51,11 @@ export const store = new Vuex.Store({
 		selectBike ({ commit }, bid) {
 			commit('setSelectBike', bid)
 		},
-		rentBike ({ state }) {
-			state.performingRequest = true
-			var bikeTypeRef = fb.bikesCollection.doc(state.selectedBikeId)
-			var bikes = bikeTypeRef.collection('Bikes')
-			bikes.where('Reserved', '==', null).limit(1).get().then(querySnapshot => {
-				querySnapshot.forEach(function (doc) {
-					console.log('Booking ', doc)
-					bikes.doc(doc.id).update({ Reserved: state.currentUser.uid })
-				})
-			})
+		returnBike ({ state }, bikeData) {
+			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: null})
 		},
-		returnBike ({ dispatch, state }, biketypeId, bikeId) {
-			fb.bikesCollection.doc(biketypeId).get().then(bikeTypeSnapShot => {
-				bikeTypeSnapShot.collection("Bikes").doc(bikeId).get().then(bikeSnapShot => {
-					bikeSnapShot.update({ Reserved: null})
-				})
-			})
+		bookBike ({ state }, bikeData) {
+			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: state.currentUser.uid})
 		}
 	},
 	mutations: {

@@ -9,19 +9,28 @@
 		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
 		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
 		<h1>Bike history</h1>
-		<button @click='returnBike'>Return default bike</button>
+		<button @click='returnDefaultBike'>Return default bike</button>
+		<button @click='bookDefaultBike'>Book default bike</button>
 	</div>
 </template>
 
 <script>
 export default {
-	methods: {
-		returnBike () {
-			this.$store.dispatch('returnBike')
+	data () {
+		return {
+			defaultBikeData: {
+				biketypeId: 'BJUocgao1XSIYR2LnkWp',
+				bikeId: 'A04OkMgvxO12QSjTD5pK'
+			}
 		}
 	},
-	created () {
-		this.$store.dispatch('fetchUserHistory')
+	methods: {
+		returnDefaultBike () {
+			this.$store.dispatch('returnBike', this.defaultBikeData)
+		},
+		bookDefaultBike () {
+			this.$store.dispatch('bookBike', this.defaultBikeData)
+		}
 	},
 	beforeCompile () {
 		console.log('beforeCompile', this)
