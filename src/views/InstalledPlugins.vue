@@ -1,14 +1,7 @@
 <template>
   <div id="home">
     <img alt="Vue logo" src="../assets/images/SPINlogowhite.png">
-    <InstalledPlugins v-bind:msg="{
-			content: 'nested object',
-			userdata: {
-				permission: 'Operator',
-				displayname: 'Salva'
-			}
-		}
-	"/>
+    <InstalledPlugins v-bind:biketypeid="1234567890"/>
   </div>
 </template>
 
@@ -20,13 +13,6 @@ export default {
 	name: 'home',
 	components: {
 		InstalledPlugins
-	},
-	data () {
-		return {
-			msgdata: {
-				
-			}
-		}
 	}
 }
 </script>

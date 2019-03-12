@@ -9,9 +9,11 @@
 </template>
 
 <script>
+const fb = require('../firebaseConfig.js')
+
 export default {
 	name: 'RestorePass',
-	data() {
+	data () {
 		return {
 			passwordForm: {
 				email: ''

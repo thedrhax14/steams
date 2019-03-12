@@ -47,7 +47,6 @@
 import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
 import RestorePass from '@/components/RestorePass.vue'
-const fb = require('../firebaseConfig.js')
 
 export default {
 	components: {

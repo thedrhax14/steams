@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p>Your permission level {{ msg.userdata.permission }}</p>
+		<p>Your permission level {{ biketypeid }}</p>
 		<div @click="UpdateDate">Udpate data</div>
 	</div>
 </template>
@@ -9,11 +9,14 @@
 export default {
 	name: 'HelloWorld',
 	props: {
-		msg: Object
+		biketypeid: String,
+		bikeid: String,
+		bikename: String,
+		bikelocation: Object
 	},
 	methods: {
-		UpdateDate(){
-			console.log(this.msg.userdata.permission);
+		UpdateDate () {
+			console.log(this.msg.userdata.permission)
 		}
 	}
 }
