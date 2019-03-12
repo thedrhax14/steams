@@ -1,9 +1,12 @@
 <template>
-	<label for="email1">Email</label>
-	<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
-	<label for="password1">Password</label>
-	<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
-	<button @click="login" class="button">Log In</button>
+	<div>
+		<h1>Welcome Back</h1>
+		<label for="email1">Email</label>
+		<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
+		<label for="password1">Password</label>
+		<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
+		<button @click="login" class="button">Log In</button>
+	</div>
 </template>
 
 <script>
@@ -16,10 +19,7 @@ export default {
 			loginForm: {
 				email: '',
 				password: ''
-			},
-			showLoginForm: true,
-			showForgotPassword: false,
-			passwordResetSuccess: false
+			}
 		}
 	},
 	methods: {

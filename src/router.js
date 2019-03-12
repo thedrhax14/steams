@@ -15,7 +15,7 @@ import Payement from './views/Payement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
 import Profile from './views/Profile.vue'
-import Login from './views/Login.vue'
+import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
 import StationsMap from './views/StationsMap.vue'
 
@@ -99,9 +99,9 @@ const router = new Router({
 			component: FAQ
 		},
 		{
-			path: '/login',
-			name: 'Login',
-			component: Login,
+			path: '/auth',
+			name: 'Auth',
+			component: Auth,
 			meta: {
 				requiresAuth: false
 			}
@@ -113,7 +113,7 @@ router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
 	const currentUser = firebase.auth().currentUser
 	if (requiresAuth && !currentUser) {
-		next('/login')
+		next('/auth')
 	} else if (requiresAuth && currentUser) {
 		next()
 	} else {

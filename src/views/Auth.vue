@@ -12,12 +12,7 @@
 			</div>
 			<div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword }">
 				<form v-if="showLoginForm" @submit.prevent>
-					<h1>Welcome Back</h1>
-					<label for="email1">Email</label>
-					<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
-					<label for="password1">Password</label>
-					<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
-					<button @click="login" class="button">Log In</button>
+					<Login/>
 					<div class="extras">
 						<a @click="togglePasswordReset">Forgot Password</a>
 						<br>
@@ -25,14 +20,7 @@
 					</div>
 				</form>
 				<form v-if="!showLoginForm && !showForgotPassword" @submit.prevent>
-					<h1>Get Started</h1>
-					<label for="name">Name</label>
-					<input v-model.trim="signupForm.name" type="text" placeholder="user name" id="name" />
-					<label for="email2">Email</label>
-					<input v-model.trim="signupForm.email" type="text" placeholder="you@email.com" id="email2" />
-					<label for="password2">Password</label>
-					<input v-model.trim="signupForm.password" type="password" placeholder="min 6 characters" id="password2" />
-					<button @click="signup" class="button">Sign Up</button>
+					<Register/>
 					<div class="extras">
 						<a @click="toggleForm">Back to Log In</a>
 					</div>
@@ -65,15 +53,16 @@
 </template>
 <script>
 const fb = require('../firebaseConfig.js')
-import InstalledPlugins from '@/components/InstalledPlugins.vue'
+import Login from '@/components/Auth components/Login.vue'
+import Register from '@/components/Auth components/Register.vue'
 
 export default {
+	components: {
+		Login,
+		Register
+	},
 	data () {
 		return {
-			loginForm: {
-				email: '',
-				password: ''
-			},
 			signupForm: {
 				name: '',
 				email: '',
@@ -103,36 +92,6 @@ export default {
 				this.showLoginForm = false
 				this.showForgotPassword = true
 			}
-		},
-		login () {
-			this.performingRequest = true
-			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
-				this.$store.commit('setCurrentUser', user.user)
-				this.$router.push('/profile')
-				this.performingRequest = false
-			}).catch(err => {
-				this.performingRequest = false
-				this.errorMsg = err.message
-			})
-		},
-		signup () {
-			this.performingRequest = true
-			fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
-				this.$store.commit('updateUserProfile', this.signupForm.name)
-				this.$store.commit('setCurrentUser', user.user)
-				fb.usersCollection.doc(user.user.uid).set({
-					Type: 'Customer'
-				}).then(() => {
-					this.$router.push('/profile')
-					this.performingRequest = false
-				}).catch(err => {
-					this.errorMsg = err.message
-					this.performingRequest = false
-				})
-			}).catch(err => {
-				this.errorMsg = err.message
-				this.performingRequest = false
-			})
 		},
 		resetPassword () {
 			this.performingRequest = true
