@@ -54,8 +54,28 @@
 			<br/>
 			<a href="reservebike.html"> <button style="margin-left: 490px; width:100px;" type="button" class="btn btn-danger">Discard</button></a>
 			&nbsp;
-			<a href="makepayement.html"> <button id = "submitBtn" onclick="submitClick()" style=" width:200px;" type="button" class="btn btn-success">Make payement &nbsp;<i class="fas fa-check fa-sm"></i></button></a>
+			<a href="makepayement.html">
+				<button id = "submitBtn" onclick="submitClick()" style=" width:200px;" type="button" class="btn btn-success">
+					Make payement &nbsp;
+					<i class="fas fa-check fa-sm"></i>
+				</button>
+			</a>
 			<br/>
 			<br/>
 		</div>
 	</template>
+
+<script>
+const fb = require('../firebaseConfig.js')
+
+export default {
+	created () {
+		fb.db.collection('Bike Types').doc('BJUocgao1XSIYR2LnkWp').collection('Bikes').get().then(bikesSnapShot => {
+			console.log(bikesSnapShot)
+			bikesSnapShot.forEach(bikeSnapShot => {
+				console.log(bikeSnapShot.id,'=>',bikeSnapShot.data())
+			})
+		})
+	}
+}
+</script>
