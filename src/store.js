@@ -15,7 +15,7 @@ export const store = new Vuex.Store({
 		performingRequest: false,
 		currentUser: null,
 		selectedBikeId: '',
-		bikeTypes: [],
+		bikeTypes: [], // The structure should be almost the same as collection in the firestore
 		bikes: [],
 		stations: [],
 		userhistory: []
@@ -36,6 +36,8 @@ export const store = new Vuex.Store({
 				state.performingRequest = false
 			})
 		},
+		// implement fetching by location name
+		// it needs to be added to inner array of bikes of bikeTypes. You may need to have a counter somewhere, which will be used as index.
 		fetchBikes ({ commit, state }, bikeTypeId) {
 			fb.bikeTypesCollection.doc(bikeTypeId).collection('Bikes').get().then(bikesSnapshot => {
 				bikesSnapshot.forEach(bikeDoc => {
