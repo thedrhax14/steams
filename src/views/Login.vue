@@ -65,6 +65,7 @@
 </template>
 <script>
 const fb = require('../firebaseConfig.js')
+import InstalledPlugins from '@/components/InstalledPlugins.vue'
 
 export default {
 	data () {

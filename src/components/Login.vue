@@ -1,0 +1,39 @@
+<template>
+	<label for="email1">Email</label>
+	<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
+	<label for="password1">Password</label>
+	<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
+	<button @click="login" class="button">Log In</button>
+</template>
+
+<script>
+const fb = require('../firebaseConfig.js')
+
+export default {
+	name: 'Login',
+	data () {
+		return {
+			loginForm: {
+				email: '',
+				password: ''
+			},
+			showLoginForm: true,
+			showForgotPassword: false,
+			passwordResetSuccess: false
+		}
+	},
+	methods: {
+		login () {
+			this.$store.state.performingRequest = true
+			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
+				this.$store.commit('setCurrentUser', user.user)
+				this.$router.push('/profile')
+				this.$store.state.performingRequest = false
+			}).catch(err => {
+				this.$store.state.performingRequest = false
+				this.errorMsg = err.message
+			})
+		}
+	}
+}
+</script>
