@@ -15,7 +15,8 @@ export const store = new Vuex.Store({
 		performingRequest: false,
 		currentUser: null,
 		selectedBikeId: '',
-		bikes: [],
+		bikeTypes: [],
+		bikes:[],
 		stations: [],
 		userhistory: []
 	},
@@ -23,13 +24,19 @@ export const store = new Vuex.Store({
 		clearData ({ commit }) {
 			commit('setCurrentUser', null)
 		},
-		fetchBikes ({ commit, state }) {
-			commit('setBikes', [])
+		fetchbikeTypes ({ commit, state }) {
+			commit('setbikeTypes', [])
 			state.performingRequest = true
-			fb.bikesCollection.get().then(querySnapshot => {
-				querySnapshot.forEach(doc => {
-					commit('addBike', doc)
-					console.log(doc.id, ' => ', doc.data())
+			fb.bikeTypesCollection.get().then(bikeTypesSnapshot => {
+				bikeTypesSnapshot.forEach(bikeTypeDoc => {
+					commit('addBikeType', bikeTypeDoc)
+					console.log(bikeTypeDoc.id, ' => ', bikeTypeDoc)
+					bikeTypeDoc.collection('Bikes').get().then(bikesSnapshot => {
+						bikesSnapshot.foreach(bikeDoc => {
+							commit('addBike', bikeDoc)
+							console.log(bikeDoc.id, ' => ', bikeDoc.data())
+						})
+					})
 				})
 				state.performingRequest = false
 			})
@@ -41,7 +48,7 @@ export const store = new Vuex.Store({
 				state.performingRequest = false
 				querySnapshot.forEach(function (doc) {
 					console.log('adding history of ' + doc.id)
-					fb.bikesCollection.doc(doc.id).get().then(snapShot => {
+					fb.bikeTypesCollection.doc(doc.id).get().then(snapShot => {
 						commit('addHistory', snapShot)
 						console.log(snapShot.id, ' => ', snapShot.data())
 					})
@@ -53,12 +60,12 @@ export const store = new Vuex.Store({
 		},
 		rentBike ({ state }) {
 			state.performingRequest = true
-			var bikeTypeRef = fb.bikesCollection.doc(state.selectedBikeId)
-			var bikes = bikeTypeRef.collection('Bikes')
-			bikes.where('Reserved', '==', null).limit(1).get().then(querySnapshot => {
+			var bikeTypeRef = fb.bikeTypesCollection.doc(state.selectedBikeId)
+			var bikeTypes = bikeTypeRef.collection('bikeTypes')
+			bikeTypes.where('Reserved', '==', null).limit(1).get().then(querySnapshot => {
 				querySnapshot.forEach(function (doc) {
 					console.log('Booking ', doc)
-					bikes.doc(doc.id).update({ Reserved: state.currentUser.uid })
+					bikeTypes.doc(doc.id).update({ Reserved: state.currentUser.uid })
 				})
 			})
 		},
@@ -87,17 +94,20 @@ export const store = new Vuex.Store({
 				alert(error)
 			})
 		},
-		setBikes (state, val) {
-			state.bikes = val
+		setbikeTypes (state, val) {
+			state.bikeTypes = val
 		},
-		addBike (state, val) {
-			state.bikes.push(val)
+		addBikeType (state, val) {
+			state.bikeTypes.push(val)
 		},
 		addHistory (state, val) {
 			state.userhistory.push(val)
 		},
 		setSelectBike (state, val) {
 			state.selectedBikeId = val
+		},
+		addBike (state, val) {
+			state.bikes.push(val)
 		}
 	}
 })

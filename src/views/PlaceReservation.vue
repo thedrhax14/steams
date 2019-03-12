@@ -61,3 +61,13 @@
 </div>
 </body>
 </template>
+
+<script>
+export default {
+  created () {
+    if (this.$store.state.bikes.length === 0) {
+      this.$store.dispatch('fetchbikeTypes')
+    }
+  }
+}
+</script>
