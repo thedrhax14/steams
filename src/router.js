@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import firebase from 'firebase'
 
 import About from './views/About.vue'
-import Home from './views/Home.vue'
 import Bikes from './views/Bikes.vue'
 import TOS from './views/TOS.vue'
 import FAQ from './views/FAQ.vue'

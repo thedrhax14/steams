@@ -64,10 +64,10 @@ export const store = new Vuex.Store({
 			commit('setSelectBike', bid)
 		},
 		returnBike ({ state }, bikeData) {
-			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: null})
+			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: null })
 		},
 		bookBike ({ state }, bikeData) {
-			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: state.currentUser.uid})
+			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: state.currentUser.uid })
 		}
 	},
 	mutations: {
