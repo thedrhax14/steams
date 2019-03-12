@@ -38,7 +38,7 @@ export const store = new Vuex.Store({
 		},
 		fetchBikes ({ commit, state }, bikeTypeId) {
 			fb.bikeTypesCollection.doc(bikeTypeId).collection('Bikes').get().then(bikesSnapshot => {
-				bikesSnapshot.foreach(bikeDoc => {
+				bikesSnapshot.forEach(bikeDoc => {
 					console.log(bikeDoc.id, ' => ', bikeDoc.data())
 					commit('addBike', bikeDoc)
 				})

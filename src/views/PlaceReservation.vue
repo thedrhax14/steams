@@ -70,12 +70,9 @@ const fb = require('../firebaseConfig.js')
 
 export default {
 	created () {
-		fb.db.collection('Bike Types').doc('BJUocgao1XSIYR2LnkWp').collection('Bikes').get().then(bikesSnapShot => {
-			console.log(bikesSnapShot)
-			bikesSnapShot.forEach(bikeSnapShot => {
-				console.log(bikeSnapShot.id,'=>',bikeSnapShot.data())
-			})
-		})
+		if(this.$store.state.bikeTypes.length===0){
+			this.$store.dispatch('fetchbikeTypes')
+		}
 	}
 }
 </script>
