@@ -52,11 +52,14 @@
 			<br/>
 			<hr>
 			<br/>
-			<a href="reservebike.html"> <button style="margin-left: 490px; width:100px;" type="button" class="btn btn-danger">Discard</button></a>
-			&nbsp;
+			<a href="reservebike.html">
+				<button style="margin-left: 490px; width:100px;" type="button" class="btn btn-danger">
+					Discard
+				</button>
+			</a>
 			<a href="makepayement.html">
-				<button id = "submitBtn" onclick="submitClick()" style=" width:200px;" type="button" class="btn btn-success">
-					Make payement &nbsp;
+				<button style=" width:200px;" type="button" class="btn btn-success">
+					Make payement
 					<i class="fas fa-check fa-sm"></i>
 				</button>
 			</a>
