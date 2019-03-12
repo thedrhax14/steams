@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <img alt="Vue logo" src="../assets/images/SPINlogowhite.png">
-    <InstalledPlugins msg="STEAMS "/>
+    <InstalledPlugins v-bind:biketypeid="1234567890"/>
   </div>
 </template>
 
