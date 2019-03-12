@@ -78,6 +78,7 @@ export default {
 		geolocate (control, position) {
 			console.log('User position: ' + position.coords.latitude + ' ' + position.coords.longitude)
 		},
+		// The methods needs to be cleaned. I created PopupContent, which needs to be used of setHTML shit, just to make this part of the html interactive. I suggest to use component somewhere else just to test its functionality. Remember, the goal of the component is to implement booking process.
 		addPopUp (map, e) {
 			const features = map.queryRenderedFeatures(e.point, { layers: ['markers'] })
 			if (!features.length) {
@@ -86,7 +87,7 @@ export default {
 			const feature = features[0]
 			console.log('Feature data =>', feature);
 			const Popup = new window.mapboxgl.Popup()
-			Popup.setLngLat(feature.geometry.coordinates).setHTML(feature).addTo(map)
+			Popup.setLngLat(feature.geometry.coordinates).setHTML(feature.properties.stationName).addTo(map)
 		}
 	},
 	created () {
