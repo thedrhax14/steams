@@ -9,25 +9,14 @@
 		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
 		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
 		<h1>Bike history</h1>
-		<table>
-			<tr>
-				<th>Name</th>
-				<th>Price</th>
-			</tr>
-			<tr v-for="bike in this.$store.state.userhistory" :key="bike.id">
-				<td><a @click="returnBike(bike.id)">{{ bike.data()['Bike Type'] }}</a></td>
-				<td>{{ bike.data()['Cost per hour'] }}</td>
-			</tr>
-			<button @click="returnBike">Return Bike</button>
-		</table>
+		<button @click='returnBike'>Return default bike</button>
 	</div>
 </template>
 
 <script>
 export default {
 	methods: {
-		returnBike (id) {
-			this.$store.dispatch('selectBike', id)
+		returnBike () {
 			this.$store.dispatch('returnBike')
 		}
 	},
