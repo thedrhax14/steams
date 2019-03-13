@@ -80,6 +80,39 @@ section h2{
 	color:#fff;
 }
 
+.custom-control.custom-radio #type-1, .custom-control.custom-radio #type-2, .custom-control.custom-radio #type-3, .custom-control.custom-radio #type-4{
+  /*border-style:solid;
+  border-color: #F8F8FF;
+  border-radius: 10px;*/
+  width:100%;
+}
+
+.custom-control.custom-radio #type-1 img{
+  margin-top:6%;
+  margin-left:-25%;
+}
+
+.custom-control.custom-radio #type-2 img{
+  margin-top:6%;
+  margin-left:-20%;
+}
+
+.custom-control.custom-radio #type-3 img{
+  margin-top:6%;
+  margin-left:-25%;
+}
+.custom-control.custom-radio #type-4 img{
+  margin-top:6%;
+  margin-left:-25%;
+}
+
+.custom-control.custom-radio #type-1 img,.custom-control.custom-radio #type-2 img,.custom-control.custom-radio #type-3 img,.custom-control.custom-radio #type-4 img{
+  width:95.75px;
+  height:54.25px;
+}
+
+
+
 img{
   margin-top: 2%;
   margin-left: 42%;
