@@ -25,7 +25,7 @@
 						<label class="custom-control-label" for="customRadio1"><h5>Standard Bike</h5></label>
 						<img src="../assets/images/standard_bike1.png">
 						<small v-model="selected" :options="options" plain name="plainInline"></small>
-						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
+						<button href='/bikes' class="btn btn-danger">More info</button>
 					</div>
 				</div>
 				<hr />
@@ -34,8 +34,8 @@
 						<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
 						<label class="custom-control-label" for="customRadio2"><h5>Road Bike</h5></label>
 						<img src="../assets/images/road_bike1.png">
-						<small style="font-size:20px; font-weight:bold;">£3.00/hr</small>
-						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
+						<small>£3.00/hr</small>
+						<button href='/bikes' class="btn btn-danger">More info</button>
 					</div>
 				</div>
 				<hr />
@@ -44,8 +44,8 @@
 						<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
 	          <label class="custom-control-label" for="customRadio3"><h5>Mountain Bike</h5></label>
 						<img src="../assets/images/mtn_bike1.png">
-						<small style="font-size:20px; font-weight:bold;">£3.00/hr</small>
-						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
+						<small>£3.00/hr</small>
+						<button href='/bikes' class="btn btn-danger">More info</button>
 					</div>
 				</div>
 				<hr />
@@ -54,8 +54,8 @@
 						<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
 						<label class="custom-control-label" for="customRadio4"><h5>Tandem Bike</h5></label>
 						<img src="../assets/images/tandem_bike1.png">
-						<small style="font-size:20px; font-weight:bold;">£3.00/hr</small>
-						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
+						<small>£3.00/hr</small>
+						<button href='/bikes'class="btn btn-danger">More info</button>
 					</div>
 				</div>
 
@@ -72,17 +72,23 @@
 			<br/>
 			<hr>
 			<br/>
-			<a href='/'>
-				<button style="margin-left: 490px; width:100px;" type="button" class="btn btn-danger">
+				<div class="checkoutOption">
+				<div id="discard">
+					<a href='/'>
+						<button style="width:200px;" type="button" class="btn btn-danger">
 					Discard
-				</button>
-			</a>
-			<a href='/payement'>
-				<button style=" width:200px;" type="button" class="btn btn-success">
+						</button>
+				</a>
+				</div>
+				<div id="makepayement">
+					<a href='/payement'>
+						<button style=" width:200px;" type="button" class="btn btn-success">
 					Make payement
-					<i class="fas fa-check fa-sm"></i>
-				</button>
-			</a>
+						&nbsp;<i class="fas fa-check fa-sm"></i>
+						</button>
+					</a>
+				</div>
+			</div>
 			<br/>
 			<br/>
 		</div>
