@@ -130,6 +130,22 @@ section h2{
   margin-right: 10%;
 }
 
+.card-list{
+  list-style-type: none;
+  line-height: 30px;
+  padding-left: 20px;
+}
+
+.card-list-reservation{
+  list-style-type: none;
+  margin-left: -25px;
+  line-height: 35px;
+  text-align: left;
+}
+
+.card-list li{
+  color: #757575;
+}
 
 img{
   margin-top: 2%;
