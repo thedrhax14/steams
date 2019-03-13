@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.14",
     "firebase": "^5.7.3",
     "mapbox-gl-vue": "^1.9.0",
     "node-sass": "^4.11.0",
