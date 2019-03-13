@@ -5,43 +5,63 @@
 		<form action="action.php">
 			<h3> <i class="fas fa-list-ol"></i> &nbsp; How many bikes do you need? </h3>
 			<br/>
-			<input class="form-control" pattern="[0-9]{2}" id="inputNumber5" type="number" name="bikecount" placeholder="e.g. 1,2,4" required> <br>
+			<div class="form-group">
+	    <select class="form-control" id="exampleFormControlSelect1">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5</option>
+	    </select>
+	  	</div>
+			<br/>
+			<br/>
 			<h3><i class="fas fa-bicycle"></i> &nbsp; What type of bike? </h3>
 			<br/>
-			<div class="list-group">
-				<li style="cursor:pointer;" class="list-group-item list-group-item-action">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Standard Bike</h5>
+			<div>
+				<div class="custom-control custom-radio">
+					 <div id="type-1">
+						<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio1"><h5>Standard Bike</h5></label>
+						<img src="../assets/images/standard_bike1.png">
+						<small v-model="selected" :options="options" plain name="plainInline"></small>
+						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
+					</div>
+				</div>
+				<hr />
+				<div class="custom-control custom-radio">
+					 <div id="type-2">
+						<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio2"><h5>Road Bike</h5></label>
+						<img src="../assets/images/road_bike1.png">
 						<small style="font-size:20px; font-weight:bold;">£3.00/hr</small>
+						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
 					</div>
-					<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
-					<img src="../assets/images/standard_bike1.png" style="width:95.75px; height:54.25px; margin-left: -5px;">
-				</li>
-				<li style="cursor:pointer;" class="list-group-item list-group-item-action">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Road Bike</h5>
-						<small style="font-size:20px; font-weight:bold;">£7.50/hr</small>
+				</div>
+				<hr />
+				<div class="custom-control custom-radio">
+					 <div id="type-3">
+						<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+	          <label class="custom-control-label" for="customRadio3"><h5>Mountain Bike</h5></label>
+						<img src="../assets/images/mtn_bike1.png">
+						<small style="font-size:20px; font-weight:bold;">£3.00/hr</small>
+						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
 					</div>
-					<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
-					<img src="../assets/images/road_bike1.png" style="width:96px; height:55.75px; margin-left: -5px;">
-				</li>
-				<li style="cursor:pointer;" class="list-group-item list-group-item-action">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Mountain Bike</h5>
-						<small style="font-size:20px; font-weight:bold;">£10.00/hr</small>
+				</div>
+				<hr />
+				<div class="custom-control custom-radio">
+					 <div id="type-4">
+						<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+						<label class="custom-control-label" for="customRadio4"><h5>Tandem Bike</h5></label>
+						<img src="../assets/images/tandem_bike1.png">
+						<small style="font-size:20px; font-weight:bold;">£3.00/hr</small>
+						<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
 					</div>
-					<button href="bikes.html" style="float:right; margin-top:30px;" class="btn btn-danger">More info</button>
-					<img src="../assets/images/mtn_bike1.png" style="width:95.75px; height:53px; margin-left: -5px;">
-				</li>
-				<li style="cursor:pointer;" class="list-group-item list-group-item-action">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">Tandem Bike</h5>
-						<small style="font-size:20px; font-weight:bold;">£5.00/hr</small>
-					</div>
-					<a href="bikes.html"><button style="float:right; margin-top:30px;" class="btn btn-danger">More info</button></a>
-					<img src="../assets/images/tandem_bike1.png" style="width:84.5px; height:36.75px; margin-left: -5px;">
-				</li>
-			</div>
+				</div>
+
+  	</div>
+			<br/>
+			<br/>
 			<br/>
 			<h3><i class="fas fa-stopwatch"></i>&nbsp; What time? </h3>
 			<br/>
@@ -52,12 +72,12 @@
 			<br/>
 			<hr>
 			<br/>
-			<a href="reservebike.html">
+			<a href='/'>
 				<button style="margin-left: 490px; width:100px;" type="button" class="btn btn-danger">
 					Discard
 				</button>
 			</a>
-			<a href="makepayement.html">
+			<a href='/payement'>
 				<button style=" width:200px;" type="button" class="btn btn-success">
 					Make payement
 					<i class="fas fa-check fa-sm"></i>
@@ -69,13 +89,16 @@
 	</template>
 
 <script>
-const fb = require('../firebaseConfig.js')
-
-export default {
-	created () {
-		if(this.$store.state.bikeTypes.length===0){
-			this.$store.dispatch('fetchbikeTypes')
-		}
-	}
-}
+  export default {
+    data() {
+      return {
+        selected: 'first',
+        options: [
+          { text: 'First radio', value: 'first' },
+          { text: 'Second radio', value: 'second' },
+          { text: 'Third radio', value: 'third' }
+        ]
+      }
+    }
+  }
 </script>
