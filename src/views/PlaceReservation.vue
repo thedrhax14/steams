@@ -71,6 +71,8 @@
 <script>
 const fb = require('../firebaseConfig.js')
 
+// Make selection of timestamp from valid input element like celander
+
 export default {
 	created () {
 		if(this.$store.state.bikeTypes.length===0){
