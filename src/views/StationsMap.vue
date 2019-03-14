@@ -1,6 +1,8 @@
 <template>
 	<body>
 	<div id="map">
+		<h2>Nearest Docking Stations</h2>
+		<br>
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
 				<p>Loading...</p>
