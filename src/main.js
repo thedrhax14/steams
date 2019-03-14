@@ -4,11 +4,11 @@ import './assets/css/style.css'
 import mapbox from 'mapbox-gl-vue'
 import router from './router'
 import { store } from './store.js'
-/*import BootstrapVue from 'bootstrap-vue'
+/* import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-Vue.use(BootstrapVue)*/
+Vue.use(BootstrapVue) */
 const fb = require('./firebaseConfig.js')
 
 Vue.config.productionTip = false
@@ -23,5 +23,8 @@ fb.auth.onAuthStateChanged(user => {
 			mapbox,
 			render: h => h(App)
 		})
+	}
+	if(user) {
+		store.dispatch('fetchUserByUserId')
 	}
 })

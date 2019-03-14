@@ -47,8 +47,7 @@ import PopupContent from '../components/PopupContent.vue'
 
 export default {
 	components: {
-		Mapbox,
-		PopupContent
+		Mapbox
 	},
 	data () {
 		return {
@@ -92,10 +91,9 @@ export default {
 			const pv = new this.PopupVue({
 				parent: this,
 				propsData: {
-					locName:features[0].properties.stationName
+					locName: features[0].properties.stationName
 				}
 			})
-			pv._data.selectedLocation = features[0].properties.stationName
 			pv.$mount('#vue-popup-content')
 		}
 	},
