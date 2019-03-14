@@ -5,7 +5,6 @@
 			<div v-if="this.$store.state.performingRequest" class="loading">
 				<p>Loading...</p>
 			</div>
-			<div id="vue-popup-content"></div>
 		</transition>
 		<mapbox
 		access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
@@ -16,13 +15,7 @@
 		}"
 		:geolocate-control="{
 			show: true,
-			position: 'top-left',
-			options: {
-				positionOptions: {
-					enableHighAccuracy: true
-				},
-				trackUserLocation: true
-			}
+			position: 'top-left'
 		}"
 		:scale-control="{
 			show: true,
@@ -43,11 +36,13 @@
 
 <script>
 import Mapbox from 'mapbox-gl-vue'
+import Vue from 'vue'
 import PopupContent from '../components/PopupContent.vue'
 
 export default {
 	components: {
-		Mapbox
+		Mapbox,
+		PopupContent
 	},
 	data () {
 		return {
@@ -62,7 +57,9 @@ export default {
 					Lat: -3.188450,
 					Long: 55.952063
 				}
-			]
+			],
+			stationName: 'Select station',
+			PopupVue: Vue.extend(PopupContent)
 		}
 	},
 	methods: {
@@ -78,29 +75,35 @@ export default {
 		geolocate (control, position) {
 			console.log('User position: ' + position.coords.latitude + ' ' + position.coords.longitude)
 		},
-		// The methods needs to be cleaned. I created PopupContent, which needs to be used of setHTML shit, just to make this part of the html interactive. I suggest to use component somewhere else just to test its functionality. Remember, the goal of the component is to implement booking process.
 		addPopUp (map, e) {
 			const features = map.queryRenderedFeatures(e.point, { layers: ['markers'] })
-			if (!features.length) {
+			if (!features.length || !features[0].properties || !features[0].properties.stationName) {
 				return
 			}
-			const feature = features[0]
-			console.log('Feature data =>', feature);
+			this.$store.commit('selectLocation', features[0].properties.stationName)
 			const Popup = new window.mapboxgl.Popup()
-			Popup.setLngLat(feature.geometry.coordinates).setHTML(feature.properties.stationName).addTo(map)
+			Popup.setLngLat(features[0].geometry.coordinates).setHTML('<div id="vue-popup-content"></div>').addTo(map)
+			const pv = new this.PopupVue({ 
+				parent: this, 
+				propsData: { 
+					locName:features[0].properties.stationName
+				}
+			})
+			pv._data.selectedLocation = features[0].properties.stationName
+			pv.$mount('#vue-popup-content')
 		}
 	},
 	created () {
-		console.log('created', this)
+		console.log('created', this.$store)
 	},
 	beforeCompile () {
-		console.log('beforeCompile', this)
+		console.log('beforeCompile')
 	},
 	compiled () {
-		console.log('compiled', this)
+		console.log('compiled')
 	},
 	ready () {
-		console.log('ready', this)
+		console.log('ready')
 	}
 }
 </script>

@@ -14,11 +14,12 @@ export const store = new Vuex.Store({
 	state: {
 		performingRequest: false,
 		currentUser: null,
-		selectedBikeId: '',
+		selectedBikeId: String,
 		bikeTypes: [], // The structure should be almost the same as collection in the firestore
 		bikes: [],
 		stations: [],
-		userhistory: []
+		userhistory: [],
+		selectedLocation:String
 	},
 	actions: {
 		clearData ({ commit }) {
@@ -73,6 +74,9 @@ export const store = new Vuex.Store({
 	mutations: {
 		setCurrentUser (state, val) {
 			state.currentUser = val
+		},
+		selectLocation(state, val) {
+			state.selectedBikeId = val
 		},
 		updateUserProfile (state, displayNameval) {
 			console.log('Updating user profile. Displayed name will be ' + displayNameval)
