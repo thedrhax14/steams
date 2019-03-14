@@ -130,6 +130,51 @@ section h2{
   margin-right: 10%;
 }
 
+.card-list{
+  list-style-type: none;
+  line-height: 30px;
+  padding-left: 20px;
+}
+
+.card-list-reservation{
+  list-style-type: none;
+  margin-left: -25px;
+  line-height: 35px;
+  text-align: left;
+}
+
+.page-footer.font-small.mdb-color.pt-4{
+background-color: black;
+color: #696969;
+}
+
+.card-list li{
+  color: #757575;
+}
+
+.wrap h3{
+  font-size: 20px;
+}
+
+.custom-file-upload {
+    border-radius: 6px;
+    width:500px;
+    font-size: 18px;
+    text-align:center;
+    color:#fff;
+    background-color: #d9534f;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.custom-file-upload:hover {
+    border-radius: 6px;
+    background-color: #CC0000;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
 
 img{
   margin-top: 2%;
@@ -270,6 +315,9 @@ footer{
   color:#fff;
   background-color: #A9A9A9;
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 footer img{

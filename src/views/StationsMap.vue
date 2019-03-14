@@ -6,6 +6,7 @@
 				<p>Loading...</p>
 			</div>
 		</transition>
+		<div>
 		<mapbox
 		access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 		:map-options="{
@@ -30,6 +31,7 @@
 		@geolocate-geolocate="geolocate"
 		@geolocate-error="geolocateError">
 		</mapbox>
+</div>
 </div>
 </body>
 </template>
