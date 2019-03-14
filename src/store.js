@@ -19,7 +19,7 @@ export const store = new Vuex.Store({
 		bikes: [],
 		stations: [],
 		userhistory: [],
-		selectedLocation:String
+		selectedLocation: String
 	},
 	actions: {
 		clearData ({ commit }) {
@@ -75,7 +75,7 @@ export const store = new Vuex.Store({
 		setCurrentUser (state, val) {
 			state.currentUser = val
 		},
-		selectLocation(state, val) {
+		selectLocation (state, val) {
 			state.selectedBikeId = val
 		},
 		updateUserProfile (state, displayNameval) {
