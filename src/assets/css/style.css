@@ -308,16 +308,16 @@ a.btn-close:hover{
   text-decoration: none;
   background-color: #fff;
 }
-
+.mapid {
+  position: relative;
+}
 footer{
   padding:5px;
   margin-top:20px;
   color:#fff;
   background-color: #A9A9A9;
   text-align: center;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+
 }
 
 footer img{

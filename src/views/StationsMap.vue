@@ -6,7 +6,7 @@
 				<p>Loading...</p>
 			</div>
 		</transition>
-		<div>
+		<div  class="sicky-top">
 		<mapbox
 		access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 		:map-options="{
@@ -35,7 +35,11 @@
 </div>
 </body>
 </template>
-
+<style>
+footer {
+	display: none;
+}
+</style>
 <script>
 import Mapbox from 'mapbox-gl-vue'
 import Vue from 'vue'
@@ -85,9 +89,9 @@ export default {
 			this.$store.commit('selectLocation', features[0].properties.stationName)
 			const Popup = new window.mapboxgl.Popup()
 			Popup.setLngLat(features[0].geometry.coordinates).setHTML('<div id="vue-popup-content"></div>').addTo(map)
-			const pv = new this.PopupVue({ 
-				parent: this, 
-				propsData: { 
+			const pv = new this.PopupVue({
+				parent: this,
+				propsData: {
 					locName:features[0].properties.stationName
 				}
 			})
