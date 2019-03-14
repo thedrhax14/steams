@@ -223,18 +223,18 @@ const fb = require('../firebaseConfig.js')
 
 // Make selection of timestamp from valid input element like celander
 export default {
-	data() {
+	data () {
 		return {
 			selected: 'first',
 			options: [
-			{ text: 'First radio', value: 'first' },
-			{ text: 'Second radio', value: 'second' },
-			{ text: 'Third radio', value: 'third' }
+				{ text: 'First radio', value: 'first' },
+				{ text: 'Second radio', value: 'second' },
+				{ text: 'Third radio', value: 'third' }
 			]
 		}
 	},
 	created () {
-		if(this.$store.state.bikeTypes.length===0){
+		if (this.$store.state.bikeTypes.length === 0) {
 			this.$store.dispatch('fetchbikeTypes')
 		}
 	}

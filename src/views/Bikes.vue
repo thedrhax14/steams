@@ -69,8 +69,6 @@
 
 			<hr class="w-100 clearfix d-md-none">
 
-
-
 			<!-- Grid column -->
 			<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
 				<h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
@@ -88,7 +86,6 @@
 				</p>
 			</div>
 			<!-- Grid column -->
-
 
 			<!-- Grid column -->
 			<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
