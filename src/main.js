@@ -24,4 +24,7 @@ fb.auth.onAuthStateChanged(user => {
 			render: h => h(App)
 		})
 	}
+	if(user) {
+		store.dispatch('fetchUserByUserId')
+	}
 })

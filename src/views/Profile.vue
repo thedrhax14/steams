@@ -8,6 +8,7 @@
 		<h1>Profile</h1>
 		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
 		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
+		<p>Permission level - {{ this.$store.state.userInfo.PermissionLevel }}</p>
 		<h1>Bike history</h1>
 		<button @click='returnDefaultBike'>Return default bike</button>
 		<button @click='bookDefaultBike'>Book default bike</button>
