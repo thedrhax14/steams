@@ -57,7 +57,7 @@
     </div>
 	</div>
 </div>
-<footer class="page-footer font-small mdb-color pt-4" style="background-color: black; color: #696969;">
+<footer class="page-footer font-small mdb-color pt-4">
 
 	<!-- Footer Links -->
 	<div class="container text-center text-md-left">
@@ -75,16 +75,16 @@
 			<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
 				<h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
 				<p>
-					<a href="/login">Your Account</a>
+					<a href='/profile'>Your Account</a>
 				</p>
 				<p>
-					<a href="#">Help</a>
+					<a href='/'>Help</a>
 				</p>
 				<p>
-					<a href="/Licenseagreement">License Agreement</a>
+					<a href='/Licenseagreement'>License Agreement</a>
 				</p>
 				<p>
-					<a href="/Termsofservice">Terms of Service</a>
+					<a href='/Termsofservice'>Terms of Service</a>
 				</p>
 			</div>
 			<!-- Grid column -->
@@ -94,13 +94,13 @@
 			<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
 				<h6 class="text-uppercase mb-4 font-weight-bold">Support</h6>
 				<p>
-					<a href="/FAQ">FAQ</a>
+					<a href='/FAQ'>FAQ</a>
 				</p>
 				<p>
-					<a href="/Safety">Safety</a>
+					<a href='/safety'>Safety</a>
 				</p>
 				<p>
-					<a href="/Licenseagreement">License Agreement</a>
+					<a href='/Licenseagreement'>License Agreement</a>
 				</p>
 
 			</div>
@@ -121,7 +121,7 @@
 			<h6 class="text-uppercase mb-4 font-weight-bold">Company</h6>
 
 			<p>
-				<a href="/About">About Us</a>
+				<a href='/about'>About Us</a>
 			</p>
 		</div>
 		</div>
@@ -134,7 +134,7 @@
 				<!--Copyright-->
 				<p class="text-center text-md-left">&copy; 2019 Copyright:
 					<a href="https://mdbootstrap.com/education/bootstrap/">
-						<strong>Spin.com</strong>
+						<strong> Spin.com</strong>
 					</a>
 				</p>
 
