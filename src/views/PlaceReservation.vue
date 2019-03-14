@@ -232,7 +232,7 @@ export default {
 			{ text: 'Third radio', value: 'third' }
 			]
 		}
-	}
+	},
 	created () {
 		if(this.$store.state.bikeTypes.length===0){
 			this.$store.dispatch('fetchbikeTypes')
