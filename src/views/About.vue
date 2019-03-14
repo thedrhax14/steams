@@ -8,6 +8,5 @@
            </article>
          <br/>
       </div>
-      
   </body>
 </template>

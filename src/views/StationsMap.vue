@@ -35,11 +35,7 @@
 </div>
 </body>
 </template>
-<style>
-footer {
-	display: none;
-}
-</style>
+
 <script>
 import Mapbox from 'mapbox-gl-vue'
 import Vue from 'vue'
