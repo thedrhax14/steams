@@ -66,7 +66,9 @@
 			<br/>
 			<h3><i class="fas fa-stopwatch"></i>&nbsp; What time? </h3>
 			<br/>
-			<span><h4 style="font-size:20px; float: left;">From: &nbsp;</h4> <input class="form-control form-control-sm" style="width: 120px; float:left;" type="time" name="usr_time" required></span>
+			<span>
+				<h4 style="font-size:20px;">From: &nbsp;</h4>
+				<input class="form-control form-control-sm" style="width: 120px;" type="time" name="usr_time" required></span>
 			</form>
 			<br/>
 			<br/>
