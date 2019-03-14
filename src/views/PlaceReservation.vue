@@ -7,14 +7,14 @@
 			<h3> <i class="fas fa-list-ol"></i> &nbsp; How many bikes do you need? </h3>
 			<br/>
 			<div class="form-group">
-	    <select class="form-control" id="exampleFormControlSelect1">
-	      <option>1</option>
-	      <option>2</option>
-	      <option>3</option>
-	      <option>4</option>
-	      <option>5</option>
-	    </select>
-	  	</div>
+		 <select class="form-control" id="exampleFormControlSelect1">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+		 </select>
+		</div>
 			<br/>
 			<br/>
 			<h3><i class="fas fa-bicycle"></i> &nbsp; What type of bike? </h3>
@@ -43,7 +43,7 @@
 				<div class="custom-control custom-radio">
 					 <div id="type-3">
 						<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-	          <label class="custom-control-label" for="customRadio3"><h5>Mountain Bike</h5></label>
+				 <label class="custom-control-label" for="customRadio3"><h5>Mountain Bike</h5></label>
 						<img src="../assets/images/mtn_bike1.png">
 						<small>£3.00/hr</small>
 						<button href='/bikes' class="btn btn-danger">More info</button>
@@ -60,7 +60,7 @@
 					</div>
 				</div>
 
-  	</div>
+	</div>
 			<br/>
 			<br/>
 			<br/>
@@ -219,16 +219,24 @@
 	</template>
 
 <script>
-  export default {
-    data() {
-      return {
-        selected: 'first',
-        options: [
-          { text: 'First radio', value: 'first' },
-          { text: 'Second radio', value: 'second' },
-          { text: 'Third radio', value: 'third' }
-        ]
-      }
-    }
-  }
+const fb = require('../firebaseConfig.js')
+
+// Make selection of timestamp from valid input element like celander
+export default {
+	data() {
+		return {
+			selected: 'first',
+			options: [
+			{ text: 'First radio', value: 'first' },
+			{ text: 'Second radio', value: 'second' },
+			{ text: 'Third radio', value: 'third' }
+			]
+		}
+	}
+	created () {
+		if(this.$store.state.bikeTypes.length===0){
+			this.$store.dispatch('fetchbikeTypes')
+		}
+	}
+}
 </script>
