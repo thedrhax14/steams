@@ -7,18 +7,19 @@
 			<h3> <i class="fas fa-list-ol"></i> &nbsp; How many bikes do you need? </h3>
 			<br/>
 			<div class="form-group">
-		 <select class="form-control" id="exampleFormControlSelect1">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-		 </select>
+			  <b-form-select v-model="selected" class="mb-3">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+				</b-form-select>
 		</div>
 			<br/>
 			<br/>
 			<h3><i class="fas fa-bicycle"></i> &nbsp; What type of bike? </h3>
 			<br/>
+			{{ selected }}
 			<div>
 				<div class="custom-control custom-radio">
 					 <div id="type-1">
@@ -59,7 +60,6 @@
 						<button href='/bikes'class="btn btn-danger">More info</button>
 					</div>
 				</div>
-
 	</div>
 			<br/>
 			<br/>
@@ -227,7 +227,7 @@ const fb = require('../firebaseConfig.js')
 export default {
 	data () {
 		return {
-			selected: 'first',
+			selected: '',
 			options: [
 				{ text: 'First radio', value: 'first' },
 				{ text: 'Second radio', value: 'second' },
