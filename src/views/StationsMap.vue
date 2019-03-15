@@ -1,12 +1,14 @@
 <template>
 	<body>
 	<div id="map">
+		<h2>Nearest Docking Stations</h2>
+		<br>
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
 				<p>Loading...</p>
 			</div>
 		</transition>
-		<div>
+		<div  class="sicky-top">
 		<mapbox
 		access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 		:map-options="{
@@ -43,8 +45,7 @@ import PopupContent from '../components/PopupContent.vue'
 
 export default {
 	components: {
-		Mapbox,
-		PopupContent
+		Mapbox
 	},
 	data () {
 		return {
@@ -85,13 +86,12 @@ export default {
 			this.$store.commit('selectLocation', features[0].properties.stationName)
 			const Popup = new window.mapboxgl.Popup()
 			Popup.setLngLat(features[0].geometry.coordinates).setHTML('<div id="vue-popup-content"></div>').addTo(map)
-			const pv = new this.PopupVue({ 
-				parent: this, 
-				propsData: { 
-					locName:features[0].properties.stationName
+			const pv = new this.PopupVue({
+				parent: this,
+				propsData: {
+					locName: features[0].properties.stationName
 				}
 			})
-			pv._data.selectedLocation = features[0].properties.stationName
 			pv.$mount('#vue-popup-content')
 		}
 	},

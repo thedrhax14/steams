@@ -1,11 +1,7 @@
 <template>
   <div id="app">
+    <navbar ></navbar>
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/bikes">Bikes</router-link> |
-      <router-link to="/profile">Profile</router-link> |
-      <router-link to="/Reserve">Place a reservation</router-link> |
       <router-link to="/installedplugins">Installed Plugins</router-link>
       <a v-if="currentUser" @click="logout"> | Logout</a>
     </div>
@@ -14,6 +10,7 @@
 </template>
 
 <script>
+import navbar from '@/components/Navbar.vue'
 import { mapState } from 'vuex'
 const fb = require('./firebaseConfig.js')
 
@@ -30,6 +27,9 @@ export default {
 				console.log(err)
 			})
 		}
-	}
+	},
+  components: {
+    navbar
+  }
 }
 </script>
