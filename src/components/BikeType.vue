@@ -1,11 +1,15 @@
 <template v-if="bikeTypeInfo.AvailableBikes.length > 0">
-	<div class="bike">
-		<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-		<label class="custom-control-label" for="customRadio2"><h5>{{ bikeTypeInfo.Name }} ({{ bikeTypeInfo.AvailableBikes.length }})</h5></label>
-		<img src="../assets/images/road_bike1.png">
-		<small>£{{ bikeTypeInfo.Price }}.00/hr</small>
-		<button @click='selectBikeType' class="btn btn-danger">Select</button>
-	</div>
+	<b-card
+	:title="bikeTypeInfo.Name"
+	img-src="../assets/images/road_bike1.png"
+	img-top
+	style="max-width: 20rem;"
+	class="mb-2"
+	>
+	<b-card-text>
+		£{{ bikeTypeInfo.Price }}.00/hr
+	</b-card-text>
+</b-card>
 </template>
 
 <script>
