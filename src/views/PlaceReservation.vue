@@ -88,7 +88,7 @@
 				<div id="makepayement">
 					<a href='/payement'>
 						<button style=" width:200px;" type="button" class="btn btn-success">
-					Make payement
+					Book {{ this.$store.state.selectedBikeTypeId }}
 						&nbsp;<i class="fas fa-check fa-sm"></i>
 						</button>
 					</a>
