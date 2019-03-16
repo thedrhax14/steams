@@ -29,7 +29,7 @@
 				<div class="card-body">
 					<p class="card-text">
 		  			<ul class="card-list-reservation">
-						    <li v-for="item in items">{{ item }} </li>
+						    <li v-for="item in items">{{ item.message }} </li>
 		  			</ul>
 					</p>
 				</div>
@@ -171,10 +171,10 @@ export default {
 	 items: [
 		 { message: 'PIN' },
 		 { message: 'Going to:' },
-		 { message: 'Start time:'},
+		 { message: 'Start time:' },
 		 { message: 'Status:' }
 	 ]
- },
+	},
 	created () {
 		if (this.$store.state.bikeTypes.length === 0) {
 			this.$store.dispatch('fetchbikeTypes')
