@@ -1,24 +1,24 @@
 <template>
 		<body>
-   		<div class="wrap" style="margin-top: 50px;">
-    		<h2> My reservations</h2>
-    		<hr>
-    		<br/>
-    		<div class="card text-center">
-  				<div class="card-header" style="font-weight:bold;">
-    					Bike ID: 01256
-  				</div>
-  				<div class="card-body">
-    				<p class="card-text">
-      			<ul class="card-list-reservation">
-        			<li>PIN: ***33 </li>
-        			<li>Going to: Edinburgh Park</li>
-        			<li>Start time: 7:25pm</li>
-        			<li>Status: Reserved</li>
-        			<li>End time: 9:30pm</li>
-      			</ul>
-    			</p>
-  			</div>
+			<div class="wrap" style="margin-top: 50px;">
+			<h2> My reservations</h2>
+			<hr>
+			<br/>
+			<div class="card text-center">
+				<div class="card-header" style="font-weight:bold;">
+						Bike ID: 01256
+				</div>
+				<div class="card-body">
+					<p class="card-text">
+					<ul class="card-list-reservation">
+					<li>PIN: ***33 </li>
+					<li>Going to: Edinburgh Park</li>
+					<li>Start time: 7:25pm</li>
+					<li>Status: Reserved</li>
+					<li>End time: 9:30pm</li>
+					</ul>
+				</p>
+			</div>
 			</div>
 
 			<br/>
@@ -163,7 +163,7 @@
 </template>
 
 <script>
-const fb = require('../firebaseConfig.js')
+// const fb = require('../firebaseConfig.js')
 
 // Make selection of timestamp from valid input element like celander
 export default {

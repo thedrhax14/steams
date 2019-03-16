@@ -21,6 +21,9 @@
 			<br/>
 			{{ selected }}
 			<div>
+				<div class="custom-control custom-radio" v-for="bikeType in this.$store.state.bikeTypes">
+					<BikeType v-bind:bikeTypeInfo="bikeType"></BikeType>
+				</div>
 				<div class="custom-control custom-radio">
 					 <div id="type-1">
 						<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
@@ -85,7 +88,7 @@
 				<div id="makepayement">
 					<a href='/payement'>
 						<button style=" width:200px;" type="button" class="btn btn-success">
-					Make payement
+					Book {{ this.$store.state.selectedBikeTypeId }}
 						&nbsp;<i class="fas fa-check fa-sm"></i>
 						</button>
 					</a>
@@ -98,10 +101,14 @@
 	</template>
 
 <script>
+import BikeType from '../components/BikeType.vue'
 const fb = require('../firebaseConfig.js')
 
 // Make selection of timestamp from valid input element like celander
 export default {
+	components: {
+		BikeType
+	},
 	data () {
 		return {
 			selected: '',

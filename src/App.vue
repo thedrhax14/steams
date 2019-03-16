@@ -28,8 +28,8 @@ export default {
 			})
 		}
 	},
-  components: {
-    navbar
-  }
+	components: {
+		navbar
+	}
 }
 </script>

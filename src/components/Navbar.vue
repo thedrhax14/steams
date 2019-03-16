@@ -32,25 +32,21 @@
 
 <script>
 export default {
-  data (){
-    return {
-      userPermission: 'check'
-    }
-  },
-  methods: {
-    setUserType(int){
-      this.userPermission = this.$store.state.userInfo.PermissionLevel; // undefined = member, 1 = operator, 2 = manager, 3 = admin
-      if(!this.userPermission || 0 === this.userPermission.length)
-        console.log('member'); //this means member
-        if(this.userPermission == "1")
-          console.log('operator');
-
-    },
-    setRouterLinks(userPermission){
-      alert("check");
-
-    }
-  }
+	data () {
+		return {
+			userPermission: 'check'
+		}
+	},
+	methods: {
+		setUserType (int) {
+			this.userPermission = this.$store.state.userInfo.PermissionLevel // undefined = member, 1 = operator, 2 = manager, 3 = admin
+			if (!this.userPermission || this.userPermission.length === 0) { console.log('member') } // this means member
+			if (this.userPermission == '1') { console.log('operator') }
+		},
+		setRouterLinks (userPermission) {
+			alert('check')
+		}
+	}
 }
 
 </script>
