@@ -25,10 +25,20 @@
          </div>
        </div>
        <br/>
+       <div>
+    <!-- Styled -->
+    <b-form-file
+      v-model="file"
+      :state="Boolean(file)"
+      placeholder="Choose a file..."
+      drop-placeholder="Drop file here..."
+    />
+    <div class="mt-3">{{ file ? file.name : '' }}</div>
+  </div>
+  <br/>
        <h3> What issue did you face with your bike? </h3>
        <div class="form-group">
           <label class="custom-file-upload">
-            <input type="file" name="file">
             <i class="fas fa-plus"></i>Add an image
           </label>
        </div>
@@ -43,3 +53,14 @@
     </div>
   </body>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        file: null,
+        file2: null
+      }
+    }
+  }
+</script>
