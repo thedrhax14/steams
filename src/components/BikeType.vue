@@ -1,5 +1,5 @@
-<template>
-	<div class="bike" v-if="bikeTypeInfo.AvailableBikes.length > 0">
+<template v-if="bikeTypeInfo.AvailableBikes.length > 0">
+	<div class="bike">
 		<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
 		<label class="custom-control-label" for="customRadio2"><h5>{{ bikeTypeInfo.Name }} ({{ bikeTypeInfo.AvailableBikes.length }})</h5></label>
 		<img src="../assets/images/cruiser_bike.png">
