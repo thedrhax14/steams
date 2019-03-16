@@ -16,8 +16,8 @@ export const store = new Vuex.Store({
 		currentUser: null,
 		userInfo: Object,
 		selectedBikeId: String,
-		bikeTypes: [], // The structure should be almost the same as collection in the firestore
-		bikes: [],
+		selectedStation: String,
+		bikeTypes: [],
 		stations: [],
 		userhistory: []
 	},
@@ -30,26 +30,31 @@ export const store = new Vuex.Store({
 			state.performingRequest = true
 			fb.bikeTypesCollection.get().then(bikeTypesSnapshot => {
 				bikeTypesSnapshot.forEach(bikeTypeDoc => {
-					// console.log(bikeTypeDoc.id, ' => ', bikeTypeDoc.data())
-					commit('addBikeType', bikeTypeDoc)
-					dispatch('fetchBikes', bikeTypeDoc.id)
+					dispatch('fetchBikes', {
+						Id: bikeTypeDoc.id,
+						Name: bikeTypeDoc.data()['Type name'],
+						Price: bikeTypeDoc.data().Price,
+						AvailableBikes: []
+					})
 				})
 			})
 		},
-		fetchBikes ({ commit, state }, bikeTypeId) {
-			fb.bikeTypesCollection.doc(bikeTypeId).collection('Bikes').get().then(bikesSnapshot => {
+		fetchBikes ({ commit, state }, data) {
+			fb.bikeTypesCollection.doc(data.Id).collection('Bikes').get().then(bikesSnapshot => {
 				bikesSnapshot.forEach(bikeDoc => {
-					// console.log(bikeDoc.id, ' => ', bikeDoc.data())
-					commit('addBike', bikeDoc)
+					if(bikeDoc.data()['Current User'] === null && (this.state.selectedStation === "" || this.state.selectedStation === bikeDoc.data()['Station name'])) {
+						data.AvailableBikes.push({Id: bikeDoc.id, Info: bikeDoc.data()})
+					}
 				})
+				commit('addBikeType', data)
 				state.performingRequest = false
 			})
 		},
-		fetchUserByUserId({ commit, state }) {
+		fetchUserByUserId ({ commit, state }) {
 			state.performingRequest = true
 			fb.usersCollection.doc(state.currentUser.uid).get().then(userDocSnapshot => {
 				console.log('Got user info ' + userDocSnapshot.data())
-				commit('setUserInfo',userDocSnapshot.data())
+				commit('setUserInfo', userDocSnapshot.data())
 				state.performingRequest = false
 			})
 		},
@@ -67,11 +72,11 @@ export const store = new Vuex.Store({
 		setCurrentUser (state, val) {
 			state.currentUser = val
 		},
-		setUserInfo(state, val) {
+		setUserInfo (state, val) {
 			state.userInfo = val
 		},
 		selectLocation (state, val) {
-			state.selectedBikeId = val
+			state.selectedStation = val
 		},
 		updateUserProfile (state, displayNameval) {
 			console.log('Updating user profile. Displayed name will be ' + displayNameval)
@@ -86,7 +91,6 @@ export const store = new Vuex.Store({
 		},
 		clearBikesData (state) {
 			state.bikeTypes = []
-			state.bikes = []
 		},
 		addBikeType (state, val) {
 			state.bikeTypes.push(val)
@@ -96,9 +100,6 @@ export const store = new Vuex.Store({
 		},
 		setSelectBike (state, val) {
 			state.selectedBikeId = val
-		},
-		addBike (state, val) {
-			state.bikes.push(val)
 		}
 	}
 })
