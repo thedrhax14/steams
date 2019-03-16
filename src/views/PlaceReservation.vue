@@ -6,7 +6,7 @@
 				<BikeType :bikeTypeInfo='bikeType'></BikeType>
 			</b-form-radio>
 		</b-form-group>
-		<div class="mt-3">Selected: <strong>{{ selectedBikeTypeId }}</strong></div>
+		<div class="mt-3">Selected: <strong>{{ selectedBikeTypeId }}</strong>
 		<b-button variant="outline-success" @click='book'>Book</b-button>
 	</div>
 </template>
@@ -15,6 +15,7 @@
 import BikeType from '../components/BikeType.vue'
 const fb = require('../firebaseConfig.js')
 
+// Make selection of timestamp from valid input element like celander
 export default {
 	components: {
 		BikeType
@@ -31,7 +32,9 @@ export default {
 		}
 	},
 	created () {
-		this.$store.dispatch('fetchbikeTypes')
+		if (this.$store.state.bikeTypes.length === 0) {
+			this.$store.dispatch('fetchbikeTypes')
+		}
 	}
 }
 </script>

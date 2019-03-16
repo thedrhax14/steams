@@ -6,10 +6,10 @@
 	style="max-width: 20rem;"
 	class="mb-2"
 	>
-	<b-card-text>
-		£{{ bikeTypeInfo.Price }}.00/hr
-	</b-card-text>
-</b-card>
+		<b-card-text>
+			£{{ bikeTypeInfo.Price }}.00/hr
+		</b-card-text>
+	</b-card>
 </template>
 
 <script>
