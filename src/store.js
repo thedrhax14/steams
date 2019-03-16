@@ -43,8 +43,8 @@ export const store = new Vuex.Store({
 		fetchBikes ({ commit, state }, data) {
 			fb.bikeTypesCollection.doc(data.Id).collection('Bikes').get().then(bikesSnapshot => {
 				bikesSnapshot.forEach(bikeDoc => {
-					if(bikeDoc.data()['Current user'] === null && (this.state.selectedStation === null || this.state.selectedStation === "" || this.state.selectedStation === bikeDoc.data()['Station name'])) {
-						data.AvailableBikes.push({Id: bikeDoc.id, Info: bikeDoc.data()})
+					if (bikeDoc.data()['Current user'] === null && (this.state.selectedStation === null || this.state.selectedStation === '' || this.state.selectedStation === bikeDoc.data()['Station name'])) {
+						data.AvailableBikes.push({ Id: bikeDoc.id, Info: bikeDoc.data() })
 					}
 				})
 				commit('addBikeType', data)
@@ -68,9 +68,9 @@ export const store = new Vuex.Store({
 		bookBike ({ state }, bikeData) {
 			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: state.currentUser.uid })
 		},
-		bookFirstAvailableBikeType({ state }, bikeTypeId) {
+		bookFirstAvailableBikeType ({ state }, bikeTypeId) {
 			bikeTypes.forEach(element => {
-				if(element.ID === bikeTypeId){
+				if (element.ID === bikeTypeId) {
 					dispatch('bookBike', {
 						biketypeId: element.ID,
 						bikeId: element.AvailableBikes[0].Id
