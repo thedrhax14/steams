@@ -15,14 +15,15 @@
 						<option value="5">5</option>
 				</b-form-select>
 		</div>
+					{{ selected }}
 			<br/>
 			<br/>
 			<h3><i class="fas fa-bicycle"></i> &nbsp; What type of bike? </h3>
 			<br/>
-			{{ selected }}
 			<div>
 				<div class="custom-control custom-radio" v-for="bikeType in this.$store.state.bikeTypes">
 					<BikeType v-bind:bikeTypeInfo="bikeType"></BikeType>
+						<small v-model="selected" :options="options" plain name="plainInline"></small>
 				</div>
 				<div class="custom-control custom-radio">
 					 <div id="type-1">
