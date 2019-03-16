@@ -30,45 +30,19 @@ export const store = new Vuex.Store({
 			state.performingRequest = true
 			fb.bikeTypesCollection.get().then(bikeTypesSnapshot => {
 				bikeTypesSnapshot.forEach(bikeTypeDoc => {
-					console.log(bikeTypeDoc.id, ' => ', bikeTypeDoc.data())
+					// console.log(bikeTypeDoc.id, ' => ', bikeTypeDoc.data())
 					commit('addBikeType', bikeTypeDoc)
 					dispatch('fetchBikes', bikeTypeDoc.id)
 				})
 			})
 		},
-		// implement fetching by location name
-		// it needs to be added to inner array of bikes of bikeTypes. You may need to have a counter somewhere, which will be used as index.
 		fetchBikes ({ commit, state }, bikeTypeId) {
 			fb.bikeTypesCollection.doc(bikeTypeId).collection('Bikes').get().then(bikesSnapshot => {
 				bikesSnapshot.forEach(bikeDoc => {
-					console.log(bikeDoc.id, ' => ', bikeDoc.data())
+					// console.log(bikeDoc.id, ' => ', bikeDoc.data())
 					commit('addBike', bikeDoc)
 				})
 				state.performingRequest = false
-			})
-		},
-		fetchBikesByStation({ commit, state }, fetchOptions) {
-			commit('clearBikesData')
-			fb.bikeTypesCollection.doc(fetchOptions.bikeTypeId).collection('Bikes').where('Station Name','==',fetchOptions.stationName).get().then(bikesSnapshot => {
-				bikesSnapshot.forEach(bikeDoc => {
-					console.log(bikeDoc.id, ' => ', bikeDoc.data())
-					commit('addBike', bikeDoc)
-				})
-				state.performingRequest = false
-			})
-		},
-		fetchUserHistory ({ commit, state }) {
-			state.performingRequest = true
-			state.userhistory = []
-			fb.bikeHistoryCollection.where('User', '==', state.currentUser.uid).get().then(querySnapshot => {
-				state.performingRequest = false
-				querySnapshot.forEach(function (doc) {
-					console.log('adding history of ' + doc.id)
-					fb.bikeTypesCollection.doc(doc.id).get().then(snapShot => {
-						commit('addHistory', snapShot)
-						console.log(snapShot.id, ' => ', snapShot.data())
-					})
-				})
 			})
 		},
 		fetchUserByUserId({ commit, state }) {
