@@ -19,7 +19,7 @@
   </a>
 </div>
     <hr>
-    <a href="newPayement.html" style="text-decoration:none;"><button type="button" class="btn btn-danger btn-lg btn-block"><i class="fas fa-plus"></i> &nbsp;Add a payement method</button></a>
+    <button @click="addPayement" variant="danger"><i class="fas fa-plus"></i> &nbsp;Add a payement method</button></a>
    </div>
 
 <br/>
@@ -27,3 +27,14 @@
 
 </body>
 </template>
+
+<script>
+
+export default{
+  name:'addCard',
+  methods: { addPayement (){
+    this.$route.push('/reserve')
+   }
+  }
+}
+</script>

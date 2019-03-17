@@ -1,6 +1,6 @@
 <template>
 	<div id="popup">
-		{{ locName }}
+		{{ locName + ' Station' }}
 		<br/>
 		<button @click="prepareForBooking">Book here</button>
 	</div>
