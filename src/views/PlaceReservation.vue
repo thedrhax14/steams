@@ -40,20 +40,21 @@ export default {
 	data () {
 		return {
 			selectedBikeTypeId: '',
-			startDate,
-			startTime
+			startDate: '',
+			startTime: ''
 		}
 	},
 	methods: {
 		book () {
-			alert('Booking ' + this.selectedBikeTypeId)
-			// this.$store.commit('bookFirstAvailableBikeType',this.selectedBikeTypeId)
+			// alert('Booking ' + this.selectedBikeTypeId)
+			this.$store.dispatch('bookFirstAvailableBikeType', {
+				bikeTypeId: this.selectedBikeTypeId,
+				StartDateAndTime: this.startDate + ',' + this.startTime
+			})
 		}
 	},
 	created () {
-		if (this.$store.state.bikeTypes.length === 0) {
-			this.$store.dispatch('fetchbikeTypes')
-		}
+		this.$store.dispatch('fetchbikeTypes')
 	}
 }
 </script>

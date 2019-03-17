@@ -17,6 +17,12 @@ import Profile from './views/Profile.vue'
 import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
 import StationsMap from './views/StationsMap.vue'
+// operator
+import PlaceOrders from './views/PlaceOrders.vue'
+import TrackBikeLocations from './views/TrackBikeLocations.vue'
+import ReviewOrders from './views/ReviewOrders.vue'
+// manager
+import ManagerStatistics from './views/managerStatistics.vue'
 
 Vue.use(Router)
 
@@ -96,6 +102,26 @@ const router = new Router({
 			path: '/FAQ',
 			name: 'FAQ',
 			component: FAQ
+		},
+		{
+			path: '/manStats',
+			name: 'manStats',
+			component: ManagerStatistics
+		},
+		{
+			path: '/trackbl',
+			name: 'trackbl',
+			component: TrackBikeLocations
+		},
+		{
+			path: '/revieworders',
+			name: 'revieworders',
+			component: ReviewOrders
+		},
+		{
+			path: '/placeorders',
+			name: 'placeorders',
+			component: PlaceOrders
 		},
 		{
 			path: '/auth',
