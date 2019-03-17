@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>{{ bikeTypeInfo.Name }}</h1>
+		<h1>{{ bikeTypeInfo.BikeTypeName }}</h1>
 		<p>£{{ bikeTypeInfo.Price }}.00/hr</p>
 	</div>
 </template>

@@ -13,7 +13,8 @@
 		<b-list-group>
 			<b-list-group-item v-for="bike in this.$store.state.userhistory">
 				<p>{{ bike.BikeType }}</p>
-				<p>{{ bike.StartDate }}</p>
+				<p>{{ bike.StartDateAndTime }}</p>
+				<button @click='returnBike(bike)'>Return</button>
 			</b-list-group-item>
 		</b-list-group>
 		<button @click='returnDefaultBike'>Return default bike</button>
@@ -26,7 +27,7 @@ export default {
 	data () {
 		return {
 			defaultBikeData: {
-				biketypeId: 'CB',
+				biketypeId: 'MB',
 				bikeId: '00001'
 			}
 		}
@@ -37,6 +38,10 @@ export default {
 		},
 		bookDefaultBike () {
 			this.$store.dispatch('bookBike', this.defaultBikeData)
+		},
+		returnBike(bike) {
+			console.log('Returning bike ', bike)
+			this.$store.dispatch('returnBike', this.defaultBikeData)
 		}
 	},
 	created () {
