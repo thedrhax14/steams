@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Booking at {{ this.$store.state.selectedStation }}</h1>
+		<h1>Booking at {{ this.$store.state.selectedStation + ' Station' }}</h1>
 		<b-form-group label="Bike types at the station">
 			<b-form-radio
 				v-model="selectedBikeTypeId"
@@ -57,3 +57,9 @@ export default {
 	}
 }
 </script>
+
+<style>
+b-form-radio{
+	background-color: #000;
+}
+</style>
