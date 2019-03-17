@@ -65,16 +65,25 @@ export const store = new Vuex.Store({
 		returnBike ({ state }, bikeData) {
 			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: null })
 		},
-		bookBike ({ state }, bikeData) {
-			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: state.currentUser.uid })
+		bookBike ({ state }, bookingData) {
+			console.log('Booking ', bookingData)
+			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).update({ Reserved: state.currentUser.uid })
+			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).collection('Usage History').doc().set({
+				StartDateAndTime: bookingData.StartDateAndTime
+			})
 		},
-		bookFirstAvailableBikeType ({ state }, bikeTypeId) {
-			bikeTypes.forEach(element => {
-				if (element.ID === bikeTypeId) {
+		bookFirstAvailableBikeType ({ state, dispatch }, data) {
+			var found = false
+			console.log('Start booking ', data)
+			state.bikeTypes.forEach(element => {
+				console.log(element.Id, ' === ', data.bikeTypeId,' = ', element.Id === data.bikeTypeId,', found = ', found)
+				if (element.Id === data.bikeTypeId && found === false) {
 					dispatch('bookBike', {
-						biketypeId: element.ID,
-						bikeId: element.AvailableBikes[0].Id
+						biketypeId: data.bikeTypeId,
+						bikeId: element.AvailableBikes[0].Id,
+						StartDateAndTime: data.StartDateAndTime
 					})
+					found = true
 				}
 			})
 		}
