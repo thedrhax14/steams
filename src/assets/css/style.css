@@ -1,3 +1,4 @@
+
 /*Body stylign*/
 body{
   font-family:"Helvetica", Serif;
@@ -87,6 +88,10 @@ section h2{
   width:100%;
 }
 
+.b-form-radio #bikeType{
+  color: #000;
+}
+
 .custom-control.custom-radio #type-1 img{
   margin-top:6%;
   margin-left:-25%;
@@ -130,6 +135,9 @@ section h2{
   margin-top:30px;
 }
 
+b-form-radio{
+  background-color: #000;
+}
 
 .checkoutOption #discard{
   float:left;
