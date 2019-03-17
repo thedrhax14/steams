@@ -9,7 +9,13 @@
 		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
 		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
 		<p>Permission level - {{ this.$store.state.userInfo.PermissionLevel }}</p>
-		<h1>Bike history</h1>
+		<h1>Booking history</h1>
+		<b-list-group>
+			<b-list-group-item v-for="bike in this.$store.state.userhistory">
+				<p>{{ bike.BikeType }}</p>
+				<p>{{ bike.StartDate }}</p>
+			</b-list-group-item>
+		</b-list-group>
 		<button @click='returnDefaultBike'>Return default bike</button>
 		<button @click='bookDefaultBike'>Book default bike</button>
 	</div>
@@ -20,8 +26,8 @@ export default {
 	data () {
 		return {
 			defaultBikeData: {
-				biketypeId: 'BJUocgao1XSIYR2LnkWp',
-				bikeId: 'A04OkMgvxO12QSjTD5pK'
+				biketypeId: 'CB',
+				bikeId: '00001'
 			}
 		}
 	},
@@ -33,14 +39,9 @@ export default {
 			this.$store.dispatch('bookBike', this.defaultBikeData)
 		}
 	},
-	beforeCompile () {
-		console.log('beforeCompile', this)
-	},
-	compiled () {
-		console.log('compiled', this)
-	},
-	ready () {
-		console.log('ready', this)
+	created () {
+		this.$store.commit('selectLocation',null)
+		this.$store.dispatch('fetchbikeTypes')
 	}
 }
 </script>

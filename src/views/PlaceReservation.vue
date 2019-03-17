@@ -6,6 +6,7 @@
 				v-model="selectedBikeTypeId"
 				button
 				v-for="bikeType in this.$store.state.bikeTypes"
+				v-if="bikeType.AvailableBikes.length > 0"
 				:value="bikeType.Id">
 				<BikeType :bikeTypeInfo='bikeType'/>
 			</b-form-radio>
@@ -49,7 +50,7 @@ export default {
 			// alert('Booking ' + this.selectedBikeTypeId)
 			this.$store.dispatch('bookFirstAvailableBikeType', {
 				bikeTypeId: this.selectedBikeTypeId,
-				StartDateAndTime: this.startDate + ',' + this.startTime
+				StartDateAndTime: this.startDate + 'T' + this.startTime + ':00'
 			})
 		}
 	},
