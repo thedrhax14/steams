@@ -135,6 +135,28 @@ section h2{
   margin-top:30px;
 }
 
+.sign-in-wrap{
+  margin-left: 25%;
+}
+
+.sign-in-wrap h2{
+  margin-left: 200px;
+}
+
+.sign-in-window{
+  width:500px;
+  margin: auto;
+  /*font-family: 'Quicksand', sans-serif;*/
+  border-color: #000;
+}
+#login h1{
+ text-align: center;
+}
+
+#login label{
+ text-align: center;
+}
+
 b-form-radio{
   background-color: #000;
 }
