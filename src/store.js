@@ -28,33 +28,65 @@ export const store = new Vuex.Store({
 		},
 		fetchbikeTypes ({ dispatch, commit, state }) {
 			commit('clearBikesData')
+			commit('clearUserhistory')
 			state.performingRequest = true
 			fb.bikeTypesCollection.get().then(bikeTypesSnapshot => {
 				bikeTypesSnapshot.forEach(bikeTypeDoc => {
 					dispatch('fetchBikes', {
-						Id: bikeTypeDoc.id,
-						Name: bikeTypeDoc.data()['Type name'],
+						bikeTypeId: bikeTypeDoc.id,
+						BikeTypeName: bikeTypeDoc.data()['Type name'],
 						Price: bikeTypeDoc.data().Price,
 						AvailableBikes: []
 					})
 				})
 			})
 		},
-		fetchBikes ({ commit, state }, data) {
-			fb.bikeTypesCollection.doc(data.Id).collection('Bikes').get().then(bikesSnapshot => {
+		fetchBikes ({ commit, dispatch, state }, data) {
+			fb.bikeTypesCollection.doc(data.bikeTypeId).collection('Bikes').get().then(bikesSnapshot => {
 				bikesSnapshot.forEach(bikeDoc => {
-					if (bikeDoc.data()['Current user'] === null && (this.state.selectedStation === null || this.state.selectedStation === '' || this.state.selectedStation === bikeDoc.data()['Station name'])) {
+					// console.log('Reserved', bikeDoc.data()['Reserved'])
+					// console.log('selectedStation', this.state.selectedStation)
+					// This needs to be separated from each other
+					if ((bikeDoc.data()['Reserved'] === null || bikeDoc.data()['Reserved'] === state.currentUser.uid) && (this.state.selectedStation === null || this.state.selectedStation === '' || this.state.selectedStation === bikeDoc.data()['Station name'])) {
 						data.AvailableBikes.push({ Id: bikeDoc.id, Info: bikeDoc.data() })
+					}
+					if(state.currentUser.uid){
+						dispatch('fetchBikeHistory',{
+							bikeTypeId: data.bikeTypeId,
+							BikeId: bikeDoc.id,
+							BikeTypeName: data.BikeTypeName
+						})
 					}
 				})
 				commit('addBikeType', data)
 				state.performingRequest = false
 			})
 		},
+		fetchBikeHistory({ commit, state }, data) {
+			fb.bikeTypesCollection
+			.doc(data.bikeTypeId)
+			.collection('Bikes')
+			.doc(data.BikeId)
+			.collection('Usage History')
+			.where('uid','==',state.currentUser.uid)
+			.get().then(entries => {
+				entries.forEach(entry => {
+					// console.log('entry', entry.data())
+					var t = new Date(1970, 0, 1)
+    				t.setSeconds(entry.data().StartDateAndTime.seconds)
+					commit('addHistory',{
+						StartDateAndTime: t,
+						BikeType: data.BikeTypeName,
+						biketypeId: data.bikeTypeId,
+						bikeId: data.BikeId
+					})
+				})
+			})
+		},
 		fetchUserByUserId ({ commit, state }) {
 			state.performingRequest = true
 			fb.usersCollection.doc(state.currentUser.uid).get().then(userDocSnapshot => {
-				console.log('Got user info ' + userDocSnapshot.data())
+				// console.log('Got user info ' + userDocSnapshot.data())
 				commit('setUserInfo', userDocSnapshot.data())
 				state.performingRequest = false
 			})
@@ -63,20 +95,26 @@ export const store = new Vuex.Store({
 			commit('setSelectBike', bid)
 		},
 		returnBike ({ state }, bikeData) {
+			state.performingRequest = true
 			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: null })
+			state.performingRequest = false
 		},
 		bookBike ({ state }, bookingData) {
-			console.log('Booking ', bookingData)
+			// console.log('Booking ', bookingData)
+			var str = bookingData.StartDateAndTime
+			var dt = new Date(str + "Z")
 			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).update({ Reserved: state.currentUser.uid })
 			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).collection('Usage History').doc().set({
-				StartDateAndTime: bookingData.StartDateAndTime
+				StartDateAndTime: dt,
+				uid: state.currentUser.uid
 			})
 		},
 		bookFirstAvailableBikeType ({ state, dispatch }, data) {
 			var found = false
-			console.log('Start booking ', data)
+			// console.log('Start booking ', data)
 			state.bikeTypes.forEach(element => {
-				console.log(element.Id, ' === ', data.bikeTypeId,' = ', element.Id === data.bikeTypeId,', found = ', found)
+				// console.log(element.Id, ' === ', data.bikeTypeId,' = ', element.Id === data.bikeTypeId,', found = ', found)
+				// console.log('element ', element)
 				if (element.Id === data.bikeTypeId && found === false) {
 					dispatch('bookBike', {
 						biketypeId: data.bikeTypeId,
@@ -114,6 +152,9 @@ export const store = new Vuex.Store({
 		},
 		clearBikesData (state) {
 			state.bikeTypes = []
+		},
+		clearUserhistory (state) {
+			state.userhistory = []
 		},
 		addBikeType (state, val) {
 			state.bikeTypes.push(val)

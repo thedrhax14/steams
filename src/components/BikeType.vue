@@ -1,6 +1,6 @@
-<template v-if="bikeTypeInfo.AvailableBikes.length > 0">
+<template>
 	<div>
-		<h1>{{ bikeTypeInfo.Name }}</h1>
+		<h1>{{ bikeTypeInfo.BikeTypeName }}</h1>
 		<p>£{{ bikeTypeInfo.Price }}.00/hr</p>
 	</div>
 </template>
@@ -10,6 +10,9 @@ export default {
 	name: 'BikeType',
 	props: {
 		bikeTypeInfo: Object
+	},
+	created() {
+		console.log('bikeTypeInfo ', this.bikeTypeInfo)
 	}
 }
 </script>
