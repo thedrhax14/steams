@@ -13,8 +13,6 @@
 		access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 		:map-options="{
 			style: 'mapbox://styles/themofro/cjrd1lqa40o5m2sp3bdkdtxdo',
-			center: [-3.188452, 55.952065],
-			zoom: 13
 		}"
 		:geolocate-control="{
 			show: true,
@@ -49,18 +47,6 @@ export default {
 	},
 	data () {
 		return {
-			stations: [
-				{
-					name: 'station name 0',
-					Lat: -3.188452,
-					Long: 55.952065
-				},
-				{
-					name: 'station name 1',
-					Lat: -3.188450,
-					Long: 55.952063
-				}
-			],
 			stationName: 'Select station',
 			PopupVue: Vue.extend(PopupContent)
 		}
