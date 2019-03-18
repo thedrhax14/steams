@@ -8,17 +8,14 @@
 				<p>Loading...</p>
 			</div>
 		</transition>
-		<div  class="sicky-top">
+		<div class="sicky-top">
 		<mapbox
 		access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 		:map-options="{
 			style: 'mapbox://styles/themofro/cjrd1lqa40o5m2sp3bdkdtxdo',
+			zoom: 13
 		}"
 		:geolocate-control="{
-			show: true,
-			position: 'top-left'
-		}"
-		:scale-control="{
 			show: true,
 			position: 'top-left'
 		}"
