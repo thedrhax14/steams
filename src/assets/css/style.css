@@ -4,6 +4,15 @@ body{
   font-family:"Helvetica", Serif;
   background-color:#f4f4f4;
   overflow-x:hidden;
+  margin: 0;
+}
+
+.main-menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+  position: relative;
 }
 /*nav bar styling*/
 .navbar{
@@ -32,11 +41,6 @@ body{
   color:#000;
 }
 /* Logo styling and positioning adjustment*/
-.logo img{
-  margin-left: 400%;
-  height:120px;
-  width:120px;
-}
 
 section h2{
   padding-top:20px;
