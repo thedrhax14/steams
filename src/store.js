@@ -15,55 +15,155 @@ export const store = new Vuex.Store({
 		selectedBikeTypeId: String,
 		selectedStation: String,
 		selectedBikeId: String,
-		user: Object,
 		userInfo: Object,
+		user: Object,
+		update: {
+			user: 0,
+			type: 1,
+			price: 2,
+			status: 3,
+			location: 4
+		},
 		userhistory: [],
 		bikeTypes: [],
-		stations: [],
+		history: [],
 		bikes: [],
-		performingRequest: false
+		loading: false
 	},
 	actions: {
-		fetchBikes ({ state, commit }, data) {
-
+		fetchBikes ({ commit }) {
+			commit('setLoading', true)
+			fb.bikesCollection.get().then(bikeDoc => {
+				commit('setBikes', bikeDoc.data)
+				commit('setLoading', false)
+			}).catch(err => {
+				console.err('Error getting bikeDoc', err)
+			})
 		},
-		fetchHistory ({ state, commit }, data) {
-
+		fetchHistory ({ commit }) {
+			commit('setLoading', true)
+			fb.historyCollection.get().then(historyDoc => {
+				commit('setHistory', historyDoc.data)
+				commit('setLoading', false)
+			}).catch(err => {
+				console.err('Error getting historyDoc', err)
+			})
 		},
-		fetchBikeTypes ({ state, commit }, data) {
-
+		fetchBikeTypes ({ commit }) {
+			commit('setLoading', true)
+			fb.bikeTypesCollection.get().then(bikeTypeDoc => {
+				commit('setBikeTypes', bikeTypeDoc.data)
+				commit('setLoading', false)
+			}).catch(err => {
+				console.err('Error getting bikeTypeDoc', err)
+			})
 		},
-		fetchUserHistory ({ state, commit }, data) {
-
+		fetchUserHistory ({ state, commit }) {
+			commit('setLoading', true)
+			fb.historyCollection.where('User', '==', state.user.id).get().then(historyDoc => {
+				commit('setUserhistory', historyDoc.data)
+				commit('setLoading', false)
+			}).catch(err => {
+				console.err('Error getting historyDoc of ' + state.user.id, err)
+			})
 		},
-		fetchUserInfomation ({ state, commit }, data) {
-
+		fetchUserInfomation ({ commit }) {
+			commit('setLoading', true)
+			fb.usersCollection.get().then(userInfoDoc => {
+				commit('setUserInfo', userInfoDoc.data)
+				commit('setLoading', false)
+			}).catch(err => {
+				console.err('Error getting userInfoDoc', err)
+			})
 		},
-		addBikeToBikes ({ state, commit }, data) {
-
+		addBikeToBikes ({ commit }, data) {
+			fb.bikesCollection.doc(data.bid).set(data.doc)
+			/*
+				expected data structure:
+				{
+					bid: "xxxxx",
+					doc: {
+						CurrentUser: "InsrestUIDHere",
+						GPSLocation: [0,0], // geopoint
+						Location: "InsertLocationHere",
+						Type: "/Bike Types/InsertTimeHere"
+					}
+				}
+			*/
 		},
-		addEntryToHistory ({ state, commit }, data) {
-
+		addEntryToHistory ({ commit }, data) {
+			commit('setLoading', true)
+			fb.historyCollection.add(data).then(newHistoryDoc => {
+				commit('addHistory', newHistoryDoc.data)
+				commit('setLoading', false)
+			})
+			/*
+				expected data structure to add new booking:
+				{
+					CurrentUser: "InsrestUIDHere",
+					GPSLocation: [0,0], // geopoint
+					Location: "InsertLocationHere",
+					Type: "/Bike Types/InsertTimeHere"
+				}
+			*/
 		},
-		addBikeTypeToBikeTypes ({ state, commit }, data) {
-
+		addBikeTypeToBikeTypes ({ commit }, data) {
+			commit('setLoading', true)
+			fb.bikeTypesCollection.doc(data.btid).set(data.doc).then(newBikeType => {
+				commit('addBikeTypeToBikeTypes', newHistoryDoc.data)
+				commit('setLoading', false)
+			})
+			/*
+				expected data structure to add new bike type:
+				{
+					btid: "xxxxx",
+					doc: {
+						Price: InsertBikePriceHere, // int
+						Name: "InsertBikeTypeNameHere", // geopoint
+					}
+				}
+			*/
 		},
 		updateBikeInBikes ({ state, commit }, data) {
-
+			fb.bikesCollection.doc(data.bid).set(data.doc)
+			/*
+				expected data structure to change bike:
+				{
+					bid: "xxxxx"
+					doc: {
+						CurrentUser: "InsrestUIDHere",
+						GPSLocation: [0,0], // geopoint
+						Location: "InsertLocationHere",
+						Type: "/Bike Types/InsertTimeHere"
+					}
+				}
+			*/
 		},
 		updateUserInformation ({ state, commit }, data) {
-
+			fb.usersCollection.doc(data.uid).set(data.doc)
+			/*
+				expected data structure to change user info:
+				{
+					uid: "this.$store.state.user.uid"
+					doc: {
+						CurrentUser: "InsrestUIDHere",
+						GPSLocation: [0,0], // geopoint
+					}
+				}
+			*/
 		},
 		updateUserProfile ({ state, commit }, newDisplayName) {
+			commit('setLoading', true)
 			console.log('Updating user profile. Displayed name will be ' + newDisplayName)
 			fb.auth.user.updateProfile({
 				displayName: newDisplayName,
 				photoURL: 'https://example.com/jane-q-user/profile.jpg'
-			}).then(function () {
+			}).then(() => {
 				commit('setUser', fb.auth.user)
 				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
-			}).catch(function (error) {
-				alert(error)
+				commit('setLoading', false)
+			}).catch(error => {
+				console.err(error)
 			})
 		}
 	},
@@ -95,11 +195,11 @@ export const store = new Vuex.Store({
 		addBikeType (state, val) {
 			state.bikeTypes.push(val)
 		},
-		setStations (state, val) {
-			state.stations = val
+		setHistory (state, val) {
+			state.history = val
 		},
-		addStation (state, val) {
-			state.stations.push(val)
+		addHistory (state, val) {
+			state.history.push(val)
 		},
 		setBikes (state, val) {
 			state.bikes = val
@@ -107,11 +207,11 @@ export const store = new Vuex.Store({
 		addBike (state, val) {
 			state.bikes.push(val)
 		},
-		setPerformingRequest (state, val) {
-			state.performingRequest = val
+		setLoading (state, val) {
+			state.loading = val
 		},
-		flipPerformingRequest (state) {
-			state.performingRequest = !state.performingRequest
+		flipLoading (state) {
+			state.loading = !state.loading
 		}
 	}
 })
