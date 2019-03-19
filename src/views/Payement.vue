@@ -30,11 +30,11 @@
 
 <script>
 
-export default{
-  name:'addCard',
-  methods: { addPayement (){
-    this.$route.push('/reserve')
-   }
-  }
+export default {
+	name: 'addCard',
+	methods: { addPayement () {
+		this.$route.push('/reserve')
+	}
+	}
 }
 </script>

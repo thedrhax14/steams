@@ -11,7 +11,7 @@ export default {
 	props: {
 		bikeTypeInfo: Object
 	},
-	created() {
+	created () {
 		console.log('bikeTypeInfo ', this.bikeTypeInfo)
 	}
 }

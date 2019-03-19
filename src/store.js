@@ -6,164 +6,112 @@ Vue.use(Vuex)
 
 fb.auth.onAuthStateChanged(user => {
 	if (user) {
-		store.commit('setCurrentUser', user)
+		store.commit('setUser', user)
 	}
 })
 
 export const store = new Vuex.Store({
 	state: {
-		performingRequest: false,
-		currentUser: null,
-		userInfo: Object,
+		selectedBikeTypeId: String,
+		selectedStation: String,
 		selectedBikeId: String,
-		selectedBikeTypeId: null,
-		selectedStation: null,
+		user: Object,
+		userInfo: Object,
+		userhistory: [],
 		bikeTypes: [],
 		stations: [],
-		userhistory: []
+		bikes: [],
+		performingRequest: false
 	},
 	actions: {
-		clearData ({ commit }) {
-			commit('setCurrentUser', null)
+		fetchBikes ({ state, commit }, data) {
+
 		},
-		fetchbikeTypes ({ dispatch, commit, state }) {
-			commit('clearBikesData')
-			commit('clearUserhistory')
-			state.performingRequest = true
-			fb.bikeTypesCollection.get().then(bikeTypesSnapshot => {
-				bikeTypesSnapshot.forEach(bikeTypeDoc => {
-					dispatch('fetchBikes', {
-						bikeTypeId: bikeTypeDoc.id,
-						BikeTypeName: bikeTypeDoc.data()['Type name'],
-						Price: bikeTypeDoc.data().Price,
-						AvailableBikes: []
-					})
-				})
-			})
+		fetchHistory ({ state, commit }, data) {
+
 		},
-		fetchBikes ({ commit, dispatch, state }, data) {
-			fb.bikeTypesCollection.doc(data.bikeTypeId).collection('Bikes').get().then(bikesSnapshot => {
-				bikesSnapshot.forEach(bikeDoc => {
-					// console.log('Reserved', bikeDoc.data()['Reserved'])
-					// console.log('selectedStation', this.state.selectedStation)
-					// This needs to be separated from each other
-					if ((bikeDoc.data()['Reserved'] === null || bikeDoc.data()['Reserved'] === state.currentUser.uid) && (this.state.selectedStation === null || this.state.selectedStation === '' || this.state.selectedStation === bikeDoc.data()['Station name'])) {
-						data.AvailableBikes.push({ Id: bikeDoc.id, Info: bikeDoc.data() })
-					}
-					if(state.currentUser.uid){
-						dispatch('fetchBikeHistory',{
-							bikeTypeId: data.bikeTypeId,
-							BikeId: bikeDoc.id,
-							BikeTypeName: data.BikeTypeName
-						})
-					}
-				})
-				commit('addBikeType', data)
-				state.performingRequest = false
-			})
+		fetchBikeTypes ({ state, commit }, data) {
+
 		},
-		fetchBikeHistory({ commit, state }, data) {
-			fb.bikeTypesCollection
-			.doc(data.bikeTypeId)
-			.collection('Bikes')
-			.doc(data.BikeId)
-			.collection('Usage History')
-			.where('uid','==',state.currentUser.uid)
-			.get().then(entries => {
-				entries.forEach(entry => {
-					// console.log('entry', entry.data())
-					var t = new Date(1970, 0, 1)
-    				t.setSeconds(entry.data().StartDateAndTime.seconds)
-					commit('addHistory',{
-						StartDateAndTime: t,
-						BikeType: data.BikeTypeName,
-						biketypeId: data.bikeTypeId,
-						bikeId: data.BikeId
-					})
-				})
-			})
+		fetchUserHistory ({ state, commit }, data) {
+
 		},
-		fetchUserByUserId ({ commit, state }) {
-			state.performingRequest = true
-			fb.usersCollection.doc(state.currentUser.uid).get().then(userDocSnapshot => {
-				// console.log('Got user info ' + userDocSnapshot.data())
-				commit('setUserInfo', userDocSnapshot.data())
-				state.performingRequest = false
-			})
+		fetchUserInfomation ({ state, commit }, data) {
+
 		},
-		selectBike ({ commit }, bid) {
-			commit('setSelectBike', bid)
+		addBikeToBikes ({ state, commit }, data) {
+
 		},
-		returnBike ({ state }, bikeData) {
-			state.performingRequest = true
-			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: null })
-			state.performingRequest = false
+		addEntryToHistory ({ state, commit }, data) {
+
 		},
-		bookBike ({ state }, bookingData) {
-			// console.log('Booking ', bookingData)
-			var str = bookingData.StartDateAndTime
-			var dt = new Date(str + "Z")
-			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).update({ Reserved: state.currentUser.uid })
-			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).collection('Usage History').doc().set({
-				StartDateAndTime: dt,
-				uid: state.currentUser.uid
-			})
+		addBikeTypeToBikeTypes ({ state, commit }, data) {
+
 		},
-		bookFirstAvailableBikeType ({ state, dispatch }, data) {
-			var found = false
-			// console.log('Start booking ', data)
-			state.bikeTypes.forEach(element => {
-				// console.log(element.Id, ' === ', data.bikeTypeId,' = ', element.Id === data.bikeTypeId,', found = ', found)
-				// console.log('element ', element)
-				if (element.Id === data.bikeTypeId && found === false) {
-					dispatch('bookBike', {
-						biketypeId: data.bikeTypeId,
-						bikeId: element.AvailableBikes[0].Id,
-						StartDateAndTime: data.StartDateAndTime
-					})
-					found = true
-				}
+		updateBikeInBikes ({ state, commit }, data) {
+
+		},
+		updateUserInformation ({ state, commit }, data) {
+
+		},
+		updateUserProfile ({ state, commit }, newDisplayName) {
+			console.log('Updating user profile. Displayed name will be ' + newDisplayName)
+			fb.auth.user.updateProfile({
+				displayName: newDisplayName,
+				photoURL: 'https://example.com/jane-q-user/profile.jpg'
+			}).then(function () {
+				commit('setUser', fb.auth.user)
+				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
+			}).catch(function (error) {
+				alert(error)
 			})
 		}
 	},
 	mutations: {
-		setCurrentUser (state, val) {
-			state.currentUser = val
+		setSelectedBikeTypeId (state, val) {
+			state.selectedBikeTypeId = val
+		},
+		setSelectedStation (state, val) {
+			state.selectedStation = val
+		},
+		setSelectedBikeId (state, val) {
+			state.selectedBikeId = val
+		},
+		setUser (state, val) {
+			state.user = val
 		},
 		setUserInfo (state, val) {
 			state.userInfo = val
 		},
-		selectLocation (state, val) {
-			state.selectedStation = val
+		setUserhistory (state, val) {
+			state.userhistory = val
 		},
-		selectBikeTypeId (state, val) {
-			state.selectedBikeTypeId = val
+		addUserHistory (state, val) {
+			state.userhistory.push(val)
 		},
-		updateUserProfile (state, displayNameval) {
-			console.log('Updating user profile. Displayed name will be ' + displayNameval)
-			fb.auth.currentUser.updateProfile({
-				displayName: displayNameval,
-				photoURL: 'https://example.com/jane-q-user/profile.jpg'
-			}).then(function () {
-				console.log('Userprofile updated. Displayed name is ' + fb.auth.currentUser.displayName)
-			}).catch(function (error) {
-				alert(error)
-			})
-		},
-		clearBikesData (state) {
-			state.bikeTypes = []
-		},
-		clearUserhistory (state) {
-			state.userhistory = []
+		setBikeTypes (state, val) {
+			state.bikeTypes = val
 		},
 		addBikeType (state, val) {
 			state.bikeTypes.push(val)
 		},
-		addHistory (state, val) {
-			state.userhistory.push(val)
+		setStations (state, val) {
+			state.stations = val
 		},
-		setSelectBike (state, val) {
-			state.selectedBikeId = val
+		addStation (state, val) {
+			state.stations.push(val)
+		},
+		setBikes (state, val) {
+			state.bikes = val
+		},
+		addBike (state, val) {
+			state.bikes.push(val)
+		},
+		setPerformingRequest (state, val) {
+			state.performingRequest = val
+		},
+		flipPerformingRequest (state) {
+			state.performingRequest = !state.performingRequest
 		}
 	}
 })

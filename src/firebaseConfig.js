@@ -28,11 +28,15 @@ db.settings(settings)
 
 const bikeTypesCollection = db.collection('Bike Types')
 const usersCollection = db.collection('User Information')
+const historyCollection = db.collection('History')
+const bikesCollection = db.collection('Bikes')
 
 export {
 	db,
 	auth,
 	currentUser,
 	bikeTypesCollection,
-	usersCollection
+	usersCollection,
+	historyCollection,
+	bikesCollection
 }

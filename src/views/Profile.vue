@@ -39,13 +39,13 @@ export default {
 		bookDefaultBike () {
 			this.$store.dispatch('bookBike', this.defaultBikeData)
 		},
-		returnBike(bike) {
+		returnBike (bike) {
 			console.log('Returning bike ', bike)
 			this.$store.dispatch('returnBike', this.defaultBikeData)
 		}
 	},
 	created () {
-		this.$store.commit('selectLocation',null)
+		this.$store.commit('selectLocation', null)
 		this.$store.dispatch('fetchbikeTypes')
 	}
 }
