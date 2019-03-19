@@ -13,6 +13,7 @@ import Reservations from './views/Reservations.vue'
 import Payement from './views/Payement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
+import ConfirmOrder from './views/confirmOrder.vue'
 import Profile from './views/Profile.vue'
 import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
@@ -39,6 +40,11 @@ const router = new Router({
 			path: '/about',
 			name: 'About',
 			component: About
+		},
+		{
+			path:'/confirm',
+			name: 'ConfirmOrder',
+			component: ConfirmOrder
 		},
 		{
 			path: '/licenseagreement',
