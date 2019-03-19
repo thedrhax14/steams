@@ -34,8 +34,7 @@
       </div>
         <br/>
         <router-link to='./profile'>My Account</router-link>
-        <router-link to='/Bikes'><i class="fas fa-question-circle fa-sm"></i>&nbsp;&nbsp;Help</router-link>
-        <router-link to="settings.html"><i class="fas fa-cog fa-sm"></i>&nbsp;&nbsp;Settings</router-link>
+        <router-link to='/'><i class="fas fa-question-circle fa-sm"></i>&nbsp;&nbsp;Help tour</router-link>
     </div>
   </div>
 </template>
