@@ -173,6 +173,7 @@ export const store = new Vuex.Store({
 					uid: fb.auth.user.uid,
 					doc: val.data
 				})
+				commit('setUserInfo', val.data)
 			}).catch(error => {
 				console.log(error)
 			})
