@@ -147,28 +147,32 @@ export const store = new Vuex.Store({
 			*/
 		},
 		updateUserInformation ({ state, commit }, data) {
-			fb.usersCollection.doc(data.uid).set(data.doc)
+			fb.usersCollection.doc(data.uid).update(data.doc)
 			/*
 				expected data structure to change user info:
 				{
 					uid: "this.$store.state.user.uid"
 					doc: {
-						CurrentUser: "InsrestUIDHere",
-						GPSLocation: [0,0], // geopoint
+						PermissionLevel: x,
+						Type: "InsertNameOfPermissionHere"
 					}
 				}
 			*/
 		},
-		updateUserProfile ({ state, commit }, newDisplayName) {
+		updateUserProfile ({ commit, dispatch }, val) {
 			commit('setLoading', true)
-			console.log('Updating user profile. Displayed name will be ' + newDisplayName)
+			console.log('Updating user profile. Displayed name will be ' + val.displayName)
 			fb.auth.user.updateProfile({
-				displayName: newDisplayName,
+				displayName: val.displayName,
 				photoURL: 'https://example.com/jane-q-user/profile.jpg'
 			}).then(() => {
 				commit('setUser', fb.auth.user)
 				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
 				commit('setLoading', false)
+				dispatch('updateUserInformation',{
+					uid: fb.auth.user.uid,
+					doc: val.data
+				})
 			}).catch(error => {
 				console.log(error)
 			})
