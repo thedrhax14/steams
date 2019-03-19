@@ -1,8 +1,9 @@
 <template>
-	<div id="bike-types">
+	<div id="bike-types" v-if='Location!="None"'>
+		<h1>Bike types at {{ Location }}</h1>
 		<b-list-group>
-			<b-list-group-item v-for='bike in GenerateAvailableBikeTypesAtLocation'>
-				<Bike v-bind:bike='bike' v-bind:ShowRaw='true'/>
+			<b-list-group-item v-for='BikeType in BikeTypesAtLocation'>
+				<Bike v-bind:bike='BikeType.data'/>
 			</b-list-group-item>
 		</b-list-group>
 	</div>
@@ -12,19 +13,26 @@
 import Bike from '@/components/Bike.vue'
 export default {
 	name: 'BikeTypes',
-	props: {
-		Location: String
-	},
 	components: {
 		Bike
 	},
 	computed: {
-		GenerateAvailableBikeTypesAtLocation() {
-			var AvailableBikeTypes = []
+		BikeTypesAtLocation() {
+			var BikeTypes = []
+			var BikeTypeIDs = []
 			this.$store.state.bikes.forEach(bikeDoc => {
-				AvailableBikeTypes.push(bikeDoc)
+				if(bikeDoc.Location==this.Location)
+					BikeTypeIDs.push(bikeDoc.TypeID)
 			})
-			return AvailableBikeTypes
+			BikeTypeIDs = [...new Set(BikeTypeIDs)]
+			this.$store.state.bikeTypes.forEach(bikeTypeDoc => {
+				if(BikeTypeIDs.includes(bikeTypeDoc.id))
+					BikeTypes.push(bikeTypeDoc)
+			})
+			return BikeTypes
+		},
+		Location() {
+			return this.$store.state.selectedStation
 		}
 	}
 }

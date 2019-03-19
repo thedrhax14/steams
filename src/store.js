@@ -13,7 +13,7 @@ fb.auth.onAuthStateChanged(user => {
 export const store = new Vuex.Store({
 	state: {
 		selectedBikeTypeId: String,
-		selectedStation: String,
+		selectedStation: 'None',
 		selectedBikeId: String,
 		userInfo: Object,
 		user: Object,
@@ -34,12 +34,12 @@ export const store = new Vuex.Store({
 		fetchBikes ({ commit }) {
 			commit('setLoading', true)
 			fb.bikesCollection.get().then(bikesDoc => {
-				bikesDoc.forEach(bike => {
-					commit('addBike', bike.data())
+				bikesDoc.forEach(bikeDoc => {
+					commit('addBike', bikeDoc.data())
 				})
 				commit('setLoading', false)
 			}).catch(err => {
-				console.err('Error getting bikesDoc', err)
+				console.log('Error getting bikesDoc', err)
 			})
 		},
 		fetchHistory ({ commit }) {
@@ -48,16 +48,21 @@ export const store = new Vuex.Store({
 				commit('setHistory', historyDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {
-				console.err('Error getting historyDoc', err)
+				console.log('Error getting historyDoc', err)
 			})
 		},
 		fetchBikeTypes ({ commit }) {
 			commit('setLoading', true)
-			fb.bikeTypesCollection.get().then(bikeTypeDoc => {
-				commit('setBikeTypes', bikeTypeDoc.data())
+			fb.bikeTypesCollection.get().then(bikeTypesDoc => {
+				bikeTypesDoc.forEach(bikeTypeDoc => {
+					commit('addBikeType', {
+						id: bikeTypeDoc.id, 
+						data: bikeTypeDoc.data()
+					})
+				})
 				commit('setLoading', false)
 			}).catch(err => {
-				console.err('Error getting bikeTypeDoc', err)
+				console.log('Error getting bikeTypesDoc', err)
 			})
 		},
 		fetchUserHistory ({ state, commit }) {
@@ -66,7 +71,7 @@ export const store = new Vuex.Store({
 				commit('setUserhistory', historyDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {
-				console.err('Error getting historyDoc of ' + state.user.id, err)
+				console.log('Error getting historyDoc of ' + state.user.id, err)
 			})
 		},
 		fetchUserInfomation ({ commit }) {
@@ -75,7 +80,7 @@ export const store = new Vuex.Store({
 				commit('setUserInfo', userInfoDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {
-				console.err('Error getting userInfoDoc', err)
+				console.log('Error getting userInfoDoc', err)
 			})
 		},
 		addBikeToBikes ({ commit }, data) {
@@ -165,7 +170,7 @@ export const store = new Vuex.Store({
 				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
 				commit('setLoading', false)
 			}).catch(error => {
-				console.err(error)
+				console.log(error)
 			})
 		}
 	},
@@ -193,7 +198,6 @@ export const store = new Vuex.Store({
 		},
 		setBikeTypes (state, val) {
 			state.bikeTypes = val
-			console.log('TypeRef = ', val.TypeRef)
 		},
 		addBikeType (state, val) {
 			state.bikeTypes.push(val)
@@ -208,7 +212,6 @@ export const store = new Vuex.Store({
 			state.bikes = val
 		},
 		addBike (state, val) {
-			console.log('addBike',val)
 			state.bikes.push(val)
 		},
 		setLoading (state, val) {
