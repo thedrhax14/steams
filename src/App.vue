@@ -18,7 +18,8 @@ const fb = require('./firebaseConfig.js')
 
 export default {
 	components: {
-		LoadingDisplay
+		LoadingDisplay,
+		navbar
 	},
 	computed: {
 		...mapState(['currentUser'])
@@ -31,6 +32,10 @@ export default {
 				console.log(err)
 			})
 		}
+	},
+	created () {
+		console.log('dispatch \'fetchBikes\' on created in app.vue')
+		this.$store.dispatch('fetchBikes')
 	}
 }
 </script>

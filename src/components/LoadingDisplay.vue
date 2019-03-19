@@ -11,7 +11,7 @@ export default {
 	name: 'LoadingDisplay',
 	computed: {
 		isLoading () {
-			return this.$store.state.performingRequest
+			return this.$store.state.loading
 		}
 	}
 }

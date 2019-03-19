@@ -7,9 +7,14 @@
 
 <script>
 export default {
-	name: 'BikeType',
+	name: 'Bike',
 	props: {
-		bikeTypeInfo: Object
+		bikeTypeInfo: Object,
+		showSettings: {
+			ButtonEdit: false,
+			ButtonBook: false,
+			ButtonSelect: false
+		}
 	},
 	created () {
 		console.log('bikeTypeInfo ', this.bikeTypeInfo)

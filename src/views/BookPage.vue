@@ -21,6 +21,7 @@
 				@geolocate-geolocate="geolocate"
 				@geolocate-error="geolocateError">
 			</mapbox>
+
 		</div>
 	</div>
 </template>

@@ -191,6 +191,7 @@ export const store = new Vuex.Store({
 		},
 		setBikeTypes (state, val) {
 			state.bikeTypes = val
+			console.log('TypeRef = ', val.TypeRef)
 		},
 		addBikeType (state, val) {
 			state.bikeTypes.push(val)
