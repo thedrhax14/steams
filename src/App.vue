@@ -4,7 +4,7 @@
     <LoadingDisplay/>
     <div id="nav">
       <router-link to="/installedplugins">Installed Plugins</router-link>
-      <a v-if="currentUser" @click="logout"> | Logout</a>
+      <a v-if="user" @click="logout"> | Logout</a>
     </div>
     <router-view/>
   </div>
@@ -22,12 +22,13 @@ export default {
 		navbar
 	},
 	computed: {
-		...mapState(['currentUser'])
+		...mapState(['user'])
 	},
 	methods: {
 		logout () {
 			fb.auth.signOut().then(() => {
-				console.log('Logged our')
+				console.log('Logged out')
+				this.$router.push('/login')
 			}).catch(err => {
 				console.log(err)
 			})

@@ -27,7 +27,7 @@ export default {
 			this.$store.state.loading = true
 			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
 				this.$store.commit('setUser', user.user)
-				this.$store.commit('fetchUserInfomation', user.user.uid)
+				this.$store.dispatch('fetchUserInfomation', user.user.uid)
 				this.$router.push('/profile')
 				this.$store.state.loading = false
 			}).catch(err => {

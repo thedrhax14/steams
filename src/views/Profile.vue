@@ -6,8 +6,8 @@
 			</div>
 		</transition>
 		<h1>Profile</h1>
-		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
-		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
+		<p>UID - {{ this.$store.state.user.uid }}</p>
+		<p>Name - {{ this.$store.state.user.displayName }}</p>
 		<p>Permission level - {{ this.$store.state.userInfo.PermissionLevel }}</p>
 		<h1>Booking history</h1>
 		<b-list-group>
@@ -43,10 +43,6 @@ export default {
 			console.log('Returning bike ', bike)
 			this.$store.dispatch('returnBike', this.defaultBikeData)
 		}
-	},
-	created () {
-		this.$store.commit('selectLocation', null)
-		this.$store.dispatch('fetchbikeTypes')
 	}
 }
 </script>

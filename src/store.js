@@ -74,9 +74,9 @@ export const store = new Vuex.Store({
 				console.log('Error getting historyDoc of ' + state.user.id, err)
 			})
 		},
-		fetchUserInfomation ({ commit }) {
+		fetchUserInfomation ({ commit }, uid) {
 			commit('setLoading', true)
-			fb.usersCollection.get().then(userInfoDoc => {
+			fb.usersCollection.doc(uid).get().then(userInfoDoc => {
 				commit('setUserInfo', userInfoDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {

@@ -2,7 +2,7 @@
 	<div class="">
 		<nav class="navbar">
 			<span class="open-slide">
-				<a href="#" onclick="openSlideMenu()" @click="setUserType() ">
+				<a href="#" onclick="openSlideMenu()">
 					<i class="fas fa-bars fa-2x"></i>
 				</a>
 			</span>
