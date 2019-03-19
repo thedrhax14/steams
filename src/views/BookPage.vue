@@ -21,7 +21,7 @@
 				@geolocate-geolocate="geolocate"
 				@geolocate-error="geolocateError">
 			</mapbox>
-
+			<BikeTypes v-bind:Location='stationName'/>
 		</div>
 	</div>
 </template>
@@ -30,14 +30,16 @@
 import Mapbox from 'mapbox-gl-vue'
 import Vue from 'vue'
 import PopupContent from '../components/PopupContent.vue'
+import BikeTypes from '../components/BikeTypes.vue'
 
 export default {
 	components: {
-		Mapbox
+		Mapbox,
+		BikeTypes
 	},
 	data () {
 		return {
-			stationName: 'Select station',
+			stationName: 'None',
 			PopupVue: Vue.extend(PopupContent)
 		}
 	},
@@ -77,6 +79,7 @@ export default {
 					locName: features[0].properties.stationName
 				}
 			})
+			this.stationName = features[0].properties.stationName
 			pv.$mount('#vue-popup-content')
 			Popup.setLngLat(features[0].geometry.coordinates).setHTML('<div id="vue-popup-content"></div>').addTo(map)
 		}

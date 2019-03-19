@@ -33,17 +33,19 @@ export const store = new Vuex.Store({
 	actions: {
 		fetchBikes ({ commit }) {
 			commit('setLoading', true)
-			fb.bikesCollection.get().then(bikeDoc => {
-				commit('setBikes', bikeDoc.data)
+			fb.bikesCollection.get().then(bikesDoc => {
+				bikesDoc.forEach(bike => {
+					commit('addBike', bike.data())
+				})
 				commit('setLoading', false)
 			}).catch(err => {
-				console.err('Error getting bikeDoc', err)
+				console.err('Error getting bikesDoc', err)
 			})
 		},
 		fetchHistory ({ commit }) {
 			commit('setLoading', true)
 			fb.historyCollection.get().then(historyDoc => {
-				commit('setHistory', historyDoc.data)
+				commit('setHistory', historyDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {
 				console.err('Error getting historyDoc', err)
@@ -52,7 +54,7 @@ export const store = new Vuex.Store({
 		fetchBikeTypes ({ commit }) {
 			commit('setLoading', true)
 			fb.bikeTypesCollection.get().then(bikeTypeDoc => {
-				commit('setBikeTypes', bikeTypeDoc.data)
+				commit('setBikeTypes', bikeTypeDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {
 				console.err('Error getting bikeTypeDoc', err)
@@ -61,7 +63,7 @@ export const store = new Vuex.Store({
 		fetchUserHistory ({ state, commit }) {
 			commit('setLoading', true)
 			fb.historyCollection.where('User', '==', state.user.id).get().then(historyDoc => {
-				commit('setUserhistory', historyDoc.data)
+				commit('setUserhistory', historyDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {
 				console.err('Error getting historyDoc of ' + state.user.id, err)
@@ -70,7 +72,7 @@ export const store = new Vuex.Store({
 		fetchUserInfomation ({ commit }) {
 			commit('setLoading', true)
 			fb.usersCollection.get().then(userInfoDoc => {
-				commit('setUserInfo', userInfoDoc.data)
+				commit('setUserInfo', userInfoDoc.data())
 				commit('setLoading', false)
 			}).catch(err => {
 				console.err('Error getting userInfoDoc', err)
@@ -94,7 +96,7 @@ export const store = new Vuex.Store({
 		addEntryToHistory ({ commit }, data) {
 			commit('setLoading', true)
 			fb.historyCollection.add(data).then(newHistoryDoc => {
-				commit('addHistory', newHistoryDoc.data)
+				commit('addHistory', newHistoryDoc.data())
 				commit('setLoading', false)
 			})
 			/*
@@ -110,7 +112,7 @@ export const store = new Vuex.Store({
 		addBikeTypeToBikeTypes ({ commit }, data) {
 			commit('setLoading', true)
 			fb.bikeTypesCollection.doc(data.btid).set(data.doc).then(newBikeType => {
-				commit('addBikeTypeToBikeTypes', newHistoryDoc.data)
+				commit('addBikeTypeToBikeTypes', newHistoryDoc.data())
 				commit('setLoading', false)
 			})
 			/*
@@ -206,6 +208,7 @@ export const store = new Vuex.Store({
 			state.bikes = val
 		},
 		addBike (state, val) {
+			console.log('addBike',val)
 			state.bikes.push(val)
 		},
 		setLoading (state, val) {
