@@ -13,11 +13,8 @@
 		<b-list-group>
 			<b-list-group-item v-for="bike in myReservations">
 				<p>{{ bike }}</p>
-				<button @click='returnBike(bike)'>Return</button>
 			</b-list-group-item>
 		</b-list-group>
-		<button @click='returnDefaultBike'>Return default bike</button>
-		<button @click='bookDefaultBike'>Book default bike</button>
 	</div>
 </template>
 
@@ -36,17 +33,13 @@ export default {
 			return this.$store.state.userhistory
 		}
 	},
-	methods: {
-		returnDefaultBike () {
-			this.$store.dispatch('returnBike', this.defaultBikeData)
-		},
-		bookDefaultBike () {
-			this.$store.dispatch('bookBike', this.defaultBikeData)
-		},
-		returnBike (bike) {
-			console.log('Returning bike ', bike)
-			this.$store.dispatch('returnBike', this.defaultBikeData)
-		},
+	created() {
+		console.log('dispatch \'fetchUserInfomation\' on created in Profile.vue')
+		this.$store.dispatch('fetchUserInfomation', this.$store.state.user.uid)
+		console.log('commit \'setUserHistory\' on created in Profile.vue')
+		this.$store.commit('setUserHistory',[])
+		console.log('dispatch \'fetchUserHistory\' on created in Profile.vue')
+		this.$store.dispatch('fetchUserHistory')
 	}
 }
 </script>

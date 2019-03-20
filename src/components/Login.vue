@@ -27,11 +27,6 @@ export default {
 			this.$store.state.loading = true
 			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
 				this.$store.commit('setUser', user.user)
-				this.$store.dispatch('fetchUserInfomation', user.user.uid)
-				console.log('commit \'setUserHistory\' onlogin in Login.vue')
-				this.$store.commit('setUserHistory',[])
-				console.log('dispatch \'fetchUserHistory\' onlogin in Login.vue')
-				this.$store.dispatch('fetchUserHistory')
 				this.$router.push('/profile')
 				this.$store.state.loading = false
 			}).catch(err => {
