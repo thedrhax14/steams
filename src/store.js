@@ -13,14 +13,14 @@ fb.auth.onAuthStateChanged(user => {
 fb.historyCollection.onSnapshot((historySnapshot) => {
 	historySnapshot.docChanges().forEach(historyChange => {
 		if (historyChange.type === 'added') {
-			console.log('New history: ', historyChange.doc.data());
-			store.commit('addHistory', historyChange.doc.data())
+			console.log('New history: ', historyChange.doc.id);
+			store.commit('addHistory', historyChange.doc)
 		}
 		if (historyChange.type === 'modified') {
-			console.log('Modified history: ', historyChange.doc.data());
+			console.log('Modified history: ', historyChange.doc.id);
 		}
 		if (historyChange.type === 'removed') {
-			console.log('Removed history: ', historyChange.doc.data());
+			console.log('Removed history: ', historyChange.doc.id);
 		}
 	})
 }, (error) => {
@@ -122,7 +122,6 @@ export const store = new Vuex.Store({
 		addEntryToHistory ({ commit }, data) {
 			commit('setLoading', true)
 			fb.historyCollection.add(data).then(newHistoryDoc => {
-				commit('addHistory', newHistoryDoc.data())
 				commit('setLoading', false)
 			})
 			/*
@@ -247,7 +246,10 @@ export const store = new Vuex.Store({
 			state.history = val
 		},
 		addHistory (state, val) {
-			state.history.push(val)
+			state.history.push({
+				id:val.id,
+				data: val.data()
+			})
 		},
 		setBikes (state, val) {
 			state.bikes = val
