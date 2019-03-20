@@ -8,7 +8,7 @@
 				v-for="bike in this.$store.state.bikeTypes"
 				v-if="bike.AvailableBikes.length > 0"
 				:value="bike.Id">
-				<Bike :bikeTypeInfo='bike'/>
+				<BikeType :bikeTypeInfo='bike'/>
 			</b-form-radio>
 			<b-form-input v-model="startDate" type="date"/>
 			<b-form-input v-model="startTime" type="time"/>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Bike from '@/components/Bike.vue'
+import BikeType from '@/components/BikeType.vue'
 const fb = require('../firebaseConfig.js')
 
 // Make selection of timestamp from valid input element like celander
@@ -36,7 +36,7 @@ export default {
 		}
 	},
 	components: {
-		Bike
+		BikeType
 	},
 	data () {
 		return {
