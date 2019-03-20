@@ -7,7 +7,8 @@
 					access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 					:map-options="{
 						style: 'mapbox://styles/themofro/cjrd1lqa40o5m2sp3bdkdtxdo',
-						zoom: 13
+						center: [-3.1917758, 55.9517872],
+						zoom: 17
 					}"
 					:geolocate-control="{
 						show: true,
@@ -31,8 +32,8 @@
 <script>
 import Mapbox from 'mapbox-gl-vue'
 import Vue from 'vue'
-import PopupContent from '../components/PopupContent.vue'
-import BikeTypes from '../components/BikeTypes.vue'
+import PopupContent from '@/components/PopupContent.vue'
+import BikeTypes from '@/components/BikeTypes.vue'
 
 export default {
 	components: {

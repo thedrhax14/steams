@@ -1,20 +1,34 @@
 <template>
-	<div id="bike-types" v-if='Location!="None"'>
-		<h1>Bike types at {{ Location }}</h1>
-		<b-list-group>
-			<b-list-group-item v-for='BikeType in BikeTypesAtLocation'>
-				<Bike v-bind:bike='BikeType.data'/>
-			</b-list-group-item>
-		</b-list-group>
+	<div>
+		<b-form
+			@submit="onSubmit"
+			@reset="onReset"
+			v-if="Location!='None'">
+			<h1>Booking</h1>
+			<b-form-radio-group
+				id="BikeTypesRadios"
+				buttons
+				stacked
+				v-model="SelectedStation"
+				:options="BikeTypesAtLocation"
+				name="radioBtnStacked"/>
+			<b-button type="submit" variant="primary">Submit</b-button>
+			<b-button type="reset" variant="danger">Reset</b-button>
+		</b-form>
 	</div>
 </template>
 
 <script>
-import Bike from '@/components/Bike.vue'
+import BikeType from '@/components/BikeType.vue'
 export default {
 	name: 'BikeTypes',
+	data() {
+		return {
+			SelectedStation: ""
+		}
+	},
 	components: {
-		Bike
+		BikeType
 	},
 	computed: {
 		BikeTypesAtLocation() {
@@ -33,6 +47,17 @@ export default {
 		},
 		Location() {
 			return this.$store.state.selectedStation
+		},
+		FormTitle() {
+			return "Available book types at " + this.$store.state.selectedStation
+		}
+	},
+	methods: {
+		onSubmit(evt) {
+
+		},
+		onReset(evt) {
+
 		}
 	}
 }
