@@ -71,7 +71,7 @@ export default {
 			return this.$store.state.selectedStation
 		},
 		AvailableBikeAtLocationByBikeTypeID() {
-
+			
 		},
 		FormTitle() {
 			return "Available book types at " + this.$store.state.selectedStation
