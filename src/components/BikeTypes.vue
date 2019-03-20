@@ -48,12 +48,18 @@ export default {
 		OptionsOfBikeTypesAtLocation() {
 			var AvailableBikeTypes = []
 			var BikeTypeIDs = []
+			console.log('bikes',this.$store.state.bikes)
 			this.$store.state.bikes.forEach(bikeDoc => {
-				if(bikeDoc.Location==this.Location)
-					BikeTypeIDs.push(bikeDoc['Type name'])
+				// console.log(bikeDoc.data.Location,'==',this.Location,'=',bikeDoc.data.Location==this.Location)
+				// console.log('bikeDoc.data',bikeDoc.data)
+				if(bikeDoc.data.Location==this.Location)
+					BikeTypeIDs.push(bikeDoc.data['Type name'])
+				// console.log('BikeTypeIDs',BikeTypeIDs)
 			})
 			BikeTypeIDs = [...new Set(BikeTypeIDs)]
+			// console.log('BikeTypeIDs',BikeTypeIDs)
 			this.$store.state.bikeTypes.forEach(bikeType => {
+				// console.log('bikeType.id is in ',BikeTypeIDs,'?')
 				if(BikeTypeIDs.includes(bikeType.id))
 					AvailableBikeTypes.push({
 						text: bikeType.data['Type name'] + ' ' + bikeType.data.Price + ' £/h',

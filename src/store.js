@@ -13,18 +13,37 @@ fb.auth.onAuthStateChanged(user => {
 fb.historyCollection.onSnapshot((historySnapshot) => {
 	historySnapshot.docChanges().forEach(historyChange => {
 		if (historyChange.type === 'added') {
-			console.log('New history: ', historyChange.doc.id);
+			console.log('New history: ', historyChange.doc.id)
 			store.commit('addHistory', historyChange.doc)
 		}
 		if (historyChange.type === 'modified') {
-			console.log('Modified history: ', historyChange.doc.id);
+			console.log('Modified history: ', historyChange.doc.id)
+			store.commit('updateHistory', historyChange.doc)
 		}
 		if (historyChange.type === 'removed') {
-			console.log('Removed history: ', historyChange.doc.id);
+			console.log('Removed history: ', historyChange.doc.id)
 		}
 	})
 }, (error) => {
 	console.log('historyCollection listener failed. Here is error:',error)
+})
+
+fb.bikesCollection.onSnapshot((bikesSnapshot) => {
+	bikesSnapshot.docChanges().forEach(bikeChange => {
+		if (bikeChange.type === 'added') {
+			console.log('New bike: ', bikeChange.doc.id)
+			store.commit('addBike', bikeChange.doc)
+		}
+		if (bikeChange.type === 'modified') {
+			console.log('Modified bike: ', bikeChange.doc.id)
+			store.commit('updateBike', bikeChange.doc)
+		}
+		if (bikeChange.type === 'removed') {
+			console.log('Removed bike: ', bikeChange.doc.id)
+		}
+	})
+}, (error) => {
+	console.log('bikesCollection listener failed. Here is error:',error)
 })
 
 export const store = new Vuex.Store({
@@ -247,15 +266,35 @@ export const store = new Vuex.Store({
 		},
 		addHistory (state, val) {
 			state.history.push({
-				id:val.id,
+				id: val.id,
 				data: val.data()
 			})
+		},
+		updateHistory(state, val) {
+			for (var i = 0; i < state.history.length; i++) {
+				if(state.history[i].id == val.id){
+					state.history[i].data = val.data()
+					break
+				}
+			}
 		},
 		setBikes (state, val) {
 			state.bikes = val
 		},
 		addBike (state, val) {
-			state.bikes.push(val)
+			// console.log('adding',val.id,'data',val.data())
+			state.bikes.push({
+				id: val.id,
+				data: val.data()
+			})
+		},
+		updateBike(state, val) {
+			for (var i = 0; i < state.bikes.length; i++) {
+				if(state.bikes[i].id == val.id){
+					state.bikes[i].data = val.data()
+					break
+				}
+			}
 		},
 		setLoading (state, val) {
 			state.loading = val
