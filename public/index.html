@@ -14,13 +14,21 @@
    <title>SPIN</title>
   </head>
   <body>
+    <nav class="navbar">
+      <span class="open-slide">
+        <a href="#" onclick="openSlideMenu()" @click="setUserType() ">
+          <i class="fas fa-bars fa-2x"></i>
+        </a>
+      </span>
+      <div id="branding">
+        <img src="/SPINlogowhite.png" alt="logo"/>
+      </div>
+    </nav>
     <noscript>
       <strong>We're sorry but vue-training doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app">
     </div>
-
-
     <footer class="page-footer font-small mdb-color pt-4">
       <!-- Footer Links -->
       <div class="container text-center text-md-left">
