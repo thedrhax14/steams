@@ -1,8 +1,5 @@
 <template>
-	<body>
 	<div id="map">
-		<h2>Nearest Docking Stations</h2>
-		<br>
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
 				<p>Loading...</p>
@@ -13,6 +10,7 @@
 		access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 		:map-options="{
 			style: 'mapbox://styles/themofro/cjrd1lqa40o5m2sp3bdkdtxdo',
+			center: [-3.188452, 55.952065],
 			zoom: 13
 		}"
 		:geolocate-control="{
@@ -28,9 +26,8 @@
 		@geolocate-geolocate="geolocate"
 		@geolocate-error="geolocateError">
 		</mapbox>
-</div>
-</div>
-</body>
+		</div>
+	</div>
 </template>
 
 <script>
