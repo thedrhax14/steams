@@ -5,7 +5,7 @@
 			<br/>
 			<div class="card text-center">
 				<div class="card-header" style="font-weight:bold;">
-						Bike ID: 04231
+						Bike ID:
 				</div>
 				<div class="card-body">
 					<p class="card-text">
@@ -24,13 +24,16 @@
 // Make selection of timestamp from valid input element like celander
 export default {
 	data () {
+		return{
 	 items: [
-		 { message: 'PIN' },
-		 { message: 'Going to:' },
+		 { message: 'PIN:' },
+		 { message: 'Bike type:' },
 		 { message: 'Start time:' },
+		 { message: 'Start date:' },
 		 { message: 'Status:' }
 	 ]
-	},
+ }
+},
 	created () {
 		if (this.$store.state.bikeTypes.length === 0) {
 			this.$store.dispatch('fetchbikeTypes')
