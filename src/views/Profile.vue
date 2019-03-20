@@ -11,9 +11,8 @@
 		<p>Permission level - {{ this.$store.state.userInfo.PermissionLevel }}</p>
 		<h1>Booking history</h1>
 		<b-list-group>
-			<b-list-group-item v-for="bike in this.$store.state.userhistory">
-				<p>{{ bike.BikeType }}</p>
-				<p>{{ bike.StartDateAndTime }}</p>
+			<b-list-group-item v-for="bike in myReservations">
+				<p>{{ bike }}</p>
 				<button @click='returnBike(bike)'>Return</button>
 			</b-list-group-item>
 		</b-list-group>
@@ -32,6 +31,11 @@ export default {
 			}
 		}
 	},
+	computed: {
+		myReservations() {
+			return this.$store.state.userhistory
+		}
+	},
 	methods: {
 		returnDefaultBike () {
 			this.$store.dispatch('returnBike', this.defaultBikeData)
@@ -42,7 +46,7 @@ export default {
 		returnBike (bike) {
 			console.log('Returning bike ', bike)
 			this.$store.dispatch('returnBike', this.defaultBikeData)
-		}
+		},
 	}
 }
 </script>

@@ -44,8 +44,10 @@ export const store = new Vuex.Store({
 		},
 		fetchHistory ({ commit }) {
 			commit('setLoading', true)
-			fb.historyCollection.get().then(historyDoc => {
-				commit('setHistory', historyDoc.data())
+			fb.historyCollection.get().then(history => {
+				history.forEach(historyDoc => {
+					commit('addHistory', historyDoc.data())
+				})
 				commit('setLoading', false)
 			}).catch(err => {
 				console.log('Error getting historyDoc', err)
@@ -67,8 +69,10 @@ export const store = new Vuex.Store({
 		},
 		fetchUserHistory ({ state, commit }) {
 			commit('setLoading', true)
-			fb.historyCollection.where('User', '==', state.user.id).get().then(historyDoc => {
-				commit('setUserhistory', historyDoc.data())
+			fb.historyCollection.where('User', '==', state.user.uid).get().then(history => {
+				history.forEach(historyDoc => {
+					commit('addUserHistory', historyDoc.data())
+				})
 				commit('setLoading', false)
 			}).catch(err => {
 				console.log('Error getting historyDoc of ' + state.user.id, err)
@@ -195,7 +199,7 @@ export const store = new Vuex.Store({
 		setUserInfo (state, val) {
 			state.userInfo = val
 		},
-		setUserhistory (state, val) {
+		setUserHistory (state, val) {
 			state.userhistory = val
 		},
 		addUserHistory (state, val) {

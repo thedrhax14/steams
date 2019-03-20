@@ -1,34 +1,48 @@
 <template>
-	<div>
-		<b-form
-			@submit="onSubmit"
-			@reset="onReset"
-			v-if="Location!='None'">
-			<h1>Booking</h1>
+	<b-container align-h="center" v-if="Location!='None'">
+		<b-row align-h="center">
+			<h1 class='formTitle'>Booking</h1>
+		</b-row>
+		<b-row align-h="center">
 			<b-form-radio-group
 				id="BikeTypesRadios"
 				buttons
 				stacked
-				v-model="SelectedStation"
+				v-model="SelectedBikeType"
 				:options="BikeTypesAtLocation"
 				name="radioBtnStacked"/>
-			<b-button type="submit" variant="primary">Submit</b-button>
-			<b-button type="reset" variant="danger">Reset</b-button>
-		</b-form>
-	</div>
+		</b-row>
+		<b-row align-h="center">
+			<b-button
+				block
+				variant="primary"
+				@click='Submit'
+				:disabled='!SelectedBikeType'>
+				Submit
+			</b-button>
+			<b-button
+				block
+				variant="danger"
+				@click='Reset'>
+				Reset
+			</b-button>
+		</b-row>
+	</b-container>
 </template>
 
 <script>
-import BikeType from '@/components/BikeType.vue'
+// import '@/styles/BikeTypes.css'
+// import BFormRow from 'bootstrap-vue/es/components/form/form-row'
+// import Vue from 'vue'
+
+// Vue.component('b-form-row', BFormRow)
+
 export default {
 	name: 'BikeTypes',
 	data() {
 		return {
-			SelectedStation: ""
+			SelectedBikeType: ''
 		}
-	},
-	components: {
-		BikeType
 	},
 	computed: {
 		BikeTypesAtLocation() {
@@ -41,7 +55,10 @@ export default {
 			BikeTypeIDs = [...new Set(BikeTypeIDs)]
 			this.$store.state.bikeTypes.forEach(bikeTypeDoc => {
 				if(BikeTypeIDs.includes(bikeTypeDoc.id))
-					BikeTypes.push(bikeTypeDoc)
+					BikeTypes.push({
+						text: bikeTypeDoc.data.Name + ' ' + bikeTypeDoc.data.Price + ' £/h',
+						value: bikeTypeDoc.id
+					})
 			})
 			return BikeTypes
 		},
@@ -53,11 +70,11 @@ export default {
 		}
 	},
 	methods: {
-		onSubmit(evt) {
-
+		Submit(evt) {
+			alert(SelectedBikeType)
 		},
-		onReset(evt) {
-
+		Reset(evt) {
+			this.SelectedBikeType = ''
 		}
 	}
 }
