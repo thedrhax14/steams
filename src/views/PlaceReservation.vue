@@ -1,7 +1,18 @@
 <template>
-	<div>
-		<h1>Booking at {{ this.$store.state.selectedStation + ' Station' }}</h1>
-		<b-form-group label="Bike types at the station">
+	<div class="wrap">
+		<h1 id="reservationTitle">Booking at {{ this.$store.state.selectedStation + ' Station' }}</h1>
+		<b-form-group align="center" label="Bike types available at the station">
+			<br>
+			<h3> <i class="fas fa-list-ol"></i> &nbsp; How many bikes do you need? </h3>
+			<div class="form-group">
+			  <b-form-select v-model="selected" class="mb-3">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+				</b-form-select>
+		</div>
 			<b-form-radio
 				v-model="selectedBikeTypeId"
 				button
