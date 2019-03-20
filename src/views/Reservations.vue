@@ -27,7 +27,7 @@ export default {
 		return{
 	 items: [
 		 { message: 'PIN:' },
-		 { message: 'Bike type:' },
+		 { message: 'Bike:' },
 		 { message: 'Start time:' },
 		 { message: 'Start date:' },
 		 { message: 'Status:' }
