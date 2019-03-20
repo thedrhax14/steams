@@ -10,6 +10,23 @@ fb.auth.onAuthStateChanged(user => {
 	}
 })
 
+fb.historyCollection.onSnapshot((historySnapshot) => {
+	historySnapshot.docChanges().forEach(historyChange => {
+		if (historyChange.type === 'added') {
+			console.log('New history: ', historyChange.doc.data());
+			store.commit('addHistory', historyChange.doc.data())
+		}
+		if (historyChange.type === 'modified') {
+			console.log('Modified history: ', historyChange.doc.data());
+		}
+		if (historyChange.type === 'removed') {
+			console.log('Removed history: ', historyChange.doc.data());
+		}
+	})
+}, (error) => {
+	console.log('historyCollection listener failed. Here is error:',error)
+})
+
 export const store = new Vuex.Store({
 	state: {
 		selectedBikeTypeId: String,
@@ -156,6 +173,21 @@ export const store = new Vuex.Store({
 				expected data structure to change user info:
 				{
 					uid: "this.$store.state.user.uid"
+					doc: {
+						PermissionLevel: x,
+						Type: "InsertNameOfPermissionHere"
+					}
+				}
+			*/
+		},
+		updateHistory ({ state, commit }, data) {
+			fb.historyCollection.doc(data.uid).update(data.doc)
+			/*
+				expected data structure to change user info:
+				{
+					// You can find this info from history table. Look for entry where uid == this.$store.state.user.uid && ['Ending time & date'] == null
+					// This may me unavailable, because listener to a history collection is not added yet
+					historyid: "InsestHistoryIDHere"
 					doc: {
 						PermissionLevel: x,
 						Type: "InsertNameOfPermissionHere"

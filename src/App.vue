@@ -39,8 +39,8 @@ export default {
 		this.$store.dispatch('fetchBikes')
 		console.log('dispatch \'fetchBikeTypes\' on created in app.vue')
 		this.$store.dispatch('fetchBikeTypes')
-		console.log('dispatch \'fetchHistory\' on created in app.vue')
-		this.$store.dispatch('fetchHistory')
+		// console.log('dispatch \'fetchHistory\' on created in app.vue')
+		// this.$store.dispatch('fetchHistory')
 	}
 }
 </script>

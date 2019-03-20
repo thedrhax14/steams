@@ -49,16 +49,11 @@ export default {
 			var AvailableBikeTypes = []
 			var BikeTypeIDs = []
 			this.$store.state.bikes.forEach(bikeDoc => {
-				console.log(bikeDoc.Location,'==',this.Location,'=',bikeDoc.Location==this.Location)
-				console.log('bikeDoc',bikeDoc)
 				if(bikeDoc.Location==this.Location)
 					BikeTypeIDs.push(bikeDoc['Type name'])
-				console.log('BikeTypeIDs',BikeTypeIDs)
 			})
 			BikeTypeIDs = [...new Set(BikeTypeIDs)]
-			console.log('BikeTypeIDs',BikeTypeIDs)
 			this.$store.state.bikeTypes.forEach(bikeType => {
-				console.log('bikeType.id is in ',BikeTypeIDs,'?')
 				if(BikeTypeIDs.includes(bikeType.id))
 					AvailableBikeTypes.push({
 						text: bikeType.data['Type name'] + ' ' + bikeType.data.Price + ' £/h',
@@ -71,7 +66,7 @@ export default {
 			return this.$store.state.selectedStation
 		},
 		AvailableBikeAtLocationByBikeTypeID() {
-			
+
 		},
 		FormTitle() {
 			return "Available book types at " + this.$store.state.selectedStation
@@ -83,6 +78,7 @@ export default {
 		},
 		Reset(evt) {
 			this.SelectedBikeType = ''
+			this.$store.commit('setSelectedStation','None')
 		}
 	}
 }
