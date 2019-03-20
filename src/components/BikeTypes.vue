@@ -9,7 +9,7 @@
 				buttons
 				stacked
 				v-model="SelectedBikeType"
-				:options="BikeTypesAtLocation"
+				:options="OptionsOfBikeTypesAtLocation"
 				name="radioBtnStacked"/>
 		</b-row>
 		<b-row align-h="center">
@@ -45,25 +45,33 @@ export default {
 		}
 	},
 	computed: {
-		BikeTypesAtLocation() {
-			var BikeTypes = []
+		OptionsOfBikeTypesAtLocation() {
+			var AvailableBikeTypes = []
 			var BikeTypeIDs = []
 			this.$store.state.bikes.forEach(bikeDoc => {
+				console.log(bikeDoc.Location,'==',this.Location,'=',bikeDoc.Location==this.Location)
+				console.log('bikeDoc',bikeDoc)
 				if(bikeDoc.Location==this.Location)
-					BikeTypeIDs.push(bikeDoc.TypeID)
+					BikeTypeIDs.push(bikeDoc['Type name'])
+				console.log('BikeTypeIDs',BikeTypeIDs)
 			})
 			BikeTypeIDs = [...new Set(BikeTypeIDs)]
-			this.$store.state.bikeTypes.forEach(bikeTypeDoc => {
-				if(BikeTypeIDs.includes(bikeTypeDoc.id))
-					BikeTypes.push({
-						text: bikeTypeDoc.data.Name + ' ' + bikeTypeDoc.data.Price + ' £/h',
-						value: bikeTypeDoc.id
+			console.log('BikeTypeIDs',BikeTypeIDs)
+			this.$store.state.bikeTypes.forEach(bikeType => {
+				console.log('bikeType.id is in ',BikeTypeIDs,'?')
+				if(BikeTypeIDs.includes(bikeType.id))
+					AvailableBikeTypes.push({
+						text: bikeType.data['Type name'] + ' ' + bikeType.data.Price + ' £/h',
+						value: bikeType.id
 					})
 			})
-			return BikeTypes
+			return AvailableBikeTypes
 		},
 		Location() {
 			return this.$store.state.selectedStation
+		},
+		AvailableBikeAtLocationByBikeTypeID() {
+
 		},
 		FormTitle() {
 			return "Available book types at " + this.$store.state.selectedStation
@@ -71,7 +79,7 @@ export default {
 	},
 	methods: {
 		Submit(evt) {
-			alert(SelectedBikeType)
+			alert(this.SelectedBikeType)
 		},
 		Reset(evt) {
 			this.SelectedBikeType = ''
