@@ -28,8 +28,7 @@
       </div>
       <br>
       <hr>
-      <b-button @click="addNewCard" block variant="info"><i class="fas fa-plus"></i> &nbsp;Save card</b-button></a>
-      <br>
+      <b-button @click="addNewCard" block variant="info"><i class="fas fa-save"></i>&nbsp;Save card</b-button></a>
      </form>
     </div>
 </template>
