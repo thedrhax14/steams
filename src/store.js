@@ -146,6 +146,7 @@ export const store = new Vuex.Store({
 					"Start location": "InsertLocationHere",
 					"Start time & date": xxxxxxxxxxxx, // seconds
 					uid: state.state.user.uid
+					Status: "Reserved"
 				}
 			*/
 		},
@@ -189,7 +190,7 @@ export const store = new Vuex.Store({
 			/*
 				expected data structure to change user info:
 				{
-					uid: "this.$store.state.user.uid"
+					uid: this.$store.state.user.uid
 					doc: {
 						PermissionLevel: x,
 						Type: "InsertNameOfPermissionHere"
@@ -200,11 +201,28 @@ export const store = new Vuex.Store({
 		updateHistory ({ state, commit }, data) {
 			fb.historyCollection.doc(data.uid).update(data.doc)
 			/*
-				expected data structure to change user info:
+				if any of the following properties gets changed the
+				db updates the fields respectively
+				expected data structure to update booking:
 				{
-					
+					BikeID: yyxxxxx,
+					PIN: xxxx,
+					"Start location": "InsertLocationHere",
+					"Start time & date": xxxxxxxxxxxx, // seconds
+					"End location": "InsertLocationHere",
+					"End time & date": xxxxxxxxxxxx, // seconds
+					Status: "InsertStatusHere"
+					uid: state.state.user.uid
 				}
 			*/
+			if(data.doc['End time & date'] && data.doc['End location']) {
+				dispatch('updateBikeInBikes',{
+					bid: data.BikeID,
+					doc: {
+						Reserved: true
+					}
+				})
+			}
 		},
 		updateUserProfile ({ commit, dispatch }, val) {
 			commit('setLoading', true)
