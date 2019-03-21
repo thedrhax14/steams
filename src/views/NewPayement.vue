@@ -24,7 +24,7 @@
       </div>
       <div class="form-group">
         <label for="inputAddress2">Postal code </label>
-        <input type="number" class="form-control" id="inputAddress2" placeholder="postal code">
+        <input type="number" class="form-control" id="inputAddress2" placeholder="e.g. 971">
       </div>
       <br>
       <hr>

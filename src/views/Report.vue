@@ -45,14 +45,14 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us more about your issue..."></textarea>
         <br>
         <hr>
-       <div>
-         <b-button v-b-modal.modal-center variant="danger"> Report </b-button>
-         <!-- Modal Component -->
-         <b-modal id="modal-center" centered title="Thank you!">
-           <p class="my-4">Your feedback has been received.</p>
-         </b-modal>
-       </div>
       </form>
+      <div>
+        <b-button v-b-modal.modal-center variant="danger"> Report </b-button>
+        <!-- Modal Component -->
+        <b-modal id="modal-center" style="height:100px;" centered title="Thank you!">
+          <p class="my-4">Your feedback has been received.</p>
+        </b-modal>
+      </div>
       </div>
   </body>
 </template>
