@@ -5,21 +5,22 @@
 			<hr>
 			<br/>
 			<div class="card text-center">
-				<div class="card-header" style="font-weight:bold;" v-if='myReservations' v-for="bike in myReservations">
-					{{ bike }}
-					<br/>
-					Bike ID: {{ bike.BikeID }}
-				</div>
-				<div class="card-body">
-					<p class="card-text">
-						<ul class="card-list-reservation">
-							<li>PIN: {{ bike.PIN }} </li>
-							<li>Going to: Edinburgh Park</li>
-							<li>Start time: {{ bike.StartDate }}</li>
-							<li>Status: Reserved</li>
-							<li>End time: {{ bike.EndDate }}</li>
-						</ul>
-					</p>
+				<div
+					class="card-header"
+					style="font-weight:bold;"
+					v-if='myReservations'
+					v-for="(bike, index) in myReservations"
+					v-bind:key='index'>
+					Bike ID: {{ bike.data.BikeID }}
+					<div class="card-body">
+						<p class="card-text">
+							<ul class="card-list-reservation">
+								<li>PIN: {{ bike.data.PIN }} </li>
+								<li>Start location: {{ bike.data['Start location'] }}</li>
+								<li>Start time: {{ bike.data['Start time & date'].seconds }}</li>
+							</ul>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -31,7 +32,7 @@ export default {
 	name: 'Reservations',
 	computed: {
 		myReservations () {
-			return this.$store.state.userhistory
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		}
 	}
 }
