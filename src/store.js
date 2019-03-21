@@ -60,7 +60,6 @@ export const store = new Vuex.Store({
 			status: 3,
 			location: 4
 		},
-		userhistory: [],
 		bikeTypes: [],
 		history: [],
 		bikes: [],
@@ -101,17 +100,6 @@ export const store = new Vuex.Store({
 				commit('setLoading', false)
 			}).catch(err => {
 				console.log('Error getting bikeTypesDoc', err)
-			})
-		},
-		fetchUserHistory ({ state, commit }) {
-			commit('setLoading', true)
-			fb.historyCollection.where('User', '==', state.user.uid).get().then(history => {
-				history.forEach(historyDoc => {
-					commit('addUserHistory', historyDoc.data())
-				})
-				commit('setLoading', false)
-			}).catch(err => {
-				console.log('Error getting historyDoc of ' + state.user.id, err)
 			})
 		},
 		fetchUserInfomation ({ commit }, uid) {
@@ -214,13 +202,7 @@ export const store = new Vuex.Store({
 			/*
 				expected data structure to change user info:
 				{
-					// You can find this info from history table. Look for entry where uid == this.$store.state.user.uid && ['Ending time & date'] == null
-					// This may me unavailable, because listener to a history collection is not added yet
-					historyid: "InsestHistoryIDHere"
-					doc: {
-						PermissionLevel: x,
-						Type: "InsertNameOfPermissionHere"
-					}
+					
 				}
 			*/
 		},
@@ -259,12 +241,6 @@ export const store = new Vuex.Store({
 		},
 		setUserInfo (state, val) {
 			state.userInfo = val
-		},
-		setUserHistory (state, val) {
-			state.userhistory = val
-		},
-		addUserHistory (state, val) {
-			state.userhistory.push(val)
 		},
 		setBikeTypes (state, val) {
 			state.bikeTypes = val

@@ -30,16 +30,16 @@ export default {
 	},
 	computed: {
 		myReservations () {
-			return this.$store.state.userhistory
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		}
 	},
 	created () {
 		console.log('dispatch \'fetchUserInfomation\' on created in Profile.vue')
 		this.$store.dispatch('fetchUserInfomation', this.$store.state.user.uid)
-		console.log('commit \'setUserHistory\' on created in Profile.vue')
-		this.$store.commit('setUserHistory', [])
-		console.log('dispatch \'fetchUserHistory\' on created in Profile.vue')
-		this.$store.dispatch('fetchUserHistory')
+		// console.log('commit \'setUserHistory\' on created in Profile.vue')
+		// this.$store.commit('setUserHistory', [])
+		// console.log('dispatch \'fetchUserHistory\' on created in Profile.vue')
+		// this.$store.dispatch('fetchUserHistory')
 	}
 }
 </script>
