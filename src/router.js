@@ -11,6 +11,7 @@ import Recents from './views/Recents.vue'
 import Report from './views/Report.vue'
 import Reservations from './views/Reservations.vue'
 import Payement from './views/Payement.vue'
+import NewPayement from './views/NewPayement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
 import ConfirmOrder from './views/confirmOrder.vue'
@@ -35,6 +36,11 @@ const router = new Router({
 			path: '/',
 			name: 'StationsMap',
 			component: StationsMap
+		},
+		{
+			path: '/newCard',
+			name: 'NewPayement',
+			component: NewPayement
 		},
 		{
 			path: '/about',
