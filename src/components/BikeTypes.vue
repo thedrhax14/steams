@@ -27,7 +27,6 @@
 				Reset
 			</b-button>
 		</b-row>
-		<p v-if='AvailableBikeAtLocationByBikeTypeID'>Available BikeID {{ AvailableBikeAtLocationByBikeTypeID.id }}</p>
 	</b-container>
 </template>
 
@@ -49,7 +48,7 @@ export default {
 		OptionsOfBikeTypesAtLocation() {
 			var AvailableBikeTypes = []
 			var BikeTypeIDs = []
-			// console.log('bikes',this.$store.state.bikes)
+			console.log('bikes',this.$store.state.bikes)
 			this.$store.state.bikes.forEach(bikeDoc => {
 				// console.log(bikeDoc.data.Location,'==',this.Location,'=',bikeDoc.data.Location==this.Location)
 				// console.log('bikeDoc.data',bikeDoc.data)
@@ -73,10 +72,7 @@ export default {
 			return this.$store.state.selectedStation
 		},
 		AvailableBikeAtLocationByBikeTypeID() {
-			return this.$store.state.bikes.filter(bike => 
-					bike.data['Type name'] == this.SelectedBikeType 
-				&& bike.data.Location == this.Location
-				&& bike.data.Reserved == false)[0]
+
 		},
 		FormTitle() {
 			return "Available book types at " + this.$store.state.selectedStation
@@ -84,8 +80,7 @@ export default {
 	},
 	methods: {
 		Submit(evt) {
-			var bikeid = this.AvailableBikeAtLocationByBikeTypeID.id
-			alert('Add plz booking:)' + bikeid)
+			alert(this.SelectedBikeType)
 		},
 		Reset(evt) {
 			this.SelectedBikeType = ''

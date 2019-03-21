@@ -282,14 +282,13 @@ export const store = new Vuex.Store({
 			state.bikes = val
 		},
 		addBike (state, val) {
-			console.log('adding',val.id,'data',val.data())
+			// console.log('adding',val.id,'data',val.data())
 			state.bikes.push({
 				id: val.id,
 				data: val.data()
 			})
 		},
 		updateBike(state, val) {
-			console.log('updating',val.id,'data',val.data())
 			for (var i = 0; i < state.bikes.length; i++) {
 				if(state.bikes[i].id == val.id){
 					state.bikes[i].data = val.data()
