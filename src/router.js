@@ -11,8 +11,10 @@ import Recents from './views/Recents.vue'
 import Report from './views/Report.vue'
 import Reservations from './views/Reservations.vue'
 import Payement from './views/Payement.vue'
+import NewPayement from './views/NewPayement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
+import ConfirmOrder from './views/confirmOrder.vue'
 import Profile from './views/Profile.vue'
 import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
@@ -36,9 +38,19 @@ const router = new Router({
 			component: BookPage
 		},
 		{
+			path: '/newCard',
+			name: 'NewPayement',
+			component: NewPayement
+		},
+		{
 			path: '/about',
 			name: 'About',
 			component: About
+		},
+		{
+			path:'/confirm',
+			name: 'ConfirmOrder',
+			component: ConfirmOrder
 		},
 		{
 			path: '/licenseagreement',

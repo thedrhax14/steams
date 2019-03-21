@@ -1,25 +1,26 @@
 <template>
   <body>
-  <div class="wrap" style="margin-top: 50px;">
+  <div class="wrap">
     <h2> Payement methods</h2>
     <hr>
     <br/>
-    <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action ">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1"><i class="fas fa-credit-card"></i> &nbsp;Credit Card: ending in **39</h5>
-      <small>Mastercard</small>
+    <div class="custom-control custom-radio">
+       <div id="pmethod-1">
+        <input type="radio" id="pradio1" name="pradio" class="custom-control-input">
+        <label class="custom-control-label" for="pradio1"><h5><i class="fas fa-credit-card"></i>&nbsp;Credit Card: ending in **39</h5></label>
+        <br><small>Visa</small>
+      </div>
     </div>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1"><i class="fas fa-credit-card"></i> &nbsp;Credit/Debit Card: ending in **52</h5>
-      <small class="text-muted">Visa</small>
+    <div class="custom-control custom-radio">
+       <div id="pmethod-2">
+        <input type="radio" id="pradio2" name="pradio" class="custom-control-input">
+        <label class="custom-control-label" for="pradio2"><h5><i class="fas fa-credit-card"></i>&nbsp;Credit/Debit Card: ending in **52</h5></label>
+        <br><small>Mastercard</small>
+      </div>
     </div>
-  </a>
-</div>
     <hr>
-    <button @click="addPayement" variant="danger"><i class="fas fa-plus"></i> &nbsp;Add a payement method</button></a>
+    <b-button @click=" " block variant="info">Save selection</b-button></a>
+    <b-button @click="addPayement" block variant="danger"><i class="fas fa-plus"></i> &nbsp;Add a payement method</b-button></a>
    </div>
 
 <br/>
@@ -30,11 +31,16 @@
 
 <script>
 
-export default {
-	name: 'addCard',
-	methods: { addPayement () {
-		this.$route.push('/reserve')
-	}
-	}
+export default{
+  name:'addCard',
+  data (){
+    return{
+
+    }
+  },
+  methods: { addPayement (){
+    this.$router.push('/newCard')
+   }
+  }
 }
 </script>

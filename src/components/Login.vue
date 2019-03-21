@@ -1,12 +1,23 @@
 <template>
-	<div>
-		<h1>Welcome Back</h1>
-		<label for="email1">Email</label>
-		<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
-		<label for="password1">Password</label>
-		<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
+	<div class="sign-in-wrap">
+		<img src="../assets/images/SPINlogotext.png" alt="logo">
+		<h2> Sign In </h2>
+		<div class="sign-in-window">
+		<br/>
+		<h1>Welcome Back {{ name }}</h1>
+		<div class="form-group">
+			<label for="email1">Email</label>
+			<br>
+			<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
+		</div>
+		<div class="form-group">
+			<label for="password1">Password</label>
+			<br>
+			<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
+		</div>
 		<button @click="login" class="button">Log In</button>
 	</div>
+</div>
 </template>
 
 <script>
