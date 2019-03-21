@@ -92,6 +92,9 @@
 		<b-button :disabled='!dateAndTimeState' block variant="outline-success" @click='book'>
 			Book
 		</b-button>
+		<b-button block variant="outline-danger" @click='discard'>
+			Discard
+		</b-button>
 	</div>
 </template>
 
@@ -124,6 +127,9 @@ export default {
 				bikeTypeId: this.selectedBikeTypeId,
 				StartDateAndTime: this.startDate + 'T' + this.startTime + ':00'
 			})
+		},
+		discard(){
+			this.$router.push('/')
 		}
 	},
 	created () {
@@ -131,9 +137,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-b-form-radio{
-	background-color: #000;
-}
-</style>
