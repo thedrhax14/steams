@@ -14,14 +14,13 @@ body{
 }
 
 #branding{
-  width:inherit;
-  height: 100%;
+  width:100%;
+  position: absolute;
 }
 
 #branding img{
   width:120px;
   height:120px;
-  position: absolute;
   margin-left: -50%;
 }
 
@@ -77,6 +76,106 @@ body{
   /*font-family: 'Quicksand', sans-serif;*/
   border-color: #000;
 }
+
+@media(max-width: 768px){
+  header #branding,
+  header nav,
+  header nav li,
+  #newsletter form,
+  #boxes .box,
+  article#main-col,
+  aside#sidebar{
+    float:none;
+    text-align:center;
+    width:100%;
+  }
+}
+
+@media(max-width: 768px){
+  .wrap{
+    float:none;
+    width:100%;
+  }
+  .custom-control.custom-radio #type-1 img{
+    margin-top:6%;
+    margin-left:-25%;
+  }
+
+  .custom-control.custom-radio #type-2 img{
+    margin-top:6%;
+    margin-left:-20%;
+  }
+
+  .custom-control.custom-radio #type-3 img{
+    margin-top:6%;
+    margin-left:-23%;
+  }
+  .custom-control.custom-radio #type-4 img{
+    margin-top:6%;
+    margin-left:-25%;
+  }
+  .custom-control.custom-radio #type-5 img{
+    margin-top:6%;
+    margin-left:-25%;
+  }
+
+  .bike img{
+    margin-top:6%;
+    margin-left:-30%;
+  }
+
+  .card-body ul{
+    list-style: none;
+  }
+
+  .card-body li{
+    text-align: left;
+  }
+
+  .custom-control.custom-radio #type-1 img,.custom-control.custom-radio #type-2 img,.custom-control.custom-radio #type-3 img,.custom-control.custom-radio #type-4 img
+  ,.custom-control.custom-radio #type-5 img, .bike img{
+    width:95.75px;
+    height:54.25px;
+  }
+
+
+  .custom-control.custom-radio #type-1 small, .custom-control.custom-radio #type-2 small, .custom-control.custom-radio #type-3 small, .custom-control.custom-radio #type-4 small
+  ,.custom-control.custom-radio #type-5 small, .bike small{
+    font-size:20px;
+    font-weight:bold;
+  }
+
+  .custom-control.custom-radio #type-1 button, .custom-control.custom-radio #type-2 button, .custom-control.custom-radio #type-3 button, .custom-control.custom-radio #type-4 button
+  , .custom-control.custom-radio #type-5 button, .bike button{
+    float:right;
+    margin-top:30px;
+  }
+
+}
+
+.sign-in-wrap{
+  margin-top:1%;
+  width:100%;
+}
+
+.sign-in-wrap h2{
+  text-align: center;
+}
+
+.sign-in-wrap img{
+  margin-left: 50%;
+  width:200px;
+  height: 200px;
+}
+
+.sign-in-window{
+  max-width: 18rem;
+  width:100%;
+  margin: auto;
+  /*font-family: 'Quicksand', sans-serif;*/
+  border-color: #000;
+}
+
 
 .wrap h3{
   font-size: 20px;
@@ -200,20 +299,6 @@ section h2{
   margin-top:30px;
 }
 
-@media(max-width: 768px){
-  header #branding,
-  header nav,
-  header nav li,
-  #newsletter form,
-  #boxes .box,
-  article#main-col,
-  aside#sidebar{
-    float:none;
-    text-align:center;
-    width:100%;
-  }
-}
-
 #app {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -282,4 +367,5 @@ footer a:hover {
 .page-footer.font-small.mdb-color.pt-4{
 background-color: black;
 color: #696969;
+height:100%;
 }
