@@ -208,12 +208,21 @@ export const store = new Vuex.Store({
 					doc: {
 						PermissionLevel: x,
 						Type: "InsertNameOfPermissionHere"
-						PaymentInfo: {
-							"Card number":"xxxxxxxxxxxxxxxx",
-							"Expire date": xxxxxxxxxxxx, // seconds
-							cvv: "xxx",
-							"Card holder": "FirstName LastName"
-						}
+						PaymentMethods: [
+							{
+								"Card number":"xxxxxxxxxxxxxxxx",
+								"Expire date": xxxxxxxxxxxx, // seconds
+								cvv: "xxx",
+								"Card holder": "FirstName LastName"
+							},
+							{
+								"Card number":"xxxxxxxxxxxxxxxx",
+								"Expire date": xxxxxxxxxxxx, // seconds
+								cvv: "xxx",
+								"Card holder": "FirstName LastName"
+							},
+							{...}
+						]
 					}
 				}
 			*/
