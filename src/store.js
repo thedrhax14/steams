@@ -4,9 +4,20 @@ const fb = require('./firebaseConfig.js')
 
 Vue.use(Vuex)
 
+var unsub
+
 fb.auth.onAuthStateChanged(user => {
 	if (user) {
 		store.commit('setUser', user)
+		unsub = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
+							console.log('userSnapshot', userSnapshot.data())
+							store.commit('setUserInfo', userSnapshot.data())
+						}, (error) => {
+							console.log('usersCollection listener failed. Here is error:', error)
+						})
+	} else {
+		if(unsub)
+			unsub()
 	}
 })
 
@@ -51,6 +62,7 @@ export const store = new Vuex.Store({
 		selectedBikeTypeId: '',
 		selectedStation: 'None',
 		selectedBikeId: '',
+		selectedCard: Object,
 		userInfo: Object,
 		user: Object,
 		update: {
@@ -188,12 +200,20 @@ export const store = new Vuex.Store({
 		updateUserInformation ({ state, commit }, data) {
 			fb.usersCollection.doc(data.uid).update(data.doc)
 			/*
+				if any of the following properties gets changed the
+				db updates the fields respectively
 				expected data structure to change user info:
 				{
 					uid: this.$store.state.user.uid
 					doc: {
 						PermissionLevel: x,
 						Type: "InsertNameOfPermissionHere"
+						PaymentInfo: {
+							"Card number":"xxxxxxxxxxxxxxxx",
+							"Expire date": xxxxxxxxxxxx, // seconds
+							cvv: "xxx",
+							"Card holder": "FirstName LastName"
+						}
 					}
 				}
 			*/
@@ -253,6 +273,9 @@ export const store = new Vuex.Store({
 		},
 		setSelectedBikeId (state, val) {
 			state.selectedBikeId = val
+		},
+		setSelectedCard(state, val) {
+			state.selectedCard = val.data().PaymentInfo
 		},
 		setUser (state, val) {
 			state.user = val

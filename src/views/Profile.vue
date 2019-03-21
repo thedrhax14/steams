@@ -5,14 +5,14 @@
 				<p>..</p>
 			</div>
 		</transition>
-		<h1>Profile</h1>
+		<h3>Profile</h3>
 		<p>UID - {{ this.$store.state.user.uid }}</p>
 		<p>Name - {{ this.$store.state.user.displayName }}</p>
-		<p>Permission level - {{ this.$store.state.userInfo.PermissionLevel }}</p>
-		<h1>Booking history</h1>
+		<p>Permission level - {{ UserInfo.PermissionLevel }}</p>
+		<h3>Payment methods</h3>
 		<b-list-group>
-			<b-list-group-item v-for="bike in myReservations">
-				<p>{{ bike }}</p>
+			<b-list-group-item v-for="PaymentMethod in PaymentMethods">
+				<p>{{ PaymentMethod }}</p>
 			</b-list-group-item>
 		</b-list-group>
 	</div>
@@ -31,11 +31,17 @@ export default {
 	computed: {
 		myReservations () {
 			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
+		},
+		UserInfo() {
+			return this.$store.state.userInfo
+		},
+		PaymentMethods() {
+			return this.$store.state.userInfo.PaymentMethods
 		}
 	},
 	created () {
-		console.log('dispatch \'fetchUserInfomation\' on created in Profile.vue')
-		this.$store.dispatch('fetchUserInfomation', this.$store.state.user.uid)
+		// console.log('dispatch \'fetchUserInfomation\' on created in Profile.vue')
+		// this.$store.dispatch('fetchUserInfomation', this.$store.state.user.uid)
 		// console.log('commit \'setUserHistory\' on created in Profile.vue')
 		// this.$store.commit('setUserHistory', [])
 		// console.log('dispatch \'fetchUserHistory\' on created in Profile.vue')

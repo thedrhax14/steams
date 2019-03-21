@@ -4,7 +4,7 @@
 		<h2> Sign In </h2>
 		<div class="sign-in-window">
 		<br/>
-		<h1>Welcome Back {{ name }}</h1>
+		<h1>Welcome Back</h1>
 		<div class="form-group">
 			<label for="email1">Email</label>
 			<br>
