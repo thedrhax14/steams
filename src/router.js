@@ -18,7 +18,7 @@ import ConfirmOrder from './views/confirmOrder.vue'
 import Profile from './views/Profile.vue'
 import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
-import StationsMap from './views/StationsMap.vue'
+import BookPage from './views/BookPage.vue'
 // operator
 import PlaceOrders from './views/PlaceOrders.vue'
 import TrackBikeLocations from './views/TrackBikeLocations.vue'
@@ -34,8 +34,8 @@ const router = new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'StationsMap',
-			component: StationsMap
+			name: 'BookPage',
+			component: BookPage
 		},
 		{
 			path: '/newCard',

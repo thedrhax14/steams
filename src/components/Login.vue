@@ -35,13 +35,13 @@ export default {
 	},
 	methods: {
 		login () {
-			this.$store.state.performingRequest = true
+			this.$store.state.loading = true
 			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
-				this.$store.commit('setCurrentUser', user.user)
+				this.$store.commit('setUser', user.user)
 				this.$router.push('/profile')
-				this.$store.state.performingRequest = false
+				this.$store.state.loading = false
 			}).catch(err => {
-				this.$store.state.performingRequest = false
+				this.$store.state.loading = false
 				this.errorMsg = err.message
 			})
 		}

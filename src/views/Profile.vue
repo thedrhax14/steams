@@ -6,19 +6,15 @@
 			</div>
 		</transition>
 		<h1>Profile</h1>
-		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
-		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
+		<p>UID - {{ this.$store.state.user.uid }}</p>
+		<p>Name - {{ this.$store.state.user.displayName }}</p>
 		<p>Permission level - {{ this.$store.state.userInfo.PermissionLevel }}</p>
 		<h1>Booking history</h1>
 		<b-list-group>
-			<b-list-group-item v-for="bike in this.$store.state.userhistory">
-				<p>{{ bike.BikeType }}</p>
-				<p>{{ bike.StartDateAndTime }}</p>
-				<button @click='returnBike(bike)'>Return</button>
+			<b-list-group-item v-for="bike in myReservations">
+				<p>{{ bike }}</p>
 			</b-list-group-item>
 		</b-list-group>
-		<button @click='returnDefaultBike'>Return default bike</button>
-		<button @click='bookDefaultBike'>Book default bike</button>
 	</div>
 </template>
 
@@ -32,21 +28,18 @@ export default {
 			}
 		}
 	},
-	methods: {
-		returnDefaultBike () {
-			this.$store.dispatch('returnBike', this.defaultBikeData)
-		},
-		bookDefaultBike () {
-			this.$store.dispatch('bookBike', this.defaultBikeData)
-		},
-		returnBike(bike) {
-			console.log('Returning bike ', bike)
-			this.$store.dispatch('returnBike', this.defaultBikeData)
+	computed: {
+		myReservations () {
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		}
 	},
 	created () {
-		this.$store.commit('selectLocation',null)
-		this.$store.dispatch('fetchbikeTypes')
+		console.log('dispatch \'fetchUserInfomation\' on created in Profile.vue')
+		this.$store.dispatch('fetchUserInfomation', this.$store.state.user.uid)
+		// console.log('commit \'setUserHistory\' on created in Profile.vue')
+		// this.$store.commit('setUserHistory', [])
+		// console.log('dispatch \'fetchUserHistory\' on created in Profile.vue')
+		// this.$store.dispatch('fetchUserHistory')
 	}
 }
 </script>

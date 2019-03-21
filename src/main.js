@@ -11,7 +11,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 const fb = require('./firebaseConfig.js')
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 let app
 fb.auth.onAuthStateChanged(user => {
@@ -24,7 +24,5 @@ fb.auth.onAuthStateChanged(user => {
 			render: h => h(App)
 		})
 	}
-	if (user) {
-		store.dispatch('fetchUserByUserId')
-	}
+	store.commit('setUser', user)
 })

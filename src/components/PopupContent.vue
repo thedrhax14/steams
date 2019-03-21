@@ -1,6 +1,6 @@
 <template>
 	<div id="popup">
-		{{ locName + ' Station' }}
+		{{ Location + ' Station' }}
 		<br/>
 		<button @click="prepareForBooking">Book here</button>
 	</div>
@@ -10,11 +10,11 @@
 export default {
 	name: 'PopupContent',
 	props: {
-		locName: String
+		Location: String
 	},
 	methods: {
 		prepareForBooking () {
-			this.$router.push('/reserve')
+			this.$store.commit('setSelectedStation', this.Location)
 		}
 	}
 }

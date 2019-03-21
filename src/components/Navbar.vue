@@ -32,16 +32,12 @@
 
 <script>
 export default {
-	data () {
-		return {
-			userPermission: 'check'
-		}
-	},
-	methods: {
-		setUserType (int) {
-			this.userPermission = this.$store.state.userInfo.PermissionLevel // undefined = member, 1 = operator, 2 = manager, 3 = admin
+	name: 'NavBar',
+	computed: {
+		userPermission () {
+			// 0 = customer, 1 = operator, 2 = manager, 3 = admin
+			return this.$store.state.userInfo.PermissionLevel
 		}
 	}
 }
-
 </script>

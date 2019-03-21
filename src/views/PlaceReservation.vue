@@ -19,10 +19,10 @@
 			<b-form-radio
 				v-model="selectedBikeTypeId"
 				button
-				v-for="bikeType in this.$store.state.bikeTypes"
-				v-if="bikeType.AvailableBikes.length > 0"
-				:value="bikeType.Id">
-				<BikeType :bikeTypeInfo='bikeType'/>
+				v-for="(bike, index) in this.$store.state.bikeTypes"
+				v-bind:key='index'
+				:value="bike.Id">
+				<BikeType v-if="bike.AvailableBikes.length > 0" :bikeTypeInfo='bike'/>
 			</b-form-radio>
 			<br>
 		</b-form-group>

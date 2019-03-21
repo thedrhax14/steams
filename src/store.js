@@ -6,164 +6,288 @@ Vue.use(Vuex)
 
 fb.auth.onAuthStateChanged(user => {
 	if (user) {
-		store.commit('setCurrentUser', user)
+		store.commit('setUser', user)
 	}
+})
+
+fb.historyCollection.onSnapshot((historySnapshot) => {
+	historySnapshot.docChanges().forEach(historyChange => {
+		if (historyChange.type === 'added') {
+			console.log('New history: ', historyChange.doc.id)
+			store.commit('addHistory', historyChange.doc)
+		}
+		if (historyChange.type === 'modified') {
+			console.log('Modified history: ', historyChange.doc.id)
+			store.commit('updateHistory', historyChange.doc)
+		}
+		if (historyChange.type === 'removed') {
+			console.log('Removed history: ', historyChange.doc.id)
+		}
+	})
+}, (error) => {
+	console.log('historyCollection listener failed. Here is error:', error)
+})
+
+fb.bikesCollection.onSnapshot((bikesSnapshot) => {
+	bikesSnapshot.docChanges().forEach(bikeChange => {
+		if (bikeChange.type === 'added') {
+			console.log('New bike: ', bikeChange.doc.id)
+			store.commit('addBike', bikeChange.doc)
+		}
+		if (bikeChange.type === 'modified') {
+			console.log('Modified bike: ', bikeChange.doc.id)
+			store.commit('updateBike', bikeChange.doc)
+		}
+		if (bikeChange.type === 'removed') {
+			console.log('Removed bike: ', bikeChange.doc.id)
+		}
+	})
+}, (error) => {
+	console.log('bikesCollection listener failed. Here is error:', error)
 })
 
 export const store = new Vuex.Store({
 	state: {
-		performingRequest: false,
-		currentUser: null,
+		selectedBikeTypeId: '',
+		selectedStation: 'None',
+		selectedBikeId: '',
 		userInfo: Object,
-		selectedBikeId: String,
-		selectedBikeTypeId: null,
-		selectedStation: null,
+		user: Object,
+		update: {
+			user: 0,
+			type: 1,
+			price: 2,
+			status: 3,
+			location: 4
+		},
 		bikeTypes: [],
-		stations: [],
-		userhistory: []
+		history: [],
+		bikes: [],
+		loading: false
 	},
 	actions: {
-		clearData ({ commit }) {
-			commit('setCurrentUser', null)
-		},
-		fetchbikeTypes ({ dispatch, commit, state }) {
-			commit('clearBikesData')
-			commit('clearUserhistory')
-			state.performingRequest = true
-			fb.bikeTypesCollection.get().then(bikeTypesSnapshot => {
-				bikeTypesSnapshot.forEach(bikeTypeDoc => {
-					dispatch('fetchBikes', {
-						bikeTypeId: bikeTypeDoc.id,
-						BikeTypeName: bikeTypeDoc.data()['Type name'],
-						Price: bikeTypeDoc.data().Price,
-						AvailableBikes: []
-					})
+		fetchBikes ({ commit }) {
+			commit('setLoading', true)
+			fb.bikesCollection.get().then(bikesDoc => {
+				bikesDoc.forEach(bikeDoc => {
+					commit('addBike', bikeDoc.data())
 				})
+				commit('setLoading', false)
+			}).catch(err => {
+				console.log('Error getting bikesDoc', err)
 			})
 		},
-		fetchBikes ({ commit, dispatch, state }, data) {
-			fb.bikeTypesCollection.doc(data.bikeTypeId).collection('Bikes').get().then(bikesSnapshot => {
-				bikesSnapshot.forEach(bikeDoc => {
-					// console.log('Reserved', bikeDoc.data()['Reserved'])
-					// console.log('selectedStation', this.state.selectedStation)
-					// This needs to be separated from each other
-					if ((bikeDoc.data()['Reserved'] === null || bikeDoc.data()['Reserved'] === state.currentUser.uid) && (this.state.selectedStation === null || this.state.selectedStation === '' || this.state.selectedStation === bikeDoc.data()['Station name'])) {
-						data.AvailableBikes.push({ Id: bikeDoc.id, Info: bikeDoc.data() })
+		fetchHistory ({ commit }) {
+			commit('setLoading', true)
+			fb.historyCollection.get().then(history => {
+				history.forEach(historyDoc => {
+					commit('addHistory', historyDoc.data())
+				})
+				commit('setLoading', false)
+			}).catch(err => {
+				console.log('Error getting historyDoc', err)
+			})
+		},
+		fetchBikeTypes ({ commit }) {
+			commit('setLoading', true)
+			fb.bikeTypesCollection.get().then(bikeTypesDoc => {
+				bikeTypesDoc.forEach(bikeTypeDoc => {
+					commit('addBikeType', {
+						id: bikeTypeDoc.id,
+						data: bikeTypeDoc.data()
+					})
+				})
+				commit('setLoading', false)
+			}).catch(err => {
+				console.log('Error getting bikeTypesDoc', err)
+			})
+		},
+		fetchUserInfomation ({ commit }, uid) {
+			commit('setLoading', true)
+			fb.usersCollection.doc(uid).get().then(userInfoDoc => {
+				commit('setUserInfo', userInfoDoc.data())
+				commit('setLoading', false)
+			}).catch(err => {
+				console.log('Error getting userInfoDoc', err)
+			})
+		},
+		addBikeToBikes ({ commit }, data) {
+			fb.bikesCollection.doc(data.bid).set(data.doc)
+			/*
+				expected data structure:
+				{
+					bid: "xxxxx",
+					doc: {
+						CurrentUser: "InsrestUIDHere",
+						GPSLocation: [0,0], // geopoint
+						Location: "InsertLocationHere",
+						Type: "/Bike Types/InsertTimeHere"
 					}
-					if(state.currentUser.uid){
-						dispatch('fetchBikeHistory',{
-							bikeTypeId: data.bikeTypeId,
-							BikeId: bikeDoc.id,
-							BikeTypeName: data.BikeTypeName
-						})
-					}
-				})
-				commit('addBikeType', data)
-				state.performingRequest = false
-			})
-		},
-		fetchBikeHistory({ commit, state }, data) {
-			fb.bikeTypesCollection
-			.doc(data.bikeTypeId)
-			.collection('Bikes')
-			.doc(data.BikeId)
-			.collection('Usage History')
-			.where('uid','==',state.currentUser.uid)
-			.get().then(entries => {
-				entries.forEach(entry => {
-					// console.log('entry', entry.data())
-					var t = new Date(1970, 0, 1)
-    				t.setSeconds(entry.data().StartDateAndTime.seconds)
-					commit('addHistory',{
-						StartDateAndTime: t,
-						BikeType: data.BikeTypeName,
-						biketypeId: data.bikeTypeId,
-						bikeId: data.BikeId
-					})
-				})
-			})
-		},
-		fetchUserByUserId ({ commit, state }) {
-			state.performingRequest = true
-			fb.usersCollection.doc(state.currentUser.uid).get().then(userDocSnapshot => {
-				// console.log('Got user info ' + userDocSnapshot.data())
-				commit('setUserInfo', userDocSnapshot.data())
-				state.performingRequest = false
-			})
-		},
-		selectBike ({ commit }, bid) {
-			commit('setSelectBike', bid)
-		},
-		returnBike ({ state }, bikeData) {
-			state.performingRequest = true
-			fb.db.collection('Bike Types').doc(bikeData.biketypeId).collection('Bikes').doc(bikeData.bikeId).update({ Reserved: null })
-			state.performingRequest = false
-		},
-		bookBike ({ state }, bookingData) {
-			// console.log('Booking ', bookingData)
-			var str = bookingData.StartDateAndTime
-			var dt = new Date(str + "Z")
-			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).update({ Reserved: state.currentUser.uid })
-			fb.db.collection('Bike Types').doc(bookingData.biketypeId).collection('Bikes').doc(bookingData.bikeId).collection('Usage History').doc().set({
-				StartDateAndTime: dt,
-				uid: state.currentUser.uid
-			})
-		},
-		bookFirstAvailableBikeType ({ state, dispatch }, data) {
-			var found = false
-			// console.log('Start booking ', data)
-			state.bikeTypes.forEach(element => {
-				// console.log(element.Id, ' === ', data.bikeTypeId,' = ', element.Id === data.bikeTypeId,', found = ', found)
-				// console.log('element ', element)
-				if (element.Id === data.bikeTypeId && found === false) {
-					dispatch('bookBike', {
-						biketypeId: data.bikeTypeId,
-						bikeId: element.AvailableBikes[0].Id,
-						StartDateAndTime: data.StartDateAndTime
-					})
-					found = true
 				}
+			*/
+		},
+		addEntryToHistory ({ commit, dispatch }, data) {
+			console.log('addEntryToHistory',data)
+			commit('setLoading', true)
+			fb.historyCollection.add(data).then(newHistoryDoc => {
+				commit('setLoading', false)
+				dispatch('updateBikeInBikes',{
+					bid: data.BikeID,
+					doc: {
+						Reserved: true
+					}
+				})
+			})
+			/*
+				expected data structure to add new booking:
+				{
+					BikeID: yyxxxxx,
+					PIN: xxxx,
+					"Start location": "InsertLocationHere",
+					"Start time & date": xxxxxxxxxxxx, // seconds
+					uid: state.state.user.uid
+				}
+			*/
+		},
+		addBikeTypeToBikeTypes ({ commit }, data) {
+			commit('setLoading', true)
+			fb.bikeTypesCollection.doc(data.btid).set(data.doc).then(newBikeType => {
+				commit('addBikeTypeToBikeTypes', newBikeType.data())
+				commit('setLoading', false)
+			})
+			/*
+				expected data structure to add new bike type:
+				{
+					btid: "xxxxx",
+					doc: {
+						Price: InsertBikePriceHere, // int
+						Name: "InsertBikeTypeNameHere", // geopoint
+					}
+				}
+			*/
+		},
+		updateBikeInBikes ({ state, commit }, data) {
+			fb.bikesCollection.doc(data.bid).update(data.doc)
+			/*
+				if any of the following properties gets changed the
+				db updates the fields respectively  
+				expected data structure to change bike:
+				{
+					bid: "xxxxx"
+					doc: {
+						"Bike condition": "InsrestConditionHere",
+						Location: "InsrestLocationHere", // geopoint
+						"Lock ID": "InsertLockRefHere",
+						Reserved: Boolean,
+						"Type name": "InsertBikeTypeID"
+					}
+				}
+			*/
+		},
+		updateUserInformation ({ state, commit }, data) {
+			fb.usersCollection.doc(data.uid).update(data.doc)
+			/*
+				expected data structure to change user info:
+				{
+					uid: "this.$store.state.user.uid"
+					doc: {
+						PermissionLevel: x,
+						Type: "InsertNameOfPermissionHere"
+					}
+				}
+			*/
+		},
+		updateHistory ({ state, commit }, data) {
+			fb.historyCollection.doc(data.uid).update(data.doc)
+			/*
+				expected data structure to change user info:
+				{
+					
+				}
+			*/
+		},
+		updateUserProfile ({ commit, dispatch }, val) {
+			commit('setLoading', true)
+			console.log('Updating user profile. Displayed name will be ' + val.displayName)
+			fb.auth.user.updateProfile({
+				displayName: val.displayName,
+				photoURL: 'https://example.com/jane-q-user/profile.jpg'
+			}).then(() => {
+				commit('setUser', fb.auth.user)
+				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
+				commit('setLoading', false)
+				dispatch('updateUserInformation', {
+					uid: fb.auth.user.uid,
+					doc: val.data
+				})
+				commit('setUserInfo', val.data)
+			}).catch(error => {
+				console.log(error)
 			})
 		}
 	},
 	mutations: {
-		setCurrentUser (state, val) {
-			state.currentUser = val
+		setSelectedBikeTypeId (state, val) {
+			state.selectedBikeTypeId = val
+		},
+		setSelectedStation (state, val) {
+			state.selectedStation = val
+		},
+		setSelectedBikeId (state, val) {
+			state.selectedBikeId = val
+		},
+		setUser (state, val) {
+			state.user = val
 		},
 		setUserInfo (state, val) {
 			state.userInfo = val
 		},
-		selectLocation (state, val) {
-			state.selectedStation = val
-		},
-		selectBikeTypeId (state, val) {
-			state.selectedBikeTypeId = val
-		},
-		updateUserProfile (state, displayNameval) {
-			console.log('Updating user profile. Displayed name will be ' + displayNameval)
-			fb.auth.currentUser.updateProfile({
-				displayName: displayNameval,
-				photoURL: 'https://example.com/jane-q-user/profile.jpg'
-			}).then(function () {
-				console.log('Userprofile updated. Displayed name is ' + fb.auth.currentUser.displayName)
-			}).catch(function (error) {
-				alert(error)
-			})
-		},
-		clearBikesData (state) {
-			state.bikeTypes = []
-		},
-		clearUserhistory (state) {
-			state.userhistory = []
+		setBikeTypes (state, val) {
+			state.bikeTypes = val
 		},
 		addBikeType (state, val) {
 			state.bikeTypes.push(val)
 		},
-		addHistory (state, val) {
-			state.userhistory.push(val)
+		setHistory (state, val) {
+			state.history = val
 		},
-		setSelectBike (state, val) {
-			state.selectedBikeId = val
+		addHistory (state, val) {
+			state.history.push({
+				id: val.id,
+				data: val.data()
+			})
+		},
+		updateHistory (state, val) {
+			for (var i = 0; i < state.history.length; i++) {
+				if (state.history[i].id == val.id) {
+					state.history[i].data = val.data()
+					break
+				}
+			}
+		},
+		setBikes (state, val) {
+			state.bikes = val
+		},
+		addBike (state, val) {
+			// console.log('adding',val.id,'data',val.data())
+			state.bikes.push({
+				id: val.id,
+				data: val.data()
+			})
+		},
+		updateBike (state, val) {
+			for (var i = 0; i < state.bikes.length; i++) {
+				if (state.bikes[i].id == val.id) {
+					state.bikes[i].data = val.data()
+					break
+				}
+			}
+		},
+		setLoading (state, val) {
+			state.loading = val
+		},
+		flipLoading (state) {
+			state.loading = !state.loading
 		}
 	}
 })

@@ -1,18 +1,19 @@
 <template>
 	<div>
-		<h1>{{ bikeTypeInfo.BikeTypeName }}</h1>
-		<p>£{{ bikeTypeInfo.Price }}.00/hr</p>
+		<h1>{{ bike.Name }}</h1>
+		<p>£{{ bike.Price }}.00/hr</p>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'BikeType',
+	name: 'Bike',
 	props: {
-		bikeTypeInfo: Object
-	},
-	created() {
-		console.log('bikeTypeInfo ', this.bikeTypeInfo)
+		bike: Object,
+		ButtonEdit:  Boolean,
+		ButtonBook:  Boolean,
+		ButtonSelect:  Boolean,
+		ShowRefType:  Boolean
 	}
 }
 </script>
