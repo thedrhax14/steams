@@ -3,15 +3,7 @@
 		<div v-if='Location=="None"'>
 			<h2>Nearest Docking Stations</h2>
 			<div class="sicky-top">
-				<MglMap
-					access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
-					mapStyle= "mapbox://styles/themofro/cjrd1lqa40o5m2sp3bdkdtxdo">
-					<MglGeocoderControl
-						access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
-						:input.sync="defaultInput"
-						@results="handleSearch"/>
-				</MglMap>
-				<!-- <mapbox
+				<mapbox
 					access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 					:map-options="{
 						style: 'mapbox://styles/themofro/cjrd1lqa40o5m2sp3bdkdtxdo',
@@ -30,7 +22,7 @@
 					@map-load="mapLoaded"
 					@geolocate-geolocate="geolocate"
 					@geolocate-error="geolocateError">
-				</mapbox> -->
+				</mapbox>
 			</div>
 		</div>
 		<BikeTypes/>
@@ -43,26 +35,14 @@ import Vue from 'vue'
 import PopupContent from '@/components/PopupContent.vue'
 import BikeTypes from '@/components/BikeTypes.vue'
 
-import {
-  MglMap,
-  MglNavigationControl,
-  MglGeolocateControl
-} from 'vue-mapbox'
-
-import MglGeocoderControl from 'vue-mapbox-geocoder'
-
 export default {
 	components: {
 		Mapbox,
-		BikeTypes,
-		MglMap,
-    	MglGeocoderControl
+		BikeTypes
 	},
 	data () {
 		return {
-			PopupVue: Vue.extend(PopupContent),
-			InputFromSearch: '',
-			defaultInput: 'None'
+			PopupVue: Vue.extend(PopupContent)
 		}
 	},
 	computed: {
@@ -88,9 +68,6 @@ export default {
 				position.coords.latitude +
 				' ' +
 				position.coords.longitude)
-		},
-		handleSearch(input) {
-			this.InputFromSearch = input
 		},
 		addPopUp (map, e) {
 			const features = map.queryRenderedFeatures(e.point, { layers: ['markers'] })
