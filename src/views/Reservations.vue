@@ -28,9 +28,9 @@
 
 <script>
 export default {
-	name:'Reservations',
+	name: 'Reservations',
 	computed: {
-		myReservations() {
+		myReservations () {
 			return this.$store.state.userhistory
 		}
 	}

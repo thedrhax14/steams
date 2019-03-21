@@ -29,15 +29,15 @@ export default {
 		}
 	},
 	computed: {
-		myReservations() {
+		myReservations () {
 			return this.$store.state.userhistory
 		}
 	},
-	created() {
+	created () {
 		console.log('dispatch \'fetchUserInfomation\' on created in Profile.vue')
 		this.$store.dispatch('fetchUserInfomation', this.$store.state.user.uid)
 		console.log('commit \'setUserHistory\' on created in Profile.vue')
-		this.$store.commit('setUserHistory',[])
+		this.$store.commit('setUserHistory', [])
 		console.log('dispatch \'fetchUserHistory\' on created in Profile.vue')
 		this.$store.dispatch('fetchUserHistory')
 	}

@@ -25,7 +25,7 @@ fb.historyCollection.onSnapshot((historySnapshot) => {
 		}
 	})
 }, (error) => {
-	console.log('historyCollection listener failed. Here is error:',error)
+	console.log('historyCollection listener failed. Here is error:', error)
 })
 
 fb.bikesCollection.onSnapshot((bikesSnapshot) => {
@@ -43,7 +43,7 @@ fb.bikesCollection.onSnapshot((bikesSnapshot) => {
 		}
 	})
 }, (error) => {
-	console.log('bikesCollection listener failed. Here is error:',error)
+	console.log('bikesCollection listener failed. Here is error:', error)
 })
 
 export const store = new Vuex.Store({
@@ -94,7 +94,7 @@ export const store = new Vuex.Store({
 			fb.bikeTypesCollection.get().then(bikeTypesDoc => {
 				bikeTypesDoc.forEach(bikeTypeDoc => {
 					commit('addBikeType', {
-						id: bikeTypeDoc.id, 
+						id: bikeTypeDoc.id,
 						data: bikeTypeDoc.data()
 					})
 				})
@@ -223,7 +223,7 @@ export const store = new Vuex.Store({
 				commit('setUser', fb.auth.user)
 				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
 				commit('setLoading', false)
-				dispatch('updateUserInformation',{
+				dispatch('updateUserInformation', {
 					uid: fb.auth.user.uid,
 					doc: val.data
 				})
@@ -270,9 +270,9 @@ export const store = new Vuex.Store({
 				data: val.data()
 			})
 		},
-		updateHistory(state, val) {
+		updateHistory (state, val) {
 			for (var i = 0; i < state.history.length; i++) {
-				if(state.history[i].id == val.id){
+				if (state.history[i].id == val.id) {
 					state.history[i].data = val.data()
 					break
 				}
@@ -288,9 +288,9 @@ export const store = new Vuex.Store({
 				data: val.data()
 			})
 		},
-		updateBike(state, val) {
+		updateBike (state, val) {
 			for (var i = 0; i < state.bikes.length; i++) {
-				if(state.bikes[i].id == val.id){
+				if (state.bikes[i].id == val.id) {
 					state.bikes[i].data = val.data()
 					break
 				}

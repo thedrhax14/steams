@@ -5,10 +5,10 @@
 			<b-form-radio
 				v-model="selectedBikeTypeId"
 				button
-				v-for="bike in this.$store.state.bikeTypes"
-				v-if="bike.AvailableBikes.length > 0"
+				v-for="(bike, index) in this.$store.state.bikeTypes"
+				v-bind:key='index'
 				:value="bike.Id">
-				<BikeType :bikeTypeInfo='bike'/>
+				<BikeType v-if="bike.AvailableBikes.length > 0" :bikeTypeInfo='bike'/>
 			</b-form-radio>
 			<b-form-input v-model="startDate" type="date"/>
 			<b-form-input v-model="startTime" type="time"/>

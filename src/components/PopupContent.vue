@@ -14,7 +14,7 @@ export default {
 	},
 	methods: {
 		prepareForBooking () {
-			this.$store.commit('setSelectedStation',this.Location)
+			this.$store.commit('setSelectedStation', this.Location)
 		}
 	}
 }

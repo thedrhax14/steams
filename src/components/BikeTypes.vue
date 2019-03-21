@@ -27,6 +27,9 @@
 				Reset
 			</b-button>
 		</b-row>
+		<p v-if='AvailableBikeAtLocationByBikeTypeID'>
+			RAW ID {{ AvailableBikeAtLocationByBikeTypeID.id }}
+		</p>
 	</b-container>
 </template>
 
@@ -39,52 +42,58 @@
 
 export default {
 	name: 'BikeTypes',
-	data() {
+	data () {
 		return {
 			SelectedBikeType: ''
 		}
 	},
 	computed: {
-		OptionsOfBikeTypesAtLocation() {
+		OptionsOfBikeTypesAtLocation () {
 			var AvailableBikeTypes = []
 			var BikeTypeIDs = []
-			console.log('bikes',this.$store.state.bikes)
+			// console.log('bikes', this.$store.state.bikes)
 			this.$store.state.bikes.forEach(bikeDoc => {
 				// console.log(bikeDoc.data.Location,'==',this.Location,'=',bikeDoc.data.Location==this.Location)
 				// console.log('bikeDoc.data',bikeDoc.data)
-				if(bikeDoc.data.Location==this.Location)
-					BikeTypeIDs.push(bikeDoc.data['Type name'])
+				if (bikeDoc.data.Location == this.Location && !bikeDoc.data.Reserved) { 
+					BikeTypeIDs.push(bikeDoc.data['Type name']) 
+				}
 				// console.log('BikeTypeIDs',BikeTypeIDs)
 			})
 			BikeTypeIDs = [...new Set(BikeTypeIDs)]
 			// console.log('BikeTypeIDs',BikeTypeIDs)
 			this.$store.state.bikeTypes.forEach(bikeType => {
 				// console.log('bikeType.id is in ',BikeTypeIDs,'?')
-				if(BikeTypeIDs.includes(bikeType.id))
+				if (BikeTypeIDs.includes(bikeType.id)) {
 					AvailableBikeTypes.push({
 						text: bikeType.data['Type name'] + ' ' + bikeType.data.Price + ' £/h',
 						value: bikeType.id
 					})
+				}
 			})
 			return AvailableBikeTypes
 		},
-		Location() {
+		Location () {
 			return this.$store.state.selectedStation
 		},
-		AvailableBikeAtLocationByBikeTypeID() {
-
+		AvailableBikeAtLocationByBikeTypeID () {
+			return this.$store.state.bikes.filter(bike => 
+					bike.data['Type name'] == this.SelectedBikeType 
+				&& bike.data.Location == this.Location
+				&& bike.data.Reserved == false)[0]
 		},
-		FormTitle() {
-			return "Available book types at " + this.$store.state.selectedStation
+		FormTitle () {
+			return 'Available book types at ' + this.$store.state.selectedStation
 		}
 	},
 	methods: {
-		Submit(evt) {
-			alert(this.SelectedBikeType)
+		Submit (evt) {
+			var bikeid = this.AvailableBikeAtLocationByBikeTypeID.id
+			alert('Add plz booking:)' + bikeid)
 		},
-		Reset(evt) {
+		Reset (evt) {
 			this.SelectedBikeType = ''
-			this.$store.commit('setSelectedStation','None')
+			this.$store.commit('setSelectedStation', 'None')
 		}
 	}
 }

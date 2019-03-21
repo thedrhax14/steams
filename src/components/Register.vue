@@ -31,7 +31,7 @@ export default {
 			fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
 				this.$store.commit('updateUserProfile', {
 					displayName: this.signupForm.name,
-					data:{
+					data: {
 						PermissionLevel: 0,
 						Type: 'Customer'
 					}

@@ -49,7 +49,7 @@ export default {
 		isLoading () {
 			return this.$store.state.performingRequest
 		},
-		Location() {
+		Location () {
 			return this.$store.state.selectedStation
 		}
 	},
