@@ -10,7 +10,7 @@
 				<div class="card-body">
 					<p class="card-text">
 		  			<ul class="card-list-reservation">
-						    <li v-for="item in items">{{ item.message }} </li>
+						    <li style="line-height:35px;" v-for="item in items">{{ item.message }} </li>
 		  			</ul>
 					</p>
 				</div>
