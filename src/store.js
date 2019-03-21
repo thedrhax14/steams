@@ -48,9 +48,9 @@ fb.bikesCollection.onSnapshot((bikesSnapshot) => {
 
 export const store = new Vuex.Store({
 	state: {
-		selectedBikeTypeId: String,
+		selectedBikeTypeId: '',
 		selectedStation: 'None',
-		selectedBikeId: String,
+		selectedBikeId: '',
 		userInfo: Object,
 		user: Object,
 		update: {
@@ -138,25 +138,33 @@ export const store = new Vuex.Store({
 				}
 			*/
 		},
-		addEntryToHistory ({ commit }, data) {
+		addEntryToHistory ({ commit, dispatch }, data) {
+			console.log('addEntryToHistory',data)
 			commit('setLoading', true)
 			fb.historyCollection.add(data).then(newHistoryDoc => {
 				commit('setLoading', false)
+				dispatch('updateBikeInBikes',{
+					bid: data.BikeID,
+					doc: {
+						Reserved: true
+					}
+				})
 			})
 			/*
 				expected data structure to add new booking:
 				{
-					CurrentUser: "InsrestUIDHere",
-					GPSLocation: [0,0], // geopoint
-					Location: "InsertLocationHere",
-					Type: "/Bike Types/InsertTimeHere"
+					BikeID: yyxxxxx,
+					PIN: xxxx,
+					"Start location": "InsertLocationHere",
+					"Start time & date": xxxxxxxxxxxx, // seconds
+					uid: state.state.user.uid
 				}
 			*/
 		},
 		addBikeTypeToBikeTypes ({ commit }, data) {
 			commit('setLoading', true)
 			fb.bikeTypesCollection.doc(data.btid).set(data.doc).then(newBikeType => {
-				commit('addBikeTypeToBikeTypes', newHistoryDoc.data())
+				commit('addBikeTypeToBikeTypes', newBikeType.data())
 				commit('setLoading', false)
 			})
 			/*
@@ -171,16 +179,19 @@ export const store = new Vuex.Store({
 			*/
 		},
 		updateBikeInBikes ({ state, commit }, data) {
-			fb.bikesCollection.doc(data.bid).set(data.doc)
+			fb.bikesCollection.doc(data.bid).update(data.doc)
 			/*
+				if any of the following properties gets changed the
+				db updates the fields respectively  
 				expected data structure to change bike:
 				{
 					bid: "xxxxx"
 					doc: {
-						CurrentUser: "InsrestUIDHere",
-						GPSLocation: [0,0], // geopoint
-						Location: "InsertLocationHere",
-						Type: "/Bike Types/InsertTimeHere"
+						"Bike condition": "InsrestConditionHere",
+						Location: "InsrestLocationHere", // geopoint
+						"Lock ID": "InsertLockRefHere",
+						Reserved: Boolean,
+						"Type name": "InsertBikeTypeID"
 					}
 				}
 			*/

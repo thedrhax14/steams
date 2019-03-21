@@ -1,36 +1,53 @@
 <template>
-	<b-container align-h="center" v-if="Location!='None'">
-		<b-row align-h="center">
-			<h1 class='formTitle'>Booking</h1>
+	<div v-if="Location!='None'">
+		<b-row>
+			<h1 class='formTitle'>Booking {{ Location }} station</h1>
 		</b-row>
-		<b-row align-h="center">
-			<b-form-radio-group
-				id="BikeTypesRadios"
-				buttons
-				stacked
-				v-model="SelectedBikeType"
-				:options="OptionsOfBikeTypesAtLocation"
-				name="radioBtnStacked"/>
+		<b-row>
+			<h3>What type of bike?</h3>
 		</b-row>
-		<b-row align-h="center">
-			<b-button
-				block
-				variant="primary"
-				@click='Submit'
-				:disabled='!SelectedBikeType'>
-				Submit
-			</b-button>
-			<b-button
-				block
-				variant="danger"
-				@click='Reset'>
-				Reset
-			</b-button>
-		</b-row>
+		<b-form-group label="Bike types avilable at the station">
+			<b-row>
+				<b-list-group>
+						<b-list-group-item
+							v-for='BikeType in OptionsOfBikeTypesAtLocation'
+							button
+							@click='Select(BikeType.id)'>
+							{{ BikeType.data['Type name'] }}
+							{{ BikeType.data.Price }} $/hr
+						</b-list-group-item>
+				</b-list-group>
+			</b-row>
+			<b-row>
+				<b-form-input type="date" v-model='StartDate'/>
+			</b-row>
+			<b-row>
+				<b-form-input type="time" v-model='StartTime'/>
+			</b-row>
+			<b-row>
+				<b-button
+					variant="primary"
+					@click='Submit'
+					:disabled='!IsFormComplete'>
+					Submit
+				</b-button>
+				<b-button
+					variant="danger"
+					@click='Reset'>
+					Reset
+				</b-button>
+			</b-row>
+		</b-form-group>
 		<p v-if='AvailableBikeAtLocationByBikeTypeID'>
 			RAW ID {{ AvailableBikeAtLocationByBikeTypeID.id }}
 		</p>
-	</b-container>
+		<p v-if='StartDate'>
+			StartDate {{ StartDate }}
+		</p>
+		<p v-if='StartTime'>
+			StartTime {{ StartTime }}
+		</p>
+	</div>
 </template>
 
 <script>
@@ -42,9 +59,10 @@
 
 export default {
 	name: 'BikeTypes',
-	data () {
+	data() {
 		return {
-			SelectedBikeType: ''
+			StartDate: '',
+			StartTime: ''
 		}
 	},
 	computed: {
@@ -65,10 +83,7 @@ export default {
 			this.$store.state.bikeTypes.forEach(bikeType => {
 				// console.log('bikeType.id is in ',BikeTypeIDs,'?')
 				if (BikeTypeIDs.includes(bikeType.id)) {
-					AvailableBikeTypes.push({
-						text: bikeType.data['Type name'] + ' ' + bikeType.data.Price + ' £/h',
-						value: bikeType.id
-					})
+					AvailableBikeTypes.push(bikeType)
 				}
 			})
 			return AvailableBikeTypes
@@ -78,9 +93,15 @@ export default {
 		},
 		AvailableBikeAtLocationByBikeTypeID () {
 			return this.$store.state.bikes.filter(bike => 
-					bike.data['Type name'] == this.SelectedBikeType 
+					bike.data['Type name'] == this.$store.state.selectedBikeTypeId
 				&& bike.data.Location == this.Location
 				&& bike.data.Reserved == false)[0]
+		},
+		IsFormComplete() {
+			return this.$store.state.selectedBikeTypeId 
+				&& this.$store.state.selectedBikeTypeId != ''
+				&& this.StartDate != ''
+				&& this.StartTime != ''
 		},
 		FormTitle () {
 			return 'Available book types at ' + this.$store.state.selectedStation
@@ -90,10 +111,23 @@ export default {
 		Submit (evt) {
 			var bikeid = this.AvailableBikeAtLocationByBikeTypeID.id
 			alert('Add plz booking:)' + bikeid)
+			this.$store.dispatch('addEntryToHistory',{
+				BikeID: bikeid,
+				PIN: Math.floor((Math.random() * 9999) + 1000),
+				"Start location": this.Location,
+				"Start time & date": new Date(this.StartDate + 'T' + this.StartTime + 'Z'),
+				uid: this.$store.state.user.uid
+			})
+		},
+		Select(id) {
+			console.log('commit setSelectedBikeTypeId',id)
+			this.$store.commit('setSelectedBikeTypeId',id)
 		},
 		Reset (evt) {
-			this.SelectedBikeType = ''
+			this.$store.commit('setSelectedBikeTypeId','')
 			this.$store.commit('setSelectedStation', 'None')
+			this.StartDate = ''
+			this.StartTime = ''
 		}
 	}
 }
