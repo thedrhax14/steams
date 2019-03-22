@@ -15,7 +15,8 @@ body{
 
 #branding{
   width:100%;
-  position: absolute;
+  position: fixed;
+  margin-bottom:50%;
 }
 
 #branding img{
@@ -46,7 +47,9 @@ body{
 .navbar{
   background-color:#E53935;
   overflow:hidden;
-  height:63px;
+  height:auto;
+  width: auto;
+  background-color:#000;
 }
 
 .navbar a{
@@ -69,20 +72,100 @@ body{
   color:#000;
 }
 
+
 .wrap{
-  width:500px;
-  margin: auto;
+  width:100%;
+  padding-left: 20%;
+  padding-right: 20%;
   /*font-family: 'Quicksand', sans-serif;*/
 }
 
+.wrap h1{
+  text-align: center;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
 @media(max-width: 768px){
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+
+  .sign-in-wrap{
+    margin-top:1%;
+    width:100%;
+  }
+
+  .sign-in-wrap h2{
+    text-align: center;
+  }
+
+  .sign-in-wrap img{
+    margin-left: 40%;
+    width:200px;
+    height: 200px;
+  }
+  .sign-in-window{
+    max-width: 18rem;
+    width:100%;
+    margin: auto;
+    /*font-family: 'Quicksand', sans-serif;*/
+    border-color: #000;
+  }
   header #branding,
   header nav,
-  header nav li,
-  #newsletter form,
-  #boxes .box,
-  article#main-col,
-  aside#sidebar{
+  header nav li,{
     float:none;
     text-align:center;
     width:100%;
@@ -90,10 +173,6 @@ body{
 }
 
 @media(max-width: 768px){
-  .wrap{
-    float:none;
-    width:100%;
-  }
   .custom-control.custom-radio #type-1 img{
     margin-top:6%;
     margin-left:-25%;
@@ -161,9 +240,18 @@ body{
 }
 
 .sign-in-wrap img{
-  margin-left: 50%;
+  margin-left: 40%;
   width:200px;
   height: 200px;
+}
+
+.extras{
+  text-align:center;
+  color:#007bff;
+}
+
+.extras a{
+  cursor: pointer;
 }
 
 .sign-in-window{
@@ -302,6 +390,8 @@ section h2{
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #2c3e50;
+  transition: margin-left .5s;
+  padding: 16px;
 }
 
 #nav {
@@ -316,6 +406,10 @@ section h2{
 
 #nav a.router-link-exact-active {
 	color: #42b983;
+}
+
+.active{
+  color: #42b983;
 }
 
 #home {
@@ -366,4 +460,21 @@ footer a:hover {
 background-color: black;
 color: #696969;
 height:100%;
+}
+
+
+/* General Demo Style */
+
+
+.logo-row{
+  text-align: center;
+}
+.logo {
+  width: 128px;
+  height: 128px;
+  text-align: center;
+}
+
+header, header .container, .logo-row, .logo{
+  background-color:#E53935;
 }
