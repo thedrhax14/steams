@@ -1,12 +1,10 @@
 <template>
 	<div v-if="Location!='None'">
-		<b-row>
-			<h1 class='formTitle'>Booking {{ Location }} station</h1>
-		</b-row>
-		<b-row>
+	<div class="wrap">
+			<h1>Booking at {{ Location }} Station</h1>
+			<br>
 			<h3>What type of bike?</h3>
-		</b-row>
-		<b-form-group label="Bike types avilable at the station">
+		<b-form-group label-align="center" label="Bike types avilable at the station">
 			<b-row>
 				<b-list-group>
 						<b-list-group-item
@@ -48,6 +46,7 @@
 			StartTime {{ StartTime }}
 		</p>
 	</div>
+</div>
 </template>
 
 <script>
@@ -73,8 +72,8 @@ export default {
 			this.$store.state.bikes.forEach(bikeDoc => {
 				// console.log(bikeDoc.data.Location,'==',this.Location,'=',bikeDoc.data.Location==this.Location)
 				// console.log('bikeDoc.data',bikeDoc.data)
-				if (bikeDoc.data.Location == this.Location && !bikeDoc.data.Reserved) { 
-					BikeTypeIDs.push(bikeDoc.data['Type name']) 
+				if (bikeDoc.data.Location == this.Location && !bikeDoc.data.Reserved) {
+					BikeTypeIDs.push(bikeDoc.data['Type name'])
 				}
 				// console.log('BikeTypeIDs',BikeTypeIDs)
 			})
@@ -92,13 +91,13 @@ export default {
 			return this.$store.state.selectedStation
 		},
 		AvailableBikeAtLocationByBikeTypeID () {
-			return this.$store.state.bikes.filter(bike => 
+			return this.$store.state.bikes.filter(bike =>
 					bike.data['Type name'] == this.$store.state.selectedBikeTypeId
 				&& bike.data.Location == this.Location
 				&& bike.data.Reserved == false)[0]
 		},
 		IsFormComplete() {
-			return this.$store.state.selectedBikeTypeId 
+			return this.$store.state.selectedBikeTypeId
 				&& this.$store.state.selectedBikeTypeId != ''
 				&& this.StartDate != ''
 				&& this.StartTime != ''
