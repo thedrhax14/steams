@@ -1,7 +1,6 @@
 <template>
 	<div id="BookPage">
 		<div v-if='Location=="None"'>
-			<h2>Nearest Docking Stations</h2>
 			<div class="sicky-top">
 				<mapbox
 					access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
