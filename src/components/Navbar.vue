@@ -1,8 +1,8 @@
 <template>
   <header>
        <div class="container"></div>
-        <div id="side-menu" class="side-nav">
-          <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+        <div id="mySidebar" class="sidebar">
+          <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
           <div id="accountpic">
             <a href='/profile'><img src="@/../public/danny-pej.png"></a>
           </div>
