@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon-96x96.png">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
@@ -14,16 +14,14 @@
    <title>SPIN</title>
   </head>
   <body>
-    <nav class="navbar">
-      <span class="open-slide">
-        <a href="#" onclick="openSlideMenu()" @click="setUserType() ">
-          <i class="fas fa-bars fa-2x"></i>
-        </a>
-      </span>
-    </nav>
-    <div id="branding">
-      <img src="/SPINlogowhite.png" alt="logo"/>
-    </div>
+    <header>
+      <div id="main">
+          <button class="openbtn" onclick="openNav()" @Click="setUserType()"><i class="fas fa-bars fa-2x"></i></button>
+        <div class="logo-row">
+          <a href="/"><img src="@/../SPINlogowhite.png" alt="logo" class="logo"></a>
+        </div>
+      </div>
+			</header>
     <noscript>
       <strong>We're sorry but vue-training doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
@@ -132,13 +130,14 @@
     </footer>
   </body>
 </html>
-
 <script>
-function openSlideMenu(){
-  document.getElementById('side-menu').style.width = '250px';
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
 }
 
-function closeSlideMenu(){
-  document.getElementById('side-menu').style.width = '0';
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
 }
 </script>
