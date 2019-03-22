@@ -1,9 +1,8 @@
 <template>
-	<div>
-		<div class="wrap" style="margin-top: 50px;">
+		<div class="wrap">
 			<h2> My reservations</h2>
 			<hr>
-			<br/>
+			<br>
 			<div class="card text-center">
 				<div
 					class="card-header"
@@ -17,11 +16,11 @@
 							<ul class="card-list-reservation">
 								<li>PIN: {{ bike.data.PIN }} </li>
 								<li>Start location: {{ bike.data['Start location'] }}</li>
+								<li>Date: {{ bike.data['Start time & date'].seconds }}</li>
 								<li>Start time: {{ bike.data['Start time & date'].seconds }}</li>
 							</ul>
 						</p>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
