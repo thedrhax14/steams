@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<h1>Get Started</h1>
+	<div class="sign-in-wrap">
+		<h1>Let's get you started!</h1>
 		<label for="name">Name</label>
 		<input v-model.trim="signupForm.name" type="text" placeholder="user name" id="name" />
 		<label for="email2">Email</label>
