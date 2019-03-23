@@ -1,6 +1,6 @@
 <template>
   <body>
-    <div class="wrap" style="margin-top: 50px; width:600px;">
+    <div class="wrap">
        <h2 style="text-align:center;"> License Agreement </h2>
        <hr>
        <article>

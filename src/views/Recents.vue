@@ -1,5 +1,4 @@
 <template>
-
 			<div class="wrap">
 			<h2> Recent trips </h2>
 			<hr>
@@ -9,8 +8,8 @@
         <h5 class="card-title">Edinburgh Park</h5>
         <p class="card-text">
         <ul class="card-list">
-          <li>Status: {{ }} </li>
-          <li>Returned at: {{ bike.data['Start location'] }} </li>
+          <li>Status: </li>
+          <li>Returned at: </li>
           <li>Date: </li>
         </ul>
         <p class="card-text"><small class="text-muted">{{ + 'hours ago' }}</small></p>
@@ -34,13 +33,20 @@
 
 <script>
 // const fb = require('../firebaseConfig.js')
-
 // Make selection of timestamp from valid input element like celander
 export default {
-		name: 'Recents',
-		computed: {
-			recentTrips () {
-				return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
+	data () {
+		return{
+	 items: [
+		 { message: 'Status:' },
+		 { message: 'Returned at:' },
+		 { message: 'Date:' }
+	 ]
+ }
+},
+	created () {
+		if (this.$store.state.bikeTypes.length === 0) {
+			this.$store.dispatch('fetchbikeTypes')
 		}
 	}
 }

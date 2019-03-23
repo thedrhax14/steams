@@ -13,17 +13,6 @@ body{
   overflow-x:hidden;
 }
 
-#branding{
-  width:100%;
-  position: fixed;
-  margin-bottom:50%;
-}
-
-#branding img{
-  width:120px;
-  height:120px;
-}
-
 .custom-file-upload {
     border-radius: 6px;
     width:500px;
@@ -72,106 +61,109 @@ body{
   color:#000;
 }
 
-
-.wrap{
-  width:100%;
-  padding-left: 20%;
-  padding-right: 20%;
-  /*font-family: 'Quicksand', sans-serif;*/
-}
-
-.wrap h1{
-  text-align: center;
-}
-
 .sidebar {
+  background-color:#f2f2f2;
   height: 100%;
   width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
   overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
+  transition: 0.3s;
 }
 
 .sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
+  width:auto;
+  display:block;
+  color:#000;
+  padding:14px 16px;
+  text-decoration:none;
+  font-size:18px;
   transition: 0.3s;
 }
 
 .sidebar a:hover {
-  color: #f1f1f1;
+  background-color:#ddd;
+  text-decoration: none;
+  color:#000;
 }
 
 .sidebar .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
-  font-size: 36px;
+  right: 10px;
+  font-size: 27px;
   margin-left: 50px;
 }
 
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
+.user-buttons a, #app #nav{
+  float: right;
+  margin-top: -150px;
 }
 
-.openbtn:hover {
-  background-color: #444;
+.sidebar .closebtn:hover {
+  color:#fff;
+}
+
+.openbtn, .openbtn:hover {
+  cursor: pointer;
+  color:#fff;
+  float:left;
+}
+
+#popup{
+  color:#000;
+  font-size:18px;
+  text-align: center;
+}
+
+#popup button{
+  font-size:13px;
+  margin-top:15px;
+  font-weight: bold;
+}
+
+#popup small{
+  font-size:13px;
 }
 
 #main {
-  transition: margin-left .5s;
+  transition: margin-left .3s;
+  padding:16px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 
 @media(max-width: 768px){
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  /* Card styles for smaller devices */
 
-  .sign-in-wrap{
-    margin-top:1%;
-    width:100%;
-  }
-
-  .sign-in-wrap h2{
-    text-align: center;
-  }
-
-  .sign-in-wrap img{
-    margin-left: 40%;
+  .card.text-center{
     width:200px;
-    height: 200px;
+    font-size:10px;
   }
-  .sign-in-window{
-    max-width: 18rem;
-    width:100%;
-    margin: auto;
-    /*font-family: 'Quicksand', sans-serif;*/
-    border-color: #000;
+  .card-header{
+    font-size: 15px;
+    background-color: #fff;
+    width:200px;
   }
-  header #branding,
-  header nav,
-  header nav li,{
-    float:none;
-    text-align:center;
-    width:100%;
-  }
-}
 
-@media(max-width: 768px){
+  .card-body{
+    background-color: #fff;
+    font-weight:normal;
+    line-height: 10px;
+    border-style: dashed;
+    font-size:10px;
+    border-width: thin;
+    width:200px;
+  }
+
+  .card img{
+    width:95%;
+    height:25%;
+  }
+  /*********************/
+
   .custom-control.custom-radio #type-1 img{
     margin-top:6%;
     margin-left:-25%;
@@ -200,14 +192,6 @@ body{
     margin-left:-30%;
   }
 
-  .card-body ul{
-    list-style: none;
-  }
-
-  .card-body li{
-    text-align: left;
-  }
-
   .custom-control.custom-radio #type-1 img,.custom-control.custom-radio #type-2 img,.custom-control.custom-radio #type-3 img,.custom-control.custom-radio #type-4 img
   ,.custom-control.custom-radio #type-5 img, .bike img{
     width:95.75px;
@@ -227,10 +211,66 @@ body{
     margin-top:30px;
   }
 
+  .wrap h1, .wrap h2{
+    font-size:20px;
+    float:left;
+  }
+
+  .wrap h3{
+    font-size: 10px;
+  }
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+
+  .wrap{
+    padding-top:30%;
+    width:50%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sign-in-wrap{
+    margin-top:1%;
+    padding-left: 20%;
+    padding-right: 20%;
+    width:50%;
+  }
+
+  .sign-in-wrap h2{
+    text-align: center;
+  }
+
+  .sign-in-wrap img{
+    margin-left: 5%;
+    width:200px;
+    height: 200px;
+  }
+
+  .extras{
+    float:left;
+    color:#007bff;
+    font-size: 15px;
+    margin-left: 25%;
+    line-height: 25px;
+  }
+
+  .extras a{
+    cursor: pointer;
+  }
+}
+
+.wrap{
+  padding-top:20px;
+  width:100%;
+  padding-left: 30%;
+  padding-right: 30%;
+  transition: margin-left .5s;
 }
 
 .sign-in-wrap{
   margin-top:1%;
+  padding-left: 25%;
+  padding-right: 25%;
   width:100%;
 }
 
@@ -239,14 +279,16 @@ body{
 }
 
 .sign-in-wrap img{
-  margin-left: 40%;
+  margin-left: 5%;
   width:200px;
   height: 200px;
 }
 
 .extras{
-  text-align:center;
+  float:left;
   color:#007bff;
+  margin-left: 25%;
+  line-height: 25px;
 }
 
 .extras a{
@@ -266,37 +308,10 @@ body{
   font-size: 20px;
 }
 
-.card img{
-  width:95%;
-  height:25%;
-}
-
-.side-nav{
-  height:100%;
-  width:0;
-  position:fixed;
-  z-index:1;
-  top:0;
-  left:0;
-  background-color:#fff;
-  opacity:0.9;
-  overflow-x:hidden;
-  padding-top:60px;
-  transition:0.5s;
-}
-
 #reservationTitle{
   text-align: center;
 }
 
-.side-nav a{
-  padding:10px 10px 10px 30px;
-  text-decoration:none;
-  font-size:20px;
-  color:#253435;
-  display:block;
-  transition:0.3s;
-}
 
 
 .side-nav a:hover{
@@ -357,14 +372,6 @@ section h2{
   margin-left:-30%;
 }
 
-.card-body ul{
-  list-style: none;
-}
-
-.card-body li{
-  text-align: left;
-}
-
 .custom-control.custom-radio #type-1 img,.custom-control.custom-radio #type-2 img,.custom-control.custom-radio #type-3 img,.custom-control.custom-radio #type-4 img
 ,.custom-control.custom-radio #type-5 img, .bike img{
   width:95.75px;
@@ -389,8 +396,6 @@ section h2{
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #2c3e50;
-  transition: margin-left .5s;
-  padding: 16px;
 }
 
 #nav {
@@ -434,6 +439,34 @@ section h2{
 	position: absolute;
 }
 
+/* Card styles */
+.card-header{
+  background-color: #fff;
+}
+
+.card-body{
+  background-color: #fff;
+  padding-bottom: 10px;
+  font-weight:normal;
+  line-height: 30px;
+  border-style: dashed;
+  font-size:16px;
+  border-width: thin;
+}
+
+.card-body ul{
+  list-style: none;
+}
+
+.card-body li{
+  text-align: left;
+}
+
+.card img{
+  width:95%;
+  height:25%;
+}
+
 footer{
   padding:5px;
   margin-top:600px;
@@ -469,9 +502,10 @@ height:100%;
   text-align: center;
 }
 .logo {
-  width: 128px;
+  width:128px;
   height: 128px;
-  text-align: center;
+  /*width: 148px;
+  height: 73px;*/
 }
 
 header, header .container, .logo-row, .logo{

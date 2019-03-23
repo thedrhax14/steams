@@ -1,5 +1,5 @@
 <template>
-	<div class="login">
+	<div class="wrap">
 		<transition name="fade">
 			<div v-if="$store.state.performingRequest" class="loading">
 				<p>Loading...</p>
@@ -9,6 +9,7 @@
 			<div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword }">
 				<form v-if="showLoginForm" @submit.prevent>
 					<Login/>
+					<br/>
 					<div class="extras">
 						<a @click="togglePasswordReset">Forgot Password</a>
 						<br>
