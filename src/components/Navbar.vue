@@ -6,6 +6,7 @@
           <div id="accountpic">
             <a href='/profile'><img src="@/../public/danny-pej.png"></a>
           </div>
+          <hr>
           <section>
           </section>
           <div v-if="userPermission === 1">
@@ -23,8 +24,7 @@
             <router-link to='/Payement'><i class="fas fa-credit-card fa-sm"></i>&nbsp;&nbsp;Payement</router-link>
             <router-link to='/Report'><i class="fas fa-exclamation fa-sm"></i>&nbsp;&nbsp;Report an issue</router-link>
           </div>
-            <br/>
-            <router-link to='./profile'>My Account</router-link>
+            <hr>
             <router-link to='/'><i class="fas fa-question-circle fa-sm"></i>&nbsp;&nbsp;Help tour</router-link>
         </div>
   </header>
