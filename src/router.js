@@ -11,12 +11,20 @@ import Recents from './views/Recents.vue'
 import Report from './views/Report.vue'
 import Reservations from './views/Reservations.vue'
 import Payement from './views/Payement.vue'
+import NewPayement from './views/NewPayement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
+import ConfirmOrder from './views/confirmOrder.vue'
 import Profile from './views/Profile.vue'
 import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
-import StationsMap from './views/StationsMap.vue'
+import BookPage from './views/BookPage.vue'
+// operator
+import PlaceOrders from './views/PlaceOrders.vue'
+import TrackBikeLocations from './views/TrackBikeLocations.vue'
+import ReviewOrders from './views/ReviewOrders.vue'
+// manager
+import ManagerStatistics from './views/managerStatistics.vue'
 
 Vue.use(Router)
 
@@ -26,13 +34,23 @@ const router = new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'StationsMap',
-			component: StationsMap
+			name: 'BookPage',
+			component: BookPage
+		},
+		{
+			path: '/newCard',
+			name: 'NewPayement',
+			component: NewPayement
 		},
 		{
 			path: '/about',
 			name: 'About',
 			component: About
+		},
+		{
+			path:'/confirm',
+			name: 'ConfirmOrder',
+			component: ConfirmOrder
 		},
 		{
 			path: '/licenseagreement',
@@ -96,6 +114,26 @@ const router = new Router({
 			path: '/FAQ',
 			name: 'FAQ',
 			component: FAQ
+		},
+		{
+			path: '/manStats',
+			name: 'manStats',
+			component: ManagerStatistics
+		},
+		{
+			path: '/trackbl',
+			name: 'trackbl',
+			component: TrackBikeLocations
+		},
+		{
+			path: '/revieworders',
+			name: 'revieworders',
+			component: ReviewOrders
+		},
+		{
+			path: '/placeorders',
+			name: 'placeorders',
+			component: PlaceOrders
 		},
 		{
 			path: '/auth',

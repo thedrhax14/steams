@@ -1,4 +1,5 @@
 <template>
+	<body>
 	<div class="wrap" style="margin-top: 50px;">
 	<div class="list_of_bikes">
 		<transition name="fade">
@@ -56,6 +57,7 @@
     </div>
 	</div>
 </div>
+</body>
 </template>
 
 <script>

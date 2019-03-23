@@ -1,14 +1,44 @@
+
 /*Body stylign*/
 body{
   font-family:"Helvetica", Serif;
   background-color:#f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  width:80%;
+  margin:auto;
   overflow-x:hidden;
 }
-/*nav bar styling*/
+
+.custom-file-upload {
+    border-radius: 6px;
+    width:500px;
+    font-size: 18px;
+    text-align:center;
+    color:#fff;
+    background-color: #d9534f;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.custom-file-upload:hover {
+    border-radius: 6px;
+    background-color: #CC0000;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
 .navbar{
   background-color:#E53935;
   overflow:hidden;
-  height:63px;
+  height:auto;
+  width: auto;
+  background-color:#000;
 }
 
 .navbar a{
@@ -30,11 +60,277 @@ body{
   background-color:#ddd;
   color:#000;
 }
-/* Logo styling and positioning adjustment*/
-.logo img{
-  margin-left: 400%;
-  height:120px;
-  width:120px;
+
+.sidebar {
+  background-color:#f2f2f2;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.3s;
+}
+
+.sidebar a {
+  width:auto;
+  display:block;
+  color:#000;
+  padding:14px 16px;
+  text-decoration:none;
+  font-size:18px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background-color:#ddd;
+  text-decoration: none;
+  color:#000;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 27px;
+  margin-left: 50px;
+}
+
+.user-buttons a, #app #nav{
+  float: right;
+  margin-top: -150px;
+}
+
+.sidebar .closebtn:hover {
+  color:#fff;
+}
+
+.openbtn, .openbtn:hover {
+  cursor: pointer;
+  color:#fff;
+  float:left;
+}
+
+#popup{
+  color:#000;
+  font-size:18px;
+  text-align: center;
+}
+
+#popup button{
+  font-size:13px;
+  margin-top:15px;
+  font-weight: bold;
+}
+
+#popup small{
+  font-size:13px;
+}
+
+#main {
+  transition: margin-left .3s;
+  padding:16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+@media(max-width: 768px){
+  /* Card styles for smaller devices */
+
+  .card.text-center{
+    width:200px;
+    font-size:10px;
+  }
+  .card-header{
+    font-size: 15px;
+    background-color: #fff;
+    width:200px;
+  }
+
+  .card-body{
+    background-color: #fff;
+    font-weight:normal;
+    line-height: 10px;
+    border-style: dashed;
+    font-size:10px;
+    border-width: thin;
+    width:200px;
+  }
+
+  .card img{
+    width:95%;
+    height:25%;
+  }
+  /*********************/
+
+  .custom-control.custom-radio #type-1 img{
+    margin-top:6%;
+    margin-left:-25%;
+  }
+
+  .custom-control.custom-radio #type-2 img{
+    margin-top:6%;
+    margin-left:-20%;
+  }
+
+  .custom-control.custom-radio #type-3 img{
+    margin-top:6%;
+    margin-left:-23%;
+  }
+  .custom-control.custom-radio #type-4 img{
+    margin-top:6%;
+    margin-left:-25%;
+  }
+  .custom-control.custom-radio #type-5 img{
+    margin-top:6%;
+    margin-left:-25%;
+  }
+
+  .bike img{
+    margin-top:6%;
+    margin-left:-30%;
+  }
+
+  .custom-control.custom-radio #type-1 img,.custom-control.custom-radio #type-2 img,.custom-control.custom-radio #type-3 img,.custom-control.custom-radio #type-4 img
+  ,.custom-control.custom-radio #type-5 img, .bike img{
+    width:95.75px;
+    height:54.25px;
+  }
+
+
+  .custom-control.custom-radio #type-1 small, .custom-control.custom-radio #type-2 small, .custom-control.custom-radio #type-3 small, .custom-control.custom-radio #type-4 small
+  ,.custom-control.custom-radio #type-5 small, .bike small{
+    font-size:20px;
+    font-weight:bold;
+  }
+
+  .custom-control.custom-radio #type-1 button, .custom-control.custom-radio #type-2 button, .custom-control.custom-radio #type-3 button, .custom-control.custom-radio #type-4 button
+  , .custom-control.custom-radio #type-5 button, .bike button{
+    float:right;
+    margin-top:30px;
+  }
+
+  .wrap h1, .wrap h2{
+    font-size:20px;
+    float:left;
+  }
+
+  .wrap h3{
+    font-size: 10px;
+  }
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+
+  .wrap{
+    padding-top:30%;
+    width:50%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sign-in-wrap{
+    margin-top:1%;
+    padding-left: 20%;
+    padding-right: 20%;
+    width:50%;
+  }
+
+  .sign-in-wrap h2{
+    text-align: center;
+  }
+
+  .sign-in-wrap img{
+    margin-left: 5%;
+    width:200px;
+    height: 200px;
+  }
+
+  .extras{
+    float:left;
+    color:#007bff;
+    font-size: 15px;
+    margin-left: 25%;
+    line-height: 25px;
+  }
+
+  .extras a{
+    cursor: pointer;
+  }
+}
+
+.wrap{
+  padding-top:20px;
+  width:100%;
+  padding-left: 30%;
+  padding-right: 30%;
+  transition: margin-left .5s;
+}
+
+.sign-in-wrap{
+  margin-top:1%;
+  padding-left: 25%;
+  padding-right: 25%;
+  width:100%;
+}
+
+.sign-in-wrap h2{
+  text-align: center;
+}
+
+.sign-in-wrap img{
+  margin-left: 5%;
+  width:200px;
+  height: 200px;
+}
+
+.extras{
+  float:left;
+  color:#007bff;
+  margin-left: 25%;
+  line-height: 25px;
+}
+
+.extras a{
+  cursor: pointer;
+}
+
+.sign-in-window{
+  max-width: 18rem;
+  width:100%;
+  margin: auto;
+  /*font-family: 'Quicksand', sans-serif;*/
+  border-color: #000;
+}
+
+
+.wrap h3{
+  font-size: 20px;
+}
+
+#reservationTitle{
+  text-align: center;
+}
+
+
+
+.side-nav a:hover{
+  color:#fff;
+  background-color: #a9a9a9;
+}
+
+a.btn-close:hover{
+   font-size: 40px;
+   background-color: transparent;
+}
+
+.side-nav .btn-close{
+  position:absolute;
+  top:0;
+  right:22px;
+  font-size:36px;
+  margin-left:50px;
+  background-color: transparent;
 }
 
 section h2{
@@ -44,66 +340,55 @@ section h2{
   font-size: 22px;
 }
 
-.card img{
-  width:95%;
-  height:25%;
+.mapid {
+  position: relative;
 }
 
-.card-title{
-  color:#000;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-align:center;
-  font-family: Arial;
+.custom-control.custom-radio #type-1 img{
+  margin-top:6%;
+  margin-left:-25%;
 }
 
-.card-text{
-  line-height: 27px;
+.custom-control.custom-radio #type-2 img{
+  margin-top:6%;
+  margin-left:-20%;
 }
 
-.readmore{
-	font-family: Arial;
-	background-color: #ed2939;
-	text-decoration:none;
-	font-size:18px;
-	cursor: pointer;
-	color:#fff;
-	text-align: center;
-	border-style: none;
-  margin-left: 25%;
-	border-color:#fff;
-
+.custom-control.custom-radio #type-3 img{
+  margin-top:6%;
+  margin-left:-23%;
+}
+.custom-control.custom-radio #type-4 img{
+  margin-top:6%;
+  margin-left:-25%;
+}
+.custom-control.custom-radio #type-5 img{
+  margin-top:6%;
+  margin-left:-25%;
 }
 
-.readmore a{
-	text-decoration:none;
-	color:#fff;
+.bike img{
+  margin-top:6%;
+  margin-left:-30%;
 }
 
-img{
-  margin-top: 2%;
-  margin-left: 42%;
-  width:200px;
-  height: 200px;
+.custom-control.custom-radio #type-1 img,.custom-control.custom-radio #type-2 img,.custom-control.custom-radio #type-3 img,.custom-control.custom-radio #type-4 img
+,.custom-control.custom-radio #type-5 img, .bike img{
+  width:95.75px;
+  height:54.25px;
 }
 
-section {
-  background-color: #fff;
+
+.custom-control.custom-radio #type-1 small, .custom-control.custom-radio #type-2 small, .custom-control.custom-radio #type-3 small, .custom-control.custom-radio #type-4 small
+,.custom-control.custom-radio #type-5 small, .bike small{
+  font-size:20px;
+  font-weight:bold;
 }
 
-small{
-  text-align: center;
-  margin-left: 60px;
-  font-size: 15px;
-  text-decoration: none;
-}
-
-.wrap{
-  width:500px;
-  margin: auto;
-  /*font-family: 'Quicksand', sans-serif;*/
-  border-color: #000;
-
+.custom-control.custom-radio #type-1 button, .custom-control.custom-radio #type-2 button, .custom-control.custom-radio #type-3 button, .custom-control.custom-radio #type-4 button
+, .custom-control.custom-radio #type-5 button, .bike button{
+  float:right;
+  margin-top:30px;
 }
 
 #app {
@@ -125,6 +410,10 @@ small{
 
 #nav a.router-link-exact-active {
 	color: #42b983;
+}
+
+.active{
+  color: #42b983;
 }
 
 #home {
@@ -149,76 +438,42 @@ small{
 	height: 500px;
 	position: absolute;
 }
-.current{
-  border-color:#000;
-  font-weight: bold;
-}
 
-.side-nav{
-  height:100%;
-  width:0;
-  position:fixed;
-  z-index:1;
-  top:0;
-  left:0;
-  background-color:#fff;
-  opacity:0.9;
-  overflow-x:hidden;
-  padding-top:60px;
-  transition:0.5s;
-}
-
-.side-nav a{
-  padding:10px 10px 10px 30px;
-  text-decoration:none;
-  font-size:20px;
-  color:#253435;
-  display:block;
-  transition:0.3s;
-}
-
-
-.side-nav a:hover{
-  color:#fff;
-  background-color: #a9a9a9;
-}
-
-a.btn-close:hover{
-   font-size: 40px;
-   background-color: transparent;
-}
-
-.side-nav .btn-close{
-  position:absolute;
-  top:0;
-  right:22px;
-  font-size:36px;
-  margin-left:50px;
-  background-color: transparent;
-}
-
-#main{
-  transition:margin-left 0.5s;
-  padding:20px;
-  overflow:hidden;
-  width:100%;
-}
-
-#side-menu #accountpic img{
-  margin-left: -6%;
-}
-
-#side-menu #accountpic img:hover{
-  text-decoration: none;
+/* Card styles */
+.card-header{
   background-color: #fff;
+}
+
+.card-body{
+  background-color: #fff;
+  padding-bottom: 10px;
+  font-weight:normal;
+  line-height: 30px;
+  border-style: dashed;
+  font-size:16px;
+  border-width: thin;
+}
+
+.card-body ul{
+  list-style: none;
+}
+
+.card-body li{
+  text-align: left;
+}
+
+.card img{
+  width:95%;
+  height:25%;
 }
 
 footer{
   padding:5px;
-  margin-top:20px;
+  margin-top:600px;
   color:#fff;
   background-color: #A9A9A9;
   text-align: center;
+
 }
 
 footer img{
@@ -231,4 +486,28 @@ footer a {
 }
 footer a:hover {
   color: #800000;
+}
+
+.page-footer.font-small.mdb-color.pt-4{
+background-color: black;
+color: #696969;
+height:100%;
+}
+
+
+/* General Demo Style */
+
+
+.logo-row{
+  text-align: center;
+}
+.logo {
+  width:128px;
+  height: 128px;
+  /*width: 148px;
+  height: 73px;*/
+}
+
+header, header .container, .logo-row, .logo{
+  background-color:#E53935;
 }

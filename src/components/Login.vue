@@ -1,12 +1,22 @@
 <template>
-	<div>
-		<h1>Welcome Back</h1>
-		<label for="email1">Email</label>
-		<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
-		<label for="password1">Password</label>
-		<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
-		<button @click="login" class="button">Log In</button>
+	<div class="sign-in-wrap">
+		<img src="../assets/images/SPINlogotext.png" alt="logo">
+		<div class="sign-in-window">
+		<h1> Sign In </h1>
+		<br/>
+		<div class="form-group">
+			<label for="email1">Email address</label>
+			<br>
+			<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
+		</div>
+		<div class="form-group">
+			<label for="password1">Password</label>
+			<br>
+			<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
+		</div>
+		<b-button @click="login" class="button">Log In</b-button>
 	</div>
+</div>
 </template>
 
 <script>
@@ -24,13 +34,13 @@ export default {
 	},
 	methods: {
 		login () {
-			this.$store.state.performingRequest = true
+			this.$store.state.loading = true
 			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
-				this.$store.commit('setCurrentUser', user.user)
+				this.$store.commit('setUser', user.user)
 				this.$router.push('/profile')
-				this.$store.state.performingRequest = false
+				this.$store.state.loading = false
 			}).catch(err => {
-				this.$store.state.performingRequest = false
+				this.$store.state.loading = false
 				this.errorMsg = err.message
 			})
 		}

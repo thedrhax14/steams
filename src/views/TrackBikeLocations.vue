@@ -36,27 +36,26 @@
   </div>
 </template>
 <script>
-  export default {
-    data(){
-      return{
-        trackBID: ' ', //store the ID to be tracked
-        user_info: 'exclude_user_info',
-        bikes: [
-          {bikeID:'BX1234', location: 'CircusLane'}
-        ],
-        location:''
-      }
-    },
-    methods: {
-      showUserDetails(value) {
+export default {
+	data () {
+		return {
+			trackBID: ' ', // store the ID to be tracked
+			user_info: 'exclude_user_info',
+			bikes: [
+				{ bikeID: 'BX1234', location: 'CircusLane' }
+			],
+			location: ''
+		}
+	},
+	methods: {
+		showUserDetails (value) {
 
-      },
-      showBikeLocation( bikeID){
-        alert('bla bla '+ bikeID );
-        var loc= this.bikes[0].location;
-        this.location = loc;
-
-      }
-    }
-  }
+		},
+		showBikeLocation (bikeID) {
+			alert('bla bla ' + bikeID)
+			var loc = this.bikes[0].location
+			this.location = loc
+		}
+	}
+}
 </script>

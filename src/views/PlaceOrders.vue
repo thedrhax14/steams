@@ -74,28 +74,28 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return{
-        value: 'repair',//to display the appropriate div
-        number: '', //number of bikes to order
-        address: '',
-        repairBID :'', 
-        bikes: [
-          {bikeID:'CX89078', location: 'Circus Lane ', currentState:'Good', reserved: 'true' }, //when it is resereved , make sure it is not available to be booked once returned by some other user
-          {bikeID:'BV12783', location: 'Holyrood Park ', currentState:'Good', reserved: 'false' } //can't set a bike which is already under-repair/being moved to a new location
-        ],
-        biketypes: [
-        {id:1, type: 'Tandem Bike'},
-           {id:2, type: 'Mountain Bike'},
-           {id:3, type: 'Road Bike'}, //later we could use the firebase IDS as keys
-           {id:4, type: 'Cruiser Bike'}
-        ],
-        selected: 'first',//has the value of the BikeType to order (incase a new bike is being ordered)
-        required: 'true'
+export default {
+	data () {
+		return {
+			value: 'repair', // to display the appropriate div
+			number: '', // number of bikes to order
+			address: '',
+			repairBID: '',
+			bikes: [
+				{ bikeID: 'CX89078', location: 'Circus Lane ', currentState: 'Good', reserved: 'true' }, // when it is resereved , make sure it is not available to be booked once returned by some other user
+				{ bikeID: 'BV12783', location: 'Holyrood Park ', currentState: 'Good', reserved: 'false' } // can't set a bike which is already under-repair/being moved to a new location
+			],
+			biketypes: [
+				{ id: 1, type: 'Tandem Bike' },
+				{ id: 2, type: 'Mountain Bike' },
+				{ id: 3, type: 'Road Bike' }, // later we could use the firebase IDS as keys
+				{ id: 4, type: 'Cruiser Bike' }
+			],
+			selected: 'first', // has the value of the BikeType to order (incase a new bike is being ordered)
+			required: 'true'
 
-      }
-    }
+		}
+	}
 
-  }
+}
 </script>

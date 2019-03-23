@@ -4,9 +4,14 @@ import './assets/css/style.css'
 import mapbox from 'mapbox-gl-vue'
 import router from './router'
 import { store } from './store.js'
+import 'bootstrap/dist/css/bootstrap.css'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
 const fb = require('./firebaseConfig.js')
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 let app
 fb.auth.onAuthStateChanged(user => {
@@ -19,4 +24,5 @@ fb.auth.onAuthStateChanged(user => {
 			render: h => h(App)
 		})
 	}
+	store.commit('setUser', user)
 })

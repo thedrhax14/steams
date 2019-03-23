@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<h1>Get Started</h1>
+	<div class="sign-in-wrap">
+		<h1>Let's get you started!</h1>
 		<label for="name">Name</label>
 		<input v-model.trim="signupForm.name" type="text" placeholder="user name" id="name" />
 		<label for="email2">Email</label>
@@ -27,22 +27,28 @@ export default {
 	},
 	methods: {
 		signup () {
-			this.$store.state.performingRequest = true
+			this.$store.state.loading = true
 			fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
-				this.$store.commit('updateUserProfile', this.signupForm.name)
+				this.$store.commit('updateUserProfile', {
+					displayName: this.signupForm.name,
+					data: {
+						PermissionLevel: 0,
+						Type: 'Customer'
+					}
+				})
 				this.$store.commit('setCurrentUser', user.user)
 				fb.usersCollection.doc(user.user.uid).set({
 					Type: 'Customer'
 				}).then(() => {
 					this.$router.push('/profile')
-					this.$store.state.performingRequest = false
+					this.$store.state.loading = false
 				}).catch(err => {
 					this.errorMsg = err.message
-					this.$store.state.performingRequest = false
+					this.$store.state.loading = false
 				})
 			}).catch(err => {
 				this.errorMsg = err.message
-				this.$store.state.performingRequest = false
+				this.$store.state.loading = false
 			})
 		}
 	}

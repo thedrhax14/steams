@@ -1,6 +1,5 @@
 <template>
-  <body>
-      <div class="wrap" style="margin-top: 50px; width:600px;">
+      <div class="wrap">
         <h2>About Us</h2>
           <hr/>
            <article style="line-height:30px;">
@@ -8,5 +7,4 @@
            </article>
          <br/>
       </div>
-  </body>
 </template>
