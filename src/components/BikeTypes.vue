@@ -3,23 +3,30 @@
 	<div class="wrap">
 			<h1>Booking at {{ Location }} Station</h1>
 			<br>
-			<h3>What type of bike?</h3>
-		<b-form-group label-align="center" label="Bike types avilable at the station">
+			<h3><i class="fas fa-bicycle"></i> &nbsp;What type of bike?</h3>
+		<b-form-group label-align="center" size="sm" label="Bike types avilable at the station">
 			<b-row>
 				<b-list-group>
 						<b-list-group-item
 							v-for='BikeType in OptionsOfBikeTypesAtLocation'
 							button
 							@click='Select(BikeType.id)'>
-							{{ BikeType.data['Type name'] }}
-							{{ BikeType.data.Price }} $/hr
+							<div id="type-5">
+							 <img src="../assets/images/tandem_bike1.png">
+							<h5>{{ BikeType.data['Type name'] }}</h5>
+							<small>{{ BikeType.data.Price }} €/hr</small>
+							</div>
 						</b-list-group-item>
 				</b-list-group>
 			</b-row>
+			<br/>
+			<h3><i class="fas fa-stopwatch"></i>&nbsp; What time?</h3>
 			<b-row>
+				<strong> Date: </strong>
 				<b-form-input type="date" v-model='StartDate'/>
 			</b-row>
 			<b-row>
+				<strong> Start time: </strong>
 				<b-form-input type="time" v-model='StartTime'/>
 			</b-row>
 			<b-row>
