@@ -3,7 +3,11 @@
     <navbar></navbar>
     <LoadingDisplay/>
     <div id="nav">
-      <router-link to="/installedplugins">Installed Plugins</router-link>
+        <a class="user-info-btn">
+          <router-link to='/profile'><i class="fas fa-user-circle"></i>
+            My Account </router-link>
+        </a>
+        <br/>
       <a v-if="user" @click="logout"> | Logout</a>
     </div>
     <router-view/>
