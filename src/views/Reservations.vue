@@ -15,7 +15,7 @@
 						<p class="card-text">
 							<ul class="card-list-reservation">
 								<li>PIN: {{ bike.data.PIN }} </li>
-								<li>Start location: {{ bike.data['Start location'] }}</li>
+								<li>Start location: {{ bike.data['Start location'] }} Station</li>
 								<li>Date: {{ bike.data['Start time & date'].seconds }}</li>
 								<li>Start time: {{ bike.data['Start time & date'].seconds }}</li>
 							</ul>
