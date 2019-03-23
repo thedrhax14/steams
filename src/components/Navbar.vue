@@ -3,6 +3,12 @@
        <div class="container"></div>
         <div id="mySidebar" class="sidebar">
           <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+          <div class="user-buttons">
+            <a class="user-info-btn">
+              <router-link to='/profile'><i class="fas fa-user-circle"></i>
+                My account </router-link>
+            </a>
+          </div>
           <div id="accountpic">
             <a href='/profile'><img src="@/../public/danny-pej.png"></a>
           </div>
