@@ -68,6 +68,7 @@ export const store = new Vuex.Store({
 		bikeTypes: [],
 		history: [],
 		bikes: [],
+		orders:[],
 		loading: false
 	},
 	actions: {
@@ -116,6 +117,17 @@ export const store = new Vuex.Store({
 				console.log('Error getting userInfoDoc', err)
 			})
 		},
+		fetchOrders ({ commit }) {
+			commit('setLoading', true)
+			fb.ordersCollection.get().then(ordersDoc => {
+				ordersDoc.forEach(ordersDoc => {
+					commit('addOrder', ordersDoc.data())
+				})
+				commit('setLoading', false)
+			}).catch(err => {
+				console.log('Error getting ordersDoc', err)
+			})
+		},
 		addBikeToBikes ({ commit }, data) {
 			fb.bikesCollection.doc(data.bid).set(data.doc)
 			/*
@@ -154,6 +166,13 @@ export const store = new Vuex.Store({
 					Status: "Reserved"
 				}
 			*/
+		},
+		addEntryToOrders ({ commit, dispatch }, data) {
+			console.log('here')
+			commit('setLoading', true)
+			fb.ordersCollection.add(data)
+			commit('setLoading', false)
+
 		},
 		addBikeTypeToBikeTypes ({ commit }, data) {
 			commit('setLoading', true)
@@ -319,6 +338,13 @@ export const store = new Vuex.Store({
 			state.bikes.push({
 				id: val.id,
 				data: val.data()
+			})
+		},
+		addOrder (state, val) {
+			//console.log('adding',val.id,'data',val.data())
+			state.orders.push({
+				id: val.id,
+				data: val
 			})
 		},
 		updateBike (state, val) {

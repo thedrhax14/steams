@@ -29,6 +29,7 @@ const usersCollection = db.collection('User Information')
 const bikeTypesCollection = db.collection('Bike Types')
 const historyCollection = db.collection('History')
 const bikesCollection = db.collection('Bikes')
+const ordersCollection = db.collection('Orders')
 
 export {
 	db,
@@ -36,5 +37,6 @@ export {
 	usersCollection,
 	bikeTypesCollection,
 	historyCollection,
-	bikesCollection
+	bikesCollection,
+	ordersCollection
 }
