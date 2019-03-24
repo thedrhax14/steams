@@ -22,6 +22,7 @@ fb.auth.onAuthStateChanged(user => {
 
 fb.historyCollection.onSnapshot((historySnapshot) => {
 	historySnapshot.docChanges().forEach(historyChange => {
+		console.log('historyChange',historyChange)
 		if (historyChange.type === 'added') {
 			console.log('New history: ', historyChange.doc.id)
 			store.commit('addHistory', historyChange.doc)
@@ -247,12 +248,13 @@ export const store = new Vuex.Store({
 					}
 				}
 			*/
-			dispatch('updateBikeInBikes', {
-				bid: data.doc.BikeID,
-				doc: {
-					Reserved: !data.doc['Start time & date'] == null && !data.doc['Start location'] == null
-				}
-			})
+			if(data.doc['End location'] == "")
+				dispatch('updateBikeInBikes', {
+					bid: data.doc.BikeID,
+					doc: {
+						Reserved: data.doc.Status != "Cancelled"
+					}
+				})
 		},
 		updateUserProfile ({ commit, dispatch }, val) {
 			commit('setLoading', true)
