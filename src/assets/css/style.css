@@ -169,7 +169,7 @@ and (max-width: 768px){
     font-weight:normal;
     line-height: 10px;
     border-style: dashed;
-    font-size:10px;
+    font-size:16px;
     border-width: thin;
     width:200px;
   }
@@ -199,16 +199,13 @@ and (max-width: 768px){
    font-size:25px;
    color:#fff;
    float:right;
-   margin-top: -75px;
-   margin-right: 8px;
+   margin-top: -145px;
+   margin-right: 16px;
+
  }
 
  .mobile-show a:hover{
    color:#fff;
- }
-
- .dropdown{
-   font-size:5px;
  }
 
  .wrap hr{
