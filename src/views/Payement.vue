@@ -2,7 +2,7 @@
 	<b-container fluid>
 		<h1>Payement methods</h1>
 		<b-list-group v-if='PaymentMethods && PaymentMethods.length>0'>
-			<b-list-group-item 
+			<b-list-group-item
 				v-for='(PaymentMethod, index) in PaymentMethods'
 				:key='index'
 				button
@@ -33,17 +33,16 @@ export default {
 		PaymentMethods () {
 			return this.$store.state.userInfo.PaymentMethods
 		},
-		CurrentPaymentMethod() {
+		CurrentPaymentMethod () {
 			var result = -1
-			if(this.$store.state.userInfo.SelectedPaymentMethod != null)
-				result = this.$store.state.userInfo.SelectedPaymentMethod
+			if (this.$store.state.userInfo.SelectedPaymentMethod != null) { result = this.$store.state.userInfo.SelectedPaymentMethod }
 			return result
 		}
 	},
 	methods: {
-		SelectedCard(index){
-			console.log('SelectedCard',index)
-			this.$store.dispatch('updateUserInformation',{
+		SelectedCard (index) {
+			console.log('SelectedCard', index)
+			this.$store.dispatch('updateUserInformation', {
 				uid: this.$store.state.user.uid,
 				doc: {
 					SelectedPaymentMethod: index
