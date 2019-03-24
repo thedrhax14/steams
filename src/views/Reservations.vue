@@ -1,42 +1,52 @@
 <template>
-	<div class="wrap sm-8 md-8">
-			<b-jumbotron bg-variant="light" style="width:100%;">
-		<h2> My reservations</h2>
-		<div class="card text-center">
-			<div v-if='UserReservations.length>0'>
-				<div
-					class="card-header"
-					style="font-weight:bold;"
-					v-for="(reservation, index) in UserReservations"
-					v-bind:key='index'>
-					Bike ID: {{ reservation.data.BikeID }}
-					<div class="card-body">
-						<p v-if='reservation.data.Status != "Cancelled"' class="card-text">
-							<ul class="card-list-reservation">
-								<li>PIN: {{ reservation.data.PIN }} </li>
-								<li>Start location: {{ reservation.data['Start location'] }} Station</li>
-								<li>Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}</li>
-								<li>Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}</li>
-							</ul>
-							<b-button variant="info">Edit reservation</b-button>
-							<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
-						</p>
-						<p v-else class="card-text">
-							<ul class="card-list-reservation">
-								<li style="color:red;">Reservation was cancelled by user</li>
-								<li>Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}</li>
-								<li>Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}</li>
-							</ul>
-						</p>
-					</div>
-				</div>
-			</div>
+	<b-container>
+		<b-row class="justify-content-md-center">
+			<h2> My reservations</h2>
+		</b-row>
+		<b-row class="justify-content-md-center">
+			<b-card-group v-if='UserReservations.length>0'>
+				<b-container>
+					<b-row
+						v-for="(reservation, index) in UserReservations"
+						v-bind:key='index'>
+						<b-card :title="reservation.data.BikeID" >
+							<b-list-group v-if='reservation.data.Status != "Cancelled"'>
+								<b-list-group-item>
+									PIN: {{ reservation.data.PIN }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Start location: {{ reservation.data['Start location'] }} Station
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}
+								</b-list-group-item>
+								<b-button variant="info">Edit reservation</b-button>
+								<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
+							</b-list-group>
+							<b-list-group v-else>
+								<b-list-group-item>
+									Reservation is cancelled by user
+								</b-list-group-item>
+								<b-list-group-item>
+									Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
+								</b-list-group-item>
+							</b-list-group>
+							<b-card-text class="small text-muted">Last updated 3 mins ago</b-card-text>
+			 			</b-card>
+			 		</b-row>
+		 		</b-container>
+			</b-card-group>
 			<div v-else>
 				<b-alert show variant="dark">No reservations yet!</b-alert>
 			</div>
-		</div>
-		</b-jumbotron>
-	</div>
+		</b-row>
+	</b-container>
 </template>
 
 <script>
@@ -78,8 +88,8 @@ export default {
 				doc: {
 					BikeID: reservation.data.BikeID,
 					PIN: reservation.data.PIN,
-					'Start location': null,
-					'Start time & date': null,
+					'Start location': reservation.data['Start location'],
+					'Start time & date': reservation.data['Start time & date'],
 					'End location': "",
 					'End time & date': new Date(),
 					Status: "Cancelled",

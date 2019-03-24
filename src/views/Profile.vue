@@ -9,12 +9,6 @@
 		<p>User ID - {{ this.$store.state.user.uid }}</p>
 		<p>Name - {{ this.$store.state.user.displayName }}</p>
 		<p>Permission level - {{ UserInfo.PermissionLevel }}</p>
-		<h3>Payment methods</h3>
-		<b-list-group>
-			<b-list-group-item v-for="PaymentMethod in PaymentMethods">
-				<p>{{ PaymentMethod }}</p>
-			</b-list-group-item>
-		</b-list-group>
 	</div>
 </template>
 
@@ -34,9 +28,6 @@ export default {
 		},
 		UserInfo () {
 			return this.$store.state.userInfo
-		},
-		PaymentMethods () {
-			return this.$store.state.userInfo.PaymentMethods
 		}
 	},
 	created () {

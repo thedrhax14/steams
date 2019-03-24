@@ -127,6 +127,7 @@ export default {
 				Status: 'Reserved',
 				uid: this.$store.state.user.uid,
 			})
+			this.$router.push('/reservations')
 		},
 		Select (id) {
 			console.log('commit setSelectedBikeTypeId', id)
