@@ -16,11 +16,9 @@
          <input type="text" class="form-control" placeholder="Other">
           <div class="selection-list">
             <b-form-select v-model="selected" class="mb-3">
-    						<option value="1">1</option>
-    						<option value="2">2</option>
-    						<option value="3">3</option>
-    						<option value="4">4</option>
-    						<option value="5">5</option>
+    						<option value="1">Bike Damage</option>
+    						<option value="2">Lock pin timeout</option>
+    						<option value="3">Connection problem</option>
     				</b-form-select>
          </div>
        </div>
