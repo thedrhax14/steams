@@ -1,6 +1,6 @@
 <template>
   <body>
-    <div class="wrap" style="margin-top: 50px; width:600px;">
+    <div class="wrap">
     <h2 style="text-align:center;"> FAQs </h2>
       <hr>
       <h5 style="font-weight:bold;">Q: Are there any rate changes during holidays?</h5>
