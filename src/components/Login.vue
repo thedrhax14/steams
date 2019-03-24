@@ -7,12 +7,12 @@
 		<div class="form-group">
 			<label for="email1">Email address</label>
 			<br>
-			<input v-model.trim="loginForm.email" required type="text" class="form-group" placeholder="you@email.com" id="email1" />
+			<input v-model.trim="loginForm.email" required type="text" placeholder="you@email.com" id="email1" />
 		</div>
 		<div class="form-group">
 			<label for="password1">Password</label>
 			<br>
-			<input v-model.trim="loginForm.password" type="password" class="form-group" placeholder="******" id="password1" />
+			<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
 		</div>
 		<b-button @click="login" class="button">Log In</b-button>
 	</div>
