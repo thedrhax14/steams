@@ -7,6 +7,7 @@ import { store } from './store.js'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Chart from 'chart.js';
 
 Vue.use(BootstrapVue)
 const fb = require('./firebaseConfig.js')
