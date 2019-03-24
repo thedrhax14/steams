@@ -38,15 +38,7 @@ export default {
 	},
 		methods:{
 			deleteReservation (){
-				if(confirm('Are you sure?')){
-					db.collection('History').where('BikeID', '==',this.$route.params.BikeID).get()
-					.then(querySnapshot => {
-						querySnapshot.forEach(doc => {
-							doc.ref.delete()
-							this.$router.push('/')
-						})
-					})
-				}
+				return this.$store.state.historyChange.filter(entry => entry.data.BikeID == this.$store.state.user.BikeID)
 			}
 		}
 	}
