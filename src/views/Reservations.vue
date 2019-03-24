@@ -3,8 +3,8 @@
 			<h2> My reservations</h2>
 			<hr>
 			<br>
+			<div v-if='myReservations.length>0'>
 			<div class="card text-center">
-				<div v-if='myReservations.length>0'>
 					<div
 						class="card-header"
 						style="font-weight:bold;"
@@ -25,9 +25,9 @@
 						<b-button variant="danger" @Click="deleteReservation">Delete</b-button>
 					</div>
 				</div>
-				<div v-else>
-					No reservations yet!
-				</div>
+		</div>
+		<div v-else>
+			<h2 class="alt-message">No reservations yet!</h2>
 		</div>
 	</div>
 </template>
