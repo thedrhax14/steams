@@ -3,7 +3,7 @@
 			<h2> Recent trips </h2>
 			<hr>
 			<br>
-      <div class="card mb-3">
+      <!--<div class="card mb-3">
       <div class="card-body">
         <h5 class="card-title">Edinburgh Park</h5>
         <p class="card-text">
@@ -14,8 +14,8 @@
         </ul>
         <p class="card-text"><small class="text-muted">{{ + 'hours ago' }}</small></p>
       </div>
-     </div>
-			<!--<div class="card text-center">
+		</div>-->
+			<div class="card text-center">
 				<div class="card-header" style="font-weight:bold;">
 						Bike ID:
 				</div>
@@ -27,7 +27,7 @@
 					</p>
           <p class="card-text"> <small class="text-muted">{{  + 'hours ago' }}</small></p>
 				</div>
-			</div>-->
+			</div>
 		</div>
 </template>
 
