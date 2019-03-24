@@ -1,40 +1,38 @@
 <template>
-		<div class="wrap">
-			<h2> My reservations</h2>
-			<hr>
-			<br>
-			<div class="card text-center">
-				<div v-if='UserReservations.length>0'>
-					<div
-						class="card-header"
-						style="font-weight:bold;"
-						v-for="(reservation, index) in UserReservations"
-						v-bind:key='index'>
-						Bike ID: {{ reservation.data.BikeID }}
-						<div class="card-body">
-							<p v-if='reservation.data.Status != "Cancelled"' class="card-text">
-								<ul class="card-list-reservation">
-									<li>PIN: {{ reservation.data.PIN }} </li>
-									<li>Start location: {{ reservation.data['Start location'] }} Station</li>
-									<li>Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}</li>
-									<li>Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}</li>
-								</ul>
-								<b-button variant="info">Edit reservation</b-button>
-								<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
-							</p>
-							<p v-else class="card-text">
-								<ul class="card-list-reservation">
-									<li>Reservation is cancelled by user</li>
-									<li>Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}</li>
-									<li>Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}</li>
-								</ul>
-							</p>
-						</div>
+	<div class="wrap">
+		<h2> My reservations</h2>
+		<div class="card text-center">
+			<div v-if='UserReservations.length>0'>
+				<div
+					class="card-header"
+					style="font-weight:bold;"
+					v-for="(reservation, index) in UserReservations"
+					v-bind:key='index'>
+					Bike ID: {{ reservation.data.BikeID }}
+					<div class="card-body">
+						<p v-if='reservation.data.Status != "Cancelled"' class="card-text">
+							<ul class="card-list-reservation">
+								<li>PIN: {{ reservation.data.PIN }} </li>
+								<li>Start location: {{ reservation.data['Start location'] }} Station</li>
+								<li>Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}</li>
+								<li>Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}</li>
+							</ul>
+							<b-button variant="info">Edit reservation</b-button>
+							<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
+						</p>
+						<p v-else class="card-text">
+							<ul class="card-list-reservation">
+								<li>Reservation is cancelled by user</li>
+								<li>Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}</li>
+								<li>Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}</li>
+							</ul>
+						</p>
 					</div>
 				</div>
-				<div v-else>
-					No reservations yet!
-				</div>
+			</div>
+			<div v-else>
+				<h2 class="alt-message">No reservations yet!</h2>
+			</div>
 		</div>
 	</div>
 </template>

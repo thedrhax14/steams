@@ -23,6 +23,7 @@
          </div>
        </div>
        <br>
+       <h3> What issue did you face with your bike? </h3>
         <b-form-file
           v-model="file"
           :state="Boolean(file)"
@@ -31,7 +32,6 @@
         />
         <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
        <br>
-       <h3> What issue did you face with your bike? </h3>
        <!--<div class="form-group">
           <label class="custom-file-upload">
             <i class="fas fa-plus"></i> &nbsp;Add an image
@@ -39,10 +39,9 @@
        </div>-->
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us more about your issue..."></textarea>
         <br>
-        <hr>
       </form>
       <div>
-        <b-button v-b-modal.modal-center variant="danger">Report</b-button>
+        <b-button v-b-modal.modal-center block variant="danger">Report</b-button>
         <!-- Modal Component -->
         <b-modal id="modal-center" style="height:100px;" centered title="Thank you!">
           <p class="my-4">Your feedback has been received.</p>
