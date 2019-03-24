@@ -1,15 +1,36 @@
 <template id="">
   <div class="revieworders">
-    <div class="jumbotron">
+    <b-jumbotron bg-variant="light" >
       <div class="page-header">
       <h1>Orders Summary</h1>
     </div>
     <hr>
-    <b-table  :hover="hover"  :dark="dark"  :items="orderHistory"  :fields="fields"    />
+    <div v-show="noOrders">
+    <b-alert show variant="dark">You have not yet placed any orders.</b-alert>
+    </div>
+    <div
+      class="card-header"
+      style="font-weight:bold;"
+      v-if='ReviewOrders'
+      v-for="(order, index) in ReviewOrders"
+      v-bind:key='index'>
+      Order ID: 00{{ index }}
+      <div class="card-body">
+        <p class="card-text">
+          <ul class="card-list-reservation">
+          <li>Order Type: {{ order.data['Order Type'] }}</li>
+          <li v-if="order.data['Bike ID'] " >Bike ID: {{ order.data['Bike ID'] }} </li>
+          <li v-if="order.data.NumberOfBikes !== null"> Qty: {{ order.data['NumberOfBikes'] }}</li>
+            <li v-if="order.data.BikeType"> Bike Type: {{ order.data['BikeType'] }}</li>
+            <li>New location: {{ order.data.Location }} </li>
+          <li>Status: {{ order.data.Status }}</li>
+          </ul>
+        </p>
+      </div>
   </div>
-   </div>
+</b-jumbotron>
+  </div>
 
-  </div>
 </template>
 
 <script>
@@ -17,20 +38,24 @@
 export default {
 	data () {
 		return {
-			fields: ['orderID', 'orderType', 'bikeID', 'bikeType', 'location', 'status'], // this helps choose which varibales from the orderHistory object do you want to display
-			orderHistory: [
-				{ orderID: '001', orderType: 'Bike Repair', bikeID: 'CR73957', bikeType: 'Cruiser Bike', location: 'Holyrood Park', status: 'Repairing' },
-				{ orderID: '002', orderType: 'Bike Repair', bikeID: 'XT78957', bikeType: 'Tandem Bike', location: ' Edinburgh Zoo', status: 'Pending' },
-				{ orderID: '003', orderType: 'Replace', bikeID: 'VG66780', bikeType: ' Track Bike', location: 'Scott Mountain', status: 'Repairing' },
-				{ orderID: '004', orderType: 'Redistribute', bikeID: 'OK09880', bikeType: ' Mountain Bike', location: 'Edinburgh Lake', status: 'Repairing' }
-			],
+      orders:[],
 			hover: true,
-			dark: true
+			dark: true,
+      fluid: true,
+      noOrders: false,
 		}
 	},
-	created () {
-
-	}
+  name: 'ReviewOrders',
+  computed: {
+		ReviewOrders() {
+      if( this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length === 0)
+          this.noOrders = true;
+      return this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid)
+		}
+	},
+  created(){
+    this.$store.dispatch('fetchOrders')
+  }
 }
 
 </script>

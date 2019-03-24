@@ -31,7 +31,7 @@
 					</div>
 					<div v-else>
 						<h1>Email Sent</h1>
-						<p>check your email for a link to reset your password</p>
+						<p>The email conatins a link to reset your passoword.</p>
 						<button @click="togglePasswordReset" class="button">Back to login</button>
 					</div>
 				</form>

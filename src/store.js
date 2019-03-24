@@ -70,11 +70,12 @@ export const store = new Vuex.Store({
 			type: 1,
 			price: 2,
 			status: 3,
-			location: 4
+			location: 4,
 		},
 		bikeTypes: [],
 		history: [],
 		bikes: [],
+		orders:[],
 		loading: false
 	},
 	actions: {
@@ -123,6 +124,17 @@ export const store = new Vuex.Store({
 				console.log('Error getting userInfoDoc', err)
 			})
 		},
+		fetchOrders ({ commit }) {
+			commit('setLoading', true)
+			fb.ordersCollection.get().then(ordersDoc => {
+				ordersDoc.forEach(ordersDoc => {
+					commit('addOrder', ordersDoc.data())
+				})
+				commit('setLoading', false)
+			}).catch(err => {
+				console.log('Error getting ordersDoc', err)
+			})
+		},
 		addBikeToBikes ({ commit }, data) {
 			fb.bikesCollection.doc(data.bid).set(data.doc)
 			/*
@@ -162,6 +174,13 @@ export const store = new Vuex.Store({
 				}
 			*/
 		},
+		addEntryToOrders ({ commit, dispatch }, data) {
+			//console.log('addEntryToOrders',data)
+			commit('setLoading', true)
+			fb.ordersCollection.add(data)
+			commit('setLoading', false)
+
+		},
 		addBikeTypeToBikeTypes ({ commit }, data) {
 			commit('setLoading', true)
 			fb.bikeTypesCollection.doc(data.btid).set(data.doc).then(newBikeType => {
@@ -183,7 +202,7 @@ export const store = new Vuex.Store({
 			fb.bikesCollection.doc(data.bid).update(data.doc)
 			/*
 				if any of the following properties gets changed the
-				db updates the fields respectively  
+				db updates the fields respectively
 				expected data structure to change bike:
 				{
 					bid: "xxxxx"
@@ -323,6 +342,13 @@ export const store = new Vuex.Store({
 			state.bikes.push({
 				id: val.id,
 				data: val.data()
+			})
+		},
+		addOrder (state, val) {
+			//console.log('adding',val.id,'data',val.data())
+			state.orders.push({
+				id: val.id,
+				data: val
 			})
 		},
 		updateBike (state, val) {

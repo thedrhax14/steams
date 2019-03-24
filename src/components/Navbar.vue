@@ -10,7 +10,9 @@
             </a>
           </div>
           <div id="accountpic">
-            <a href='/profile'><img src="@/../public/danny-pej.png"></a>
+            <a  v-if="userPermission === 0" href='/profile'><img src="@/../public/danny-pej.png"></a>
+            <a  v-if="userPermission === 1" href='/profile'><img src="@/../public/operator.png" style="height:120px; margin-left: 50px;"></a>
+            <a  v-if="userPermission === 2" href='/profile'><img src="@/../public/manager.png"  style="height:120px; margin-left: 50px;"></a>
           </div>
           <hr>
           <section>
