@@ -6,7 +6,7 @@
 			</div>
 		</transition>
 		<h3>Profile</h3>
-		<p>UID - {{ this.$store.state.user.uid }}</p>
+		<p>User ID - {{ this.$store.state.user.uid }}</p>
 		<p>Name - {{ this.$store.state.user.displayName }}</p>
 		<p>Permission level - {{ UserInfo.PermissionLevel }}</p>
 		<h3>Payment methods</h3>
