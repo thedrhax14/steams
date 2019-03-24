@@ -100,6 +100,16 @@ body{
 .user-buttons a, #app #nav{
   float: right;
   margin-top: -150px;
+  color:#fff;
+}
+
+#app #nav a{
+  color:#fff;
+}
+
+.res-message{
+  text-align: center;
+  padding-top: 20px;
 }
 
 .sidebar .closebtn:hover {
@@ -128,6 +138,10 @@ body{
   font-size:13px;
 }
 
+.mobile-show{
+  display: none;
+}
+
 #main {
   transition: margin-left .3s;
   padding:16px;
@@ -135,7 +149,9 @@ body{
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 
-@media(max-width: 768px){
+@media only screen
+and (min-width:320px)
+and (max-width: 768px){
   /* Card styles for smaller devices */
 
   .card.text-center{
@@ -164,6 +180,40 @@ body{
   }
   /*********************/
 
+  .logo-row{
+    text-align: center;
+  }
+  .logo{
+    width:64px;
+    height: 64px;
+    /*width: 148px;
+    height: 73px;*/
+  }
+ /*******************/
+ .user-buttons a, #app #nav a{
+    display: none;
+ }
+
+.mobile-show, .mobile-show a{
+   display: inline;
+   font-size:25px;
+   color:#fff;
+   float:right;
+   margin-top: -75px;
+   margin-right: 8px;
+ }
+
+ .mobile-show a:hover{
+   color:#fff;
+ }
+
+ .dropdown{
+   font-size:5px;
+ }
+
+ .wrap hr{
+   display: none;
+ }
   .custom-control.custom-radio #type-1 img{
     margin-top:6%;
     margin-left:-25%;
@@ -222,12 +272,11 @@ body{
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 
-  .wrap{
+  /* .wrap{
     padding-top:30%;
-    width:50%;
     margin: 0;
     padding: 0;
-  }
+  } */
 
   .sign-in-wrap{
     margin-top:1%;
