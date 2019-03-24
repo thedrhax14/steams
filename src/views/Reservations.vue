@@ -4,25 +4,32 @@
 			<hr>
 			<br>
 			<div class="card text-center">
-				<div v-if='myReservations.length>0'>
+				<div v-if='UserReservations.length>0'>
 					<div
 						class="card-header"
 						style="font-weight:bold;"
-						v-for="(bike, index) in myReservations"
+						v-for="(reservation, index) in UserReservations"
 						v-bind:key='index'>
-						Bike ID: {{ bike.data.BikeID }}
+						Bike ID: {{ reservation.data.BikeID }}
 						<div class="card-body">
-							<p class="card-text">
+							<p v-if='reservation.data.Status != "Cancelled"' class="card-text">
 								<ul class="card-list-reservation">
-									<li>PIN: {{ bike.data.PIN }} </li>
-									<li>Start location: {{ bike.data['Start location'] }} Station</li>
-									<li>Date: {{ bike.data['Start time & date'].seconds }}</li>
-									<li>Start time: {{ bike.data['Start time & date'].seconds }}</li>
+									<li>PIN: {{ reservation.data.PIN }} </li>
+									<li>Start location: {{ reservation.data['Start location'] }} Station</li>
+									<li>Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}</li>
+									<li>Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}</li>
+								</ul>
+								<b-button variant="info">Edit reservation</b-button>
+								<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
+							</p>
+							<p v-else class="card-text">
+								<ul class="card-list-reservation">
+									<li>Reservation is cancelled by user</li>
+									<li>Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}</li>
+									<li>Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}</li>
 								</ul>
 							</p>
 						</div>
-						<b-button variant="info">Edit reservation</b-button>
-						<b-button variant="danger" @Click="deleteReservation">Delete</b-button>
 					</div>
 				</div>
 				<div v-else>
@@ -36,13 +43,44 @@
 export default {
 	name: 'Reservations',
 	computed: {
-		myReservations () {
+		UserReservations () {
 			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		}
 	},
 	methods: {
-		deleteReservation () {
-			return this.$store.state.historyChange.filter(entry => entry.data.BikeID == this.$store.state.user.BikeID)
+		SecondsToLocalDate(secs) {
+			var d = new Date(1970, 0, 1);
+			d.setSeconds(secs);
+			return d.toLocaleDateString();
+		},
+		NanosecondsToTime(nanosecs){
+			var seconds = nanosecs/10000
+			var hour = Math.floor(seconds/3600) % 24
+			var min = Math.floor(seconds/60) % 60
+			var hourString = ""
+			var minString = ""
+			if(hour<10) hourString = "0" + hour
+			else hourString = hour
+			if(min<10) minString = "0" + min
+			else minString = min
+			return hourString + ":" + minString
+		},
+		deleteReservation (index) {
+			var reservation = this.UserReservations[index]
+			console.log('Deleting',reservation[index])
+			this.$store.dispatch('updateHistory',{
+				id: reservation.id,
+				doc: {
+					BikeID: reservation.data.BikeID,
+					PIN: reservation.data.PIN,
+					'Start location': null,
+					'Start time & date': null,
+					'End location': "",
+					'End time & date': new Date(),
+					Status: "Cancelled",
+					uid: this.$store.state.user.uid
+				}
+			})
 		}
 	}
 }

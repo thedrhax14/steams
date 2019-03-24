@@ -178,7 +178,8 @@ export const store = new Vuex.Store({
 				}
 			*/
 		},
-		updateBikeInBikes ({ state, commit }, data) {
+		updateBikeInBikes ({ state }, data) {
+			console.log(data.bid,' is updating ',data.doc)
 			fb.bikesCollection.doc(data.bid).update(data.doc)
 			/*
 				if any of the following properties gets changed the
@@ -226,31 +227,32 @@ export const store = new Vuex.Store({
 				}
 			*/
 		},
-		updateHistory ({ state, commit }, data) {
-			fb.historyCollection.doc(data.uid).update(data.doc)
+		updateHistory ({ dispatch, commit }, data) {
+			fb.historyCollection.doc(data.id).update(data.doc)
 			/*
 				if any of the following properties gets changed the
 				db updates the fields respectively
 				expected data structure to update booking:
 				{
-					BikeID: yyxxxxx,
-					PIN: xxxx,
-					"Start location": "InsertLocationHere",
-					"Start time & date": xxxxxxxxxxxx, // seconds
-					"End location": "InsertLocationHere",
-					"End time & date": xxxxxxxxxxxx, // seconds
-					Status: "InsertStatusHere"
-					uid: state.state.user.uid
+					id: "InsertHistoryIDHere",
+					doc: {
+						BikeID: yyxxxxx,
+						PIN: xxxx,
+						"Start location": "InsertLocationHere",
+						"Start time & date": xxxxxxxxxxxx, // seconds
+						"End location": "InsertLocationHere",
+						"End time & date": xxxxxxxxxxxx, // seconds
+						Status: "InsertStatusHere"
+						uid: state.state.user.uid
+					}
 				}
 			*/
-			if (data.doc['End time & date'] && data.doc['End location']) {
-				dispatch('updateBikeInBikes', {
-					bid: data.BikeID,
-					doc: {
-						Reserved: true
-					}
-				})
-			}
+			dispatch('updateBikeInBikes', {
+				bid: data.doc.BikeID,
+				doc: {
+					Reserved: !data.doc['Start time & date'] == null && !data.doc['Start location'] == null
+				}
+			})
 		},
 		updateUserProfile ({ commit, dispatch }, val) {
 			commit('setLoading', true)

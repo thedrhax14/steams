@@ -122,8 +122,10 @@ export default {
 				PIN: Math.floor((Math.random() * 9999) + 1000),
 				'Start location': this.Location,
 				'Start time & date': new Date(this.StartDate + 'T' + this.StartTime + 'Z'),
-				uid: this.$store.state.user.uid,
-				Status: 'Reserved'
+				'End location' : null,
+				'End time & date' : null,
+				Status: 'Reserved',
+				uid: this.$store.state.user.uid
 			})
 		},
 		Select (id) {
