@@ -35,28 +35,28 @@
 export default {
 	data () {
 		return {
-			ExpireDate:"",
+			ExpireDate: '',
 			NewCardData: {
-				'Card holder':"",
-				'Card number':"",
-				'Expire date':null,
-				cvv:""
+				'Card holder': '',
+				'Card number': '',
+				'Expire date': null,
+				cvv: ''
 			}
 		}
 	},
 	computed: {
-		IsFormComplete() {
-			this.NewCardData['Expire date'] = new Date(this.ExpireDate + "T00:00:00Z")
-			return this.NewCardData['Card holder'].length > 5 
-			&& this.NewCardData['Card number'].length == 16 
-			&& this.NewCardData['Expire date'] != null
-			&& this.NewCardData.cvv.length == 3
+		IsFormComplete () {
+			this.NewCardData['Expire date'] = new Date(this.ExpireDate + 'T00:00:00Z')
+			return this.NewCardData['Card holder'].length > 5 &&
+			this.NewCardData['Card number'].length == 16 &&
+			this.NewCardData['Expire date'] != null &&
+			this.NewCardData.cvv.length == 3
 		}
 	},
 	methods: {
 		addNewCard () {
-			this.$store.commit('addUserPaymentMethod',this.NewCardData)
-			this.$store.dispatch('updateUserInformation',{
+			this.$store.commit('addUserPaymentMethod', this.NewCardData)
+			this.$store.dispatch('updateUserInformation', {
 				uid: this.$store.state.user.uid,
 				doc: {
 					PaymentMethods: this.$store.state.userInfo.PaymentMethods
