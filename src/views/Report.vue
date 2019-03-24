@@ -23,15 +23,13 @@
          </div>
        </div>
        <br>
-   <!--<div>
-    <b-form-file
-      v-model="file"
-      :state="Boolean(file)"
-      placeholder="Choose a file..."
-      drop-placeholder="Drop file here..."
-    />
-    <div class="mt-3">{{ file ? file.name : '' }}</div>
-  </div>-->
+        <b-form-file
+          v-model="file"
+          :state="Boolean(file)"
+          placeholder="Choose a file..."
+          drop-placeholder="Drop file here..."
+        />
+        <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
        <br>
        <h3> What issue did you face with your bike? </h3>
        <div class="form-group">
