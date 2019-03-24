@@ -122,10 +122,10 @@ export default {
 				PIN: Math.floor((Math.random() * 9999) + 1000),
 				'Start location': this.Location,
 				'Start time & date': new Date(this.StartDate + 'T' + this.StartTime + 'Z'),
-				'End location' : null,
-				'End time & date' : null,
+				'End location': null,
+				'End time & date': null,
 				Status: 'Reserved',
-				uid: this.$store.state.user.uid,
+				uid: this.$store.state.user.uid
 			})
 			this.$router.push('/reservations')
 		},
