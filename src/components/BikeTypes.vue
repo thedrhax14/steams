@@ -116,7 +116,6 @@ export default {
 	methods: {
 		Submit (evt) {
 			var bikeid = this.AvailableBikeAtLocationByBikeTypeID.id
-			alert('Add plz booking:)' + bikeid)
 			this.$store.dispatch('addEntryToHistory', {
 				BikeID: bikeid,
 				PIN: Math.floor((Math.random() * 9999) + 1000),
@@ -127,6 +126,7 @@ export default {
 				Status: 'Reserved',
 				uid: this.$store.state.user.uid
 			})
+			this.$router.push('/reservations')
 		},
 		Select (id) {
 			console.log('commit setSelectedBikeTypeId', id)

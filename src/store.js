@@ -65,13 +65,6 @@ export const store = new Vuex.Store({
 		selectedCard: Object,
 		userInfo: Object,
 		user: Object,
-		update: {
-			user: 0,
-			type: 1,
-			price: 2,
-			status: 3,
-			location: 4
-		},
 		bikeTypes: [],
 		history: [],
 		bikes: [],
@@ -198,7 +191,7 @@ export const store = new Vuex.Store({
 				}
 			*/
 		},
-		updateUserInformation ({ state, commit }, data) {
+		updateUserInformation ({ state }, data) {
 			fb.usersCollection.doc(data.uid).update(data.doc)
 			/*
 				if any of the following properties gets changed the
@@ -256,7 +249,7 @@ export const store = new Vuex.Store({
 					}
 				})
 		},
-		updateUserProfile ({ commit, dispatch }, val) {
+		updateUserProfile ({ commit }, val) {
 			commit('setLoading', true)
 			console.log('Updating user profile. Displayed name will be ' + val.displayName)
 			fb.auth.user.updateProfile({
@@ -266,10 +259,6 @@ export const store = new Vuex.Store({
 				commit('setUser', fb.auth.user)
 				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
 				commit('setLoading', false)
-				dispatch('updateUserInformation', {
-					uid: fb.auth.user.uid,
-					doc: val.data
-				})
 				commit('setUserInfo', val.data)
 			}).catch(error => {
 				console.log(error)
@@ -294,6 +283,9 @@ export const store = new Vuex.Store({
 		},
 		setUserInfo (state, val) {
 			state.userInfo = val
+		},
+		addUserPaymentMethod(state, val) {
+			state.userInfo.PaymentMethods.push(val)
 		},
 		setBikeTypes (state, val) {
 			state.bikeTypes = val
