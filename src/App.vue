@@ -7,7 +7,6 @@
           <router-link to='/profile'><i class="fas fa-user-circle"></i>
             My Account </router-link>
         </a>
-        <br/>
       <a v-if="user" @click="logout"> | Logout</a>
     </div>
     <router-view/>
@@ -32,7 +31,7 @@ export default {
 		logout () {
 			fb.auth.signOut().then(() => {
 				console.log('Logged out')
-				this.$router.push('/login')
+				this.$router.push('/auth')
 			}).catch(err => {
 				console.log(err)
 			})
