@@ -22,7 +22,7 @@ fb.auth.onAuthStateChanged(user => {
 
 fb.historyCollection.onSnapshot((historySnapshot) => {
 	historySnapshot.docChanges().forEach(historyChange => {
-		console.log('historyChange',historyChange)
+		console.log('historyChange', historyChange)
 		if (historyChange.type === 'added') {
 			console.log('New history: ', historyChange.doc.id)
 			store.commit('addHistory', historyChange.doc)
@@ -173,7 +173,7 @@ export const store = new Vuex.Store({
 			*/
 		},
 		updateBikeInBikes ({ state }, data) {
-			console.log(data.bid,' is updating ',data.doc)
+			console.log(data.bid, ' is updating ', data.doc)
 			fb.bikesCollection.doc(data.bid).update(data.doc)
 			/*
 				if any of the following properties gets changed the
@@ -241,13 +241,14 @@ export const store = new Vuex.Store({
 					}
 				}
 			*/
-			if(data.doc['End location'] == "")
+			if (data.doc['End location'] == '') {
 				dispatch('updateBikeInBikes', {
 					bid: data.doc.BikeID,
 					doc: {
-						Reserved: data.doc.Status != "Cancelled"
+						Reserved: data.doc.Status != 'Cancelled'
 					}
 				})
+			}
 		},
 		updateUserProfile ({ commit }, val) {
 			commit('setLoading', true)
@@ -284,7 +285,7 @@ export const store = new Vuex.Store({
 		setUserInfo (state, val) {
 			state.userInfo = val
 		},
-		addUserPaymentMethod(state, val) {
+		addUserPaymentMethod (state, val) {
 			state.userInfo.PaymentMethods.push(val)
 		},
 		setBikeTypes (state, val) {
