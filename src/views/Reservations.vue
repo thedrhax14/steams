@@ -7,7 +7,7 @@
 				<div
 					class="card-header"
 					style="font-weight:bold;"
-					v-if='myReservations'
+					v-if='myReservations.length>0'
 					v-for="(bike, index) in myReservations"
 					v-bind:key='index'>
 					Bike ID: {{ bike.data.BikeID }}
@@ -23,6 +23,9 @@
 					</div>
 					<b-button variant="info">Edit reservation</b-button>
 					<b-button variant="danger" @Click="deleteReservation">Delete</b-button>
+			</div>
+			<div v-else>
+				No reservations yet!
 			</div>
 		</div>
 	</div>
