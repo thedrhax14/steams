@@ -83,8 +83,8 @@ export default {
 				doc: {
 					BikeID: reservation.data.BikeID,
 					PIN: reservation.data.PIN,
-					'Start location': null,
-					'Start time & date': null,
+					'Start location': reservation.data['Start location'],
+					'Start time & date': reservation.data['Start time & date'],
 					'End location': "",
 					'End time & date': new Date(),
 					Status: "Cancelled",
