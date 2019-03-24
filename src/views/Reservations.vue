@@ -1,5 +1,6 @@
 <template>
-	<div class="wrap">
+	<div class="wrap sm-8 md-8">
+			<b-jumbotron bg-variant="light" style="width:100%;">
 		<h2> My reservations</h2>
 		<div class="card text-center">
 			<div v-if='UserReservations.length>0'>
@@ -31,14 +32,20 @@
 				</div>
 			</div>
 			<div v-else>
-				<h2 class="alt-message">No reservations yet!</h2>
+				<b-alert show variant="dark">No reservations yet!</b-alert>
 			</div>
 		</div>
+		</b-jumbotron>
 	</div>
 </template>
 
 <script>
 export default {
+	data (){
+		return {
+			fluid:true
+		}
+	},
 	name: 'Reservations',
 	computed: {
 		UserReservations () {
