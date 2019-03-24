@@ -9,6 +9,16 @@
         </a>
       <a v-if="user" @click="logout"> | Logout</a>
     </div>
+    <div class="dropdown">
+    <a class="mobile-show">
+        <b-dropdown variant="link" no-caret>
+          <template slot="button-content"><i class="far fa-user"></i></span></template>
+          <b-dropdown-item style="font-size:10px;" href="/profile">Profile</b-dropdown-item>
+          <br/>
+          <b-dropdown-item @click="logout" style="font-size:10px;" href="#">Logout</b-dropdown-item>
+        </b-dropdown>
+    </a>
+    </div>
     <router-view/>
   </div>
 </template>
