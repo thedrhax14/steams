@@ -33,16 +33,16 @@
     </div>
 </template>
 <script>
-  export default{
-    data (){
-      return{
+export default {
+	data () {
+		return {
 
-      }
-    },
-    methods:{
-      addNewCard(){
-        this.$router.push('/')
-      }
-    }
-  }
+		}
+	},
+	methods: {
+		addNewCard () {
+			this.$router.push('/')
+		}
+	}
+}
 </script>

@@ -4,29 +4,30 @@
 			<hr>
 			<br>
 			<div class="card text-center">
-				<div
-					class="card-header"
-					style="font-weight:bold;"
-					v-if='myReservations.length>0'
-					v-for="(bike, index) in myReservations"
-					v-bind:key='index'>
-					Bike ID: {{ bike.data.BikeID }}
-					<div class="card-body">
-						<p class="card-text">
-							<ul class="card-list-reservation">
-								<li>PIN: {{ bike.data.PIN }} </li>
-								<li>Start location: {{ bike.data['Start location'] }} Station</li>
-								<li>Date: {{ bike.data['Start time & date'].seconds }}</li>
-								<li>Start time: {{ bike.data['Start time & date'].seconds }}</li>
-							</ul>
-						</p>
+				<div v-if='myReservations.length>0'>
+					<div
+						class="card-header"
+						style="font-weight:bold;"
+						v-for="(bike, index) in myReservations"
+						v-bind:key='index'>
+						Bike ID: {{ bike.data.BikeID }}
+						<div class="card-body">
+							<p class="card-text">
+								<ul class="card-list-reservation">
+									<li>PIN: {{ bike.data.PIN }} </li>
+									<li>Start location: {{ bike.data['Start location'] }} Station</li>
+									<li>Date: {{ bike.data['Start time & date'].seconds }}</li>
+									<li>Start time: {{ bike.data['Start time & date'].seconds }}</li>
+								</ul>
+							</p>
+						</div>
+						<b-button variant="info">Edit reservation</b-button>
+						<b-button variant="danger" @Click="deleteReservation">Delete</b-button>
 					</div>
-					<b-button variant="info">Edit reservation</b-button>
-					<b-button variant="danger" @Click="deleteReservation">Delete</b-button>
-			</div>
-			<div v-else>
-				No reservations yet!
-			</div>
+				</div>
+				<div v-else>
+					No reservations yet!
+				</div>
 		</div>
 	</div>
 </template>
@@ -39,10 +40,10 @@ export default {
 			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		}
 	},
-		methods:{
-			deleteReservation (){
-				return this.$store.state.historyChange.filter(entry => entry.data.BikeID == this.$store.state.user.BikeID)
-			}
+	methods: {
+		deleteReservation () {
+			return this.$store.state.historyChange.filter(entry => entry.data.BikeID == this.$store.state.user.BikeID)
 		}
 	}
+}
 </script>

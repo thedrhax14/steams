@@ -14,8 +14,8 @@ export default {
 	props: {
 		Location: String
 	},
-	data (){
-		return{
+	data () {
+		return {
 			message: 'click to see what bikes are available!'
 		}
 	},

@@ -10,14 +10,13 @@ fb.auth.onAuthStateChanged(user => {
 	if (user) {
 		store.commit('setUser', user)
 		unsub = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
-							console.log('userSnapshot', userSnapshot.data())
-							store.commit('setUserInfo', userSnapshot.data())
-						}, (error) => {
-							console.log('usersCollection listener failed. Here is error:', error)
-						})
+			console.log('userSnapshot', userSnapshot.data())
+			store.commit('setUserInfo', userSnapshot.data())
+		}, (error) => {
+			console.log('usersCollection listener failed. Here is error:', error)
+		})
 	} else {
-		if(unsub)
-			unsub()
+		if (unsub) { unsub() }
 	}
 })
 
@@ -139,11 +138,11 @@ export const store = new Vuex.Store({
 			*/
 		},
 		addEntryToHistory ({ commit, dispatch }, data) {
-			console.log('addEntryToHistory',data)
+			console.log('addEntryToHistory', data)
 			commit('setLoading', true)
 			fb.historyCollection.add(data).then(newHistoryDoc => {
 				commit('setLoading', false)
-				dispatch('updateBikeInBikes',{
+				dispatch('updateBikeInBikes', {
 					bid: data.BikeID,
 					doc: {
 						Reserved: true
@@ -183,7 +182,7 @@ export const store = new Vuex.Store({
 			fb.bikesCollection.doc(data.bid).update(data.doc)
 			/*
 				if any of the following properties gets changed the
-				db updates the fields respectively  
+				db updates the fields respectively
 				expected data structure to change bike:
 				{
 					bid: "xxxxx"
@@ -244,8 +243,8 @@ export const store = new Vuex.Store({
 					uid: state.state.user.uid
 				}
 			*/
-			if(data.doc['End time & date'] && data.doc['End location']) {
-				dispatch('updateBikeInBikes',{
+			if (data.doc['End time & date'] && data.doc['End location']) {
+				dispatch('updateBikeInBikes', {
 					bid: data.BikeID,
 					doc: {
 						Reserved: true
@@ -283,7 +282,7 @@ export const store = new Vuex.Store({
 		setSelectedBikeId (state, val) {
 			state.selectedBikeId = val
 		},
-		setSelectedCard(state, val) {
+		setSelectedCard (state, val) {
 			state.selectedCard = val.data().PaymentInfo
 		},
 		setUser (state, val) {

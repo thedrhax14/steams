@@ -36,14 +36,14 @@
 // Make selection of timestamp from valid input element like celander
 export default {
 	data () {
-		return{
+		return {
 	 items: [
 		 { message: 'Status:' },
 		 { message: 'Returned at:' },
 		 { message: 'Date:' }
 	 ]
- }
-},
+		}
+	},
 	created () {
 		if (this.$store.state.bikeTypes.length === 0) {
 			this.$store.dispatch('fetchbikeTypes')

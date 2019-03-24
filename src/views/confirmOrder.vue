@@ -34,15 +34,15 @@
 
 <script>
 export default {
-data() {
-  return {
-    items: [
-      { message: 'PIN' },
-      { message: 'Date' },
-      { message: 'Start time' }
-    ]
-  }
-},
+	data () {
+		return {
+			items: [
+				{ message: 'PIN' },
+				{ message: 'Date' },
+				{ message: 'Start time' }
+			]
+		}
+	},
 	name: 'confirmOrder',
 	methods: {
 		confirmBooking () {

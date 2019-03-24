@@ -31,16 +31,16 @@
 
 <script>
 
-export default{
-  name:'addCard',
-  data (){
-    return{
+export default {
+	name: 'addCard',
+	data () {
+		return {
 
-    }
-  },
-  methods: { addPayement (){
-    this.$router.push('/newCard')
-   }
-  }
+		}
+	},
+	methods: { addPayement () {
+		this.$router.push('/newCard')
+	}
+	}
 }
 </script>

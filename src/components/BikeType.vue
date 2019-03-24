@@ -10,10 +10,10 @@ export default {
 	name: 'Bike',
 	props: {
 		bike: Object,
-		ButtonEdit:  Boolean,
-		ButtonBook:  Boolean,
-		ButtonSelect:  Boolean,
-		ShowRefType:  Boolean
+		ButtonEdit: Boolean,
+		ButtonBook: Boolean,
+		ButtonSelect: Boolean,
+		ShowRefType: Boolean
 	}
 }
 </script>
