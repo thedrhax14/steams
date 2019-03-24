@@ -16,9 +16,9 @@
          <input type="text" class="form-control" placeholder="Other">
           <div class="selection-list">
             <b-form-select v-model="selected" class="mb-3">
-    						<option value="1">Bike Damage</option>
-    						<option value="2">Lock pin timeout</option>
-    						<option value="3">Connection problem</option>
+    						<option value="BD">Bike Damage</option>
+    						<option value="LP">Lock pin timeout</option>
+    						<option value="CP">Connection problem</option>
     				</b-form-select>
          </div>
        </div>
@@ -32,18 +32,17 @@
         <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
        <br>
        <h3> What issue did you face with your bike? </h3>
-       <div class="form-group">
+       <!--<div class="form-group">
           <label class="custom-file-upload">
             <i class="fas fa-plus"></i> &nbsp;Add an image
           </label>
-       </div>
-       <button type="submit" name="submit">UPLOAD</button>
+       </div>-->
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us more about your issue..."></textarea>
         <br>
         <hr>
       </form>
       <div>
-        <b-button v-b-modal.modal-center variant="danger"> Report </b-button>
+        <b-button v-b-modal.modal-center variant="danger">Report</b-button>
         <!-- Modal Component -->
         <b-modal id="modal-center" style="height:100px;" centered title="Thank you!">
           <p class="my-4">Your feedback has been received.</p>
