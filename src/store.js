@@ -175,7 +175,7 @@ export const store = new Vuex.Store({
 			*/
 		},
 		addEntryToOrders ({ commit, dispatch }, data) {
-			//console.log('addEntryToOrders',data)
+			console.log('here')
 			commit('setLoading', true)
 			fb.ordersCollection.add(data)
 			commit('setLoading', false)
