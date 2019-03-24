@@ -1,12 +1,11 @@
 <template>
 	<div class="sign-in-wrap">
 		<img src="../assets/images/SPINlogotext.png" alt="logo">
-		<h2> Sign In </h2>
 		<div class="sign-in-window">
+		<h1> Sign In </h1>
 		<br/>
-		<h1>Welcome Back</h1>
 		<div class="form-group">
-			<label for="email1">Email</label>
+			<label for="email1">Email address</label>
 			<br>
 			<input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
 		</div>
@@ -15,7 +14,7 @@
 			<br>
 			<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
 		</div>
-		<button @click="login" class="button">Log In</button>
+		<b-button @click="login" class="button">Log In</b-button>
 	</div>
 </div>
 </template>

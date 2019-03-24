@@ -32,10 +32,10 @@ export default {
 		myReservations () {
 			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		},
-		UserInfo() {
+		UserInfo () {
 			return this.$store.state.userInfo
 		},
-		PaymentMethods() {
+		PaymentMethods () {
 			return this.$store.state.userInfo.PaymentMethods
 		}
 	},

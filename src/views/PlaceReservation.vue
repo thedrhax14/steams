@@ -128,7 +128,7 @@ export default {
 				StartDateAndTime: this.startDate + 'T' + this.startTime + ':00'
 			})
 		},
-		discard(){
+		discard () {
 			this.$router.push('/')
 		}
 	},

@@ -48,7 +48,7 @@ const router = new Router({
 			component: About
 		},
 		{
-			path:'/confirm',
+			path: '/confirm',
 			name: 'ConfirmOrder',
 			component: ConfirmOrder
 		},

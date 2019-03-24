@@ -1,27 +1,32 @@
 <template>
 	<div v-if="Location!='None'">
-		<b-row>
-			<h1 class='formTitle'>Booking {{ Location }} station</h1>
-		</b-row>
-		<b-row>
-			<h3>What type of bike?</h3>
-		</b-row>
-		<b-form-group label="Bike types avilable at the station">
+	<div class="wrap">
+			<h1>Booking at {{ Location }} Station</h1>
+			<br>
+			<h3><i class="fas fa-bicycle"></i> &nbsp;What type of bike?</h3>
+		<b-form-group label-align="center" size="sm" label="Bike types avilable at the station">
 			<b-row>
 				<b-list-group>
 						<b-list-group-item
 							v-for='BikeType in OptionsOfBikeTypesAtLocation'
 							button
 							@click='Select(BikeType.id)'>
-							{{ BikeType.data['Type name'] }}
-							{{ BikeType.data.Price }} $/hr
+							<div id="type-5">
+							 <img src="../assets/images/tandem_bike1.png">
+							<h5>{{ BikeType.data['Type name'] }}</h5>
+							<small>{{ BikeType.data.Price }} €/hr</small>
+							</div>
 						</b-list-group-item>
 				</b-list-group>
 			</b-row>
+			<br/>
+			<h3><i class="fas fa-stopwatch"></i>&nbsp; What time?</h3>
 			<b-row>
+				<strong> Date: </strong>
 				<b-form-input type="date" v-model='StartDate'/>
 			</b-row>
 			<b-row>
+				<strong> Start time: </strong>
 				<b-form-input type="time" v-model='StartTime'/>
 			</b-row>
 			<b-row>
@@ -48,6 +53,7 @@
 			StartTime {{ StartTime }}
 		</p>
 	</div>
+</div>
 </template>
 
 <script>
@@ -59,7 +65,7 @@
 
 export default {
 	name: 'BikeTypes',
-	data() {
+	data () {
 		return {
 			StartDate: '',
 			StartTime: ''
@@ -73,8 +79,8 @@ export default {
 			this.$store.state.bikes.forEach(bikeDoc => {
 				// console.log(bikeDoc.data.Location,'==',this.Location,'=',bikeDoc.data.Location==this.Location)
 				// console.log('bikeDoc.data',bikeDoc.data)
-				if (bikeDoc.data.Location == this.Location && !bikeDoc.data.Reserved) { 
-					BikeTypeIDs.push(bikeDoc.data['Type name']) 
+				if (bikeDoc.data.Location == this.Location && !bikeDoc.data.Reserved) {
+					BikeTypeIDs.push(bikeDoc.data['Type name'])
 				}
 				// console.log('BikeTypeIDs',BikeTypeIDs)
 			})
@@ -92,16 +98,16 @@ export default {
 			return this.$store.state.selectedStation
 		},
 		AvailableBikeAtLocationByBikeTypeID () {
-			return this.$store.state.bikes.filter(bike => 
-					bike.data['Type name'] == this.$store.state.selectedBikeTypeId
-				&& bike.data.Location == this.Location
-				&& bike.data.Reserved == false)[0]
+			return this.$store.state.bikes.filter(bike =>
+				bike.data['Type name'] == this.$store.state.selectedBikeTypeId &&
+				bike.data.Location == this.Location &&
+				bike.data.Reserved == false)[0]
 		},
-		IsFormComplete() {
-			return this.$store.state.selectedBikeTypeId 
-				&& this.$store.state.selectedBikeTypeId != ''
-				&& this.StartDate != ''
-				&& this.StartTime != ''
+		IsFormComplete () {
+			return this.$store.state.selectedBikeTypeId &&
+				this.$store.state.selectedBikeTypeId != '' &&
+				this.StartDate != '' &&
+				this.StartTime != ''
 		},
 		FormTitle () {
 			return 'Available book types at ' + this.$store.state.selectedStation
@@ -111,21 +117,21 @@ export default {
 		Submit (evt) {
 			var bikeid = this.AvailableBikeAtLocationByBikeTypeID.id
 			alert('Add plz booking:)' + bikeid)
-			this.$store.dispatch('addEntryToHistory',{
+			this.$store.dispatch('addEntryToHistory', {
 				BikeID: bikeid,
 				PIN: Math.floor((Math.random() * 9999) + 1000),
-				"Start location": this.Location,
-				"Start time & date": new Date(this.StartDate + 'T' + this.StartTime + 'Z'),
+				'Start location': this.Location,
+				'Start time & date': new Date(this.StartDate + 'T' + this.StartTime + 'Z'),
 				uid: this.$store.state.user.uid,
 				Status: 'Reserved'
 			})
 		},
-		Select(id) {
-			console.log('commit setSelectedBikeTypeId',id)
-			this.$store.commit('setSelectedBikeTypeId',id)
+		Select (id) {
+			console.log('commit setSelectedBikeTypeId', id)
+			this.$store.commit('setSelectedBikeTypeId', id)
 		},
 		Reset (evt) {
-			this.$store.commit('setSelectedBikeTypeId','')
+			this.$store.commit('setSelectedBikeTypeId', '')
 			this.$store.commit('setSelectedStation', 'None')
 			this.StartDate = ''
 			this.StartTime = ''

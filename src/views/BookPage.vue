@@ -1,8 +1,8 @@
 <template>
 	<div id="BookPage">
 		<div v-if='Location=="None"'>
-			<h2>Nearest Docking Stations</h2>
 			<div class="sicky-top">
+				<h2 class="res-message"> Welcome back{{ this.$store.state.user.id }}!</h2>
 				<mapbox
 					access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 					:map-options="{
@@ -42,7 +42,8 @@ export default {
 	},
 	data () {
 		return {
-			PopupVue: Vue.extend(PopupContent)
+			PopupVue: Vue.extend(PopupContent),
+			message: "Let's reserve a bike!"
 		}
 	},
 	computed: {

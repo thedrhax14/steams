@@ -3,9 +3,15 @@
     <navbar></navbar>
     <LoadingDisplay/>
     <div id="nav">
-      <router-link to="/installedplugins">Installed Plugins</router-link>
+        <a class="user-info-btn">
+          <router-link to='/profile'><i class="fas fa-user-circle"></i>
+            My Account </router-link>
+        </a>
       <a v-if="user" @click="logout"> | Logout</a>
     </div>
+    <a href="/profile" class="mobile-show">
+        <i class="far fa-user"></i>
+    </a>
     <router-view/>
   </div>
 </template>
@@ -28,7 +34,7 @@ export default {
 		logout () {
 			fb.auth.signOut().then(() => {
 				console.log('Logged out')
-				this.$router.push('/login')
+				this.$router.push('/auth')
 			}).catch(err => {
 				console.log(err)
 			})

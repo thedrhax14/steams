@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" style="margin-top: 50px; width:600px;">
+    <div class="wrap">
       <h2 style="text-align:center;"> Safety </h2>
       <hr>
       <article>
