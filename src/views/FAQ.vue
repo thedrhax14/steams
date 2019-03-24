@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="wrap" style="margin-top: 50px; width:600px;">
-    <h2 style="text-align:center;"> FAQs </h2>
+    <h2 style="text-align:left;"> FAQs </h2>
       <hr>
       <h5 style="font-weight:bold;">Q: Are there any rate changes during holidays?</h5>
       <p style="font-size:20px;">A: Our rates do not change during any public holidays, religious holidays.</p>
