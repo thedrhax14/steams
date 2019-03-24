@@ -21,6 +21,8 @@
 							</ul>
 						</p>
 					</div>
+					<b-button variant="info">Edit reservation</b-button>
+					<b-button variant="danger" @Click="deleteReservation">Delete</b-button>
 			</div>
 		</div>
 	</div>
@@ -33,6 +35,19 @@ export default {
 		myReservations () {
 			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		}
+	},
+		methods:{
+			deleteReservation (){
+				if(confirm('Are you sure?')){
+					db.collection('History').where('BikeID', '==',this.$route.params.BikeID).get()
+					.then(querySnapshot => {
+						querySnapshot.forEach(doc => {
+							doc.ref.delete()
+							this.$router.push('/')
+						})
+					})
+				}
+			}
+		}
 	}
-}
 </script>
