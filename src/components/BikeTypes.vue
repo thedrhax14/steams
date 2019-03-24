@@ -6,7 +6,7 @@
 			<h3><i class="fas fa-bicycle"></i> &nbsp;What type of bike?</h3>
 		<b-form-group label-align="center" size="sm" label="Bike types avilable at the station">
 			<b-row>
-				<b-list-group>
+				<b-list-group class="active">
 						<b-list-group-item
 							v-for='BikeType in OptionsOfBikeTypesAtLocation'
 							button
@@ -115,8 +115,8 @@ export default {
 	},
 	methods: {
 		Submit (evt) {
+			this.$router.push('/reservations')
 			var bikeid = this.AvailableBikeAtLocationByBikeTypeID.id
-			alert('Add plz booking:)' + bikeid)
 			this.$store.dispatch('addEntryToHistory', {
 				BikeID: bikeid,
 				PIN: Math.floor((Math.random() * 9999) + 1000),
@@ -125,7 +125,7 @@ export default {
 				'End location' : null,
 				'End time & date' : null,
 				Status: 'Reserved',
-				uid: this.$store.state.user.uid
+				uid: this.$store.state.user.uid,
 			})
 		},
 		Select (id) {
