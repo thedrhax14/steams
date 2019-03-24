@@ -51,9 +51,9 @@
 
 <script>
 export default {
-	data (){
+	data () {
 		return {
-			fluid:true
+			fluid: true
 		}
 	},
 	name: 'Reservations',
@@ -63,36 +63,36 @@ export default {
 		}
 	},
 	methods: {
-		SecondsToLocalDate(secs) {
-			var d = new Date(1970, 0, 1);
-			d.setSeconds(secs);
-			return d.toLocaleDateString();
+		SecondsToLocalDate (secs) {
+			var d = new Date(1970, 0, 1)
+			d.setSeconds(secs)
+			return d.toLocaleDateString()
 		},
-		NanosecondsToTime(nanosecs){
-			var seconds = nanosecs/10000
-			var hour = Math.floor(seconds/3600) % 24
-			var min = Math.floor(seconds/60) % 60
-			var hourString = ""
-			var minString = ""
-			if(hour<10) hourString = "0" + hour
+		NanosecondsToTime (nanosecs) {
+			var seconds = nanosecs / 10000
+			var hour = Math.floor(seconds / 3600) % 24
+			var min = Math.floor(seconds / 60) % 60
+			var hourString = ''
+			var minString = ''
+			if (hour < 10) hourString = '0' + hour
 			else hourString = hour
-			if(min<10) minString = "0" + min
+			if (min < 10) minString = '0' + min
 			else minString = min
-			return hourString + ":" + minString
+			return hourString + ':' + minString
 		},
 		deleteReservation (index) {
 			var reservation = this.UserReservations[index]
-			console.log('Deleting',reservation[index])
-			this.$store.dispatch('updateHistory',{
+			console.log('Deleting', reservation[index])
+			this.$store.dispatch('updateHistory', {
 				id: reservation.id,
 				doc: {
 					BikeID: reservation.data.BikeID,
 					PIN: reservation.data.PIN,
 					'Start location': reservation.data['Start location'],
 					'Start time & date': reservation.data['Start time & date'],
-					'End location': "",
+					'End location': '',
 					'End time & date': new Date(),
-					Status: "Cancelled",
+					Status: 'Cancelled',
 					uid: this.$store.state.user.uid
 				}
 			})
