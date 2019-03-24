@@ -22,7 +22,7 @@
 						</p>
 						<p v-else class="card-text">
 							<ul class="card-list-reservation">
-								<li>Reservation is cancelled by user</li>
+								<li style="color:red;">Reservation was cancelled by user</li>
 								<li>Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}</li>
 								<li>Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}</li>
 							</ul>
