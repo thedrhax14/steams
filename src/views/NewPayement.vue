@@ -8,29 +8,49 @@
 		<br>
 		<div class="form-group">
 			<div role="group">
-	    <label for="inputLive">Email address:</label>
+	    <label for="cardHolderName">Card holder:</label>
 	    <b-form-input
-	      id="email1"
-	      v-model.trim="loginForm.email"
+	      id="cardHolderName"
+	      v-model.trim='NewCardData["Card holder"]'
 	      trim
 				required="true"
-	      type="email"
-	      :state="emailState"
+	      type="name"
+	      :state="cHolderState"
 	      aria-describedby="inputLiveHelp inputLiveFeedback"
-	      placeholder="you@email.com"
+	      placeholder="Name"
 	    />
+			<b-form-invalid-feedback id="inputLiveFeedback">
+		 Enter at least 3 letters
+	 		</b-form-invalid-feedback>
 	    <!-- This will only be shown if the preceeding input has an invalid state -->
-	    <label for="inputLive">Passsword:</label>
+	    <label for="inputCardNumber">Card Number:</label>
 	    <b-form-input
-	      id="password1"
-				v-model.trim="loginForm.password"
+	      id="inputCardNumber"
+				v-model.trim='NewCardData["Card number"]'
 	      trim
 				required="true"
-	      type="password"
-	      :state="passState"
+	      type="text"
+	      :state="cNumberState"
 	      aria-describedby="inputLiveHelp inputLiveFeedback"
-	      placeholder="******"
+	      placeholder="Card number"
 	    />
+			<b-form-invalid-feedback id="inputCardNumber">
+		 	Enter at least 3 letters
+	 		</b-form-invalid-feedback>
+			<label for="inputDate">Expiry date:</label>
+	    <b-form-input
+	      id="inputDate"
+				v-model.trim='ExpireDate'
+	      trim
+				required="true"
+	      type="date"
+	      :state="expDate"
+	      aria-describedby="inputLiveHelp inputLiveFeedback"
+	      placeholder="e.g. 06/23"
+	    />
+			<b-form-invalid-feedback id="inputLiveFeedback">
+		 		Enter at least 3 letters
+	 		</b-form-invalid-feedback>
 	  </div>
 	</div>
 			<div class="form-group">
@@ -83,6 +103,15 @@ export default {
 			this.NewCardData['Expire date'] != null &&
 			this.NewCardData.cvv.length == 3
 		}
+	},
+	cHolderState (){
+		return this.NewCardData["Card holder"].length > 5 ? true : null
+	},
+	cNumberState (){
+			return this.NewCardData["Card number"].length > 5 ? true : null
+	},
+	expDate (){
+			return this.ExpireDate.length > 5 ? true : null
 	},
 	methods: {
 		addNewCard () {
