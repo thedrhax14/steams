@@ -9,6 +9,9 @@
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/reservations" class="fas fa-book-open">
 				<span>Reservations</span>
 			</router-link>
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/recents" class="fas fa-book-open">
+				<span>Recent<br>trips</span>
+			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/payement" class="fas fa-credit-card">
 				<span>Payment<br>methods</span>
 			</router-link>
