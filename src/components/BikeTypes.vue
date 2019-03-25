@@ -18,7 +18,7 @@
 							button
 							@click='Select(BikeType.id)'>
 							<div id="type-5" style="	">
-							 <img src="../assets/images/TB.png" style="width:90%">
+							 <img :src="GetPath(BikeType.id)" style="width:90%">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
 							<small>{{ BikeType.data.Price }} €/hr</small>
 							</div>
@@ -151,6 +151,9 @@ export default {
 				uid: this.$store.state.user.uid
 			})
 			this.$router.push('/reservations')
+		},
+		GetPath(BikTypeID){
+			return "../assets/images/" + BikTypeID + ".png"
 		},
 		Select (id) {
 			console.log('commit setSelectedBikeTypeId', id)

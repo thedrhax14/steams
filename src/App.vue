@@ -1,8 +1,8 @@
 <template>
 	<div id="app">
 		<LoadingDisplay/>
-		<Push v-if='IsAvailable' width="200">
-			<span>Welcome</span>
+		<Push v-if='IsAvailable' width="250">
+			<span><h1>Menu</h1></span>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-map">
 				<span>Reserve<br>bike</span>
 			</router-link>

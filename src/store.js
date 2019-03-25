@@ -12,13 +12,6 @@ fb.auth.onAuthStateChanged(user => {
 		unsub = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
 			console.log('userSnapshot', userSnapshot.data())
 			store.commit('setUserInfo', userSnapshot.data())
-			if (userSnapshot.data().PermissionLevel === 1) {
-				router.push('/placeorders')
-			} else if (userSnapshot.data().PermissionLevel === 2) {
-				router.push('/manStats')
-			} else {
-				router.push('/')
-			}
 		}, (error) => {
 			console.log('usersCollection listener failed. Here is error:', error)
 		})
