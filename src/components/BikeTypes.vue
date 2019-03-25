@@ -37,15 +37,25 @@
 			</b-row>
 			<b-row>
 				<b-button
+				v-b-modal.modal-center
+				variant="primary"
+				:disabled='!IsFormComplete'>
+				Proceed to confirmation
+			</b-button>
+        <!-- Modal Component -->
+        <b-modal id="modal-center" style="height:100px;" centered title="Booking summary:">
+          <p class="my-4">Your feedback has been received.</p>
+        </b-modal>
+				<b-button
 					variant="primary"
 					@click='Submit'
 					:disabled='!IsFormComplete'>
-					Submit
+					Proceed to confirmation
 				</b-button>
 				<b-button
 					variant="danger"
 					@click='Reset'>
-					Reset
+					Discard
 				</b-button>
 			</b-row>
 		</b-form-group>
