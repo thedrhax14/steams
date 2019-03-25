@@ -11,7 +11,11 @@
 						v-for="(reservation, index) in UserReservations"
 						v-bind:key='index'
 						align="center">
-						<b-card :title="Title(reservation.data.BikeID)" >
+						<b-card 
+							:header="Title(reservation.data.BikeID)" 
+							:border-variant='CardVariant(reservation.data.Status)'
+							:header-bg-variant='CardVariant(reservation.data.Status)'
+							header-text-variant="white">
 							<b-list-group v-if='reservation.data.Status == "Reserved"'>
 								<b-list-group-item>
 									PIN: {{ reservation.data.PIN }}
@@ -85,6 +89,14 @@ export default {
 	methods: {
 		Title(BikeID){
 			return "Bike ID: " + BikeID
+		},
+		CardVariant(Status) {
+			if(Status == "Cancelled")
+				return "danger"
+			else if(Status == "Reserved")
+				return "primary"
+			else if(Status == "Completed")
+				return "success"
 		},
 		SecondsToLocalDate (secs) {
 			var d = new Date(1970, 0, 1)
