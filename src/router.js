@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase'
-
+// User
 import About from './views/About.vue'
 import Bikes from './views/Bikes.vue'
 import TOS from './views/TOS.vue'
