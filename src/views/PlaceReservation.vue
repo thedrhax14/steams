@@ -27,55 +27,6 @@
 			<br>
 		</b-form-group>
 		<div>
-			<div class="custom-control custom-radio">
-				 <div id="type-1">
-					<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-					<label class="custom-control-label" for="customRadio1"><h5>Standard Bike</h5></label>
-					<img src="../assets/images/standard_bike1.png">
-					<small v-model="selected" :options="options" plain name="plainInline"></small>
-					<button href='/bikes' class="btn btn-danger">More info</button>
-				</div>
-			</div>
-			<hr />
-			<div class="custom-control custom-radio">
-				 <div id="type-2">
-					<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-					<label class="custom-control-label" for="customRadio2"><h5>Road Bike</h5></label>
-					<img src="../assets/images/road_bike1.png">
-					<small>£3.00/hr</small>
-					<button href='/bikes' class="btn btn-danger">More info</button>
-				</div>
-			</div>
-			<hr />
-			<div class="custom-control custom-radio">
-				 <div id="type-3">
-					<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-					<label class="custom-control-label" for="customRadio3"><h5>Cruise Bike</h5></label>
-					<img src="../assets/images/cruiser_bike.png">
-					<small>£3.00/hr</small>
-					<button href='/bikes'class="btn btn-danger">More info</button>
-				</div>
-			</div>
-			<hr/>
-			<div class="custom-control custom-radio">
-				 <div id="type-4">
-					<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-			 <label class="custom-control-label" for="customRadio4"><h5>Mountain Bike</h5></label>
-					<img src="../assets/images/mtn_bike1.png">
-					<small>£3.00/hr</small>
-					<button href='/bikes' class="btn btn-danger">More info</button>
-				</div>
-			</div>
-			<hr />
-			<div class="custom-control custom-radio">
-				 <div id="type-5">
-					<input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-					<label class="custom-control-label" for="customRadio5"><h5>Tandem Bike</h5></label>
-					<img src="../assets/images/tandem_bike1.png">
-					<small>£10.00/hr</small>
-					<button href='/bikes'class="btn btn-danger">More info</button>
-				</div>
-			</div>
 		</div>
 		<br>
 		<h3><i class="fas fa-stopwatch"></i>&nbsp; What time? </h3>
