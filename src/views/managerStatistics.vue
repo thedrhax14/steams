@@ -38,6 +38,13 @@ export default {
         },
         getRandomInt () {
             return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+        },
+        GetMostPopularBikeType() {
+            var bikes = []
+            this.$store.state.history.forEach(entry => {
+                bikes
+            })
+            return bike
         }
     }
 }
