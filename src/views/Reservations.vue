@@ -11,7 +11,7 @@
 						v-for="(reservation, index) in UserReservations"
 						v-bind:key='index'
 						align="center">
-						<b-card :title="reservation.data.BikeID" >
+						<b-card :title="Title(reservation.data.BikeID)" >
 							<b-list-group v-if='reservation.data.Status == "Reserved"'>
 								<b-list-group-item>
 									PIN: {{ reservation.data.PIN }}
@@ -83,6 +83,9 @@ export default {
 		}
 	},
 	methods: {
+		Title(BikeID){
+			return "Bike ID: " + BikeID
+		},
 		SecondsToLocalDate (secs) {
 			var d = new Date(1970, 0, 1)
 			d.setSeconds(secs)
