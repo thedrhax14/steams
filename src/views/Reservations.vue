@@ -29,8 +29,8 @@
 								<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
 							</b-list-group>
 							<b-list-group v-else>
-								<b-list-group-item>
-									Reservation is cancelled by user
+								<b-list-group-item style="color:red;">
+									Reservation was cancelled by user
 								</b-list-group-item>
 								<b-list-group-item>
 									Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}

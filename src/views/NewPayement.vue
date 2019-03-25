@@ -5,9 +5,35 @@
 		<h2 class="page-title">New Payment method</h2>
 	<b-row class="justify-content-sm-center">
 	</b-row>
-		<hr>
 		<br>
-		<form>
+		<div class="form-group">
+			<div role="group">
+	    <label for="inputLive">Email address:</label>
+	    <b-form-input
+	      id="email1"
+	      v-model.trim="loginForm.email"
+	      trim
+				required="true"
+	      type="email"
+	      :state="emailState"
+	      aria-describedby="inputLiveHelp inputLiveFeedback"
+	      placeholder="you@email.com"
+	    />
+	    <!-- This will only be shown if the preceeding input has an invalid state -->
+
+	    <label for="inputLive">Passsword:</label>
+	    <b-form-input
+	      id="password1"
+				v-model.trim="loginForm.password"
+	      trim
+				required="true"
+	      type="password"
+	      :state="passState"
+	      aria-describedby="inputLiveHelp inputLiveFeedback"
+	      placeholder="******"
+	    />
+	  </div>
+	</div>
 			<div class="form-group">
 				<label for="cardHolderName">Card holder </label>
 				<input v-model='NewCardData["Card holder"]' required="true" type="name" class="form-control" id="cardHolderName" placeholder="Name">

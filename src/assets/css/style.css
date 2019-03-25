@@ -579,6 +579,13 @@ color: #696969;
 height:100%;
 }
 
+#modal-center{
+  color:#fff;
+}
+
+#modal-center p{
+  color:#000;
+}
 
 /* General Demo Style */
 

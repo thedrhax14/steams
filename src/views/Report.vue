@@ -29,11 +29,6 @@
        <h3> What issue did you face with your bike? </h3>
        <a href="mailto:name@email.com">Link text</a>
        <br>
-       <!--<div class="form-group">
-          <label class="custom-file-upload">
-            <i class="fas fa-plus"></i> &nbsp;Add an image
-          </label>
-       </div>-->
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us more about your issue..."></textarea>
         <br>
       </form>

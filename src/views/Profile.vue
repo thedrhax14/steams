@@ -9,7 +9,7 @@
 		</transition>
 		<h3>Profile</h3>
 		<p>Full Name - {{ this.$store.state.user.displayName }}</p>
-		<p>Change payement UserInfo.PermissionLevel }}</p>
+		<a href="#"><img src="@/../public/danny-pej.png"></a>
 	</b-container>
 </b-jumbotron>
 	</div>

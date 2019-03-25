@@ -17,7 +17,7 @@
 							button
 							@click='Select(BikeType.id)'>
 							<div id="type-5">
-							 <img src="../assets/images/tandem_bike1.png">
+							 <img src="../assets/images/TB.png">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
 							<small>{{ BikeType.data.Price }} €/hr</small>
 							</div>

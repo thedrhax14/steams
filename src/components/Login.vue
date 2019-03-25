@@ -1,7 +1,8 @@
 <template>
-	<div class="sign-in-wrap">
+	<b-jumbotron bg-variant="light" class="sm-8 md-8">
+	<b-container fluid>
+		<div class="page-header">
 		<img src="../assets/images/SPINlogotext.png" alt="logo">
-		<div class="sign-in-window">
 		<h1> Sign In </h1>
 		<br/>
 		<div class="form-group">
@@ -33,9 +34,9 @@
 	  </div>
 		</div>
 		<b-button @click="login" class="button">Log In</b-button>
-
-	</div>
 </div>
+</b-container>
+</b-jumbotron>
 </template>
 
 <script>
