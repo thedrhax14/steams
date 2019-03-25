@@ -15,12 +15,12 @@
 				<div class="card-body">
 					<p class="card-text">
 						<ul class="card-list-reservation">
-							<li>Order Type: {{ order['Order Type'] }}</li>
-							<li v-if="order['Bike ID'] " >Bike ID: {{ order['Bike ID'] }} </li>
-							<li v-if="order.NumberOfBikes !== null"> Qty: {{ order['NumberOfBikes'] }}</li>
-							<li v-if="order.BikeType"> Bike Type: {{ order['BikeType'] }}</li>
-							<li>New location: {{ order.Location }} </li>
-							<li>Status: {{ order.Status }}</li>
+							<li>Order Type: {{ order.data['Order Type'] }}</li>
+							<li v-if="order.data['Bike ID'] " >Bike ID: {{ order.data['Bike ID'] }} </li>
+							<li v-if="order.data.NumberOfBikes !== null"> Qty: {{ order.data['NumberOfBikes'] }}</li>
+							<li v-if="order.data.BikeType"> Bike Type: {{ order.data['BikeType'] }}</li>
+							<li>New location: {{ order.data.Location }} </li>
+							<li>Status: {{ order.data.Status }}</li>
 						</ul>
 					</p>
 				</div>
@@ -39,7 +39,7 @@ export default {
 	name: 'ReviewOrders',
 	computed: {
 		ReviewOrders () {
-			return this.$store.state.orders
+			return this.$store.state.orders.filter(order => order.data.uid == this.$store.state.user.uid)
 		}
 	},
 	methods: {

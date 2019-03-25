@@ -122,6 +122,9 @@ export default {
 	computed: {
 		IsFormComplete () {
 			if (this.value === 'Repair' || this.value === 'Redistribute') { return this.repairBID != '' && this.address != '' } else { return this.selected != 'none' && this.number != 0 && this.address != '' }
+		},
+		GetNextOID() {
+			return this.$store.state.orders.length
 		}
 	},
 	methods: {
@@ -138,14 +141,17 @@ export default {
 			if (this.selected !== 'none') {
 				bikeType = this.selected
 			}
-			this.$store.dispatch('addEntryToOrders', {
-				'Bike ID': rbid,
-				'Location': this.address,
-				'Order Type': this.value,
-				NumberOfBikes: numberBikes,
-				uid: this.$store.state.user.uid,
-				Status: 'Pending',
-				BikeType: bikeType
+			this.$store.dispatch('updateOrderInOrders', {
+				oid: this.GetNextOID,
+				doc: {
+					BikeID: rbid,
+					"Bike Type": bikeType,
+					Location: this.address,
+					NumberOfBikes: numberBikes,
+					"Order type": this.value,
+					Status: "Pending",
+					uid: this.$store.state.user.uid
+				}
 			})
 		}
 	}

@@ -11,19 +11,22 @@ fb.auth.onAuthStateChanged(user => {
 	if (user) {
 		store.commit('setUser', user)
 		UnsubFromUserCollection = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
-			console.log('userSnapshot', userSnapshot.data())
+			// console.log('userSnapshot', userSnapshot.data())
 			store.commit('setUserInfo', userSnapshot.data())
 			if(userSnapshot.data().PermissionLevel == 1){
-				console.log('subscribing to ordersCollection')
-				UnsubFromOrdersCollection = fb.ordersCollection.where("uid","==",user.uid).onSnapshot(ordersChange => {
-					if (ordersChange.type === 'added') {
-						console.log('New order: ', ordersChange.doc.id)
-						store.commit('addOrder', ordersChange.doc)
-					}
-					if (ordersChange.type === 'modified') {
-						console.log('Modified order: ', ordersChange.doc.id)
-						store.commit('updateOrder', ordersChange.doc)
-					}
+				// console.log('subscribing to ordersCollection',user.uid)
+				UnsubFromOrdersCollection = fb.ordersCollection.onSnapshot(ordersSnapshot => {
+					// console.log('ordersSnapshot', ordersSnapshot)
+					ordersSnapshot.docChanges().forEach(ordersChange => {
+						if (ordersChange.type === 'added') {
+							// console.log('New order: ', ordersChange.doc.id)
+							store.commit('addOrder', ordersChange.doc)
+						}
+						if (ordersChange.type === 'modified') {
+							// console.log('Modified order: ', ordersChange.doc.id)
+							store.commit('updateOrder', ordersChange.doc)
+						}
+					})
 				}, (error) => {
 					console.log('ordersCollection listener failed. Here is error:', error)
 				})
@@ -187,12 +190,6 @@ export const store = new Vuex.Store({
 				}
 			*/
 		},
-		addEntryToOrders ({ commit, dispatch }, data) {
-			console.log('here')
-			commit('setLoading', true)
-			fb.ordersCollection.add(data)
-			commit('setLoading', false)
-		},
 		addBikeTypeToBikeTypes ({ commit }, data) {
 			commit('setLoading', true)
 			fb.bikeTypesCollection.doc(data.btid).set(data.doc).then(newBikeType => {
@@ -221,10 +218,31 @@ export const store = new Vuex.Store({
 					bid: "xxxxx"
 					doc: {
 						"Bike condition": "InsrestConditionHere",
-						Location: "InsrestLocationHere", // geopoint
+						Location: "InsrestLocationHere",
 						"Lock ID": "InsertLockRefHere",
 						Reserved: Boolean,
 						"Type name": "InsertBikeTypeID"
+					}
+				}
+			*/
+		},
+		updateOrderInOrders ({ state }, data) {
+			console.log(data.oid, ' is updating ', data.doc)
+			fb.bikesCollection.doc(data.bid).update(data.doc)
+			/*
+				if any of the following properties gets changed the
+				db updates the fields respectively
+				expected data structure to change bike:
+				{
+					oid: "xxx"
+					doc: {
+						BikeID: "YYXXXXX",
+						"Bike Type": "InsrestBikeTypeHere",
+						Location: "InsertLocationNameHere,
+						NumberOfBikes: xx,
+						"Order type": "InsertOrderTypeHere",
+						Status: "InsertStatusHere",
+						uid: this.$store.state.user.uid
 					}
 				}
 			*/
