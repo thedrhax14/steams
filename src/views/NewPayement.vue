@@ -30,7 +30,7 @@
 			<hr>
 			<b-button :disabled='!IsFormComplete' @click="addNewCard" block variant="info"><i class="fas fa-save">
 				</i>&nbsp;Save card
-			</b-button></a>
+			</b-button>
 		</form>
 		</b-container>
 	</b-jumbotron>
