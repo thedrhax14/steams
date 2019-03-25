@@ -38,19 +38,18 @@
 export default {
 	data () {
 		return {
-      orders:[],
+			orders: [],
 			hover: true,
 			dark: true,
-      fluid: true,
-      noOrders: false,
+			fluid: true,
+			noOrders: false
 		}
 	},
-  name: 'ReviewOrders',
-  computed: {
-		ReviewOrders() {
-      if( this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length === 0)
-          this.noOrders = true;
-      return this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid)
+	name: 'ReviewOrders',
+	computed: {
+		ReviewOrders () {
+			if (this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length === 0) { this.noOrders = true }
+			return this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		}
 	},
   created(){

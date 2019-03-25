@@ -46,20 +46,19 @@ export default {
 
 	data () {
 		return {
-			trackBID: '' ,// store the ID to be tracked
-      location: 'Bike under use by customer',
-      check: 0
+			trackBID: '', // store the ID to be tracked
+			location: 'Bike under use by customer',
+			check: 0
 
-	}
-},
-computed: {
-  IsFormComplete() {
-    return this.trackBID != ''
-  }
-},
-methods: {
-  submit(evt){
-
+		}
+	},
+	computed: {
+		IsFormComplete () {
+			return this.trackBID != ''
+		}
+	},
+	methods: {
+		submit (evt) {
   },
   getBikes(){
     this.check = 1;
@@ -82,6 +81,5 @@ methods: {
         this.location = 'This BikeID does not exist!'
   }
 }
-
 }
 </script>

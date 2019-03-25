@@ -2,7 +2,7 @@
 	<div id="BookPage">
 		<div v-if='Location=="None"'>
 			<div class="sicky-top">
-				<h2 class="res-message"> Welcome {{ this.$store.state.user.displayName }}!</h2>
+				<h2 class="res-message"> Welcome {{ DisplayName }}</h2>
 				<h3 class="res-lead"> These are the nearest stations to you: </h3>
 				<mapbox
 				  style="z-index:0;"
@@ -155,6 +155,11 @@ export default {
 		},
 		Location () {
 			return this.$store.state.selectedStation
+		},
+		DisplayName() {
+			if(this.$store.state.user)
+				return this.$store.state.user.displayName + "!"
+			return ""
 		}
 	},
 	methods: {

@@ -76,7 +76,8 @@ export const store = new Vuex.Store({
 		history: [],
 		bikes: [],
 		orders: [],
-		loading: false
+		loading: false,
+		isStationInterfaceActive: false
 	},
 	actions: {
 		fetchBikes ({ commit }) {
@@ -366,6 +367,9 @@ export const store = new Vuex.Store({
 		},
 		flipLoading (state) {
 			state.loading = !state.loading
+		},
+		SetIsStationInterfaceActive(state, val) {
+			state.isStationInterfaceActive = val
 		}
 	}
 })

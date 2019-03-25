@@ -101,7 +101,7 @@
 export default {
 	data () {
 		return {
-      fluid: true,
+			fluid: true,
 			value: 'Repair', // to display the appropriate div
 			number: 0, // number of bikes to order
 			address: '',
@@ -117,41 +117,37 @@ export default {
 
 		}
 	},
-  computed: {
-    IsFormComplete() {
-			if(this.value === 'Repair' || this.value === 'Redistribute')
-              return this.repairBID != ''    && this.address != '';
-      else
-              return this.selected != 'none' && this.number != 0 && this.address != '';
-		},
-  },
-  methods: {
-    submit(evt) {
-      var rbid = null;
-      var numberBikes = null;
-      var bikeType = null;
-     if (this.repairBID.length !== 1  ) {
-        rbid = this.repairBID;
-      }
+	computed: {
+		IsFormComplete () {
+			if (this.value === 'Repair' || this.value === 'Redistribute') { return this.repairBID != '' && this.address != '' } else { return this.selected != 'none' && this.number != 0 && this.address != '' }
+		}
+	},
+	methods: {
+		submit (evt) {
+			var rbid = null
+			var numberBikes = null
+			var bikeType = null
+			if (this.repairBID.length !== 1) {
+				rbid = this.repairBID
+			}
 
-      if(this.number !== 0){
-        numberBikes = this.number;
-      }
-      if(this.selected !== 'none' ){
-        bikeType = this.selected;
-      }
-          this.$store.dispatch('addEntryToOrders',{
-            "Bike ID": rbid,
-            "Location": this.address,
-            "Order Type": this.value,
-            NumberOfBikes: numberBikes,
-            uid: this.$store.state.user.uid,
-            Status: 'Pending',
-            BikeType: bikeType
-          })
-
-    }
-  }
+			if (this.number !== 0) {
+				numberBikes = this.number
+			}
+			if (this.selected !== 'none') {
+				bikeType = this.selected
+			}
+			this.$store.dispatch('addEntryToOrders', {
+				'Bike ID': rbid,
+				'Location': this.address,
+				'Order Type': this.value,
+				NumberOfBikes: numberBikes,
+				uid: this.$store.state.user.uid,
+				Status: 'Pending',
+				BikeType: bikeType
+			})
+		}
+	}
 
 }
 </script>
