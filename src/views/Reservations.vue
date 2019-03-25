@@ -1,5 +1,5 @@
 <template>
-	<b-jumbotron bg-variant="light" class="sm-8 md-8">
+	<b-jumbotron bg-variant="light" fluid>
 	<b-container>
 		<b-row>
 			<h2 class="page-title">My reservations</h2>
@@ -43,8 +43,8 @@
 			 		</b-row>
 		 		</b-container>
 			</b-card-group>
-			<div v-else>
-				<b-alert show variant="dark">No reservations yet</b-alert>
+			<div style="width:100%" v-else>
+				<b-alert show variant="light" style="width:100%">No reservations yet</b-alert>
 			</div>
 		</b-row>
 	</b-container>

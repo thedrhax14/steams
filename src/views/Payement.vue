@@ -20,7 +20,7 @@
 		</b-list-group>
 		<p v-else>
 			<br/>
-			<b-alert show variant="dark" style="font-size: 15px;">You haven't added a payement method yet</b-alert>
+			<b-alert show variant="light" style="font-size: 15px; width:100%">You haven't added a payement method yet</b-alert>
 		</p>
 		<br/>
 		<b-button @click="$router.push('/newCard')" block variant="danger">
