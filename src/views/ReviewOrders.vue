@@ -4,10 +4,10 @@
       <div class="page-header">
       <h1>Orders Summary</h1>
     </div>
-    <hr>
     <div v-show="noOrders">
     <b-alert show variant="dark">You have not yet placed any orders.</b-alert>
     </div>
+    <hr>
     <div
       class="card-header"
       style="font-weight:bold;"
@@ -54,7 +54,11 @@ export default {
 		}
 	},
   created(){
-    this.$store.dispatch('fetchOrders')
+    	if (this.$store.state.bikeTypes.length === 0) {
+    this.$store.dispatch('fetchOrders');
+  }
+    if(   this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length === 0)
+          this.noOrders = true;
   }
 }
 
