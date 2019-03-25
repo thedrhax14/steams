@@ -1,7 +1,7 @@
 <template>
 	<div v-if="Location!='None'">
 		<b-jumbotron bg-variant="light" fluid>
-		<b-container>
+		<b-container fluid>
 				<b-row class="justify-content-md-center">
 			<h1>Booking at {{ Location }} Station</h1>
 		</b-row>
@@ -37,6 +37,7 @@
 			</b-row>
 			<b-row>
 				<b-button
+				style="margin-top:7px;"
 				v-b-modal.modal-center
 				variant="primary"
 				:disabled='!IsFormComplete'>
@@ -46,13 +47,16 @@
         <b-modal id="modal-center" style="height:100px;" centered title="Booking summary:">
           <p class="my-4">Your feedback has been received.</p>
         </b-modal>
+
 				<b-button
+				style="margin-top:7px;"
 					variant="primary"
 					@click='Submit'
 					:disabled='!IsFormComplete'>
 					Proceed to confirmation
 				</b-button>
 				<b-button
+				style="margin-top:7px;"
 					variant="danger"
 					@click='Reset'>
 					Discard
