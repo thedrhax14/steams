@@ -19,7 +19,6 @@ export default {
 	},
 	mounted () {
 		this.fillData()
-		//this.rows = filter.data.data.rows
 	},
 	methods: {
 		fillData () {
@@ -29,8 +28,7 @@ export default {
 				{
 					label: 'Data One',
 					backgroundColor: '#f87979',
-					data: [
-					]
+					data: [5,6,7, 8]
 				}
 				]
 			}
