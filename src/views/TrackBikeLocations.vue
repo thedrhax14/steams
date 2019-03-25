@@ -46,35 +46,34 @@ export default {
 
 	data () {
 		return {
-			trackBID: '' ,// store the ID to be tracked
-      location: 'Bike under use by customer',
-      check: 0
+			trackBID: '', // store the ID to be tracked
+			location: 'Bike under use by customer',
+			check: 0
 
+		}
+	},
+	computed: {
+		IsFormComplete () {
+			return this.trackBID != ''
+		}
+	},
+	methods: {
+		submit (evt) {
+
+		},
+		getBikes () {
+			this.check = 1
+			var doesNotExist = 1
+			this.$store.state.bikes.forEach(bikeDoc => {
+				if (bikeDoc.id == this.trackBID && !bikeDoc.data.Reserved) {
+					this.location = (bikeDoc.data['Location'])
+					doesNotExist = 0
+				}
+				// console.log('BikeTypeIDs',BikeTypeIDs)
+			})
+			if (doesNotExist) { this.location = 'This BikeID does not exist!' }
+		}
 	}
-},
-computed: {
-  IsFormComplete() {
-    return this.trackBID != ''
-  }
-},
-methods: {
-  submit(evt){
-
-  },
-  getBikes(){
-    this.check = 1;
-    var  doesNotExist = 1;
-    this.$store.state.bikes.forEach(bikeDoc => {
-      if (bikeDoc.id == this.trackBID && !bikeDoc.data.Reserved) {
-        this.location =  (bikeDoc.data['Location']);
-        doesNotExist = 0;
-      }
-      // console.log('BikeTypeIDs',BikeTypeIDs)
-    })
-    if(doesNotExist)
-        this.location = 'This BikeID does not exist!'
-  }
-}
 
 }
 </script>

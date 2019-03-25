@@ -1,19 +1,19 @@
 <template>
-  <div id="app">
-    <navbar></navbar>
-    <LoadingDisplay/>
-    <div id="nav">
-        <a class="user-info-btn">
-          <router-link to='/profile'><i class="fas fa-user-circle"></i>
-            My Account </router-link>
-        </a>
-      <a v-if="user" @click="logout"> | Logout</a>
-    </div>
-    <a href="/profile" class="mobile-show">
-        <i class="far fa-user"></i>
-    </a>
-    <router-view/>
-  </div>
+	<div id="app">
+		<navbar v-if='IsAvailable'/>
+		<LoadingDisplay/>
+		<div id="nav" v-if='IsAvailable'>
+			<a class="user-info-btn">
+				<router-link to='/profile'><i class="fas fa-user-circle"></i>
+				My Account </router-link>
+			</a>
+			<a v-if="user" @click="logout"> | Logout</a>
+		</div>
+		<a v-if='IsAvailable' href="/profile" class="mobile-show">
+			<i class="far fa-user"></i>
+		</a>
+		<router-view/>
+	</div>
 </template>
 
 <script>
@@ -38,6 +38,11 @@ export default {
 			}).catch(err => {
 				console.log(err)
 			})
+		}
+	},
+	computed: {
+		IsAvailable(){
+			return !this.$store.state.isStationInterfaceActive
 		}
 	},
 	created () {

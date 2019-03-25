@@ -68,8 +68,9 @@ export const store = new Vuex.Store({
 		bikeTypes: [],
 		history: [],
 		bikes: [],
-		orders:[],
-		loading: false
+		orders: [],
+		loading: false,
+		isStationInterfaceActive: false
 	},
 	actions: {
 		fetchBikes ({ commit }) {
@@ -172,7 +173,6 @@ export const store = new Vuex.Store({
 			commit('setLoading', true)
 			fb.ordersCollection.add(data)
 			commit('setLoading', false)
-
 		},
 		addBikeTypeToBikeTypes ({ commit }, data) {
 			commit('setLoading', true)
@@ -341,7 +341,7 @@ export const store = new Vuex.Store({
 			})
 		},
 		addOrder (state, val) {
-			//console.log('adding',val.id,'data',val.data())
+			// console.log('adding',val.id,'data',val.data())
 			state.orders.push({
 				id: val.id,
 				data: val
@@ -360,6 +360,9 @@ export const store = new Vuex.Store({
 		},
 		flipLoading (state) {
 			state.loading = !state.loading
+		},
+		SetIsStationInterfaceActive(state, val) {
+			state.isStationInterfaceActive = val
 		}
 	}
 })
