@@ -1,7 +1,6 @@
 <template>
-	<div class="wrap">
-	<b-jumbotron bg-variant="light" class="sm-8 md-8">
-	<b-container fluid>
+	<b-jumbotron bg-variant="light" fluid>
+	<b-container>
 		<b-row>
 			<h2 class="page-title">Recent trips</h2>
 		</b-row>
@@ -14,6 +13,9 @@
 						align="center">
 						<b-card :title="reservation.data.BikeID" >
 							<b-list-group>
+								<b-list-group-item>
+									PIN: {{ reservation.data.PIN }}
+								</b-list-group-item>
 								<b-list-group-item>
 									Start location: {{ reservation.data['Start location'] }} Station
 								</b-list-group-item>
@@ -34,13 +36,12 @@
 			 		</b-row>
 		 		</b-container>
 			</b-card-group>
-			<div v-else>
-				<b-alert show variant="dark">No trips yet!</b-alert>
+			<div style="width:100%" v-else>
+				<b-alert show variant="light" style="width:100%">No recent trips yet</b-alert>
 			</div>
 		</b-row>
 	</b-container>
 </b-jumbotron>
-</div>
 </template>
 
 <script>

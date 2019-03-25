@@ -48,22 +48,6 @@
 					Reset
 				</b-button>
 			</b-row>
-
-			<b-row class="mobile-res">
-				<b-button
-				  block
-					variant="primary"
-					@click='Submit'
-					:disabled='!IsFormComplete'>
-					Submit
-				</b-button>
-				<b-button
-				  block
-					variant="danger"
-					@click='Reset'>
-					Reset
-				</b-button>
-			</b-row>
 		</b-form-group>
 	</b-row>
 		<p v-if='AvailableBikeAtLocationByBikeTypeID'>

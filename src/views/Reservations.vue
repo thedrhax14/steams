@@ -79,7 +79,7 @@ export default {
 	name: 'Reservations',
 	computed: {
 		UserReservations () {
-			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid && entry.data.Status != "Cancelled")
 		}
 	},
 	methods: {

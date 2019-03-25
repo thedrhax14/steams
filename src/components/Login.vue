@@ -11,7 +11,7 @@
 				<div role="group">
 				<label for="inputLive">Email address:</label>
 				<b-form-input
-					id="email1"
+					id="inputLive"
 					v-model.trim="loginForm.email"
 					trim
 					required="true"
@@ -24,7 +24,7 @@
 
 				<label for="inputLive">Passsword:</label>
 				<b-form-input
-					id="email1"
+					id="inputLive"
 					v-model.trim="loginForm.password"
 					trim
 					required="true"
@@ -40,13 +40,10 @@
 		</b-container>
 	</b-jumbotron>
 </div>
-</b-container>
-</b-jumbotron>
 </template>
 
 <script>
 const fb = require('../firebaseConfig.js')
-
 export default {
 	computed:{
 		emailState() {
