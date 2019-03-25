@@ -2,7 +2,7 @@
 	<div id="BookPage">
 		<div v-if='Location=="None"'>
 			<div class="sicky-top">
-				<h2 class="res-message"> Welcome to SPIN, {{ this.$store.state.user.displayName }}!</h2>
+				<h2 class="res-message"> Welcome to SPIN, {{ DisplayName }}</h2>
 				<h3> Nearest stations: </h3>
 				<mapbox
 					access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
@@ -53,6 +53,11 @@ export default {
 		},
 		Location () {
 			return this.$store.state.selectedStation
+		},
+		DisplayName() {
+			if(this.$store.state.user)
+				return this.$store.state.user.displayName + "!"
+			return ""
 		}
 	},
 	methods: {

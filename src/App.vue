@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<LoadingDisplay/>
-		<navbar/>
+		<navbar v-if='IsAvailable'/>
 		<router-view/>
 	</div>
 </template>
