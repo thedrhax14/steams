@@ -5,6 +5,7 @@
 				<h2 class="res-message"> Welcome {{ this.$store.state.user.displayName }}!</h2>
 				<h3 class="res-lead"> These are the nearest stations to you: </h3>
 				<mapbox
+				  style="z-index:0;"
 					access-token="pk.eyJ1IjoidGhlbW9mcm8iLCJhIjoiY2pxbzZ2M3d1MGR3MjQ0cGpic2FpMWh5MCJ9.0PPnnUqzrWMkFfzFb7m3rQ"
 					:map-options="{
 						style: 'mapbox://styles/themofro/cjrd1lqa40o5m2sp3bdkdtxdo',
