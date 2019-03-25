@@ -67,6 +67,9 @@ fb.bikesCollection.onSnapshot((bikesSnapshot) => {
 		if (bikeChange.type === 'added') {
 			// console.log('New bike: ', bikeChange.doc.id)
 			store.commit('addBike', bikeChange.doc)
+			bikeChange.doc.data()['Lock ID'].get().then(lockSnapshot => {
+				console.log('lockSnapshot',lockSnapshot.data())
+			})
 		}
 		if (bikeChange.type === 'modified') {
 			// console.log('Modified bike: ', bikeChange.doc.id)

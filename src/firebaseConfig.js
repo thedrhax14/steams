@@ -31,6 +31,7 @@ const bikeTypesCollection = db.collection('Bike Types')
 const historyCollection = db.collection('History')
 const bikesCollection = db.collection('Bikes')
 const ordersCollection = db.collection('Orders')
+const stationsCollection = db.collection('Lock Booths')
 
 export {
 	db,
