@@ -18,7 +18,7 @@
 							button
 							@click='Select(BikeType.id)'>
 							<div id="type-5" style="	">
-							 <img :src="GetPath(BikeType.id)" style="width:90%">
+							<img :src='GetImage(BikeType.id)' style="width:90%">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
 							<small>{{ BikeType.data.Price }} €/hr</small>
 							</div>
@@ -81,12 +81,6 @@
 </template>
 
 <script>
-// import '@/styles/BikeTypes.css'
-// import BFormRow from 'bootstrap-vue/es/components/form/form-row'
-// import Vue from 'vue'
-
-// Vue.component('b-form-row', BFormRow)
-
 export default {
 	name: 'BikeTypes',
 	data () {
@@ -152,8 +146,8 @@ export default {
 			})
 			this.$router.push('/reservations')
 		},
-		GetPath(BikTypeID){
-			return "../assets/images/" + BikTypeID + ".png"
+		GetImage(BikTypeID){
+			return 'https://thedrhax14eng.files.wordpress.com/2019/03/' + BikTypeID.toLowerCase() + '.png'
 		},
 		Select (id) {
 			console.log('commit setSelectedBikeTypeId', id)
