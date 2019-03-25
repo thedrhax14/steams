@@ -1,5 +1,5 @@
 <template>
-	<sidebar-menu :menu="menu" />
+	<sidebar-menu :menu="menu" collapsed/>
 </template>
 
 <script>
@@ -44,3 +44,13 @@ export default {
 	}
 }
 </script>
+
+<style>
+.v-sidebar-menu {
+    background-color: #F44336;
+}
+
+.v-sidebar-menu .vsm-icon {
+	background-color: rgba(0,0,0,0);
+}
+</style>
