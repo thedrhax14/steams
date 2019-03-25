@@ -12,7 +12,7 @@
 						v-bind:key='index'
 						align="center">
 						<b-card :title="reservation.data.BikeID" >
-							<b-list-group v-if='reservation.data.Status != "Cancelled"'>
+							<b-list-group>
 								<b-list-group-item>
 									PIN: {{ reservation.data.PIN }}
 								</b-list-group-item>
@@ -27,17 +27,6 @@
 								</b-list-group-item>
 								<b-button variant="info">Edit reservation</b-button>
 								<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
-							</b-list-group>
-							<b-list-group v-else>
-								<b-list-group-item style="color:red;">
-									Reservation was cancelled by user
-								</b-list-group-item>
-								<b-list-group-item>
-									Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}
-								</b-list-group-item>
-								<b-list-group-item>
-									Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
-								</b-list-group-item>
 							</b-list-group>
 			 			</b-card>
 			 		</b-row>
@@ -61,7 +50,7 @@ export default {
 	name: 'Reservations',
 	computed: {
 		UserReservations () {
-			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid && entry.data.Status != "Cancelled")
 		}
 	},
 	methods: {
