@@ -3,20 +3,20 @@
 		<LoadingDisplay/>
 		<Push v-if='IsAvailable' width="250">
 			<span><h1>Menu</h1></span>
-			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-map">
-				<span>Reserve<br>bike</span>
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-bicycle fa-sm">
+				<span>Reserve bike</span>
 			</router-link>
-			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/reservations" class="fas fa-book-open">
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/reservations" class="fas fa-bell fa-sm">
 				<span>Reservations</span>
 			</router-link>
-			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/recents" class="fas fa-book-open">
-				<span>Recent<br>trips</span>
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/recents" class="far fa-clock fa-sm">
+				<span>Recent trips</span>
 			</router-link>
-			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/payement" class="fas fa-credit-card">
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/payement" class="fas fa-credit-card fa-sm">
 				<span>Payment<br>methods</span>
 			</router-link>
-			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/report" class="fas fa-credit-card">
-				<span>Report <br>an issue</span>
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/report" class="fas fa-exclamation fa-sm">
+				<span>Report<br>an issue</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/placeorders" class="fas fa-bicycle">
 				<span>Place order</span>
@@ -33,7 +33,7 @@
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 2' to="/manStats" class="fas fa fa-chart-bar">
 				<span>Statistics</span>
 			</router-link>
-			<span @click='logout'>Log out</span>
+			<a><span @click='logout'>Log out</span></a>
 		</Push>
 		<main id="page-wrap">
 			<router-view/>

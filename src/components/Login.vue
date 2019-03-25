@@ -1,5 +1,5 @@
 <template>
-	<div >
+	<div>
 		<b-jumbotron  fluid>
 			<b-container>
 			<img src="../assets/images/SPINlogotext.png" alt="logo"style="width:200px;">
@@ -49,7 +49,7 @@ export default {
 		emailState() {
 			return this.loginForm.email.length > 5? true : null
 		},passState() {
-			return this.loginForm.password.length > 7? true : false
+			return this.loginForm.password.length > 5? true : false
 		}
 	},
 	name: 'Login',

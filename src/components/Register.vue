@@ -1,43 +1,51 @@
 <template>
-	<div >
-		<b-jumbotron  fluid>
-			<b-container>
-				<b-row>
-			  <h1>Let's get you started!</h1>
-			</b-row>
-			<br/>
-			<div class="form-group">
-				<div role="group">
-				<label for="inputLive">Email address:</label>
-				<b-form-input
-					id="inputLive"
-					v-model.trim="loginForm.email"
-					trim
-					required="true"
-					type="email"
-					:state="emailState"
-					aria-describedby="inputLiveHelp inputLiveFeedback"
-					placeholder="you@email.com"
-				/>
-				<!-- This will only be shown if the preceeding input has an invalid state -->
-
-				<label for="inputLive">Passsword:</label>
-				<b-form-input
-					id="inputLive"
-					v-model.trim="loginForm.password"
-					trim
-					required="true"
-					type="password"
-					:state="passState"
-					aria-describedby="inputLiveHelp inputLiveFeedback"
-					placeholder="******"
-				/>
-			</div>
-			</div>
-			<b-button @click="login" class="button">Log In</b-button>
-
-		</b-container>
-	</b-jumbotron>
+		<div>
+			<b-jumbotron fluid>
+				<b-container>
+				  <h1>Let's get you started!</h1>
+				</b-container>
+				<b-container>
+				<br/>
+				<div class="form-group">
+					<div role="group">
+						<label for="inputLive">Full Name:</label>
+						<b-form-input
+							id="inputLive"
+							v-model.trim="SignupForm.name"
+							trim
+							required="true"
+							type="text"
+							:state="nameState"
+							aria-describedby="inputLiveHelp inputLiveFeedback"
+							placeholder="Full name"
+						/>
+						<label for="inputLive">Email address:</label>
+						<b-form-input
+							id="inputLive"
+							v-model.trim="SignupForm.email"
+							trim
+							required="true"
+							type="text"
+							:state="emailState"
+							aria-describedby="inputLiveHelp inputLiveFeedback"
+							placeholder="you@email.com"
+						/>
+						<label for="inputLive">Password:</label>
+						<b-form-input
+							id="inputLive"
+							v-model.trim="SignupForm.password"
+							trim
+							required="true"
+							type="password"
+							:state="emailState"
+							aria-describedby="inputLiveHelp inputLiveFeedback"
+							placeholder="******"
+						/>
+					</div>
+				</div>
+				<b-button @click="signup" class="button">Sign up</b-button>
+	</b-container>
+</b-jumbotron>
 </div>
 </template>
 
@@ -45,32 +53,50 @@
 const fb = require('../firebaseConfig.js')
 export default {
 	computed:{
-		emailState() {
-			return this.loginForm.email.length > 5? true : null
-		},passState() {
-			return this.loginForm.password.length > 7? true : false
+		nameState () {
+			return this.signupForm.name.length > 5? true : null
+		},
+		emailState (){
+			return this.SignupForm.email.length >5? true : null
+		},
+		passState (){
+			return this.SignupForm.password.length >5? true : null
 		}
 	},
-	name: 'Login',
+	name: 'Register',
 	data () {
 		return {
-			name: '',
-			loginForm: {
+			signupForm: {
+				name: '',
 				email: '',
-				password: '',
+				password: ''
 			}
 		}
 	},
 	methods: {
-		login () {
+		signup () {
 			this.$store.state.loading = true
-			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
-				this.$store.commit('setUser', user.user)
-				this.$router.push('/')
-				this.$store.state.loading = false
+			fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
+				this.$store.commit('updateUserProfile', {
+					displayName: this.signupForm.name,
+					data: {
+						PermissionLevel: 0,
+						Type: 'Customer'
+					}
+				})
+				this.$store.commit('setCurrentUser', user.user)
+				fb.usersCollection.doc(user.user.uid).set({
+					Type: 'Customer'
+				}).then(() => {
+					this.$router.push('/profile')
+					this.$store.state.loading = false
+				}).catch(err => {
+					this.errorMsg = err.message
+					this.$store.state.loading = false
+				})
 			}).catch(err => {
-				this.$store.state.loading = false
 				this.errorMsg = err.message
+				this.$store.state.loading = false
 			})
 		}
 	}
