@@ -4,9 +4,6 @@
       <div class="page-header">
       <h1>Orders Summary</h1>
     </div>
-    <div v-show="noOrders">
-    <b-alert show variant="dark">You have not yet placed any orders.</b-alert>
-    </div>
     <hr>
     <div
       class="card-header"
@@ -28,6 +25,9 @@
         </p>
       </div>
   </div>
+  <div v-else>
+  <b-alert show variant="dark">You have not yet placed any orders.</b-alert>
+  </div>
 </b-jumbotron>
   </div>
 
@@ -38,27 +38,24 @@
 export default {
 	data () {
 		return {
-			orders: [],
-			hover: true,
-			dark: true,
-			fluid: true,
-			noOrders: false
+		orders: 78
 		}
 	},
-	name: 'ReviewOrders',
-	computed: {
-		ReviewOrders () {
-			if (this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length === 0) { this.noOrders = true }
-			return this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid)
-		}
-	},
-  created(){
-    	if (this.$store.state.bikeTypes.length === 0) {
-    this.$store.dispatch('fetchOrders');
-  }
-    if(   this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length === 0)
-          this.noOrders = true;
-  }
+  name: 'ReviewOrders',
+ computed: {
+   ReviewOrders() {
+
+       return this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid)
+
+   }
+ },
+ created(){
+   this.$store.dispatch('fetchOrders');
+   this.orders =  this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length
+   console.log('length is '+ this.$store.state.orders.filter(entry => entry.data.uid == this.$store.state.user.uid).length)
+   console.log('orders are '+ this.orders)
+   console.log('UID'+this.$store.state.user.uid)
+ }
 }
 
 </script>

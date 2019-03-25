@@ -1,6 +1,6 @@
 <template>
   <div class="placeorder">
-    <b-jumbotron bg-variant="light">
+    <b-jumbotron bg-variant="light" fluid>
       <div class="page-header">
       <h1>Place Orders</h1>
     </div>
