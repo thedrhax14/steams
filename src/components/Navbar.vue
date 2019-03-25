@@ -12,23 +12,12 @@ export default {
 			menu: [
 				{
 					header: true,
-					title: 'Main Navigation'
+					title: 'Welcome'
 				},
 				{
 					href: '/',
 					title: 'Dashboard',
 					icon: 'fa fa-user'
-				},
-				{
-					href: '/charts',
-					title: 'Charts',
-					icon: 'fa fa-chart-area',
-					child: [
-						{
-							href: '/charts/sublink',
-							title: 'Sub Link'
-						}
-					]
 				}
 			]
 		}
@@ -40,17 +29,8 @@ export default {
 		userPermission () {
 			// 0 = customer, 1 = operator, 2 = manager, 3 = admin
 			return this.$store.state.userInfo.PermissionLevel
-		}
+		},
+		
 	}
 }
 </script>
-
-<style>
-.v-sidebar-menu {
-    background-color: #F44336;
-}
-
-.v-sidebar-menu .vsm-icon {
-	background-color: rgba(0,0,0,0);
-}
-</style>
