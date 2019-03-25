@@ -1,9 +1,14 @@
 <template>
 	<div v-if="Location!='None'">
-	<div class="wrap">
+		<b-jumbotron bg-variant="light" class="sm-8 md-8">
+		<b-container fluid>
+				<b-row class="justify-content-md-center">
 			<h1>Booking at {{ Location }} Station</h1>
+		</b-row>
 			<br>
+			<b-row class="justify-content-md-center">
 			<h3><i class="fas fa-bicycle"></i> &nbsp;What type of bike?</h3>
+		</b-row>
 		<b-form-group label-align="center" size="sm" label="Bike types avilable at the station">
 			<b-row>
 				<b-list-group class="active">
@@ -23,7 +28,7 @@
 			<h3><i class="fas fa-stopwatch"></i>&nbsp; What time?</h3>
 			<b-row>
 				<strong> Date: </strong>
-				<b-form-input type="date" v-model='StartDate'/>
+				<b-form-input type="date" min="2019-03-25" v-model='StartDate'/>
 			</b-row>
 			<b-row>
 				<strong> Start time: </strong>
@@ -42,6 +47,22 @@
 					Reset
 				</b-button>
 			</b-row>
+
+			<b-row class="mobile-res">
+				<b-button
+				  block
+					variant="primary"
+					@click='Submit'
+					:disabled='!IsFormComplete'>
+					Submit
+				</b-button>
+				<b-button
+				  block
+					variant="danger"
+					@click='Reset'>
+					Reset
+				</b-button>
+			</b-row>
 		</b-form-group>
 		<p v-if='AvailableBikeAtLocationByBikeTypeID'>
 			RAW ID {{ AvailableBikeAtLocationByBikeTypeID.id }}
@@ -52,7 +73,8 @@
 		<p v-if='StartTime'>
 			StartTime {{ StartTime }}
 		</p>
-	</div>
+	</b-container>
+	</b-jumbotron>
 </div>
 </template>
 
@@ -115,7 +137,6 @@ export default {
 	},
 	methods: {
 		Submit (evt) {
-			this.$router.push('/reservations')
 			var bikeid = this.AvailableBikeAtLocationByBikeTypeID.id
 			this.$store.dispatch('addEntryToHistory', {
 				BikeID: bikeid,

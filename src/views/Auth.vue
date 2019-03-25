@@ -1,5 +1,7 @@
 <template>
-	<div class="wrap">
+	<div class="sign-in-wrap">
+		<b-jumbotron bg-variant="light" class="sm-8 md-8">
+		<b-container fluid>
 		<transition name="fade">
 			<div v-if="$store.state.performingRequest" class="loading">
 				<p>Loading...</p>
@@ -42,6 +44,8 @@
 				</transition>
 			</div>
 		</section>
+	</b-container>
+</b-jumbotron>
 	</div>
 </template>
 <script>

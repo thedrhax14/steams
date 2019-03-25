@@ -18,10 +18,10 @@
             <router-link to='manStats/' class="current"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;View Statistics</router-link>
           </div>
           <div v-else>
-            <router-link to='/' class="current"><i class="fas fa-bicycle fa-sm"></i>&nbsp;&nbsp;Reserve a bike</router-link>
+            <a href="/"><router-link to='/' class="current"><i class="fas fa-bicycle fa-sm"></i>&nbsp;&nbsp;Reserve a bike</router-link></a>
             <router-link to='/reservations'><i class="fas fa-bell fa-sm"></i>&nbsp;&nbsp;My reservations</router-link>
             <router-link to='/Recents'><i class="far fa-clock fa-sm"></i>&nbsp;&nbsp;Recent trips</router-link>
-            <router-link to='/Payement'><i class="fas fa-credit-card fa-sm"></i>&nbsp;&nbsp;Payement</router-link>
+            <router-link to='/Payement'><i class="fas fa-credit-card fa-sm"></i>&nbsp;&nbsp;Payment</router-link>
             <router-link to='/Report'><i class="fas fa-exclamation fa-sm"></i>&nbsp;&nbsp;Report an issue</router-link>
           </div>
             <hr>

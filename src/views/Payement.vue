@@ -1,6 +1,10 @@
 <template>
+	<div class="wrap">
+	<b-jumbotron bg-variant="light" class="sm-8 md-8">
 	<b-container fluid>
-		<h1>Payement methods</h1>
+		<h2 class="page-title">Payment methods</h2>
+		<b-row class="justify-content-sm-center" >
+	</b-row>
 		<b-list-group v-if='PaymentMethods && PaymentMethods.length>0'>
 			<b-list-group-item
 				v-for='(PaymentMethod, index) in PaymentMethods'
@@ -15,7 +19,8 @@
 			</b-list-group-item>
 		</b-list-group>
 		<p v-else>
-			You haven't added a payment method yet
+			<br/>
+			<b-alert show variant="dark" style="font-size: 15px;">You haven't added a payement method yet</b-alert>
 		</p>
 		<br/>
 		<b-button @click="$router.push('/newCard')" block variant="danger">
@@ -23,10 +28,11 @@
 			Add a payement method
 		</b-button>
 	</b-container>
+</b-jumbotron>
+</div>
 </template>
 
 <script>
-
 export default {
 	name: 'addCard',
 	computed: {

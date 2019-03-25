@@ -1,14 +1,16 @@
 <template>
+	<b-jumbotron bg-variant="light" class="sm-8 md-8">
 	<b-container>
-		<b-row class="justify-content-md-center">
-			<h2> My reservations</h2>
+		<b-row>
+			<h2 class="page-title">My reservations</h2>
 		</b-row>
 		<b-row class="justify-content-md-center">
 			<b-card-group v-if='UserReservations.length>0'>
 				<b-container>
 					<b-row
 						v-for="(reservation, index) in UserReservations"
-						v-bind:key='index'>
+						v-bind:key='index'
+						align="center">
 						<b-card :title="reservation.data.BikeID" >
 							<b-list-group v-if='reservation.data.Status != "Cancelled"'>
 								<b-list-group-item>
@@ -37,16 +39,16 @@
 									Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
 								</b-list-group-item>
 							</b-list-group>
-							<b-card-text class="small text-muted">Last updated 3 mins ago</b-card-text>
 			 			</b-card>
 			 		</b-row>
 		 		</b-container>
 			</b-card-group>
 			<div v-else>
-				<b-alert show variant="dark">No reservations yet!</b-alert>
+				<b-alert show variant="dark">No reservations yet</b-alert>
 			</div>
 		</b-row>
 	</b-container>
+</b-jumbotron>
 </template>
 
 <script>

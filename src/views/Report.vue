@@ -1,10 +1,13 @@
 <template>
-  <body>
     <div class="wrap">
-    <h2> Report an issue</h2>
-    <hr>
-    <br>
-    <form method="POST" enctype="multipart/form-data">
+      <b-jumbotron bg-variant="light" class="sm-8 md-8">
+    	<b-container fluid>
+        <b-row>
+    			 <h2 class="page-title">Report an issue</h2>
+    		</b-row>
+        <hr>
+        <br>
+        <form method="POST" enctype="multipart/form-data">
         <label for="inputEmail4"><h3> Please enter your Bike ID: </h3></label>
         <input type="text" pattern="[A-Z]{2}[0-9]{5}" class="form-control" size = "7" id="inputNumber4"  name="bikecount"  placeholder="XX12345" required>
         <small class="text-muted" style="font-size: 11px;">
@@ -24,13 +27,7 @@
        </div>
        <br>
        <h3> What issue did you face with your bike? </h3>
-        <b-form-file
-          v-model="file"
-          :state="Boolean(file)"
-          placeholder="Choose a file..."
-          drop-placeholder="Drop file here..."
-        />
-        <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
+       <a href="mailto:name@email.com">Link text</a>
        <br>
        <!--<div class="form-group">
           <label class="custom-file-upload">
@@ -47,8 +44,9 @@
           <p class="my-4">Your feedback has been received.</p>
         </b-modal>
       </div>
-      </div>
-  </body>
+    </b-container>
+    </b-jumbotron>
+  </div>
 </template>
 
 <script>

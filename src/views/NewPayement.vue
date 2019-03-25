@@ -1,25 +1,29 @@
 <template>
 	<div class="wrap">
-		<h2> Payement methods</h2>
+		<b-jumbotron bg-variant="light" class="sm-5 md-8">
+		<b-container fluid>
+		<h2 class="page-title">New Payment method</h2>
+	<b-row class="justify-content-sm-center">
+	</b-row>
 		<hr>
 		<br>
 		<form>
 			<div class="form-group">
 				<label for="cardHolderName">Card holder </label>
-				<input v-model='NewCardData["Card holder"]' type="name" class="form-control" id="cardHolderName" placeholder="Name">
+				<input v-model='NewCardData["Card holder"]' required="true" type="name" class="form-control" id="cardHolderName" placeholder="Name">
 			</div>
 			<div class="form-group">
 				<label for="inputCardNumber">Card number </label>
-				<input v-model='NewCardData["Card number"]' type="text" class="form-control" id="inputCardNumber" placeholder="Card number">
+				<input v-model='NewCardData["Card number"]' type="text" required="true" class="form-control" id="inputCardNumber" placeholder="Card number">
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputDate">Expiry date</label>
-					<input v-model='ExpireDate' type="date" class="form-control" id="inputDate" placeholder="e.g. 06/23">
+					<input v-model='ExpireDate' type="date" class="form-control" required="true" id="inputDate" placeholder="e.g. 06/23">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="inputPassword">CVV</label>
-					<input v-model='NewCardData.cvv' type="password" class="form-control" id="inputPassword" placeholder="CVV">
+					<input v-model='NewCardData.cvv' type="password" required="true" class="form-control" id="inputPassword" placeholder="CVV">
 				</div>
 			</div>
 			<br>
@@ -28,7 +32,9 @@
 				</i>&nbsp;Save card
 			</b-button></a>
 		</form>
-	</div>
+		</b-container>
+	</b-jumbotron>
+  </div>
 </template>
 
 <script>

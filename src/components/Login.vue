@@ -5,16 +5,35 @@
 		<h1> Sign In </h1>
 		<br/>
 		<div class="form-group">
-			<label for="email1">Email address</label>
-			<br>
-			<input v-model.trim="loginForm.email" required type="text" placeholder="you@email.com" id="email1" />
-		</div>
-		<div class="form-group">
-			<label for="password1">Password</label>
-			<br>
-			<input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
+			<div role="group">
+	    <label for="inputLive">Email address:</label>
+	    <b-form-input
+	      id="email1"
+	      v-model.trim="loginForm.email"
+	      trim
+				required="true"
+	      type="email"
+	      :state="emailState"
+	      aria-describedby="inputLiveHelp inputLiveFeedback"
+	      placeholder="you@email.com"
+	    />
+	    <!-- This will only be shown if the preceeding input has an invalid state -->
+
+	    <label for="inputLive">Passsword:</label>
+	    <b-form-input
+	      id="email1"
+				v-model.trim="loginForm.password"
+	      trim
+				required="true"
+	      type="password"
+	      :state="passState"
+	      aria-describedby="inputLiveHelp inputLiveFeedback"
+	      placeholder="******"
+	    />
+	  </div>
 		</div>
 		<b-button @click="login" class="button">Log In</b-button>
+
 	</div>
 </div>
 </template>
@@ -23,12 +42,20 @@
 const fb = require('../firebaseConfig.js')
 
 export default {
+	computed:{
+		emailState() {
+			return this.loginForm.email.length > 5? true : null
+		},passState() {
+			return this.loginForm.password.length > 7? true : false
+		}
+	},
 	name: 'Login',
 	data () {
 		return {
+			name: '',
 			loginForm: {
 				email: '',
-				password: ''
+				password: '',
 			}
 		}
 	},
@@ -37,7 +64,7 @@ export default {
 			this.$store.state.loading = true
 			fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
 				this.$store.commit('setUser', user.user)
-				this.$router.push('/profile')
+				this.$router.push('/')
 				this.$store.state.loading = false
 			}).catch(err => {
 				this.$store.state.loading = false

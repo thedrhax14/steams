@@ -1,14 +1,17 @@
 <template>
 	<div class="profile">
+		<b-jumbotron bg-variant="light" class="sm-8 md-8">
+		<b-container fluid>
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
 				<p>..</p>
 			</div>
 		</transition>
 		<h3>Profile</h3>
-		<p>User ID - {{ this.$store.state.user.uid }}</p>
-		<p>Name - {{ this.$store.state.user.displayName }}</p>
-		<p>Permission level - {{ UserInfo.PermissionLevel }}</p>
+		<p>Full Name - {{ this.$store.state.user.displayName }}</p>
+		<p>Change payement UserInfo.PermissionLevel }}</p>
+	</b-container>
+</b-jumbotron>
 	</div>
 </template>
 

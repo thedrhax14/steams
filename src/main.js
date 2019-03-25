@@ -21,6 +21,7 @@ fb.auth.onAuthStateChanged(user => {
 			router,
 			store,
 			mapbox,
+			template: '<App/>',
 			render: h => h(App)
 		})
 	}

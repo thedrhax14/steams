@@ -1,23 +1,9 @@
 <template>
-	<body>
-	<div class="wrap" style="margin-top: 50px;">
-	<div class="list_of_bikes">
-		<transition name="fade">
-			<div v-if="this.$store.state.performingRequest" class="loading">
-				<p>Loading...</p>
-			</div>
-		</transition>
-		<h1>Available bikes</h1>
-		<table>
-			<tr>
-				<th>Bike Name</th>
-				<th>Price</th>
-			</tr>
-			<tr v-for="bike in this.$store.state.bikes" :key="bike.id">
-				<td><a @click="showBike(bike.id)">{{ bike.data()['Bike Type'] }}</a></td>
-				<td>{{ bike.data()['Cost per hour'] }}</td>
-			</tr>
-		</table>
+	<div class="wrap">
+		<b-jumbotron bg-variant="light" class="sm-5 md-8">
+		<b-container fluid>
+		<h1>Start your trip with our bikes!</h1>
+		<small>Not all bikes are available at every stations</small>
 		<h2 class="bike-header">Bike options</h2>
     <p> These are the bike options the company currently offers</p>
     <hr>
@@ -55,9 +41,9 @@
 				</div>
       </div>
     </div>
-	</div>
+	</b-container>
+</b-jumbotron>
 </div>
-</body>
 </template>
 
 <script>
