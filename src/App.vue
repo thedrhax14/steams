@@ -10,19 +10,19 @@
 				<span>Reservations</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/payement" class="fas fa-credit-card">
-				<span>Payment methods</span>
+				<span>Payment<br>methods</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/placeorders" class="fas fa-bicycle">
 				<span>Place order</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/revieworders" class="fas fa-th-list">
-				<span>Review orders</span>
+				<span>Review<br>orders</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/trackbl" class="fas fa-map-marked-alt">
 				<span>Track bike</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/stationinterface" class="fas fa-wrench">
-				<span>Setup station</span>
+				<span>Setup<br>station</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 2' to="/manStats" class="fas fa fa-chart-bar">
 				<span>Statistics</span>
