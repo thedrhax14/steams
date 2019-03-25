@@ -1,16 +1,19 @@
 <template>
     <div v-if='datacollection' class="small">
         <line-chart :chart-data="datacollection"></line-chart>
+        <pie-chart :chart-data="datacollection"></pie-chart>
         <button @click="fillData">Randomize</button>
     </div>
 </template>
 
 <script>
 import LineChart from './LineChart.js'
+import PieChart from './PieChart.js'
 
 export default {
     components: {
-        LineChart
+        LineChart,
+        PieChart
     },
     data () {
         return {
