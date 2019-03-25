@@ -1,44 +1,60 @@
 <template>
   <div class="small">
-    <line-chart :chart-data="datacollection"></line-chart>
-    <button @click="fillData()">Randomize</button>
+    <line-chart :chart-data="MostPopularBikes"></line-chart>
+    <bar-chart :chart-data="Popularhours"></bar-chart>
+    <button @click="popularbikes">Bikes</button>
+    <button @click="hours">Busy Hours</button>
   </div>
 </template>
 
 <script>
   import LineChart from './LineChart.js'
+  import BarChart from './BarChart.js'
 
   export default {
     components: {
-      LineChart
+      LineChart,
+      BarChart
     },
     data () {
       return {
-        datacollection: null
+        MostPopularBikes: null
       }
     },
     mounted () {
-      this.fillData()
+      this.popularbikes()
+      this.hours()
     },
     methods: {
-      fillData () {
-        this.datacollection = {
-          labels: [this.getRandomInt(), this.getRandomInt()],
+      popularbikes () {
+        this.MostPopularBikes = {
+          labels: ['CB', 'MB','HB', 'RB', 'TB'],
           datasets: [
             {
-              label: 'Data One',
+              label: 'Most Popular Bikes',
               backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }, {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
+              data: [this.count()]
             }
           ]
         }
       },
-      getRandomInt () {
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+      hours () {
+        this.PopularHours = {
+          labels: [this.getTime()],
+          datasets: [
+            {
+              label: 'Busy Hours',
+              backgroundColor: '#f87979',
+              data: [null]
+            }
+          ]
+        }
+      },
+      count () {
+        return Math.floor(Math.random(0)) + 5
+      },
+      getTime () {
+        return this.startTime()
       }
     }
   }
