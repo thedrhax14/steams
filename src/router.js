@@ -38,7 +38,7 @@ const router = new Router({
 			name: 'BookPage',
 			component: BookPage,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -46,7 +46,7 @@ const router = new Router({
 			name: 'NewPayement',
 			component: NewPayement,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -59,7 +59,7 @@ const router = new Router({
 			name: 'ConfirmOrder',
 			component: ConfirmOrder,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -72,7 +72,7 @@ const router = new Router({
 			name: 'Recents',
 			component: Recents,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -80,7 +80,7 @@ const router = new Router({
 			name: 'Reservations',
 			component: Reservations,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -88,7 +88,7 @@ const router = new Router({
 			name: 'Report',
 			component: Report,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -97,16 +97,16 @@ const router = new Router({
 			component: Bikes
 		},
 		{
-		path: '/dashboard',
-		name: 'Dashboard',
-		component: Dashboard
+			path: '/dashboard',
+			name: 'Dashboard',
+			component: Dashboard
 	  },
 		{
 			path: '/payement',
 			name: 'Payement',
 			component: Payement,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -114,7 +114,7 @@ const router = new Router({
 			name: 'PlaceReservation',
 			component: PlaceReservation,
 			meta: {
-				requiresAuth:true
+				requiresAuth: true
 			}
 		},
 		{
@@ -176,7 +176,7 @@ const router = new Router({
 	]
 })
 
-/*router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
 	const currentUser = firebase.auth().currentUser
 	if (requiresAuth && !currentUser) {
@@ -186,34 +186,33 @@ const router = new Router({
 	} else {
 		next()
 	}
-})*/
-
+}) */
 
 router.beforeEach((to, from, next) => {
-	if(to.matched.some(x => x.meta.requiresAuth)){
-		if(!firebase.auth().currentUser){
+	if (to.matched.some(x => x.meta.requiresAuth)) {
+		if (!firebase.auth().currentUser) {
 			next({
 				path: '/auth',
-				query:{
+				query: {
 					redirect: to.fullPath
 				}
 			})
-		}else{
+		} else {
 			next()
 		}
-	}else if(to.matched.some(x => x.meta.requiresGuest)){
-			if(firebase.auth().currentUser){
-				next({
-					path: '/',
-					query:{
-						redirect: to.fullPath
-					}
-				})
-			}else{
-				next()
-			}
-	}else{
-		next();
+	} else if (to.matched.some(x => x.meta.requiresGuest)) {
+		if (firebase.auth().currentUser) {
+			next({
+				path: '/',
+				query: {
+					redirect: to.fullPath
+				}
+			})
+		} else {
+			next()
+		}
+	} else {
+		next()
 	}
 })
 export default router

@@ -9,7 +9,7 @@
     <hr>
 		<div class="card-deck" style="width:240%; margin-left: -69%;">
       <div class="card">
-        <img src="../assets/images/road_bike1.png" class="card-img-top" alt="..."style="margin-left:10px;">
+        <img src="../assets/images/RB.png" class="card-img-top" alt="..."style="margin-left:10px;">
         <div class="card-body">
           <h5 class="card-title">Road bike</h5>
           <p class="card-text">Road bikes are simply just bikes that dominate the roads with a design that favors the conditions on the road and introduces great efficiency and speed on the road with very little effort.</p>
@@ -17,7 +17,7 @@
 				</div>
       </div>
       <div class="card">
-        <img src="../assets/images/mtn_bike1.png" class="card-img-top" alt="..."style="margin-left:10px;">
+        <img src="../assets/images/MB.png" class="card-img-top" alt="..."style="margin-left:10px;">
         <div class="card-body">
           <h5 class="card-title">Mountaint bike</h5>
           <p class="card-text">The purpose of Montaint bikes is to focus mostly on being used in off-road trails but it can also be usedd on the road. Mountain bikes have suspension on both wheels to help navigate incoming obstacles along the way and they are also build with a mechanism called bicycle gearing that allows ease of cycling during up and down hills.</p>
@@ -25,7 +25,7 @@
 				</div>
       </div>
       <div class="card">
-        <img src="../assets/images/tandem_bike1.png" class="card-img-top" alt="..."style="margin-left:10px;">
+        <img src="../assets/images/TB.png" class="card-img-top" alt="..."style="margin-left:10px;">
         <div class="card-body">
           <h5 class="card-title">Tandem bike</h5>
           <p class="card-text">A Tandem bike is a 2 person bike that includes 2 seats, 2 handle bars and 2 pedals. There is no skill needed to ride a Tandem bike other than being able to ride a bike and coordination, overall it is a new experience for riding a bike.</p>
@@ -33,7 +33,7 @@
 				</div>
       </div>
       <div class="card">
-        <img src="../assets/images/standard_bike1.png" class="card-img-top" alt="..." style="margin-left:10px;">
+        <img src="../assets/images/SB.png" class="card-img-top" alt="..." style="margin-left:10px;">
         <div class="card-body">
           <h5 class="card-title">Standard bike</h5>
           <p class="card-text">Any bike is considered as a communting bike. However, the commuting bike we provide consists of additional features such as front and rear lights, racks and fenders. These make a perfect bike for commuting within a city.</p>
