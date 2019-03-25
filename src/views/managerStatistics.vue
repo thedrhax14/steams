@@ -1,10 +1,50 @@
-<template >
-  <div id = "manStats">
-    <div class="jumbotron" >
-      <div class="page-header">
-      <h1>Today's Statistics</h1>
-    </div>
-    <hr>
-    </div>
-</div>
+<template>
+	<div v-if='datacollection' class="small">
+		<line-chart :chart-data="datacollection"></line-chart>
+		<button @click="fillData">Randomize</button>
+	</div>
 </template>
+
+<script>
+import LineChart from './LineChart.js'
+
+export default {
+	components: {
+		LineChart
+	},
+	data () {
+		return {
+			datacollection: null
+		}
+	},
+	mounted () {
+		this.fillData()
+		//this.rows = filter.data.data.rows
+	},
+	methods: {
+		fillData () {
+			this.datacollection = {
+				labels: ['S', 'V'],
+				datasets: [
+				{
+					label: 'Data One',
+					backgroundColor: '#f87979',
+					data: [
+					]
+				}
+				]
+			}
+		},
+		getRandomInt () {
+			return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+		}
+	}
+}
+</script>
+
+<style>
+.small {
+	max-width: 600px;
+	margin:  150px auto;
+}
+</style>
