@@ -12,6 +12,9 @@
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/payement" class="fas fa-credit-card">
 				<span>Payment<br>methods</span>
 			</router-link>
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/report" class="fas fa-credit-card">
+				<span>Payment<br>methods</span>
+			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/placeorders" class="fas fa-bicycle">
 				<span>Place order</span>
 			</router-link>

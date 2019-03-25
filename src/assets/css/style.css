@@ -14,6 +14,10 @@ body{
   text-align:center;
 }
 
+.bm-burger-bars{
+  background-color:#fff;
+}
+
 .res-message{
   text-align: center;
   padding-top: 20px;
