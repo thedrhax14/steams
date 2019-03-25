@@ -66,8 +66,15 @@ methods: {
     var  doesNotExist = 1;
     this.$store.state.bikes.forEach(bikeDoc => {
       if (bikeDoc.id == this.trackBID && !bikeDoc.data.Reserved) {
-        this.location =  (bikeDoc.data['Location']);
+        if( (bikeDoc.data['Location']) != null)
+                    this.location =  (bikeDoc.data['Location']);
         doesNotExist = 0;
+      }
+      else
+      {
+        if (bikeDoc.id == this.trackBID && bikeDoc.data.Reserved)
+          this.location= 'Bike under use by customer'
+                doesNotExist = 0;
       }
       // console.log('BikeTypeIDs',BikeTypeIDs)
     })

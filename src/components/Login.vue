@@ -1,39 +1,44 @@
 <template>
-	<b-jumbotron bg-variant="light" class="sm-8 md-8">
-	<b-container fluid>
-		<div class="page-header">
-		<img src="../assets/images/SPINlogotext.png" alt="logo">
-		<h1> Sign In </h1>
-		<br/>
-		<div class="form-group">
-			<div role="group">
-	    <label for="inputLive">Email address:</label>
-	    <b-form-input
-	      id="email1"
-	      v-model.trim="loginForm.email"
-	      trim
-				required="true"
-	      type="email"
-	      :state="emailState"
-	      aria-describedby="inputLiveHelp inputLiveFeedback"
-	      placeholder="you@email.com"
-	    />
-	    <!-- This will only be shown if the preceeding input has an invalid state -->
+	<div >
+		<b-jumbotron  fluid>
+			<b-container>
+			<img src="../assets/images/SPINlogotext.png" alt="logo"style="width:200px;">
+		</b-container>
+			<b-container>
+			<h1> Sign In </h1	>
+			<br/>
+			<div class="form-group">
+				<div role="group">
+				<label for="inputLive">Email address:</label>
+				<b-form-input
+					id="email1"
+					v-model.trim="loginForm.email"
+					trim
+					required="true"
+					type="email"
+					:state="emailState"
+					aria-describedby="inputLiveHelp inputLiveFeedback"
+					placeholder="you@email.com"
+				/>
+				<!-- This will only be shown if the preceeding input has an invalid state -->
 
-	    <label for="inputLive">Passsword:</label>
-	    <b-form-input
-	      id="email1"
-				v-model.trim="loginForm.password"
-	      trim
-				required="true"
-	      type="password"
-	      :state="passState"
-	      aria-describedby="inputLiveHelp inputLiveFeedback"
-	      placeholder="******"
-	    />
-	  </div>
-		</div>
-		<b-button @click="login" class="button">Log In</b-button>
+				<label for="inputLive">Passsword:</label>
+				<b-form-input
+					id="email1"
+					v-model.trim="loginForm.password"
+					trim
+					required="true"
+					type="password"
+					:state="passState"
+					aria-describedby="inputLiveHelp inputLiveFeedback"
+					placeholder="******"
+				/>
+			</div>
+			</div>
+			<b-button @click="login" class="button">Log In</b-button>
+
+		</b-container>
+	</b-jumbotron>
 </div>
 </b-container>
 </b-jumbotron>
