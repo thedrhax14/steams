@@ -1,20 +1,20 @@
 <template>
   <div class="small">
-    <line-chart :chart-data="MostPopularBikes"></line-chart>
-    <pie-chart :chart-data="Popularhours"></pie-chart>
+    <bar-chart :chart-data="MostPopularBikes"></bar-chart>
+   // <line-chart :chart-data="Popularhours"></line-chart>
     <button @click="popularbikes">Bikes</button>
     <button @click="hours">Busy Hours</button>
   </div>
 </template>
 
 <script>
-  import LineChart from './LineChart.js'
-  import PieChart from './PieChart.js'
+  import BarChart from './BarChart.js'
+  //import LineChart from './LineChart.js'
 
   export default {
     components: {
-      LineChart,
-      PieChart
+      BarChart,
+     // LineChart
     },
     data () {
       return {
@@ -33,7 +33,7 @@
             {
               label: 'Most Popular Bikes',
               backgroundColor: '#f87979',
-              data: [this.count()]
+              data: [this.count(), this.count(), this.count(), this.count(), this.count()]
             }
           ]
         }
@@ -51,7 +51,7 @@
         }
       },
       count () {
-        return Math.floor(Math.random(0)) + 2
+        return Math.floor(Math.random() * (50 - 1 + 5)) + 5
       },
       getTime () {
         return this.$store.state.history.filter(
