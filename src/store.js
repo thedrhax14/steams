@@ -13,11 +13,11 @@ fb.auth.onAuthStateChanged(user => {
 			console.log('userSnapshot', userSnapshot.data())
 			store.commit('setUserInfo', userSnapshot.data())
 			if (userSnapshot.data().PermissionLevel === 1) {
-				this.$router.push('/placeorders')
+				router.push('/placeorders')
 			} else if (userSnapshot.data().PermissionLevel === 2) {
-				this.$router.push('/manStats')
+				router.push('/manStats')
 			} else {
-				this.router.push('/')
+				router.push('/')
 			}
 		}, (error) => {
 			console.log('usersCollection listener failed. Here is error:', error)

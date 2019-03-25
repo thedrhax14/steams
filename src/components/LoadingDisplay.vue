@@ -1,5 +1,5 @@
 <template>
-	<loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
+	<loading :active.sync="isLoading" is-full-page></loading>
 </template>
 
 <script>
