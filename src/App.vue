@@ -1,17 +1,7 @@
 <template>
 	<div id="app">
-		<navbar v-if='IsAvailable'/>
 		<LoadingDisplay/>
-		<div id="nav" v-if='IsAvailable'>
-			<a class="user-info-btn">
-				<router-link to='/profile'><i class="fas fa-user-circle"></i>
-				My Account </router-link>
-			</a>
-			<a v-if="user" @click="logout"> | Logout</a>
-		</div>
-		<a v-if='IsAvailable' href="/profile" class="mobile-show">
-			<i class="far fa-user"></i>
-		</a>
+		<navbar/>
 		<router-view/>
 	</div>
 </template>
