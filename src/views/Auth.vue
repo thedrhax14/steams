@@ -1,5 +1,5 @@
 <template>
-	<div class="sign-in-wrap">
+	<div class="">
 		<b-jumbotron bg-variant="light" class="sm-8 md-8">
 		<b-container fluid>
 		<transition name="fade">
