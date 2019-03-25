@@ -72,7 +72,7 @@
 					<input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
 					<label class="custom-control-label" for="customRadio5"><h5>Tandem Bike</h5></label>
 					<img src="../assets/images/tandem_bike1.png">
-					<small>£3.00/hr</small>
+					<small>£10.00/hr</small>
 					<button href='/bikes'class="btn btn-danger">More info</button>
 				</div>
 			</div>
