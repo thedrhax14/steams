@@ -1,14 +1,16 @@
 <template>
-	<transition name="fade">
-		<div v-if="isLoading" class="loading">
-			Loading...
-		</div>
-	</transition>
+	<loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 export default {
 	name: 'LoadingDisplay',
+	components: {
+		Loading
+	},
 	computed: {
 		isLoading () {
 			return this.$store.state.loading
