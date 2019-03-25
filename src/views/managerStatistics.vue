@@ -1,29 +1,38 @@
 <template>
   <div class="small">
+    <h>
+      <button @click="popularbikes">Bikes</button>
+      <button @click="hours">Busy Hours</button>
+      <button @click="location">Busy Locations</button>
+    </h>
     <bar-chart :chart-data="MostPopularBikes"></bar-chart>
-   // <line-chart :chart-data="Popularhours"></line-chart>
-    <button @click="popularbikes">Bikes</button>
-    <button @click="hours">Busy Hours</button>
+    <line-chart :chart-data="PopularHours"></line-chart>
+    <pie-chart :chart-data="PopularLoc"></pie-chart>
   </div>
 </template>
 
 <script>
   import BarChart from './BarChart.js'
-  //import LineChart from './LineChart.js'
+  import LineChart from './LineChart.js'
+  import PieChart from './PieChart.js'
 
   export default {
     components: {
       BarChart,
-     // LineChart
+      LineChart,
+      PieChart
     },
     data () {
       return {
-        MostPopularBikes: null
+        MostPopularBikes: null,
+        PopularHours: null,
+        PopularLoc: null
       }
     },
     mounted () {
       this.popularbikes()
-      this.hours()
+      this.hours(),
+      this.location()
     },
     methods: {
       popularbikes () {
@@ -40,23 +49,33 @@
       },
       hours () {
         this.PopularHours = {
-          labels: [this.getTime()],
+          labels: ['h', 'i'],
           datasets: [
             {
               label: 'Busy Hours',
-              backgroundColor: '#f87979',
-              data: [this.count()]
+              backgroundColor: '#f87679',
+              data: [this.count(), this.count()]
+            }
+          ]
+        }
+      },
+      location () {
+        this.PopularLoc = {
+          labels: ['h', 'i', 'j', 'k'],
+          datasets: [
+            {
+              label: 'Busy Locations',
+              backgroundColor: '#f87479',
+              data: [this.count(), this.count(), this.count(), this.count()]
             }
           ]
         }
       },
       count () {
-        return Math.floor(Math.random() * (50 - 1 + 5)) + 5
+        return Math.random() * (12)
       },
       getTime () {
-        return this.$store.state.history.filter(
-          startTime
-        )
+        return this.startTime()
       }
     }
   }
