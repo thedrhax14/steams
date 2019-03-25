@@ -5,10 +5,10 @@
 			<h2 class="page-title">Recent trips</h2>
 		</b-row>
 		<b-row class="justify-content-md-center">
-			<b-card-group v-if='UserReservations.length>0'>
+			<b-card-group v-if='RecentReservations.length>0'>
 				<b-container>
 					<b-row
-						v-for="(reservation, index) in UserReservations"
+						v-for="(reservation, index) in RecentReservations"
 						v-bind:key='index'
 						align="center">
 						<b-card :title="reservation.data.BikeID" >
@@ -25,8 +25,12 @@
 								<b-list-group-item>
 									Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}
 								</b-list-group-item>
-								<b-button variant="info">Edit reservation</b-button>
-								<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
+								<b-list-group-item>
+									End Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									End Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
+								</b-list-group-item>
 							</b-list-group>
 			 			</b-card>
 			 		</b-row>
@@ -42,15 +46,13 @@
 
 <script>
 export default {
-	data () {
-		return {
-			fluid: true
-		}
-	},
 	name: 'Reservations',
 	computed: {
-		UserReservations () {
-			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid && entry.data.Status != "Cancelled")
+		RecentReservations () {
+			var Recent = []
+			Recent = this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid && entry.data.Status == "Completed")
+			Recent.sort((a, b) => b.data['Start time & date'].seconds - a.data['Start time & date'].seconds)
+			return Recent.slice(0, 3)
 		}
 	},
 	methods: {
@@ -70,23 +72,6 @@ export default {
 			if (min < 10) minString = '0' + min
 			else minString = min
 			return hourString + ':' + minString
-		},
-		deleteReservation (index) {
-			var reservation = this.UserReservations[index]
-			console.log('Deleting', reservation[index])
-			this.$store.dispatch('updateHistory', {
-				id: reservation.id,
-				doc: {
-					BikeID: reservation.data.BikeID,
-					PIN: reservation.data.PIN,
-					'Start location': reservation.data['Start location'],
-					'Start time & date': reservation.data['Start time & date'],
-					'End location': '',
-					'End time & date': new Date(),
-					Status: 'Cancelled',
-					uid: this.$store.state.user.uid
-				}
-			})
 		}
 	}
 }

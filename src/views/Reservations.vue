@@ -11,8 +11,8 @@
 						v-for="(reservation, index) in UserReservations"
 						v-bind:key='index'
 						align="center">
-						<b-card :title="reservation.data.BikeID" >
-							<b-list-group>
+						<b-card :title="Title(reservation.data.BikeID)" >
+							<b-list-group v-if='reservation.data.Status == "Reserved"'>
 								<b-list-group-item>
 									PIN: {{ reservation.data.PIN }}
 								</b-list-group-item>
@@ -25,8 +25,37 @@
 								<b-list-group-item>
 									Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}
 								</b-list-group-item>
-								<b-button variant="info">Edit reservation</b-button>
-								<b-button variant="danger" @click="deleteReservation(index)">Delete</b-button>
+							</b-list-group>
+							<b-list-group v-else-if='reservation.data.Status == "Cancelled"'>
+								<b-list-group-item>
+									Reservation is cancelled by user
+								</b-list-group-item>
+								<b-list-group-item>
+									Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
+								</b-list-group-item>
+							</b-list-group>
+							<b-list-group v-else>
+								<b-list-group-item>
+									Trip was completed
+								</b-list-group-item>
+								<b-list-group-item>
+									Start location: {{ reservation.data['Start location'] }} Station
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									End Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									End Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
+								</b-list-group-item>
 							</b-list-group>
 			 			</b-card>
 			 		</b-row>
@@ -54,6 +83,9 @@ export default {
 		}
 	},
 	methods: {
+		Title(BikeID){
+			return "Bike ID: " + BikeID
+		},
 		SecondsToLocalDate (secs) {
 			var d = new Date(1970, 0, 1)
 			d.setSeconds(secs)
