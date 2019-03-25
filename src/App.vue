@@ -4,7 +4,7 @@
 		<Push v-if='IsAvailable' width="200">
 			<span>Welcome</span>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-map">
-				<span>Map</span>
+				<span>Reserve<br>bike</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/reservations" class="fas fa-book-open">
 				<span>Reservations</span>
@@ -138,3 +138,23 @@ export default {
 	}
 }
 </script>
+
+<style>
+.bm-menu {
+	background-color: #E53935;
+}
+
+nav a, nav span {
+	color: white;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.bm-cross {
+    background: #fff;
+}
+</style>
