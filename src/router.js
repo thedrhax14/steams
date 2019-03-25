@@ -22,7 +22,8 @@ import PlaceOrders from './views/PlaceOrders.vue'
 import TrackBikeLocations from './views/TrackBikeLocations.vue'
 import ReviewOrders from './views/ReviewOrders.vue'
 // manager
-import ManagerStatistics from './views/managerStatistics.vue'
+import stats from './views/managerStatistics.vue'
+import graph from './components/graph/graph.vue'
 
 Vue.use(Router)
 
