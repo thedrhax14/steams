@@ -19,6 +19,7 @@ import Profile from './views/Profile.vue'
 import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
 import BookPage from './views/BookPage.vue'
+import Dashboard from './views/Dashboard.vue'
 // operator
 import PlaceOrders from './views/PlaceOrders.vue'
 import TrackBikeLocations from './views/TrackBikeLocations.vue'
@@ -35,12 +36,18 @@ const router = new Router({
 		{
 			path: '/',
 			name: 'BookPage',
-			component: BookPage
+			component: BookPage,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/newCard',
 			name: 'NewPayement',
-			component: NewPayement
+			component: NewPayement,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/about',
@@ -50,7 +57,10 @@ const router = new Router({
 		{
 			path: '/confirm',
 			name: 'ConfirmOrder',
-			component: ConfirmOrder
+			component: ConfirmOrder,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/licenseagreement',
@@ -60,17 +70,26 @@ const router = new Router({
 		{
 			path: '/recents',
 			name: 'Recents',
-			component: Recents
+			component: Recents,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/reservations',
 			name: 'Reservations',
-			component: Reservations
+			component: Reservations,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/report',
 			name: 'Report',
-			component: Report
+			component: Report,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/bikes',
@@ -78,14 +97,25 @@ const router = new Router({
 			component: Bikes
 		},
 		{
+		path: '/dashboard',
+		name: 'Dashboard',
+		component: Dashboard
+	  },
+		{
 			path: '/payement',
 			name: 'Payement',
-			component: Payement
+			component: Payement,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/reserve',
 			name: 'PlaceReservation',
-			component: PlaceReservation
+			component: PlaceReservation,
+			meta: {
+				requiresAuth:true
+			}
 		},
 		{
 			path: '/installedplugins',
@@ -140,13 +170,13 @@ const router = new Router({
 			name: 'Auth',
 			component: Auth,
 			meta: {
-				requiresAuth: false
+				requiresGuest: true
 			}
 		}
 	]
 })
 
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
 	const currentUser = firebase.auth().currentUser
 	if (requiresAuth && !currentUser) {
@@ -156,6 +186,34 @@ router.beforeEach((to, from, next) => {
 	} else {
 		next()
 	}
-})
+})*/
 
+
+router.beforeEach((to, from, next) => {
+	if(to.matched.some(x => x.meta.requiresAuth)){
+		if(!firebase.auth().currentUser){
+			next({
+				path: '/auth',
+				query:{
+					redirect: to.fullPath
+				}
+			})
+		}else{
+			next()
+		}
+	}else if(to.matched.some(x => x.meta.requiresGuest)){
+			if(firebase.auth().currentUser){
+				next({
+					path: '/',
+					query:{
+						redirect: to.fullPath
+					}
+				})
+			}else{
+				next()
+			}
+	}else{
+		next();
+	}
+})
 export default router
