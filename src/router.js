@@ -27,6 +27,8 @@ import ReviewOrders from './views/ReviewOrders.vue'
 // manager
 import ManagerStatistics from './views/managerStatistics.vue'
 
+import StationInterface from './views/StationInterface.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -164,6 +166,11 @@ const router = new Router({
 			path: '/placeorders',
 			name: 'placeorders',
 			component: PlaceOrders
+		},
+		{
+			path: '/stationinterface',
+			name: 'stationinterface',
+			component: StationInterface
 		},
 		{
 			path: '/auth',
