@@ -19,14 +19,14 @@
               </div>
             </div>
           <div class="form-row">
-            <button type="submit" class="btn btn-danger mt-2" @click="submit" 	:disabled='!IsFormComplete'>Track</button>
+            <button  class="btn btn-danger mt-2" @click="getBikes" 	:disabled='!IsFormComplete'>Track</button>
           </div>
           </form>
         </b-col>
         <b-col>
           <div >
-            <b-card bg-variant="danger" header="Location" class="text-center">
-                <b-card-text text-variant="black" >Currently at: <p v-if="check">{{ location }}</p><p v-else>(Please enter BikeID)</p></b-card-text>
+            <b-card bg-variant="danger" header="Location" class="text-center" text-variant="white">
+                <b-card-text text-variant="white" >Currently at: <p v-if="check">{{ location }}</p><p v-else>(Please enter BikeID)</p></b-card-text>
               </b-card>
           </div>
         </b-col>
@@ -47,7 +47,7 @@ export default {
 	data () {
 		return {
 			trackBID: '' ,// store the ID to be tracked
-      location: 'Queen St',
+      location: 'Bike under use by customer',
       check: 0
 
 	}
@@ -59,8 +59,22 @@ computed: {
 },
 methods: {
   submit(evt){
+
+  },
+  getBikes(){
     this.check = 1;
+    var  doesNotExist = 1;
+    this.$store.state.bikes.forEach(bikeDoc => {
+      if (bikeDoc.id == this.trackBID && !bikeDoc.data.Reserved) {
+        this.location =  (bikeDoc.data['Location']);
+        doesNotExist = 0;
+      }
+      // console.log('BikeTypeIDs',BikeTypeIDs)
+    })
+    if(doesNotExist)
+        this.location = 'This BikeID does not exist!'
   }
 }
+
 }
 </script>
