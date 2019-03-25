@@ -1,7 +1,7 @@
 <template>
 	<div v-if="Location!='None'">
-		<b-jumbotron bg-variant="light" class="sm-8 md-8">
-		<b-container fluid>
+		<b-jumbotron bg-variant="light" fluid>
+		<b-container>
 				<b-row class="justify-content-md-center">
 			<h1>Booking at {{ Location }} Station</h1>
 		</b-row>
@@ -9,15 +9,16 @@
 			<b-row class="justify-content-md-center">
 			<h3><i class="fas fa-bicycle"></i> &nbsp;What type of bike?</h3>
 		</b-row>
+		<b-row  class="justify-content-md-center">
 		<b-form-group label-align="center" size="sm" label="Bike types avilable at the station">
 			<b-row>
-				<b-list-group class="active">
+				<b-list-group class="active text-center">
 						<b-list-group-item
 							v-for='BikeType in OptionsOfBikeTypesAtLocation'
 							button
 							@click='Select(BikeType.id)'>
-							<div id="type-5">
-							 <img src="../assets/images/tandem_bike1.png">
+							<div id="type-5" style="	">
+							 <img src="../assets/images/tandem_bike1.png" style="width:90%">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
 							<small>{{ BikeType.data.Price }} €/hr</small>
 							</div>
@@ -64,6 +65,7 @@
 				</b-button>
 			</b-row>
 		</b-form-group>
+	</b-row>
 		<p v-if='AvailableBikeAtLocationByBikeTypeID'>
 			RAW ID {{ AvailableBikeAtLocationByBikeTypeID.id }}
 		</p>
