@@ -12,6 +12,13 @@ fb.auth.onAuthStateChanged(user => {
 		unsub = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
 			console.log('userSnapshot', userSnapshot.data())
 			store.commit('setUserInfo', userSnapshot.data())
+			if (userSnapshot.data().PermissionLevel === 1) {
+				this.$router.push('/placeorders')
+			} else if (userSnapshot.data().PermissionLevel === 2) {
+				this.$router.push('/manStats')
+			} else {
+				this.router.push('/')
+			}
 		}, (error) => {
 			console.log('usersCollection listener failed. Here is error:', error)
 		})
@@ -68,7 +75,7 @@ export const store = new Vuex.Store({
 		bikeTypes: [],
 		history: [],
 		bikes: [],
-		orders:[],
+		orders: [],
 		loading: false
 	},
 	actions: {
@@ -172,7 +179,6 @@ export const store = new Vuex.Store({
 			commit('setLoading', true)
 			fb.ordersCollection.add(data)
 			commit('setLoading', false)
-
 		},
 		addBikeTypeToBikeTypes ({ commit }, data) {
 			commit('setLoading', true)
@@ -341,7 +347,7 @@ export const store = new Vuex.Store({
 			})
 		},
 		addOrder (state, val) {
-			//console.log('adding',val.id,'data',val.data())
+			// console.log('adding',val.id,'data',val.data())
 			state.orders.push({
 				id: val.id,
 				data: val
