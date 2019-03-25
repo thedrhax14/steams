@@ -4,35 +4,55 @@ const fb = require('./firebaseConfig.js')
 
 Vue.use(Vuex)
 
-var unsub
+var UnsubFromUserCollection
+var UnsubFromOrdersCollection
 
 fb.auth.onAuthStateChanged(user => {
 	if (user) {
 		store.commit('setUser', user)
-		unsub = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
+		UnsubFromUserCollection = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
 			console.log('userSnapshot', userSnapshot.data())
 			store.commit('setUserInfo', userSnapshot.data())
+			if(userSnapshot.data().PermissionLevel == 1){
+				console.log('subscribing to ordersCollection')
+				UnsubFromOrdersCollection = fb.ordersCollection.where("uid","==",user.uid).onSnapshot(ordersChange => {
+					if (ordersChange.type === 'added') {
+						console.log('New order: ', ordersChange.doc.id)
+						store.commit('addOrder', ordersChange.doc)
+					}
+					if (ordersChange.type === 'modified') {
+						console.log('Modified order: ', ordersChange.doc.id)
+						store.commit('updateOrder', ordersChange.doc)
+					}
+				}, (error) => {
+					console.log('ordersCollection listener failed. Here is error:', error)
+				})
+			} else if(UnsubFromOrdersCollection){
+				UnsubFromOrdersCollection()
+			}
 		}, (error) => {
 			console.log('usersCollection listener failed. Here is error:', error)
 		})
 	} else {
-		if (unsub) { unsub() }
+		UnsubFromUserCollection()
+		if(UnsubFromOrdersCollection)
+			UnsubFromOrdersCollection()
 	}
 })
 
 fb.historyCollection.onSnapshot((historySnapshot) => {
 	historySnapshot.docChanges().forEach(historyChange => {
-		console.log('historyChange', historyChange)
+		// console.log('historyChange', historyChange)
 		if (historyChange.type === 'added') {
-			console.log('New history: ', historyChange.doc.id)
+			// console.log('New history: ', historyChange.doc.id)
 			store.commit('addHistory', historyChange.doc)
 		}
 		if (historyChange.type === 'modified') {
-			console.log('Modified history: ', historyChange.doc.id)
+			// console.log('Modified history: ', historyChange.doc.id)
 			store.commit('updateHistory', historyChange.doc)
 		}
 		if (historyChange.type === 'removed') {
-			console.log('Removed history: ', historyChange.doc.id)
+			// console.log('Removed history: ', historyChange.doc.id)
 		}
 	})
 }, (error) => {
@@ -42,15 +62,15 @@ fb.historyCollection.onSnapshot((historySnapshot) => {
 fb.bikesCollection.onSnapshot((bikesSnapshot) => {
 	bikesSnapshot.docChanges().forEach(bikeChange => {
 		if (bikeChange.type === 'added') {
-			console.log('New bike: ', bikeChange.doc.id)
+			// console.log('New bike: ', bikeChange.doc.id)
 			store.commit('addBike', bikeChange.doc)
 		}
 		if (bikeChange.type === 'modified') {
-			console.log('Modified bike: ', bikeChange.doc.id)
+			// console.log('Modified bike: ', bikeChange.doc.id)
 			store.commit('updateBike', bikeChange.doc)
 		}
 		if (bikeChange.type === 'removed') {
-			console.log('Removed bike: ', bikeChange.doc.id)
+			// console.log('Removed bike: ', bikeChange.doc.id)
 		}
 	})
 }, (error) => {
@@ -118,15 +138,14 @@ export const store = new Vuex.Store({
 				console.log('Error getting userInfoDoc', err)
 			})
 		},
-		fetchOrders ({ commit }) {
+		fetchOrders ({ commit, state }) {
 			commit('setLoading', true)
-			fb.ordersCollection.get().then(ordersDoc => {
-				ordersDoc.forEach(ordersDoc => {
-					commit('addOrder', ordersDoc.data())
+			commit('setOrders',[])
+			fb.ordersCollection.where("uid","==",state.user.uid).get().then(ordersSnapshot => {
+				ordersSnapshot.forEach(orderDoc => {
+					commit('addOrder', orderDoc)
 				})
 				commit('setLoading', false)
-			}).catch(err => {
-				console.log('Error getting ordersDoc', err)
 			})
 		},
 		addBikeToBikes ({ commit }, data) {
@@ -334,17 +353,9 @@ export const store = new Vuex.Store({
 			state.bikes = val
 		},
 		addBike (state, val) {
-			// console.log('adding',val.id,'data',val.data())
 			state.bikes.push({
 				id: val.id,
 				data: val.data()
-			})
-		},
-		addOrder (state, val) {
-			// console.log('adding',val.id,'data',val.data())
-			state.orders.push({
-				id: val.id,
-				data: val
 			})
 		},
 		updateBike (state, val) {
@@ -355,13 +366,30 @@ export const store = new Vuex.Store({
 				}
 			}
 		},
+		setOrders (state, val) {
+			state.orders = val
+		},
+		addOrder (state, val) {
+			state.orders.push({
+				id: val.id,
+				data: val.data()
+			})
+		},
+		updateOrder (state, val) {
+			for (var i = 0; i < state.order.length; i++) {
+				if (state.order[i].id == val.id) {
+					state.order[i].data = val.data()
+					break
+				}
+			}
+		},
 		setLoading (state, val) {
 			state.loading = val
 		},
 		flipLoading (state) {
 			state.loading = !state.loading
 		},
-		SetIsStationInterfaceActive(state, val) {
+		SetIsStationInterfaceActive (state, val) {
 			state.isStationInterfaceActive = val
 		}
 	}

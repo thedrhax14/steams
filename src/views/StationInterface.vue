@@ -68,15 +68,15 @@
 
 <script>
 export default {
-	name: "StationInterface",
-	data() {
+	name: 'StationInterface',
+	data () {
 		return {
-			StationName: "None",
-			PIN: [-1,-1,-1,-1]
+			StationName: 'None',
+			PIN: [-1, -1, -1, -1]
 		}
 	},
-	created() {
-		this.$store.commit('SetIsStationInterfaceActive',true)
+	created () {
+		this.$store.commit('SetIsStationInterfaceActive', true)
 	}
 }
 </script>

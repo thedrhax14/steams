@@ -11,8 +11,8 @@
 						v-for="(reservation, index) in UserReservations"
 						v-bind:key='index'
 						align="center">
-						<b-card 
-							:header="Title(reservation.data.BikeID)" 
+						<b-card
+							:header="Title(reservation.data.BikeID)"
 							:border-variant='CardVariant(reservation.data.Status)'
 							:header-bg-variant='CardVariant(reservation.data.Status)'
 							header-text-variant="white">
@@ -83,20 +83,15 @@ export default {
 	name: 'Reservations',
 	computed: {
 		UserReservations () {
-			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid && entry.data.Status != "Cancelled")
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid && entry.data.Status != 'Cancelled')
 		}
 	},
 	methods: {
-		Title(BikeID){
-			return "Bike ID: " + BikeID
+		Title (BikeID) {
+			return 'Bike ID: ' + BikeID
 		},
-		CardVariant(Status) {
-			if(Status == "Cancelled")
-				return "danger"
-			else if(Status == "Reserved")
-				return "primary"
-			else if(Status == "Completed")
-				return "success"
+		CardVariant (Status) {
+			if (Status == 'Cancelled') { return 'danger' } else if (Status == 'Reserved') { return 'primary' } else if (Status == 'Completed') { return 'success' }
 		},
 		SecondsToLocalDate (secs) {
 			var d = new Date(1970, 0, 1)

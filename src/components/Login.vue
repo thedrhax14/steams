@@ -45,11 +45,12 @@
 <script>
 const fb = require('../firebaseConfig.js')
 export default {
-	computed:{
-		emailState() {
-			return this.loginForm.email.length > 5? true : null
-		},passState() {
-			return this.loginForm.password.length > 5? true : false
+	computed: {
+		emailState () {
+			return this.loginForm.email.length > 5 ? true : null
+		},
+		passState () {
+			return this.loginForm.password.length > 5
 		}
 	},
 	name: 'Login',
@@ -58,7 +59,7 @@ export default {
 			name: '',
 			loginForm: {
 				email: '',
-				password: '',
+				password: ''
 			}
 		}
 	},

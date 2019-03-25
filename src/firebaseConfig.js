@@ -39,6 +39,6 @@ export {
 	usersCollection,
 	bikeTypesCollection,
 	historyCollection,
-	bikesCollection,
-	ordersCollection
+	ordersCollection,
+	bikesCollection
 }
