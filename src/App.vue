@@ -31,6 +31,9 @@
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/trackbl" class="fas fa-map-marked-alt">
 				<span>Track bike</span>
 			</router-link>
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/stationinterface">
+				<span>Setup station</span>
+			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 2' to="/manStats" class="fas fa fa-chart-bar">
 				<span>Statistics</span>
 			</router-link>
