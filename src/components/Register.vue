@@ -11,9 +11,9 @@
 						<label for="inputLive">Full Name:</label>
 						<b-form-input
 							id="inputLive"
-							v-model.trim="SignupForm.name"
+							v-model.trim="signupForm.name"
 							trim
-							required="true"
+							required
 							type="text"
 							:state="nameState"
 							aria-describedby="inputLiveHelp inputLiveFeedback"
@@ -22,9 +22,9 @@
 						<label for="inputLive">Email address:</label>
 						<b-form-input
 							id="inputLive"
-							v-model.trim="SignupForm.email"
+							v-model.trim="signupForm.email"
 							trim
-							required="true"
+							required
 							type="text"
 							:state="emailState"
 							aria-describedby="inputLiveHelp inputLiveFeedback"
@@ -33,9 +33,9 @@
 						<label for="inputLive">Password:</label>
 						<b-form-input
 							id="inputLive"
-							v-model.trim="SignupForm.password"
+							v-model.trim="signupForm.password"
 							trim
-							required="true"
+							required
 							type="password"
 							:state="emailState"
 							aria-describedby="inputLiveHelp inputLiveFeedback"
@@ -57,10 +57,10 @@ export default {
 			return this.signupForm.name.length > 5 ? true : null
 		},
 		emailState () {
-			return this.SignupForm.email.length > 5 ? true : null
+			return this.signupForm.email.length > 5 ? true : null
 		},
 		passState () {
-			return this.SignupForm.password.length > 5 ? true : null
+			return this.signupForm.password.length > 5 ? true : null
 		}
 	},
 	name: 'Register',

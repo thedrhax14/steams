@@ -6,73 +6,71 @@
 			<h1>Booking at {{ Location }} Station</h1>
 		</b-row>
 			<br>
-			<b-row class="justify-content-md-center">
-			<h3><i class="fas fa-bicycle"></i> &nbsp;What type of bike?</h3>
+			<b-row class="justify-content-sm-center">
+			<h3><i class="fas fa-bicycle"></i>&nbsp;What type of bike?</h3>
 		</b-row>
 		<b-row  class="justify-content-md-center">
-		<b-form-group label-align="center" size="sm" label="Bike types avilable at the station">
+		<b-form-group label-align="center" size="sm">
 			<b-row>
 				<b-list-group class="active text-center">
 						<b-list-group-item
 							v-for='BikeType in OptionsOfBikeTypesAtLocation'
 							button
 							@click='Select(BikeType.id)'>
-							<div id="type-5" style="	">
+							<div id="type" v-on:click="selected = !selected" v-bind:class="{selected: selected}">
 							<img :src='GetImage(BikeType.id)' style="width:60%">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
-							<small><strong>Price: {{ BikeType.data.Price }} €/hr</strong></small>
+							<strong>{{ BikeType.data.Price }} €/hr</strong>
 							</div>
 						</b-list-group-item>
 				</b-list-group>
 			</b-row>
 			<br/>
+			<b-row class="justify-content-sm-center">
 			<h3><i class="fas fa-stopwatch"></i>&nbsp; What time?</h3>
+		</b-row>
 			<b-row>
 				<strong> Date: </strong>
-				<b-form-input type="date" min="2019-03-25" v-model='StartDate'/>
+				<b-form-input type="date" min="2019-03-26" max="2019-03-28" v-model='StartDate'/>
 			</b-row>
 			<b-row>
 				<strong> Start time: </strong>
 				<b-form-input type="time" v-model='StartTime'/>
 			</b-row>
-			<b-row>
+			<div style="text-align:center;" class="booking-summary">
+				 <h4>Booking summary:</h4>
+				<p v-if='AvailableBikeAtLocationByBikeTypeID'>
+					Bike ID: {{ AvailableBikeAtLocationByBikeTypeID.id }}
+				</p>
+				<p v-if='StartDate'>
+					Date: {{ StartDate }}
+				</p>
+				<p v-if='StartTime'>
+					Time: {{ StartTime }}
+				</p>
+				<hr>
+				<!--<p> TOTAL: {{ BikeType.data.Price }} €</p>-->
+			</div>
+			<b-row align="center">
 				<b-button
 				style="margin-top:7px;"
-				v-b-modal.modal-center
-				variant="primary"
-				:disabled='!IsFormComplete'>
-				Proceed to confirmation
-			</b-button>
-        <!-- Modal Component -->
-        <b-modal id="modal-center" style="height:100px;" centered title="Booking summary:">
-          <p class="my-4">Your feedback has been received.</p>
-        </b-modal>
-
-				<b-button
-				style="margin-top:7px;"
-					variant="primary"
+					variant="success"
+					block
 					@click='Submit'
 					:disabled='!IsFormComplete'>
-					Proceed to confirmation
+					Make payement &nbsp;
+					<i class="fas fa-check fa-sm"></i>
 				</b-button>
 				<b-button
 				style="margin-top:7px;"
 					variant="danger"
+					block
 					@click='Reset'>
 					Discard
 				</b-button>
 			</b-row>
 		</b-form-group>
 	</b-row>
-		<p v-if='AvailableBikeAtLocationByBikeTypeID'>
-			RAW ID {{ AvailableBikeAtLocationByBikeTypeID.id }}
-		</p>
-		<p v-if='StartDate'>
-			StartDate {{ StartDate }}
-		</p>
-		<p v-if='StartTime'>
-			StartTime {{ StartTime }}
-		</p>
 	</b-container>
 	</b-jumbotron>
 </div>
@@ -84,7 +82,8 @@ export default {
 	data () {
 		return {
 			StartDate: '',
-			StartTime: ''
+			StartTime: '',
+			selected:true
 		}
 	},
 	computed: {

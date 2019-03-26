@@ -30,7 +30,9 @@
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 2' to="/manStats" class="fas fa fa-chart-bar">
 				<span>Statistics</span>
 			</router-link>
-			<a><span @click='logout'>Log out</span></a>
+			<br/>
+			<hr>
+			<a id="logout" class="fas fa-sign-out-alt"><span @click='logout'>Log out</span></a>
 		</Push>
 		<main id="page-wrap">
 			<router-view/>

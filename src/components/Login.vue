@@ -2,8 +2,8 @@
 	<div>
 		<b-jumbotron  fluid>
 			<b-container>
-			<img src="../assets/images/SPINlogotext.png" alt="logo"style="width:200px;">
-		</b-container>
+				<img src="../assets/images/SPINlogotext.png" alt="logo"style="width:200px;">
+			</b-container>
 			<b-container>
 			<h1> Sign In </h1	>
 			<br/>
@@ -14,7 +14,7 @@
 					id="inputLive"
 					v-model.trim="loginForm.email"
 					trim
-					required="true"
+					required
 					type="email"
 					:state="emailState"
 					aria-describedby="inputLiveHelp inputLiveFeedback"
@@ -27,7 +27,7 @@
 					id="inputLive"
 					v-model.trim="loginForm.password"
 					trim
-					required="true"
+					required
 					type="password"
 					:state="passState"
 					aria-describedby="inputLiveHelp inputLiveFeedback"
@@ -36,10 +36,9 @@
 			</div>
 			</div>
 			<b-button @click="login" class="button">Log In</b-button>
-
-		</b-container>
-	</b-jumbotron>
-</div>
+			</b-container>
+		</b-jumbotron>
+	</div>
 </template>
 
 <script>
