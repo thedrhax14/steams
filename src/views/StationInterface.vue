@@ -145,6 +145,7 @@ export default {
 			this.Index++
 			if(this.Index>3) {
 				var history = this.$store.state.history.filter(entry => entry.data.Status == "Reserved")
+				var ReservationsAtTheStation = this.$store.state.history.filter(entry => entry.data.Status == "Reserved" && entry.data['Start location'] == this.StationName)
 				for (var i = 0; i < history.length; i++) {
 					// console.log(history[i].data.PIN)
 					if(history[i].data.PIN.toString() == this.PINToString){
@@ -166,6 +167,8 @@ export default {
 						break;
 					}
 				}
+				if(ReservationsAtTheStation.length == 0 || history.length == 0 || !history || ReservationsAtTheStation)
+					alert('Nothing is booked at this station')
 				this.PIN = [-1, -1, -1, -1]
 				this.Index = 0
 			}
