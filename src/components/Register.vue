@@ -52,15 +52,15 @@
 <script>
 const fb = require('../firebaseConfig.js')
 export default {
-	computed:{
+	computed: {
 		nameState () {
-			return this.signupForm.name.length > 5? true : null
+			return this.signupForm.name.length > 5 ? true : null
 		},
-		emailState (){
-			return this.SignupForm.email.length >5? true : null
+		emailState () {
+			return this.SignupForm.email.length > 5 ? true : null
 		},
-		passState (){
-			return this.SignupForm.password.length >5? true : null
+		passState () {
+			return this.SignupForm.password.length > 5 ? true : null
 		}
 	},
 	name: 'Register',

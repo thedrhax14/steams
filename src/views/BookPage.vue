@@ -55,10 +55,9 @@ export default {
 		Location () {
 			return this.$store.state.selectedStation
 		},
-		DisplayName() {
-			if(this.$store.state.user)
-				return this.$store.state.user.displayName + "!"
-			return ""
+		DisplayName () {
+			if (this.$store.state.user) { return this.$store.state.user.displayName + '!' }
+			return ''
 		}
 	},
 	methods: {

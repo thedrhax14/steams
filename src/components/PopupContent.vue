@@ -27,12 +27,11 @@ export default {
 		}
 	},
 	computed: {
-		IsAvailable() {
+		IsAvailable () {
 			var result = false
-			this.$store.state.bikes.forEach(bike =>{
+			this.$store.state.bikes.forEach(bike => {
 				// console.log(bike.data.Reserved + ' == false ' + '&& ' + bike.data.Location + ' == ' + this.Location + " =",bike.data.Reserved == false && bike.data.Location == this.Location)
-				if(bike.data.Reserved == false && bike.data.Location == this.Location)
-					result |= true
+				if (bike.data.Reserved == false && bike.data.Location == this.Location) { result |= true }
 			})
 			return result
 		}

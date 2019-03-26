@@ -25,11 +25,11 @@ export default {
 			this.datacollection = {
 				labels: ['S', 'V'],
 				datasets: [
-				{
-					label: 'Data One',
-					backgroundColor: '#f87979',
-					data: [5,6,7, 8]
-				}
+					{
+						label: 'Data One',
+						backgroundColor: '#f87979',
+						data: [5, 6, 7, 8]
+					}
 				]
 			}
 		},
