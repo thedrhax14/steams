@@ -1,5 +1,4 @@
 <template>
-	<div class="wrap">
 	<b-jumbotron bg-variant="light" class="sm-8 md-8">
 	<b-container fluid>
 		<h2 class="page-title">Payment methods</h2>
@@ -29,7 +28,6 @@
 		</b-button>
 	</b-container>
 </b-jumbotron>
-</div>
 </template>
 
 <script>

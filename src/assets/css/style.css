@@ -1,7 +1,7 @@
 
 /*Body stylign*/
 body{
-  font-family:'Arial', sans-serif;
+  font-family:'Nunito', sans-serif;
   background-color:#f4f4f4;
   margin: 0;
   padding: 0;
@@ -14,6 +14,14 @@ body{
   text-align:center;
 }
 
+#type{
+  background-color: transparent;
+}
+
+.selected #type{
+  background-color: blue;
+}
+
 .bm-burger-bars{
   background-color:#fff;
 }
@@ -21,6 +29,7 @@ body{
 .bm-item-list span{
   font-family:'Nunito', sans-serif;
 }
+
 
 /*.bm-item-list {
   font-family: 'Arial';
@@ -199,6 +208,10 @@ and (max-width: 768px){
     font-size:25px;
   }
 
+  .card-body{
+    text-align: center;
+  }
+
   .sign-in-wrap img{
     width:200px;
     height: 200px;
@@ -329,8 +342,7 @@ and (max-width: 768px){
   }
 
   .wrap h2{
-    font-size:15px;
-    float:left;
+    font-size:20px;
   }
 
   .wrap h3{
@@ -355,6 +367,7 @@ and (max-width: 768px){
     color:#007bff;
     font-size: 15px;
     line-height: 25px;
+    padding-bottom:200px;
   }
 
   .wrap{
@@ -365,6 +378,7 @@ and (max-width: 768px){
 
   .extras a{
     cursor: pointer;
+    padding-bottom:200px;
   }
 }
 
@@ -431,6 +445,10 @@ and (max-width: 768px){
 a.btn-close:hover{
    font-size: 40px;
    background-color: transparent;
+}
+
+#logout{
+  color:#fff;
 }
 
 .side-nav .btn-close{
