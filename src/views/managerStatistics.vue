@@ -1,13 +1,17 @@
 <template>
-  <div class="small">
-    <h>
-      <button @click="popularbikes">Bikes</button>
+  <div class="charts">
+    <div class="b">
       <button @click="hours">Busy Hours</button>
+      <bar-chart :chart-data="PopularHours"></bar-chart>
+    </div>
+     <div class="a">
+      <button @click="popularbikes">Bikes</button>
+      <pie-chart :chart-data="MostPopularBikes"></pie-chart>
+    </div>
+    <div class="c">
       <button @click="location">Busy Locations</button>
-    </h>
-    <bar-chart :chart-data="MostPopularBikes"></bar-chart>
-    <line-chart :chart-data="PopularHours"></line-chart>
-    <pie-chart :chart-data="PopularLoc"></pie-chart>
+      <line-chart :chart-data="PopularLoc"></line-chart>
+    </div>
   </div>
 </template>
 
@@ -29,6 +33,16 @@
         PopularLoc: null
       }
     },
+   /* options: {
+        legend: {
+            display: true,
+            position: 'top',
+            labels: {
+                fontColor: 'rgb(255, 99, 132)'
+                ['hello']
+            }
+        }
+    },*/
     mounted () {
       this.popularbikes()
       this.hours(),
@@ -36,37 +50,39 @@
     },
     methods: {
       popularbikes () {
-        this.MostPopularBikes = {
+        this.MostPopularBikes= {
           labels: ['CB', 'MB','HB', 'RB', 'TB'],
           datasets: [
             {
               label: 'Most Popular Bikes',
               backgroundColor: '#f87979',
+              borderColor: '#fff',
+              hoverBackgroundColor: 'red',
               data: [this.count(), this.count(), this.count(), this.count(), this.count()]
             }
           ]
         }
       },
-      hours () {
+      hours() {
         this.PopularHours = {
-          labels: ['h', 'i'],
+          labels: ['10am', '12pm' , '2pm', '4pm', '6pm'],
           datasets: [
             {
               label: 'Busy Hours',
               backgroundColor: '#f87679',
-              data: [this.count(), this.count()]
+              data: [this.count(), this.count(),this.count(), this.count(), this.count()]
             }
           ]
         }
       },
       location () {
         this.PopularLoc = {
-          labels: ['h', 'i', 'j', 'k'],
+          labels: ['Hendersons', 'Old Town', 'Crewe Rd.', 'Queen St.' ,'Parsons Green Primary'],
           datasets: [
             {
               label: 'Busy Locations',
               backgroundColor: '#f87479',
-              data: [this.count(), this.count(), this.count(), this.count()]
+              data: [this.count(), this.count(), this.count(), this.count(), this.count()]
             }
           ]
         }
@@ -74,20 +90,31 @@
       count () {
         return Math.random() * (12)
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
       //getTime () {
         //return this.startTime()
       //}
-    }
+    },
   }
 </script>
 
 <style>
   .small {
+    max-width: 100%;
+  }
+  .b {
     max-width: 40%;
-    margin:  150px left;
+    margin-right: auto;
+    margin-left: auto;
+    
+  }
+  .a {
+    max-width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .c {
+    max-width: 40%;
+    margin-right: auto;
+    margin-left: auto;
   }
 </style>
