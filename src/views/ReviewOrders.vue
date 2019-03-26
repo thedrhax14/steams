@@ -11,7 +11,7 @@
 				v-if='ReviewOrders && ReviewOrders.length>0'
 				v-for="(order, index) in ReviewOrders"
 				v-bind:key='index'>
-				Order ID: {{ ParseIndex(index) }}
+				Order ID: {{ ParseIndex(order.id) }}
 				<div class="card-body">
 					<p class="card-text">
 						<ul class="card-list-reservation">

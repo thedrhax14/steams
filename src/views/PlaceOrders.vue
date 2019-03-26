@@ -14,12 +14,11 @@
 					</div>
 				</div>
 				<div class="card-body">
-
 					<div class="container-fluid" v-show="value ==='Repair'">
 						<i class="fas fa-info">&nbsp;&nbsp; Report faulty bikes, if it  unrepairable it will be replaced.</i>
 						<br>
 						<br>
-						<form action="">
+						<form>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputEmail4">Bike ID</label>
@@ -36,7 +35,7 @@
 								</div>
 							</div >
 							<div class="form-row">
-								<button type="submit" class="btn btn-danger mt-2" @click='submit ' 	:disabled='!IsFormComplete'>Confirm</button>
+								<b-button class="btn btn-danger mt-2" @click='submit' :disabled='!IsFormComplete'>Confirm</b-button>
 							</div>
 						</form>
 					</div>
@@ -44,7 +43,7 @@
 						<i class="fas fa-info">&nbsp;&nbsp; Send a bike to a different location.</i>
 						<br>
 						<br>
-						<form action="">
+						<form>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputEmail4">Bike ID</label>
@@ -61,7 +60,7 @@
 								</div>
 							</div >
 							<div class="form-row">
-								<button type="submit" class="btn btn-danger mt-2" @click='submit'>Confirm</button>
+								<b-button class="btn btn-danger mt-2" @click='submit'>Confirm</b-button>
 							</div>
 						</form>
 
@@ -70,7 +69,7 @@
 						<i class="fas fa-info">&nbsp;&nbsp; Order new bikes to be delivered to a specific docking station .</i>
 						<br>
 						<br>
-						<form action="">
+						<form>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputEmail4">Number of Bikes</label>
@@ -86,7 +85,7 @@
 									<input v-model="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
 								</div>
 							</div >
-							<button type="submit" class="btn btn-danger mt-2" @click='submit' 	:disabled='!IsFormComplete'>Confirm</button>
+							<b-button class="btn btn-danger mt-2" @click='submit' 	:disabled='!IsFormComplete'>Confirm</b-button>
 						</form>
 
 					</div>
@@ -129,6 +128,7 @@ export default {
 	},
 	methods: {
 		submit (evt) {
+			console.log('Submitting')
 			var rbid = null
 			var numberBikes = null
 			var bikeType = null

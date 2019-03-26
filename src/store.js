@@ -229,7 +229,7 @@ export const store = new Vuex.Store({
 		},
 		updateOrderInOrders ({ state }, data) {
 			console.log(data.oid, ' is updating ', data.doc)
-			fb.bikesCollection.doc(data.bid).update(data.doc)
+			fb.ordersCollection.doc(data.oid.toString()).set(data.doc)
 			/*
 				if any of the following properties gets changed the
 				db updates the fields respectively
