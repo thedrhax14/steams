@@ -11,7 +11,7 @@ fb.auth.onAuthStateChanged(user => {
 	if (user) {
 		store.commit('setUser', user)
 		UnsubFromUserCollection = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
-			// console.log('userSnapshot', userSnapshot.data())
+			console.log('userSnapshot', userSnapshot.data())
 			store.commit('setUserInfo', userSnapshot.data())
 			if(userSnapshot.data().PermissionLevel == 1){
 				// console.log('subscribing to ordersCollection',user.uid)
@@ -66,11 +66,8 @@ fb.historyCollection.onSnapshot((historySnapshot) => {
 fb.bikesCollection.onSnapshot((bikesSnapshot) => {
 	bikesSnapshot.docChanges().forEach(bikeChange => {
 		if (bikeChange.type === 'added') {
-			// console.log('New bike: ', bikeChange.doc.id)
+			console.log('New bike: ', bikeChange.doc.id)
 			store.commit('addBike', bikeChange.doc)
-			bikeChange.doc.data()['Lock ID'].get().then(lockSnapshot => {
-				console.log('lockSnapshot',lockSnapshot.data())
-			})
 		}
 		if (bikeChange.type === 'modified') {
 			// console.log('Modified bike: ', bikeChange.doc.id)
@@ -320,10 +317,32 @@ export const store = new Vuex.Store({
 				commit('setUser', fb.auth.user)
 				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
 				commit('setLoading', false)
-				commit('setUserInfo', val.data)
 			}).catch(error => {
 				console.log(error)
 			})
+		},
+		unlockBike({ commit, dispatch }, val) {
+			commit('setLoading', true)
+			console.log('unlocking', val)
+			fb.bikesCollection.doc(val.BikeID).get().then(bike => {
+				bike.data()['Lock ID'].update({
+					"Lock State":"unlocked"
+				})
+				dispatch('updateBikeInBikes',{
+					bid: val.BikeID,
+					doc: {
+						Location: null,
+						"Lock ID": null
+					}
+				})
+				commit('setLoading', false)
+			})
+			/*
+			Expected data structure:
+			{
+				BikeID: "InsertBikeIDHere"
+			}
+			*/
 		}
 	},
 	mutations: {

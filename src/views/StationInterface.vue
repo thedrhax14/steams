@@ -112,7 +112,8 @@ export default {
 		AvailableLocations() {
 			var locations = []
 			this.$store.state.bikes.forEach(bike => {
-				locations.push(bike.data.Location)
+				if(bike.data.Location)
+					locations.push(bike.data.Location)
 			})
 			locations = [...new Set(locations)]
 			return locations
@@ -147,7 +148,21 @@ export default {
 				for (var i = 0; i < history.length; i++) {
 					// console.log(history[i].data.PIN)
 					if(history[i].data.PIN.toString() == this.PINToString){
-						alert("Bike " + history[i].data.BikeID + " is unlocked")
+						// console.log('Start location',history[i].data['Start location'])
+						if(history[i].data['Start location'] != this.StationName) {
+							alert('Your bike is not at this station. Please proceed to ' + history[i].data['Start location'])
+							break;
+						}
+						alert("Bike " + history[i].data.BikeID + " is unlocked. HID: " + history[i].id)
+						this.$store.dispatch('updateHistory',{
+							id: history[i].id,
+							doc: {
+								Status: "Taken"
+							}
+						})
+						this.$store.dispatch('unlockBike',{
+							BikeID: history[i].data.BikeID
+						})
 						break;
 					}
 				}

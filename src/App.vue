@@ -65,7 +65,7 @@ export default {
 	},
 	computed: {
 		IsAvailable () {
-			return !this.$store.state.isStationInterfaceActive && this.$store.state.user
+			return !this.$store.state.isStationInterfaceActive && this.$store.state.user && this.$store.state.userInfo
 		},
 		IsLoggedIn () {
 			return this.$store.state.user
