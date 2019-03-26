@@ -1,8 +1,8 @@
 <template>
 	<b-jumbotron bg-variant="light" fluid>
-	<b-container>
+	<b-container fluid>
 		<b-row>
-			<h1>My reservations</h1>
+			<h2 class="page-title">My reservations</h2>
 		</b-row>
 		<b-row class="justify-content-md-center">
 			<b-card-group v-if='UserReservations.length>0'>
