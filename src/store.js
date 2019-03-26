@@ -229,7 +229,7 @@ export const store = new Vuex.Store({
 		},
 		updateOrderInOrders ({ state }, data) {
 			console.log(data.oid, ' is updating ', data.doc)
-			fb.bikesCollection.doc(data.bid).update(data.doc)
+			fb.ordersCollection.doc(data.oid.toString()).set(data.doc)
 			/*
 				if any of the following properties gets changed the
 				db updates the fields respectively
@@ -307,15 +307,14 @@ export const store = new Vuex.Store({
 				})
 			}
 		},
-		updateUserProfile ({ commit }, val) {
+		updateUserProfile ({ commit, state }, val) {
 			commit('setLoading', true)
 			console.log('Updating user profile. Displayed name will be ' + val.displayName)
-			fb.auth.user.updateProfile({
+			state.user.updateProfile({
 				displayName: val.displayName,
 				photoURL: 'https://example.com/jane-q-user/profile.jpg'
 			}).then(() => {
-				commit('setUser', fb.auth.user)
-				console.log('Userprofile updated. Displayed name is ' + fb.auth.user.displayName)
+				console.log('Userprofile updated. Displayed name is ' + state.user.displayName)
 				commit('setLoading', false)
 			}).catch(error => {
 				console.log(error)
