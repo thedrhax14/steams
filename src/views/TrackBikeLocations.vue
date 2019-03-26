@@ -19,7 +19,7 @@
               </div>
             </div>
           <div class="form-row">
-            <button  class="btn btn-danger mt-2" @click="getBikes" 	:disabled='!IsFormComplete'>Track</button>
+            <b-button  class="btn btn-danger mt-2" @click="getBikes" 	:disabled='!IsFormComplete'>Track</b-button>
           </div>
           </form>
         </b-col>
