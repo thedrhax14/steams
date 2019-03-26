@@ -14,7 +14,7 @@
 					id="inputLive"
 					v-model.trim="loginForm.email"
 					trim
-					required="true"
+					required
 					type="email"
 					:state="emailState"
 					aria-describedby="inputLiveHelp inputLiveFeedback"
@@ -27,7 +27,7 @@
 					id="inputLive"
 					v-model.trim="loginForm.password"
 					trim
-					required="true"
+					required
 					type="password"
 					:state="passState"
 					aria-describedby="inputLiveHelp inputLiveFeedback"

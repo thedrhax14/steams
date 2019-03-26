@@ -6,52 +6,44 @@
 				</b-container>
 				<b-container>
 				<br/>
-				<div clasaas="form-group">
+				<div class="form-group">
 					<div role="group">
-    <label for="inputLive">Fulll Name:</label>
-    <b-form-input
-      id="inputLive"
-      v-model="signupForm.fname"
-      trim
-      type="text"
-      :state="nameState"
-      aria-describedby="inputLiveHelp inputLiveFeedback"
-      placeholder="Enter your name"
-    />
-
-    <!-- This is a form text block (formerly known as help block) -->
-    <b-form-text id="inputLiveHelp">Your full name.</b-form-text>
-
-		<label for="inputLive">Email address:</label>
-    <b-form-input
-      id="inputLive"
-      v-model="signupForm.email"
-      trim
-      type="text"
-      :state="emailState"
-      aria-describedby="inputLiveHelp inputLiveFeedback"
-      placeholder="you@email.com"
-    />
-
-		<b-form-text id="inputLiveHelp">Provide a valid email address.</b-form-text>
-
-	<label for="inputLive"> Password:</label>
-	<b-form-input
-		id="inputLive"
-		v-model="signupForm.password"
-		trim
-		type="password"
-		:state="passState"
-		aria-describedby="inputLiveHelp inputLiveFeedback"
-		placeholder="*****"
-	/>
-			<b-form-invalid-feedback id="inputLiveFeedback">
-      	Enter at least 5 characters
-    	</b-form-invalid-feedback>
-			</div>
-		</div>
-		<br/>
-   <b-button @click="signup" class="button">Sign up</b-button>
+						<label for="inputLive">Full Name:</label>
+						<b-form-input
+							id="inputLive"
+							v-model.trim="signupForm.name"
+							trim
+							required
+							type="text"
+							:state="nameState"
+							aria-describedby="inputLiveHelp inputLiveFeedback"
+							placeholder="Full name"
+						/>
+						<label for="inputLive">Email address:</label>
+						<b-form-input
+							id="inputLive"
+							v-model.trim="signupForm.email"
+							trim
+							required
+							type="text"
+							:state="emailState"
+							aria-describedby="inputLiveHelp inputLiveFeedback"
+							placeholder="you@email.com"
+						/>
+						<label for="inputLive">Password:</label>
+						<b-form-input
+							id="inputLive"
+							v-model.trim="signupForm.password"
+							trim
+							required
+							type="password"
+							:state="emailState"
+							aria-describedby="inputLiveHelp inputLiveFeedback"
+							placeholder="******"
+						/>
+					</div>
+				</div>
+				<b-button @click="signup" class="button">Sign up</b-button>
 	</b-container>
 </b-jumbotron>
 </div>
@@ -65,20 +57,19 @@ export default {
 			return this.signupForm.name.length > 5 ? true : null
 		},
 		emailState () {
-			return this.SignupForm.email.length > 5 ? true : null
+			return this.signupForm.email.length > 5 ? true : null
 		},
 		passState () {
-			return this.SignupForm.password.length > 5 ? true : null
+			return this.signupForm.password.length > 5 ? true : null
 		}
 	},
 	name: 'Register',
 	data () {
 		return {
-			name:'',
 			signupForm: {
-				fname:'',
+				name: '',
 				email: '',
-				password: '',
+				password: ''
 			}
 		}
 	},
@@ -97,7 +88,7 @@ export default {
 				fb.usersCollection.doc(user.user.uid).set({
 					Type: 'Customer'
 				}).then(() => {
-					this.$router.push('/')
+					this.$router.push('/profile')
 					this.$store.state.loading = false
 				}).catch(err => {
 					this.errorMsg = err.message
