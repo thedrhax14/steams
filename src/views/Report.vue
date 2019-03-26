@@ -56,6 +56,7 @@
     <b-button class="btn btn-primary" @click="okButton">OK</b-button>
   </b-modal>
 </div>
+<a style="text-align:center;" href="/">Return to book a bike</a>
 </b-container>
 </b-jumbotron>
 </template>

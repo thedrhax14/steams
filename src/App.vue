@@ -3,9 +3,9 @@
 		<LoadingDisplay/>
 		<Push v-if='IsAvailable' width="250">
 			<span>
-			<a  v-if="this.$store.state.userInfo.PermissionLevel == 0"><img src="@/../public/danny-pej.png"></a>
-			<a  v-if="this.$store.state.userInfo.PermissionLevel == 1"><img src="@/../public/operator.png" style="height:120px; margin-left: 50px;"></a>
-			<a  v-if="this.$store.state.userInfo.PermissionLevel == 2"><img src="@/../public/manager.png"  style="height:120px; margin-left: 50px;"></a>
+			<h1  v-if="this.$store.state.userInfo.PermissionLevel == 0">User</h1>
+			<h1  v-if="this.$store.state.userInfo.PermissionLevel == 1">operator</h1>
+			<h1  v-if="this.$store.state.userInfo.PermissionLevel == 2">Manager</h1>
 		</span>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-bicycle fa-sm">
 				<span>Reserve bike</span>
