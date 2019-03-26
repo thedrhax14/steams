@@ -16,7 +16,7 @@
 						<b-list-group-item
 							v-for='BikeType in OptionsOfBikeTypesAtLocation'
 							button
-							@click='Select(BikeType.id)'>
+							@click='Select(BikeType)'>
 							<div id="type" v-on:click="selected = !selected" v-bind:class="{selected: selected}">
 							<img :src='GetImage(BikeType.id)' style="width:60%">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
@@ -49,7 +49,7 @@
 					Time: {{ StartTime }}
 				</p>
 				<hr>
-				<p v-if='AvailableBikeAtLocationByBikeTypeID'> TOTAL: {{ AvailableBikeAtLocationByBikeTypeID.data.Price }} €</p>
+				<p v-if='BikeType'> TOTAL: {{ BikeType.data.Price }} €</p>
 			</div>
 			<b-row align="center">
 				<b-button
@@ -83,7 +83,8 @@ export default {
 		return {
 			StartDate: '',
 			StartTime: '',
-			selected:true
+			selected:true,
+			BikeType:null
 		}
 	},
 	computed: {
@@ -146,9 +147,10 @@ export default {
 		GetImage (BikTypeID) {
 			return 'https://thedrhax14eng.files.wordpress.com/2019/03/' + BikTypeID.toLowerCase() + '.png'
 		},
-		Select (id) {
-			console.log('commit setSelectedBikeTypeId', id)
-			this.$store.commit('setSelectedBikeTypeId', id)
+		Select (BikeType) {
+			console.log('commit setSelectedBikeTypeId', BikeType.id)
+			this.BikeType = BikeType
+			this.$store.commit('setSelectedBikeTypeId', BikeType.id)
 		},
 		Reset (evt) {
 			this.$store.commit('setSelectedBikeTypeId', '')
