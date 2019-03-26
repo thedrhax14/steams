@@ -74,16 +74,20 @@
       count () {
         return Math.random() * (12)
       },
-      getTime () {
-        return this.startTime()
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
       }
+      //getTime () {
+        //return this.startTime()
+      //}
     }
   }
 </script>
 
 <style>
   .small {
-    max-width: 600px;
-    margin:  150px auto;
+    max-width: 40%;
+    margin:  150px left;
   }
 </style>
