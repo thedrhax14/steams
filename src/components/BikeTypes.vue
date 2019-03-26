@@ -143,7 +143,7 @@ export default {
 			})
 			this.$router.push('/reservations')
 		},
-		GetImage(BikTypeID){
+		GetImage (BikTypeID) {
 			return 'https://thedrhax14eng.files.wordpress.com/2019/03/' + BikTypeID.toLowerCase() + '.png'
 		},
 		Select (id) {

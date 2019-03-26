@@ -59,6 +59,15 @@ export default {
 			this.NewCardData.cvv.length == 3
 		}
 	},
+	cHolderState () {
+		return this.NewCardData['Card holder'].length > 5 ? true : null
+	},
+	cNumberState () {
+		return this.NewCardData['Card number'].length > 5 ? true : null
+	},
+	expDate () {
+		return this.ExpireDate.length > 5 ? true : null
+	},
 	methods: {
 		addNewCard () {
 			this.$store.commit('addUserPaymentMethod', this.NewCardData)
