@@ -2,7 +2,11 @@
 	<div id="app">
 		<LoadingDisplay/>
 		<Push v-if='IsAvailable' width="250">
-			<span><h1>Menu</h1></span>
+			<span>
+			<a  v-if="this.$store.state.userInfo.PermissionLevel == 0"><img src="@/../public/danny-pej.png"></a>
+			<a  v-if="this.$store.state.userInfo.PermissionLevel == 1"><img src="@/../public/operator.png" style="height:120px; margin-left: 50px;"></a>
+			<a  v-if="this.$store.state.userInfo.PermissionLevel == 2"><img src="@/../public/manager.png"  style="height:120px; margin-left: 50px;"></a>
+		</span>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-bicycle fa-sm">
 				<span>Reserve bike</span>
 			</router-link>
