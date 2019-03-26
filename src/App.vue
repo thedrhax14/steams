@@ -2,7 +2,7 @@
 	<div id="app">
 		<LoadingDisplay/>
 		<Push v-if='IsAvailable' width="250">
-			<span><h1>Menu</h1></span>
+			<span><h1>  {{  this.$store.state.userInfo.Type }} </h1></span>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-bicycle fa-sm">
 				<span>Reserve bike</span>
 			</router-link>
@@ -67,6 +67,7 @@ export default {
 		IsLoggedIn () {
 			return this.$store.state.user
 		}
+
 	},
 	created () {
 		console.log('dispatch \'fetchBikeTypes\' on created in app.vue')

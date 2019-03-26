@@ -36,7 +36,7 @@
 					 </div>
 					 </div >
 						 <div class="form-row">
-						<button type="submit" class="btn btn-danger mt-2" @click='submit ' 	:disabled='!IsFormComplete'>Confirm</button>
+						<b-button  class="btn btn-danger mt-2" @click='submit ' 	:disabled='!IsFormComplete' >Confirm</b-button>
 				 </div>
 				 </form>
 					 </div>
@@ -61,7 +61,7 @@
 							</div>
 							</div >
 								<div class="form-row">
-							<button type="submit" class="btn btn-danger mt-2" @click='submit'>Confirm</button>
+							<b-button  class="btn btn-danger mt-2" @click='submit'>Confirm</b-button>
 						</div>
 						</form>
 
@@ -86,7 +86,7 @@
 				<input v-model="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
 			</div>
 			</div >
-			<button type="submit" class="btn btn-danger mt-2" @click='submit' 	:disabled='!IsFormComplete'>Confirm</button>
+			<b-button  class="btn btn-danger mt-2" @click='submit' 	:disabled='!IsFormComplete'>Confirm</b-button>
 						</form>
 
 							</div>

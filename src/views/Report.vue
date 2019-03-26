@@ -53,7 +53,7 @@
   >Report</b-button>
   <b-modal id="modal-center" style="height:100px;" centered title="Thank you!">
     <p class="my-4">Your feedback has been received.</p>
-    <b-button class="btn btn-primary" @click="okButton">OK</b-button>
+    <b-button class="btn btn-primary" @click="okButton" :disabled='!IsFormComplete' >OK</b-button>
   </b-modal>
 </div>
 </b-container>
@@ -96,6 +96,9 @@ export default {
     }
   },
   computed:{
+    sFormComplete () {
+			if (this.value === 'Repair' || this.value === 'Redistribute') { return this.repairBID != '' && this.address != '' } else { return this.selected != 'none' && this.number != 0 && this.address != '' }
+		},
     IdInputState (){
       this.reportForm.bikeIdInput.length == 7? true : false
     },
