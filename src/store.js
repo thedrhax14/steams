@@ -37,7 +37,8 @@ fb.auth.onAuthStateChanged(user => {
 			console.log('usersCollection listener failed. Here is error:', error)
 		})
 	} else {
-		UnsubFromUserCollection()
+		if(UnsubFromUserCollection)
+			UnsubFromUserCollection()
 		if(UnsubFromOrdersCollection)
 			UnsubFromOrdersCollection()
 	}

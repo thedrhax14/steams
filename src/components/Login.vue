@@ -2,8 +2,8 @@
 	<div>
 		<b-jumbotron  fluid>
 			<b-container>
-			<img src="../assets/images/SPINlogotext.png" alt="logo"style="width:200px;">
-		</b-container>
+				<img src="../assets/images/SPINlogotext.png" alt="logo"style="width:200px;">
+			</b-container>
 			<b-container>
 			<h1> Sign In </h1	>
 			<br/>
@@ -36,10 +36,9 @@
 			</div>
 			</div>
 			<b-button @click="login" class="button">Log In</b-button>
-
-		</b-container>
-	</b-jumbotron>
-</div>
+			</b-container>
+		</b-jumbotron>
+	</div>
 </template>
 
 <script>
