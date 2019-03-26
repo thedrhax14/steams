@@ -49,7 +49,7 @@
 					Time: {{ StartTime }}
 				</p>
 				<hr>
-				<!--<p> TOTAL: {{ BikeType.data.Price }} €</p>-->
+				<p v-if='AvailableBikeAtLocationByBikeTypeID'> TOTAL: {{ AvailableBikeAtLocationByBikeTypeID.data.Price }} €</p>
 			</div>
 			<b-row align="center">
 				<b-button
