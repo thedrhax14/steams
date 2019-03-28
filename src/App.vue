@@ -2,7 +2,11 @@
 	<div id="app">
 		<LoadingDisplay/>
 		<Push v-if='IsAvailable' width="250">
-			<span><h1>  {{  this.$store.state.userInfo.Type }} </h1></span>
+			<span>
+			<a  v-if="this.$store.state.userInfo.PermissionLevel == 0"><img src="@/../public/danny-pej.png"></a>
+			<a  v-if="this.$store.state.userInfo.PermissionLevel == 1"><img src="@/../public/operator.png" style="height:120px; margin-left: 50px;"></a>
+			<a  v-if="this.$store.state.userInfo.PermissionLevel == 2"><img src="@/../public/manager.png"  style="height:120px; margin-left: 50px;"></a>
+		</span>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 0' to="/" class="fas fa-bicycle fa-sm">
 				<span>Reserve bike</span>
 			</router-link>
@@ -26,6 +30,9 @@
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/trackbl" class="fas fa-map-marked-alt">
 				<span>Track bike</span>
+			</router-link>
+			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 1' to="/stationinterface">
+				<span>Setup station</span>
 			</router-link>
 			<router-link v-if='this.$store.state.userInfo.PermissionLevel == 2' to="/manStats" class="fas fa fa-chart-bar">
 				<span>Statistics</span>

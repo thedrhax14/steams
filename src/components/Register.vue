@@ -78,17 +78,17 @@ export default {
 		signup () {
 			this.$store.state.loading = true
 			fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
+				this.$store.commit('setUser', user.user)
 				this.$store.dispatch('updateUserProfile', {
 					displayName: this.signupForm.name
 				})
-				this.$store.commit('setUser', user.user)
-				fb.usersCollection.doc(user.user.uid).update({
+				fb.usersCollection.doc(user.user.uid).set({
 					PermissionLevel: 0,
 					SelectedPaymentMethod: -1,
 					PaymentMethods: [],
 					Type: 'Customer'
 				}).then(() => {
-					console.log('User info success',err)
+					console.log('User info success')
 					this.$router.push('/profile')
 					this.$store.state.loading = false
 				}).catch(err => {

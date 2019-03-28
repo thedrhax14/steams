@@ -23,7 +23,7 @@
           Enter at least 7 characters
     </b-form-invalid-feedback>
     <br>
-    <label for="inputLive">What would you like to report about?:</label>
+    <label for="inputLive">What would you like to report about?</label>
     <b-form-select
      v-model="reportForm.selected"
      class="mb-3"

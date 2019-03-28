@@ -29,6 +29,9 @@
 								<b-list-group-item>
 									Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}
 								</b-list-group-item>
+								<b-list-group-item>
+									<b-button block @click='deleteReservation(index)' variant='outline-danger'>Cancel</b-button>
+								</b-list-group-item>
 							</b-list-group>
 							<b-list-group v-else-if='reservation.data.Status == "Cancelled"'>
 								<b-list-group-item>
