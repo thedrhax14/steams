@@ -53,10 +53,9 @@
   >Report</b-button>
   <b-modal id="modal-center" style="height:100px;" centered title="Thank you!">
     <p class="my-4">Your feedback has been received.</p>
-    <b-button class="btn btn-primary" @click="okButton">OK</b-button>
   </b-modal>
 </div>
-<a style="text-align:center;" href="/">Return to book a bike</a>
+<b-button block style="text-align:center;" href="/">Return to book a bike</b-button>
 </b-container>
 </b-jumbotron>
 </template>
