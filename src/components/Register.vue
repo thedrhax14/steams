@@ -82,13 +82,13 @@ export default {
 				this.$store.dispatch('updateUserProfile', {
 					displayName: this.signupForm.name
 				})
-				fb.usersCollection.doc(user.user.uid).update({
+				fb.usersCollection.doc(user.user.uid).set({
 					PermissionLevel: 0,
 					SelectedPaymentMethod: -1,
 					PaymentMethods: [],
 					Type: 'Customer'
 				}).then(() => {
-					console.log('User info success',err)
+					console.log('User info success')
 					this.$router.push('/profile')
 					this.$store.state.loading = false
 				}).catch(err => {
