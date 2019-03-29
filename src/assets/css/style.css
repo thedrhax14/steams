@@ -22,36 +22,10 @@ body{
   background-color: blue;
 }
 
-.bm-burger-bars{
-  background-color:#fff;
-}
-
 #logout{
   color:#000;
 }
 
-.bm-item-list span{
-  font-family:'Nunito', sans-serif;
-}
-
-
-.bm-item-list {
-  font-family: 'Arial';
-}
-
-.bm-item-list a, .bm-item-list span {
-  color:#000;
-  text-decoration:none;
-}
-
-.bm-item-list a:hover, .bm-item-list span:hover{
-  background-color: #fff;
-  color:red;
-}
-
-.bm-menu{
-  background-color: #f2f2f2;
-}
 .res-message{
   text-align: center;
   padding-top: 20px;
