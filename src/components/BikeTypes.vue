@@ -39,8 +39,11 @@
 			</b-row>
 			<div style="text-align:center;" class="booking-summary">
 				 <h4>Booking summary:</h4>
+				 <p> <i class="fas fa-credit-card"></i>&nbsp;
+				 Payment method:
+				 Card ending in ** {{ this.$store.state.userInfo.PaymentMethods[this.$store.state.userInfo.SelectedPaymentMethod]['Card number'].slice(14, 16) }} </p>
 				<p v-if='AvailableBikeAtLocationByBikeTypeID'>
-					Bike ID: {{ AvailableBikeAtLocationByBikeTypeID.id }}
+					Bike type: {{ BikeType.data['Type name'] }}
 				</p>
 				<p v-if='StartDate'>
 					Date: {{ StartDate }}
