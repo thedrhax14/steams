@@ -37,22 +37,52 @@
 							<strong> Start time: </strong>
 							<b-form-input type="time" v-model='StartTime'/>
 						</b-row>
-						<div style="text-align:center;" class="booking-summary">
-							 <h4>Booking summary:</h4>
+						<b-row>
+							<h4>
+								Booking summary:
+							</h4>
+						</b-row>
+						<b-row>
 							<p v-if='AvailableBikeAtLocationByBikeTypeID'>
 								Bike ID: {{ AvailableBikeAtLocationByBikeTypeID.id }}
 							</p>
+							<p v-else>
+								...
+							</p>
+						</b-row>
+						<b-row>
 							<p v-if='StartDate'>
 								Date: {{ StartDate }}
 							</p>
+							<p v-else>
+								...
+							</p>
+						</b-row>
+						<b-row>
 							<p v-if='StartTime'>
 								Time: {{ StartTime }}
 							</p>
-							<hr>
-							<p v-if='BikeType'> TOTAL: {{ BikeType.data.Price }} €</p>
-						</div>
+							<p v-else>
+								...
+							</p>
+						</b-row>
 						<b-row>
-							<PaymentMethods/>
+							<p v-if='BikeType'>
+								TOTAL: {{ BikeType.data.Price }} €
+							</p>
+						</b-row>
+						<b-row v-if='IsPaymentMethodSelected == false'>
+							<b-alert show variant="light" style="font-size: 15px; width:100%">
+								You haven't added a payement method yet
+								<b-button 
+									@click="$router.push('/newCard')" 
+									block 
+									variant="danger">
+									<i class="fas fa-plus">
+										Add a payement method
+									</i>
+								</b-button>
+							</b-alert>
 						</b-row>
 						<b-row align="center">
 							<b-button
@@ -80,13 +110,8 @@
 </template>
 
 <script>
-import PaymentMethods from '@/components/PaymentMethods.vue'
-
 export default {
 	name: 'BikeTypes',
-	components: {
-		PaymentMethods
-	},
 	data () {
 		return {
 			StartDate: '',
@@ -136,6 +161,9 @@ export default {
 		},
 		FormTitle () {
 			return 'Available book types at ' + this.$store.state.selectedStation
+		},
+		IsPaymentMethodSelected() {
+			return this.$store.state.userInfo.SelectedPaymentMethod != -1
 		}
 	},
 	methods: {

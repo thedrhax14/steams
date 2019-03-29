@@ -20,7 +20,7 @@
 		</p>
 		<br/>
 		<b-button v-if='DisplayAddButton == true' @click="$router.push('/newCard')" block variant="danger">
-			<i class="fas fa-plus"></i> &nbsp;
+			<i class="fas fa-plus"></i>
 			Add a payement method
 		</b-button>
 	</b-container>

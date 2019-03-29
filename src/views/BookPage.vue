@@ -27,7 +27,7 @@
 				</mapbox>
 			</div>
 		</div>
-		<BikeTypes/>
+		<Booking/>
 	</div>
 </template>
 
@@ -35,12 +35,12 @@
 import Mapbox from 'mapbox-gl-vue'
 import Vue from 'vue'
 import PopupContent from '@/components/PopupContent.vue'
-import BikeTypes from '@/components/BikeTypes.vue'
+import Booking from '@/components/Booking.vue'
 
 export default {
 	components: {
 		Mapbox,
-		BikeTypes
+		Booking
 	},
 	data () {
 		return {
