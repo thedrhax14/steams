@@ -37,7 +37,7 @@
 						trim
 						required
 						type="password"
-						:state="emailState"
+						:state="passState"
 						aria-describedby="inputLiveHelp inputLiveFeedback"
 						placeholder="******"
 					/>
@@ -60,7 +60,7 @@ export default {
 			return this.signupForm.email.length > 5 ? true : null
 		},
 		passState () {
-			return this.signupForm.password.length > 5 ? true : null
+			return this.signupForm.password.length > 5 ? true : false
 		}
 	},
 	name: 'Register',
