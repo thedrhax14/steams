@@ -148,7 +148,7 @@ export default {
 					"Bike Type": bikeType,
 					Location: this.address,
 					NumberOfBikes: numberBikes,
-					"Order type": this.value,
+					"Order Type": this.value,
 					Status: "Pending",
 					uid: this.$store.state.user.uid
 				}
