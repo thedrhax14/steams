@@ -20,7 +20,7 @@
 							<div id="type" v-on:click="selected = !selected" v-bind:class="{selected: selected}">
 							<img :src='GetImage(BikeType.id)' style="width:60%">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
-							<strong>{{ BikeType.data.Price }} €/hr</strong>
+							<strong>{{ BikeType.data.Price }} £/hr</strong>
 							</div>
 						</b-list-group-item>
 				</b-list-group>
