@@ -8,9 +8,9 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="orders btn-group" role="group" aria-label="First group">
-						<button type="button" class="btn btn-danger btn-lg mt-2"  @click="value = 'Repair'">Repair Bikes</button>
-						<button type="button" class="btn btn-danger btn-lg mt-2"  @click="value = 'Redistribute'">Redistribute Bikes</button>
-						<button type="button" class="btn btn-danger btn-lg  mt-2" @click=" value ='New Bikes' ">Order New Bikes</button>
+						<button type="button" class="btn btn-danger btn-lg mt-2"  @click="value = 'Repair',orderPlaced = false">Repair Bikes</button>
+						<button type="button" class="btn btn-danger btn-lg mt-2"  @click="value = 'Redistribute',orderPlaced = false">Redistribute Bikes</button>
+						<button type="button" class="btn btn-danger btn-lg  mt-2" @click=" value ='New Bikes',orderPlaced = false ">Order New Bikes</button>
 					</div>
 				</div>
 				<div class="card-body">
@@ -91,6 +91,7 @@
 					</div>
 
 				</div>
+					<div v-show="orderPlaced">  <b-alert show variant="light"><i class="far fa-check-square"></i>      Your order has been placed.</b-alert></div>
 			</div>
 		</b-jumbotron>
 	</div>
@@ -103,6 +104,7 @@ export default {
 	data () {
 		return {
 			fluid: true,
+			orderPlaced: false,
 			value: 'Repair', // to display the appropriate div
 			number: 0, // number of bikes to order
 			address: '',
@@ -122,7 +124,7 @@ export default {
 		IsFormComplete () {
 			if (this.value === 'Repair' || this.value === 'Redistribute') { return this.repairBID != '' && this.address != '' } else { return this.selected != 'none' && this.number != 0 && this.address != '' }
 		},
-		GetNextOID() {
+		GetNextOID () {
 			return this.$store.state.orders.length
 		}
 	},
@@ -144,15 +146,17 @@ export default {
 			this.$store.dispatch('updateOrderInOrders', {
 				oid: this.GetNextOID,
 				doc: {
-					BikeID: rbid,
-					"Bike Type": bikeType,
+					'Bike ID': rbid,
+					'Bike Type': bikeType,
 					Location: this.address,
 					NumberOfBikes: numberBikes,
-					"Order type": this.value,
-					Status: "Pending",
+					'Order Type': this.value,
+					Status: 'Pending',
 					uid: this.$store.state.user.uid
 				}
 			})
+			this.orderPlaced = true
+			this.value = 'bla'
 		}
 	}
 

@@ -1,45 +1,46 @@
 <template>
-			<div>
-				<b-jumbotron fluid>
-					<b-container>
-					  <h1>Reset Password</h1>
-					</b-container>
-					<b-container>
-					<br/>
-					<div clasaas="form-group">
-						<div role="group">
-	    <label for="inputLive">Email:</label>
-	    <b-form-input
-	      id="inputLive"
-	      v-model="passwordForm.email"
-	      trim
-	      type="text"
-	      :state="emailState"
-	      aria-describedby="inputLiveHelp inputLiveFeedback"
-	      placeholder="you@email.com"
-	    />
-		<p>We will send you an email to reset your password!</p>
-		<b-button @click="resetPassword" class="button">Submit</b-button>
+	<div>
+		<b-jumbotron fluid>
+			<b-container>
+				<h1>
+					Reset Password
+				</h1>
+			</b-container>
+			<b-container>
+				<br/>
+				<div clasaas="form-group">
+					<div role="group">
+		 				<label for="inputLive">Email:</label>
+						<b-form-input
+							id="inputLive"
+							v-model="passwordForm.email"
+							trim
+							type="text"
+							:state="emailState"
+							aria-describedby="inputLiveHelp inputLiveFeedback"
+							placeholder="you@email.com"/>
+						<p>We will send you an email to reset your password!</p>
+						<b-button @click="resetPassword" class="button">Submit</b-button>
+					</div>
+				</div>
+			</b-container>
+		</b-jumbotron>
 	</div>
-</div>
-</b-container>
-</b-jumbotron>
-</div>
 </template>
 
 <script>
 const fb = require('../firebaseConfig.js')
 
 export default {
-	computed :{
-		emailState (){
+	computed: {
+		emailState () {
 			return this.passwordForm.email.length > 5 ? true : null
 		}
 	},
 	name: 'RestorePass',
 	data () {
 		return {
-			name:'',
+			name: '',
 			passwordForm: {
 				email: ''
 			},

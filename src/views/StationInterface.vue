@@ -72,8 +72,8 @@
 							variant="primary"
 							:text="StationName"
 							class="m-2">
-							<b-dropdown-item 
-								v-for='Location in AvailableLocations' 
+							<b-dropdown-item
+								v-for='Location in AvailableLocations'
 								@click='SetStationName(Location)'>
 								{{ Location }}
 							</b-dropdown-item>
@@ -109,66 +109,64 @@ export default {
 		}
 	},
 	computed: {
-		AvailableLocations() {
+		AvailableLocations () {
 			var locations = []
 			this.$store.state.bikes.forEach(bike => {
-				if(bike.data.Location)
-					locations.push(bike.data.Location)
+				if (bike.data.Location) { locations.push(bike.data.Location) }
 			})
 			locations = [...new Set(locations)]
 			return locations
 		},
-		TypedPIN() {
+		TypedPIN () {
 			return this.PIN
 		},
-		BikesAtStation() {
+		BikesAtStation () {
 			return this.$store.state.bikes.filter(bike => bike.data.Location == this.StationName)
 		},
-		PINToString() {
+		PINToString () {
 			return this.PIN[0].toString() + this.PIN[1].toString() + this.PIN[2].toString() + this.PIN[3].toString()
 		}
 	},
 	methods: {
-		SetStationName(StationName){
+		SetStationName (StationName) {
 			this.StationName = StationName
 		},
-		Reset() {
+		Reset () {
 			this.PIN = [-1, -1, -1, -1]
 			this.Index = 0
 		},
-		FinishSetup() {
+		FinishSetup () {
 			this.$store.commit('SetIsStationInterfaceActive', true)
 			this.StationIsActive = true
 		},
-		TypeInput(val) {
+		TypeInput (val) {
 			this.PIN[this.Index] = val
 			this.Index++
-			if(this.Index>3) {
-				var history = this.$store.state.history.filter(entry => entry.data.Status == "Reserved")
-				var ReservationsAtTheStation = this.$store.state.history.filter(entry => entry.data.Status == "Reserved" && entry.data['Start location'] == this.StationName)
+			if (this.Index > 3) {
+				var history = this.$store.state.history.filter(entry => entry.data.Status == 'Reserved')
+				var ReservationsAtTheStation = this.$store.state.history.filter(entry => entry.data.Status == 'Reserved' && entry.data['Start location'] == this.StationName)
 				for (var i = 0; i < history.length; i++) {
 					// console.log(history[i].data.PIN)
-					if(history[i].data.PIN.toString() == this.PINToString){
+					if (history[i].data.PIN.toString() == this.PINToString) {
 						// console.log('Start location',history[i].data['Start location'])
-						if(history[i].data['Start location'] != this.StationName) {
+						if (history[i].data['Start location'] != this.StationName) {
 							alert('Your bike is not at this station. Please proceed to ' + history[i].data['Start location'])
-							break;
+							break
 						}
-						alert("Bike " + history[i].data.BikeID + " is unlocked. HID: " + history[i].id)
-						this.$store.dispatch('updateHistory',{
+						alert('Bike ' + history[i].data.BikeID + ' is unlocked. HID: ' + history[i].id)
+						this.$store.dispatch('updateHistory', {
 							id: history[i].id,
 							doc: {
-								Status: "Taken"
+								Status: 'Taken'
 							}
 						})
-						this.$store.dispatch('unlockBike',{
+						this.$store.dispatch('unlockBike', {
 							BikeID: history[i].data.BikeID
 						})
-						break;
+						break
 					}
 				}
-				if(ReservationsAtTheStation.length == 0 || history.length == 0 || !history || ReservationsAtTheStation)
-					alert('Nothing is booked at this station')
+				if (ReservationsAtTheStation.length == 0 || history.length == 0 || !history || ReservationsAtTheStation) { alert('Nothing is booked at this station') }
 				this.PIN = [-1, -1, -1, -1]
 				this.Index = 0
 			}

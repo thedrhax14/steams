@@ -13,7 +13,7 @@ fb.auth.onAuthStateChanged(user => {
 		UnsubFromUserCollection = fb.usersCollection.doc(user.uid).onSnapshot((userSnapshot) => {
 			console.log('userSnapshot', userSnapshot.data())
 			store.commit('setUserInfo', userSnapshot.data())
-			if(userSnapshot.data().PermissionLevel == 1){
+			if (userSnapshot.data().PermissionLevel === 1) {
 				// console.log('subscribing to ordersCollection',user.uid)
 				UnsubFromOrdersCollection = fb.ordersCollection.onSnapshot(ordersSnapshot => {
 					// console.log('ordersSnapshot', ordersSnapshot)
@@ -30,17 +30,15 @@ fb.auth.onAuthStateChanged(user => {
 				}, (error) => {
 					console.log('ordersCollection listener failed. Here is error:', error)
 				})
-			} else if(UnsubFromOrdersCollection){
+			} else if (UnsubFromOrdersCollection) {
 				UnsubFromOrdersCollection()
 			}
 		}, (error) => {
 			console.log('usersCollection listener failed. Here is error:', error)
 		})
 	} else {
-		if(UnsubFromUserCollection)
-			UnsubFromUserCollection()
-		if(UnsubFromOrdersCollection)
-			UnsubFromOrdersCollection()
+		if (UnsubFromUserCollection) { UnsubFromUserCollection() }
+		if (UnsubFromOrdersCollection) { UnsubFromOrdersCollection() }
 	}
 })
 
@@ -144,8 +142,8 @@ export const store = new Vuex.Store({
 		},
 		fetchOrders ({ commit, state }) {
 			commit('setLoading', true)
-			commit('setOrders',[])
-			fb.ordersCollection.where("uid","==",state.user.uid).get().then(ordersSnapshot => {
+			commit('setOrders', [])
+			fb.ordersCollection.where('uid', '==', state.user.uid).get().then(ordersSnapshot => {
 				ordersSnapshot.forEach(orderDoc => {
 					commit('addOrder', orderDoc)
 				})
@@ -302,7 +300,7 @@ export const store = new Vuex.Store({
 				dispatch('updateBikeInBikes', {
 					bid: data.doc.BikeID,
 					doc: {
-						Reserved: data.doc.Status != 'Cancelled'
+						Reserved: data.doc.Status !== 'Cancelled'
 					}
 				})
 			}
@@ -320,18 +318,18 @@ export const store = new Vuex.Store({
 				console.log(error)
 			})
 		},
-		unlockBike({ commit, dispatch }, val) {
+		unlockBike ({ commit, dispatch }, val) {
 			commit('setLoading', true)
 			console.log('unlocking', val)
 			fb.bikesCollection.doc(val.BikeID).get().then(bike => {
 				bike.data()['Lock ID'].update({
-					"Lock State":"unlocked"
+					'Lock State': 'unlocked'
 				})
-				dispatch('updateBikeInBikes',{
+				dispatch('updateBikeInBikes', {
 					bid: val.BikeID,
 					doc: {
 						Location: null,
-						"Lock ID": null
+						'Lock ID': null
 					}
 				})
 				commit('setLoading', false)
@@ -383,7 +381,7 @@ export const store = new Vuex.Store({
 		},
 		updateHistory (state, val) {
 			for (var i = 0; i < state.history.length; i++) {
-				if (state.history[i].id == val.id) {
+				if (state.history[i].id === val.id) {
 					state.history[i].data = val.data()
 					break
 				}
@@ -400,7 +398,7 @@ export const store = new Vuex.Store({
 		},
 		updateBike (state, val) {
 			for (var i = 0; i < state.bikes.length; i++) {
-				if (state.bikes[i].id == val.id) {
+				if (state.bikes[i].id === val.id) {
 					state.bikes[i].data = val.data()
 					break
 				}
@@ -417,7 +415,7 @@ export const store = new Vuex.Store({
 		},
 		updateOrder (state, val) {
 			for (var i = 0; i < state.order.length; i++) {
-				if (state.order[i].id == val.id) {
+				if (state.order[i].id === val.id) {
 					state.order[i].data = val.data()
 					break
 				}

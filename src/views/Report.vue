@@ -78,32 +78,35 @@
 
 <script>
 export default {
-  name:'Report',
+	name: 'Report',
 	data () {
 		return {
-      text:'',
-      name:'',
-      reportForm:{
-        bikeIdInput: '',
-        selected: null,
-        messageInput: ''
-      }
+			text: '',
+			name: '',
+			reportForm: {
+				bikeIdInput: '',
+				selected: null,
+				messageInput: ''
+			}
 		}
 	},
-  methods:{
-    okButton(){
-      this.$router.push('/')
-    }
-  },
-  computed:{
-    IdInputState (){
-      this.reportForm.bikeIdInput.length == 7? true : false
-    },
-    IsFormComplete () {
+	methods: {
+		okButton () {
+			this.$router.push('/')
+		}
+	},
+	computed: {
+		sFormComplete () {
+			if (this.value === 'Repair' || this.value === 'Redistribute') { return this.repairBID != '' && this.address != '' } else { return this.selected != 'none' && this.number != 0 && this.address != '' }
+		},
+		IdInputState () {
+			this.reportForm.bikeIdInput.length == 7
+		},
+		IsFormComplete () {
 			return this.reportForm.bikeIdInput != '' &&
         this.reportForm.selected != null &&
         this.reportForm.messageInput != ''
 		}
-  }
+	}
 }
 </script>
