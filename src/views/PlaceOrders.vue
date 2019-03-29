@@ -124,7 +124,7 @@ export default {
 		IsFormComplete () {
 			if (this.value === 'Repair' || this.value === 'Redistribute') { return this.repairBID != '' && this.address != '' } else { return this.selected != 'none' && this.number != 0 && this.address != '' }
 		},
-		GetNextOID() {
+		GetNextOID () {
 			return this.$store.state.orders.length
 		}
 	},
@@ -146,17 +146,17 @@ export default {
 			this.$store.dispatch('updateOrderInOrders', {
 				oid: this.GetNextOID,
 				doc: {
-					"Bike ID": rbid,
-					"Bike Type": bikeType,
+					'Bike ID': rbid,
+					'Bike Type': bikeType,
 					Location: this.address,
 					NumberOfBikes: numberBikes,
-					"Order Type": this.value,
-					Status: "Pending",
+					'Order Type': this.value,
+					Status: 'Pending',
 					uid: this.$store.state.user.uid
 				}
 			})
-			this.orderPlaced = true;
-			this.value = "bla";
+			this.orderPlaced = true
+			this.value = 'bla'
 		}
 	}
 

@@ -74,9 +74,9 @@
 						<b-row v-if='IsPaymentMethodSelected == false'>
 							<b-alert show variant="light" style="font-size: 15px; width:100%">
 								You haven't added a payement method yet
-								<b-button 
-									@click="$router.push('/newCard')" 
-									block 
+								<b-button
+									@click="$router.push('/newCard')"
+									block
 									variant="danger">
 									<i class="fas fa-plus">
 										Add a payement method
@@ -116,8 +116,8 @@ export default {
 		return {
 			StartDate: '',
 			StartTime: '',
-			selected:true,
-			BikeType:null
+			selected: true,
+			BikeType: null
 		}
 	},
 	computed: {
@@ -162,7 +162,7 @@ export default {
 		FormTitle () {
 			return 'Available book types at ' + this.$store.state.selectedStation
 		},
-		IsPaymentMethodSelected() {
+		IsPaymentMethodSelected () {
 			return this.$store.state.userInfo.SelectedPaymentMethod != -1
 		}
 	},

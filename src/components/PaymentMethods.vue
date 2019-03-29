@@ -30,7 +30,7 @@
 export default {
 	name: 'PaymentMethods',
 	props: {
-		DisplayAddButton: false
+		DisplayAddButton: Boolean
 	},
 	computed: {
 		PaymentMethods () {

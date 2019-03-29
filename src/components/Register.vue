@@ -92,12 +92,12 @@ export default {
 					this.$router.push('/profile')
 					this.$store.state.loading = false
 				}).catch(err => {
-					console.log('User info error',err)
+					console.log('User info error', err)
 					this.errorMsg = err.message
 					this.$store.state.loading = false
 				})
 			}).catch(err => {
-				console.log('Register error',err)
+				console.log('Register error', err)
 				this.errorMsg = err.message
 				this.$store.state.loading = false
 			})
