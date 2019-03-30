@@ -11,12 +11,11 @@
           <label for="inputLive">Please enter your Bike ID:</label>
         <b-form-input
           id="inputLive"
-          v-model="reportForm['bikeIdInput']"
+          v-model="reportForm.bikeIdInput"
           trim
           type="text"
           required
           pattern="[A-Z]{2}[0-9]{5}"
-          size = "7"
           :state="IdInputState"
           aria-describedby="inputLiveHelp inputLiveFeedback"
           placeholder="XX12345"
@@ -88,21 +87,21 @@ export default {
       text:'',
       name:'',
       reportForm:{
-        'bikeIdInput': '',
-        'selected': null,
-        'messageInput': ''
+        bikeIdInput: '',
+        selected: null,
+        messageInput: ''
       }
 		}
 	},
   computed:{
     IdInputState () {
-      this.reportForm['bikeIdInput'].length == 7 ? true : false
-    }
-    // IsFormComplete () {
-		// 	return this.reportForm.bikeIdInput != '' &&
-    //     this.reportForm.selected != null &&
-    //     this.reportForm.messageInput != ''
-		// }
+      this.reportForm.bikeIdInput.length == 7 ? true : false
+    },
+    IsFormComplete () {
+			return this.reportForm.bikeIdInput != '' &&
+        this.reportForm.selected != null &&
+        this.reportForm.messageInput != ''
+		}
   },
   methods:{
     okButton(){
