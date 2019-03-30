@@ -37,7 +37,7 @@
 						trim
 						required
 						type="password"
-						:state="emailState"
+						:state="passState"
 						aria-describedby="inputLiveHelp inputLiveFeedback"
 						placeholder="******"
 					/>
@@ -60,7 +60,7 @@ export default {
 			return this.signupForm.email.length > 5 ? true : null
 		},
 		passState () {
-			return this.signupForm.password.length > 5 ? true : null
+			return this.signupForm.password.length > 5 ? true : false
 		}
 	},
 	name: 'Register',
@@ -82,22 +82,22 @@ export default {
 				this.$store.dispatch('updateUserProfile', {
 					displayName: this.signupForm.name
 				})
-				fb.usersCollection.doc(user.user.uid).update({
+				fb.usersCollection.doc(user.user.uid).set({
 					PermissionLevel: 0,
 					SelectedPaymentMethod: -1,
 					PaymentMethods: [],
 					Type: 'Customer'
 				}).then(() => {
-					console.log('User info success',err)
+					console.log('User info success')
 					this.$router.push('/profile')
 					this.$store.state.loading = false
 				}).catch(err => {
-					console.log('User info error',err)
+					console.log('User info error', err)
 					this.errorMsg = err.message
 					this.$store.state.loading = false
 				})
 			}).catch(err => {
-				console.log('Register error',err)
+				console.log('Register error', err)
 				this.errorMsg = err.message
 				this.$store.state.loading = false
 			})

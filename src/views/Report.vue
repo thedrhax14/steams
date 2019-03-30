@@ -6,19 +6,21 @@
     		</b-row>
         <hr>
         <br>
+        <div class="form-group">
         <div role="group">
           <label for="inputLive">Please enter your Bike ID:</label>
-    <b-form-input
-      id="inputLive"
-      v-model="reportForm.bikeIdInput"
-      trim
-      type="text"
-      pattern="[A-Z]{2}[0-9]{5}"
-      size = "7"
-      :state="IdInputState"
-      aria-describedby="inputLiveHelp inputLiveFeedback"
-      placeholder="XX12345"
-    />
+        <b-form-input
+          id="inputLive"
+          v-model="reportForm['bikeIdInput']"
+          trim
+          type="text"
+          required
+          pattern="[A-Z]{2}[0-9]{5}"
+          size = "7"
+          :state="IdInputState"
+          aria-describedby="inputLiveHelp inputLiveFeedback"
+          placeholder="XX12345"
+        />
     <b-form-invalid-feedback id="inputLiveFeedback">
           Enter at least 7 characters
     </b-form-invalid-feedback>
@@ -45,7 +47,7 @@
       max-rows="6"
       />
       <pre class="mt-3 mb-0">{{ text }}</pre>
-    </div>
+
     <div>
   <b-button v-b-modal.modal-center
   block
@@ -53,9 +55,11 @@
   >Report</b-button>
   <b-modal id="modal-center" style="height:100px;" centered title="Thank you!">
     <p class="my-4">Your feedback has been received.</p>
-    <b-button class="btn btn-primary" @click="okButton">OK</b-button>
   </b-modal>
 </div>
+</div>
+</div>
+<b-button block style="text-align:center;" href="/">Return to book a bike</b-button>
 </b-container>
 </b-jumbotron>
 </template>
@@ -84,26 +88,26 @@ export default {
       text:'',
       name:'',
       reportForm:{
-        bikeIdInput: '',
-        selected: null,
-        messageInput: ''
+        'bikeIdInput': '',
+        'selected': null,
+        'messageInput': ''
       }
 		}
 	},
+  computed:{
+    IdInputState () {
+      this.reportForm['bikeIdInput'].length == 7 ? true : false
+    }
+    // IsFormComplete () {
+		// 	return this.reportForm.bikeIdInput != '' &&
+    //     this.reportForm.selected != null &&
+    //     this.reportForm.messageInput != ''
+		// }
+  },
   methods:{
     okButton(){
       this.$router.push('/')
     }
-  },
-  computed:{
-    IdInputState (){
-      this.reportForm.bikeIdInput.length == 7? true : false
-    },
-    IsFormComplete () {
-			return this.reportForm.bikeIdInput != '' &&
-        this.reportForm.selected != null &&
-        this.reportForm.messageInput != ''
-		}
   }
 }
 </script>

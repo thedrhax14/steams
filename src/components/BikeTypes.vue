@@ -20,7 +20,7 @@
 							<div id="type" v-on:click="selected = !selected" v-bind:class="{selected: selected}">
 							<img :src='GetImage(BikeType.id)' style="width:60%">
 							<h5>{{ BikeType.data['Type name'] }}</h5>
-							<strong>{{ BikeType.data.Price }} €/hr</strong>
+							<strong>{{ BikeType.data.Price }} £/hr</strong>
 							</div>
 						</b-list-group-item>
 				</b-list-group>
@@ -39,8 +39,11 @@
 			</b-row>
 			<div style="text-align:center;" class="booking-summary">
 				 <h4>Booking summary:</h4>
+				 <p> <i class="fas fa-credit-card"></i>&nbsp;
+				 Payment method:
+				 Card ending in ** {{ this.$store.state.userInfo.PaymentMethods[this.$store.state.userInfo.SelectedPaymentMethod]['Card number'] }} </p>
 				<p v-if='AvailableBikeAtLocationByBikeTypeID'>
-					Bike ID: {{ AvailableBikeAtLocationByBikeTypeID.id }}
+					Bike type: {{ BikeType.data['Type name'] }}
 				</p>
 				<p v-if='StartDate'>
 					Date: {{ StartDate }}

@@ -39,9 +39,6 @@
   </div>
 </template>
 <script>
-import Mapbox from 'mapbox-gl-vue'
-import Vue from 'vue'
-
 export default {
 
 	data () {
@@ -54,7 +51,7 @@ export default {
 	},
 	computed: {
 		IsFormComplete () {
-			return this.trackBID != ''
+			return this.trackBID !== ''
 		}
 	},
 	methods: {
@@ -64,10 +61,9 @@ export default {
 			this.check = 1
 			var doesNotExist = 1
 			this.$store.state.bikes.forEach(bikeDoc => {
-				if (bikeDoc.id == this.trackBID && !bikeDoc.data.Reserved) {
-          console.log('entered')
-					if ((bikeDoc.data['Location']) != null) { this.location = (bikeDoc.data['Location']); doesNotExist=0 }
-          else  {this.location = 'Bike under use by customer';  doesNotExist=0}
+				if (bikeDoc.id === this.trackBID && !bikeDoc.data.Reserved) {
+					console.log('entered')
+					if ((bikeDoc.data['Location']) != null) { this.location = (bikeDoc.data['Location']); doesNotExist = 0 } else { this.location = 'Bike under use by customer'; doesNotExist = 0 }
 				}
 				// console.log('BikeTypeIDs',BikeTypeIDs)
 			})
