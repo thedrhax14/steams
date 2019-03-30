@@ -1,183 +1,134 @@
 <template>
-		<body>
-			<div class="wrap" style="margin-top: 50px;">
-			<h2> My reservations</h2>
-			<hr>
-			<br/>
-			<div class="card text-center">
-				<div class="card-header" style="font-weight:bold;">
-						Bike ID: 01256
-				</div>
-				<div class="card-body">
-					<p class="card-text">
-					<ul class="card-list-reservation">
-					<li>PIN: ***33 </li>
-					<li>Going to: Edinburgh Park</li>
-					<li>Start time: 7:25pm</li>
-					<li>Status: Reserved</li>
-					<li>End time: 9:30pm</li>
-					</ul>
-				</p>
+	<b-jumbotron bg-variant="light" fluid>
+	<b-container fluid>
+		<b-row>
+			<h2 class="page-title">My reservations</h2>
+		</b-row>
+		<b-row class="justify-content-md-center">
+			<b-card-group v-if='UserReservations.length>0'>
+				<b-container>
+					<b-row
+						v-for="(reservation, index) in UserReservations"
+						v-bind:key='index'
+						align="center">
+						<b-card
+							:header="Title(reservation.data.BikeID)"
+							:border-variant='CardVariant(reservation.data.Status)'
+							:header-bg-variant='CardVariant(reservation.data.Status)'
+							header-text-variant="white">
+							<b-list-group v-if='reservation.data.Status == "Reserved"'>
+								<b-list-group-item>
+									PIN: {{ reservation.data.PIN }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Start location: {{ reservation.data['Start location'] }} Station
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									<b-button block @click='deleteReservation(index)' variant='outline-danger'>Cancel</b-button>
+								</b-list-group-item>
+							</b-list-group>
+							<b-list-group v-else-if='reservation.data.Status == "Cancelled"'>
+								<b-list-group-item>
+									Reservation is cancelled by user
+								</b-list-group-item>
+								<b-list-group-item>
+									Cancel Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Cancel Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
+								</b-list-group-item>
+							</b-list-group>
+							<b-list-group v-else>
+								<b-list-group-item>
+									Trip was completed
+								</b-list-group-item>
+								<b-list-group-item>
+									Start location: {{ reservation.data['Start location'] }} Station
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Date: {{ SecondsToLocalDate(reservation.data['Start time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									Start Time: {{ NanosecondsToTime(reservation.data['Start time & date'].nanoseconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									End Date: {{ SecondsToLocalDate(reservation.data['End time & date'].seconds) }}
+								</b-list-group-item>
+								<b-list-group-item>
+									End Time: {{ NanosecondsToTime(reservation.data['End time & date'].nanoseconds) }}
+								</b-list-group-item>
+							</b-list-group>
+			 			</b-card>
+			 		</b-row>
+		 		</b-container>
+			</b-card-group>
+			<div style="width:100%" v-else>
+				<b-alert show variant="light" style="width:100%">No reservations yet</b-alert>
 			</div>
-			</div>
-
-			<br/>
-			<div class="card text-center">
-				<div class="card-header" style="font-weight:bold;">
-						Bike ID: 04231
-				</div>
-				<div class="card-body">
-					<p class="card-text">
-		  			<ul class="card-list-reservation">
-						    <li v-for="item in items">{{ item.message }} </li>
-		  			</ul>
-					</p>
-				</div>
-			</div>
-		</div>
-
-		<br/>
-		<br/>
-
-		<footer class="page-footer font-small mdb-color pt-4">
-
-			<!-- Footer Links -->
-			<div class="container text-center text-md-left">
-
-				<!-- Footer links -->
-				<div class="row text-center text-md-left mt-3 pb-3">
-
-					<!-- Grid column -->
-
-					<hr class="w-100 clearfix d-md-none">
-
-					<!-- Grid column -->
-					<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-						<h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
-						<p>
-							<a href='/profile'>Your Account</a>
-						</p>
-						<p>
-							<a href='/'>Help</a>
-						</p>
-						<p>
-							<a href='/Licenseagreement'>License Agreement</a>
-						</p>
-						<p>
-							<a href='/Termsofservice'>Terms of Service</a>
-						</p>
-					</div>
-					<!-- Grid column -->
-
-					<!-- Grid column -->
-					<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-						<h6 class="text-uppercase mb-4 font-weight-bold">Support</h6>
-						<p>
-							<a href='/FAQ'>FAQ</a>
-						</p>
-						<p>
-							<a href='/safety'>Safety</a>
-						</p>
-						<p>
-							<a href='/Licenseagreement'>License Agreement</a>
-						</p>
-
-					</div>
-					<!-- Grid column -->
-					<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-						<h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-						<p>
-							<i class="fas fa-envelope mr-3"></i> spin@gmail.com</p>
-						<p>
-							<i class="fas fa-phone mr-3"></i> 04 74 567 88</p>
-						<p>
-							 <i class="fas fa-calendar mr-3"></i>Friday – Thursday: 8am to 10pm</p>
-						<p>
-								<i class="fas fa-map-marker-alt mr-3"></i>Edinburgh, United Kingdom</p>
-					</div>
-				<!-- Grid column -->
-				<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">Company</h6>
-
-					<p>
-						<a href='/about'>About Us</a>
-					</p>
-				</div>
-				</div>
-				<!-- Grid row -->
-				<div class="row d-flex align-items-center">
-
-					<!-- Grid column -->
-					<div class="col-md-7 col-lg-8">
-
-						<!--Copyright-->
-						<p class="text-center text-md-left">&copy; 2019 Copyright:
-							<a href="https://mdbootstrap.com/education/bootstrap/">
-								<strong> Spin.com</strong>
-							</a>
-						</p>
-
-					</div>
-					<!-- Grid column -->
-
-					<!-- Grid column -->
-					<div class="col-md-5 col-lg-4 ml-lg-0">
-
-						<!-- Social buttons -->
-						<div class="text-center text-md-right">
-							<ul class="list-unstyled list-inline">
-								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1">
-										<i class="fab fa-facebook-f"></i>
-									</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1">
-										<i class="fab fa-twitter"></i>
-									</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1">
-										<i class="fab fa-google-plus-g"></i>
-									</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1">
-										<i class="fab fa-linkedin-in"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-
-					</div>
-					<!-- Grid column -->
-
-				</div>
-				<!-- Grid row -->
-
-			</div>
-			<!-- Footer Links -->
-
-		</footer>
-</body>
+		</b-row>
+	</b-container>
+</b-jumbotron>
 </template>
 
 <script>
-// const fb = require('../firebaseConfig.js')
-
-// Make selection of timestamp from valid input element like celander
 export default {
 	data () {
-	 items: [
-		 { message: 'PIN' },
-		 { message: 'Going to:' },
-		 { message: 'Start time:' },
-		 { message: 'Status:' }
-	 ]
+		return {
+			fluid: true
+		}
 	},
-	created () {
-		if (this.$store.state.bikeTypes.length === 0) {
-			this.$store.dispatch('fetchbikeTypes')
+	name: 'Reservations',
+	computed: {
+		UserReservations () {
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid && entry.data.Status != 'Cancelled')
+		}
+	},
+	methods: {
+		Title (BikeID) {
+			return 'Bike ID: ' + BikeID
+		},
+		CardVariant (Status) {
+			if (Status == 'Cancelled') { return 'danger' } else if (Status == 'Reserved') { return 'primary' } else if (Status == 'Completed') { return 'success' }
+		},
+		SecondsToLocalDate (secs) {
+			var d = new Date(1970, 0, 1)
+			d.setSeconds(secs)
+			return d.toLocaleDateString()
+		},
+		NanosecondsToTime (nanosecs) {
+			var seconds = nanosecs / 10000
+			var hour = Math.floor(seconds / 3600) % 24
+			var min = Math.floor(seconds / 60) % 60
+			var hourString = ''
+			var minString = ''
+			if (hour < 10) hourString = '0' + hour
+			else hourString = hour
+			if (min < 10) minString = '0' + min
+			else minString = min
+			return hourString + ':' + minString
+		},
+		deleteReservation (index) {
+			var reservation = this.UserReservations[index]
+			console.log('Deleting', reservation[index])
+			this.$store.dispatch('updateHistory', {
+				id: reservation.id,
+				doc: {
+					BikeID: reservation.data.BikeID,
+					PIN: reservation.data.PIN,
+					'Start location': reservation.data['Start location'],
+					'Start time & date': reservation.data['Start time & date'],
+					'End location': '',
+					'End time & date': new Date(),
+					Status: 'Cancelled',
+					uid: this.$store.state.user.uid
+				}
+			})
 		}
 	}
 }

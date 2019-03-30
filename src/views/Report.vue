@@ -1,66 +1,113 @@
 <template>
-  <body>
-    <div class="wrap" style="margin-top: 50px;">
-    <h2> Report an issue</h2>
-    <hr>
-    <br/>
-    <form method="POST" enctype="multipart/form-data">
-        <label for="inputEmail4"><h3> Please enter your Bike ID: </h3></label>
-        <input type="text" pattern="[A-Z]{2}[0-9]{5}" class="form-control" size = "7" id="inputNumber4"  name="bikecount"  placeholder="XX12345" required>
-        <small class="text-muted" style="font-size: 11px;">
-          The BikeID of the format XX12345 (Two uppercase letters followed by 5 numbers).
-        </small>
-       <br>
-       <h3> What would you like to report about? </h3>
-       <div class="input-group">
-         <input type="text" class="form-control" placeholder="Other">
-         <div class="selection-list">
-           <select class="form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <div class="dropdown-menu">
-               <option>Bike Damage</option>
-               <option>Lock pin timeout</option>
-               <option>Connection problem</option>
-             </div>
-           </select>
-         </div>
-       </div>
-       <br/>
-       <div>
-    <!-- Styled -->
-    <b-form-file
-      v-model="file"
-      :state="Boolean(file)"
-      placeholder="Choose a file..."
-      drop-placeholder="Drop file here..."
-    />
-    <div class="mt-3">{{ file ? file.name : '' }}</div>
-  </div>
-  <br/>
-       <h3> What issue did you face with your bike? </h3>
-       <div class="form-group">
-          <label class="custom-file-upload">
-            <i class="fas fa-plus"></i>Add an image
-          </label>
-       </div>
-       <button type="submit" name="submit">UPLOAD</button>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us more about your issue..."></textarea>
-        <br/>
+      <b-jumbotron bg-variant="light" class="sm-8 md-8">
+    	<b-container fluid>
+        <b-row>
+    			 <h2 class="page-title">Report an issue</h2>
+    		</b-row>
         <hr>
-       <button id="my_button" type="button" class="btn btn-danger" style="margin-left:140px; width:200px;">Report</button>
-       <div id="my_modal" class="modall">
-      </div>
-    </form>
-    </div>
-  </body>
+        <br>
+        <div class="form-group">
+        <div role="group">
+          <label for="inputLive">Please enter your Bike ID:</label>
+        <b-form-input
+          id="inputLive"
+          v-model="reportForm['bikeIdInput']"
+          trim
+          type="text"
+          required
+          pattern="[A-Z]{2}[0-9]{5}"
+          size = "7"
+          :state="IdInputState"
+          aria-describedby="inputLiveHelp inputLiveFeedback"
+          placeholder="XX12345"
+        />
+    <b-form-invalid-feedback id="inputLiveFeedback">
+          Enter at least 7 characters
+    </b-form-invalid-feedback>
+    <br>
+    <label for="inputLive">What would you like to report about?</label>
+    <b-form-select
+     v-model="reportForm.selected"
+     class="mb-3"
+     placeholder="Other"
+     type="text"
+     >
+        <option value="BD">Bike Damage</option>
+        <option value="LP">Lock pin timeout</option>
+        <option value="CP">Connection problem</option>
+    </b-form-select>
+    <br>
+    <label for="inputLive"> What issue did you face with your bike?</label>
+    <br>
+    <b-form-textarea
+      id="textarea"
+      v-model="reportForm.messageInput"
+      placeholder="Tell us more about your issue..."
+      rows="3"
+      max-rows="6"
+      />
+      <pre class="mt-3 mb-0">{{ text }}</pre>
+
+    <div>
+  <b-button v-b-modal.modal-center
+  block
+  variant="danger"
+  >Report</b-button>
+  <b-modal id="modal-center" style="height:100px;" centered title="Thank you!">
+    <p class="my-4">Your feedback has been received.</p>
+  </b-modal>
+</div>
+</div>
+</div>
+<b-button block style="text-align:center;" href="/">Return to book a bike</b-button>
+</b-container>
+</b-jumbotron>
 </template>
+
+<!--<div>
+    <b-alert
+      :show="dismissCountDown"
+      dismissible
+      variant="warning"
+      @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged"
+    >
+      Thank you! Your feedback has been received.
+      you will be redirected to the homepage in {{ dismissCountDown }} seconds...
+    </b-alert>
+    <b-button @click="showAlert" variant="danger" class="m-1">
+      Report
+    </b-button>
+  </div>-->
 
 <script>
 export default {
+  name:'Report',
 	data () {
 		return {
-			file: null,
-			file2: null
+      text:'',
+      name:'',
+      reportForm:{
+        'bikeIdInput': '',
+        'selected': null,
+        'messageInput': ''
+      }
 		}
-	}
+	},
+  computed:{
+    IdInputState () {
+      this.reportForm['bikeIdInput'].length == 7 ? true : false
+    }
+    // IsFormComplete () {
+		// 	return this.reportForm.bikeIdInput != '' &&
+    //     this.reportForm.selected != null &&
+    //     this.reportForm.messageInput != ''
+		// }
+  },
+  methods:{
+    okButton(){
+      this.$router.push('/')
+    }
+  }
 }
 </script>

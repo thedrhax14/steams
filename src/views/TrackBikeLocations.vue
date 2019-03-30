@@ -1,60 +1,73 @@
 <template>
   <div class="trackbl">
-    <b-jumbotron>
+    <b-jumbotron bg-variant="light">
       <div class="page-header">
       <h1>Bike Tracking</h1>
     </div>
     <hr>
-    <form  action="">
-      <div class="form-row" >
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Bike ID</label>
-          <b-form-input v-model="trackBID" id="inputNumber4" pattern="[A-Z]{2}[0-9]{5}"  type="text" class="form-control" size ="7"placeholder=" XX12345" required/>
-          <small class="text-muted">
-         The BikeID of the format XX12345 (Two uppercase letters followed by 5 numbers).
-       </small>
-         <div class="mt-2">Value(checking BID read): {{ trackBID }}</div>
-        </div>
-      </div>
-        <div class="form-row" >
-      <b-form-checkbox  id="checkbox1"    name="checkbox1" v-model="user_info"  value="include_user_info"    unchecked-value="exclude_user_info"  >
-      Get more user details
-    </b-form-checkbox>
-    <div>State: <strong>{{ user_info }}</strong></div>
-  </div>
-  <div class="form-row">
-      <button type="submit" class="btn btn-danger mt-2" @click="showBikeLocation(trackBID)">Track</button>
-      <div>
-        {{ location }}
-       </div>
-  </div>
-    </form>
-    <br>
+    <b-container fluid>
+      <b-row>
+        <b-col>
+          <form  action="">
+            <div class="form-row" >
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Bike ID</label>
+                <b-form-input v-model="trackBID" id="inputNumber4" pattern="[A-Z]{2}[0-9]{5}"  type="text" class="form-control" size ="7"placeholder=" XX12345" required/>
+                <small class="text-muted">
+               The BikeID of the format XX12345 (Two uppercase letters followed by 5 numbers).
+             </small>
+              </div>
+            </div>
+          <div class="form-row">
+            <b-button  class="btn btn-danger mt-2" @click="getBikes" 	:disabled='!IsFormComplete'>Track</b-button>
+          </div>
+          </form>
+        </b-col>
+        <b-col>
+          <div >
+            <b-card bg-variant="danger" header="Location" class="text-center" text-variant="white">
+                <b-card-text text-variant="white" >Currently at: <p v-if="check">{{ location }}</p><p v-else>(Please enter BikeID)</p></b-card-text>
+              </b-card>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
 
+    <br>
   </b-jumbotron>
 
   </div>
 </template>
 <script>
 export default {
+
 	data () {
 		return {
-			trackBID: ' ', // store the ID to be tracked
-			user_info: 'exclude_user_info',
-			bikes: [
-				{ bikeID: 'BX1234', location: 'CircusLane' }
-			],
-			location: ''
+			trackBID: '', // store the ID to be tracked
+			location: 'Bike under use by customer',
+			check: 0
+
+		}
+	},
+	computed: {
+		IsFormComplete () {
+			return this.trackBID !== ''
 		}
 	},
 	methods: {
-		showUserDetails (value) {
-
+		submit (evt) {
 		},
-		showBikeLocation (bikeID) {
-			alert('bla bla ' + bikeID)
-			var loc = this.bikes[0].location
-			this.location = loc
+		getBikes () {
+			this.check = 1
+			var doesNotExist = 1
+			this.$store.state.bikes.forEach(bikeDoc => {
+				if (bikeDoc.id === this.trackBID && !bikeDoc.data.Reserved) {
+					console.log('entered')
+					if ((bikeDoc.data['Location']) != null) { this.location = (bikeDoc.data['Location']); doesNotExist = 0 } else { this.location = 'Bike under use by customer'; doesNotExist = 0 }
+				}
+				// console.log('BikeTypeIDs',BikeTypeIDs)
+			})
+			if (doesNotExist) { this.location = 'This BikeID does not exist!' }
 		}
 	}
 }

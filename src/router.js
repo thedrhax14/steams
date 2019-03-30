@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase'
-
+// User
 import About from './views/About.vue'
 import Bikes from './views/Bikes.vue'
 import TOS from './views/TOS.vue'
@@ -11,12 +11,15 @@ import Recents from './views/Recents.vue'
 import Report from './views/Report.vue'
 import Reservations from './views/Reservations.vue'
 import Payement from './views/Payement.vue'
+import NewPayement from './views/NewPayement.vue'
 import Safety from './views/Safety.vue'
 import PlaceReservation from './views/PlaceReservation.vue'
+import ConfirmOrder from './views/confirmOrder.vue'
 import Profile from './views/Profile.vue'
 import Auth from './views/Auth.vue'
 import InstalledPlugins from './views/InstalledPlugins.vue'
-import StationsMap from './views/StationsMap.vue'
+import BookPage from './views/BookPage.vue'
+import Dashboard from './views/Dashboard.vue'
 // operator
 import PlaceOrders from './views/PlaceOrders.vue'
 import TrackBikeLocations from './views/TrackBikeLocations.vue'
@@ -24,6 +27,8 @@ import ReviewOrders from './views/ReviewOrders.vue'
 // manager
 import ManagerStatistics from './views/managerStatistics.vue'
 //import graph from './components/graph/graph.vue'
+
+import StationInterface from './views/StationInterface.vue'
 
 Vue.use(Router)
 
@@ -33,13 +38,32 @@ const router = new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'StationsMap',
-			component: StationsMap
+			name: 'BookPage',
+			component: BookPage,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/newCard',
+			name: 'NewPayement',
+			component: NewPayement,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/about',
 			name: 'About',
 			component: About
+		},
+		{
+			path: '/confirm',
+			name: 'ConfirmOrder',
+			component: ConfirmOrder,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/licenseagreement',
@@ -49,17 +73,26 @@ const router = new Router({
 		{
 			path: '/recents',
 			name: 'Recents',
-			component: Recents
+			component: Recents,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/reservations',
 			name: 'Reservations',
-			component: Reservations
+			component: Reservations,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/report',
 			name: 'Report',
-			component: Report
+			component: Report,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/bikes',
@@ -67,14 +100,25 @@ const router = new Router({
 			component: Bikes
 		},
 		{
+			path: '/dashboard',
+			name: 'Dashboard',
+			component: Dashboard
+	  },
+		{
 			path: '/payement',
 			name: 'Payement',
-			component: Payement
+			component: Payement,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/reserve',
 			name: 'PlaceReservation',
-			component: PlaceReservation
+			component: PlaceReservation,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/installedplugins',
@@ -125,17 +169,22 @@ const router = new Router({
 			component: PlaceOrders
 		},
 		{
+			path: '/stationinterface',
+			name: 'stationinterface',
+			component: StationInterface
+		},
+		{
 			path: '/auth',
 			name: 'Auth',
 			component: Auth,
 			meta: {
-				requiresAuth: false
+				requiresGuest: true
 			}
 		}
 	]
 })
 
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
 	const currentUser = firebase.auth().currentUser
 	if (requiresAuth && !currentUser) {
@@ -145,6 +194,33 @@ router.beforeEach((to, from, next) => {
 	} else {
 		next()
 	}
-})
+}) */
 
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(x => x.meta.requiresAuth)) {
+		if (!firebase.auth().currentUser) {
+			next({
+				path: '/auth',
+				query: {
+					redirect: to.fullPath
+				}
+			})
+		} else {
+			next()
+		}
+	} else if (to.matched.some(x => x.meta.requiresGuest)) {
+		if (firebase.auth().currentUser) {
+			next({
+				path: '/',
+				query: {
+					redirect: to.fullPath
+				}
+			})
+		} else {
+			next()
+		}
+	} else {
+		next()
+	}
+})
 export default router

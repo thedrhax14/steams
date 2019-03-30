@@ -1,17 +1,17 @@
 <template>
 	<div class="profile">
+		<b-jumbotron bg-variant="light" class="sm-8 md-8">
+		<b-container fluid>
 		<transition name="fade">
 			<div v-if="this.$store.state.performingRequest" class="loading">
 				<p>..</p>
 			</div>
 		</transition>
-		<h1>Profile</h1>
-		<p>UID - {{ this.$store.state.currentUser.uid }}</p>
-		<p>Name - {{ this.$store.state.currentUser.displayName }}</p>
-		<p>Permission level - {{ this.$store.state.userInfo.PermissionLevel }}</p>
-		<h1>Bike history</h1>
-		<button @click='returnDefaultBike'>Return default bike</button>
-		<button @click='bookDefaultBike'>Book default bike</button>
+		<h3>Profile</h3>
+		<p>Full Name - {{ this.$store.state.user.displayName }}</p>
+		<a href="#"><img src="@/../public/danny-pej.png"></a>
+	</b-container>
+</b-jumbotron>
 	</div>
 </template>
 
@@ -20,27 +20,26 @@ export default {
 	data () {
 		return {
 			defaultBikeData: {
-				biketypeId: 'BJUocgao1XSIYR2LnkWp',
-				bikeId: 'A04OkMgvxO12QSjTD5pK'
+				biketypeId: 'MB',
+				bikeId: '00001'
 			}
 		}
 	},
-	methods: {
-		returnDefaultBike () {
-			this.$store.dispatch('returnBike', this.defaultBikeData)
+	computed: {
+		myReservations () {
+			return this.$store.state.history.filter(entry => entry.data.uid == this.$store.state.user.uid)
 		},
-		bookDefaultBike () {
-			this.$store.dispatch('bookBike', this.defaultBikeData)
+		UserInfo () {
+			return this.$store.state.userInfo
 		}
 	},
-	beforeCompile () {
-		console.log('beforeCompile', this)
-	},
-	compiled () {
-		console.log('compiled', this)
-	},
-	ready () {
-		console.log('ready', this)
+	created () {
+		// console.log('dispatch \'fetchUserInfomation\' on created in Profile.vue')
+		// this.$store.dispatch('fetchUserInfomation', this.$store.state.user.uid)
+		// console.log('commit \'setUserHistory\' on created in Profile.vue')
+		// this.$store.commit('setUserHistory', [])
+		// console.log('dispatch \'fetchUserHistory\' on created in Profile.vue')
+		// this.$store.dispatch('fetchUserHistory')
 	}
 }
 </script>

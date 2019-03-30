@@ -1,24 +1,50 @@
 <template>
-	<div>
-		<h1>Booking at {{ this.$store.state.selectedStation }}</h1>
-		<b-form-group label="Bike types at the station">
+	<div class="wrap">
+		<h1 id="reservationTitle">Booking at {{ this.$store.state.selectedStation + ' Station' }}</h1>
+			<br>
+			<h3> <i class="fas fa-list-ol"></i> &nbsp; How many bikes do you need? </h3>
+			<br>
+			<div class="form-group">
+			  <b-form-select v-model="selected" class="mb-3">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+				</b-form-select>
+		</div>
+		<h3><i class="fas fa-bicycle"></i> &nbsp; What type of bike? </h3>
+		<b-form-group align="center" label="Bike types available at the station:">
+			<br>
 			<b-form-radio
 				v-model="selectedBikeTypeId"
 				button
-				v-for="bikeType in this.$store.state.bikeTypes"
-				:value="bikeType.Id">
-				<BikeType :bikeTypeInfo='bikeType'/>
+				v-for="(bike, index) in this.$store.state.bikeTypes"
+				v-bind:key='index'
+				:value="bike.Id">
+				<BikeType v-if="bike.AvailableBikes.length > 0" :bikeTypeInfo='bike'/>
 			</b-form-radio>
-			<b-form-input v-model="startDate" type="date"/>
-			<b-form-input v-model="startTime" type="time"/>
+			<br>
 		</b-form-group>
-		<div class="mt-3">
-			<p>Selected: <strong>{{ selectedBikeTypeId }}</strong></p>
-			<p>Start startDate: <strong>{{ startDate }}</strong></p>
-			<p>Start startTime: <strong>{{ startTime }}</strong></p>
+		<div>
 		</div>
-		<b-button :disabled='!dateAndTimeState' variant="outline-success" @click='book'>
+		<br>
+		<h3><i class="fas fa-stopwatch"></i>&nbsp; What time? </h3>
+		<br>
+		<b-form-input v-model="startDate" type="date"/>
+		<br>
+		<b-form-input v-model="startTime" type="time"/>
+		<div class="mt-3">
+			<p>Bike: <strong>{{ selectedBikeTypeId }}</strong></p>
+			<p>Quantity: <strong>{{ selected }}</strong></p>
+			<p>Date: <strong>{{ startDate }}</strong></p>
+			<p>Start time: <strong>{{ startTime }}</strong></p>
+		</div>
+		<b-button :disabled='!dateAndTimeState' block variant="outline-success" @click='book'>
 			Book
+		</b-button>
+		<b-button block variant="outline-danger" @click='discard'>
+			Discard
 		</b-button>
 	</div>
 </template>
@@ -39,21 +65,26 @@ export default {
 	},
 	data () {
 		return {
+			selected: '',
 			selectedBikeTypeId: '',
-			startDate,
-			startTime
+			startDate: '',
+			startTime: ''
 		}
 	},
 	methods: {
 		book () {
-			alert('Booking ' + this.selectedBikeTypeId)
-			// this.$store.commit('bookFirstAvailableBikeType',this.selectedBikeTypeId)
+			// alert('Booking ' + this.selectedBikeTypeId)
+			this.$store.dispatch('bookFirstAvailableBikeType', {
+				bikeTypeId: this.selectedBikeTypeId,
+				StartDateAndTime: this.startDate + 'T' + this.startTime + ':00'
+			})
+		},
+		discard () {
+			this.$router.push('/')
 		}
 	},
 	created () {
-		if (this.$store.state.bikeTypes.length === 0) {
-			this.$store.dispatch('fetchbikeTypes')
-		}
+		this.$store.dispatch('fetchbikeTypes')
 	}
 }
 </script>

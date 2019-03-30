@@ -1,20 +1,68 @@
 <template>
 	<div>
-		<h1>Get Started</h1>
-		<label for="name">Name</label>
-		<input v-model.trim="signupForm.name" type="text" placeholder="user name" id="name" />
-		<label for="email2">Email</label>
-		<input v-model.trim="signupForm.email" type="text" placeholder="you@email.com" id="email2" />
-		<label for="password2">Password</label>
-		<input v-model.trim="signupForm.password" type="password" placeholder="min 6 characters" id="password2" />
-		<button @click="signup" class="button">Sign Up</button>
+		<b-jumbotron fluid>
+			<b-container>
+			  <h1>Let's get you started!</h1>
+			</b-container>
+			<b-container>
+			<br/>
+			<div class="form-group">
+				<div role="group">
+					<label for="inputLive">Full Name:</label>
+					<b-form-input
+						id="inputLive"
+						v-model.trim="signupForm.name"
+						trim
+						required
+						type="text"
+						:state="nameState"
+						aria-describedby="inputLiveHelp inputLiveFeedback"
+						placeholder="Full name"
+					/>
+					<label for="inputLive">Email address:</label>
+					<b-form-input
+						id="inputLive"
+						v-model.trim="signupForm.email"
+						trim
+						required
+						type="text"
+						:state="emailState"
+						aria-describedby="inputLiveHelp inputLiveFeedback"
+						placeholder="you@email.com"
+					/>
+					<label for="inputLive">Password:</label>
+					<b-form-input
+						id="inputLive"
+						v-model.trim="signupForm.password"
+						trim
+						required
+						type="password"
+						:state="passState"
+						aria-describedby="inputLiveHelp inputLiveFeedback"
+						placeholder="******"
+					/>
+				</div>
+			</div>
+			<b-button @click="signup" class="button">Sign up</b-button>
+			</b-container>
+		</b-jumbotron>
 	</div>
 </template>
 
 <script>
 const fb = require('../firebaseConfig.js')
-
 export default {
+	computed: {
+		nameState () {
+			return this.signupForm.name.length > 5 ? true : null
+		},
+		emailState () {
+			return this.signupForm.email.length > 5 ? true : null
+		},
+		passState () {
+			return this.signupForm.password.length > 5 ? true : false
+		}
+	},
 	name: 'Register',
 	data () {
 		return {
@@ -22,27 +70,36 @@ export default {
 				name: '',
 				email: '',
 				password: ''
-			}
+			},
+			errorMsg: ''
 		}
 	},
 	methods: {
 		signup () {
-			this.$store.state.performingRequest = true
+			this.$store.state.loading = true
 			fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
-				this.$store.commit('updateUserProfile', this.signupForm.name)
-				this.$store.commit('setCurrentUser', user.user)
+				this.$store.commit('setUser', user.user)
+				this.$store.dispatch('updateUserProfile', {
+					displayName: this.signupForm.name
+				})
 				fb.usersCollection.doc(user.user.uid).set({
+					PermissionLevel: 0,
+					SelectedPaymentMethod: -1,
+					PaymentMethods: [],
 					Type: 'Customer'
 				}).then(() => {
+					console.log('User info success')
 					this.$router.push('/profile')
-					this.$store.state.performingRequest = false
+					this.$store.state.loading = false
 				}).catch(err => {
+					console.log('User info error', err)
 					this.errorMsg = err.message
-					this.$store.state.performingRequest = false
+					this.$store.state.loading = false
 				})
 			}).catch(err => {
+				console.log('Register error', err)
 				this.errorMsg = err.message
-				this.$store.state.performingRequest = false
+				this.$store.state.loading = false
 			})
 		}
 	}

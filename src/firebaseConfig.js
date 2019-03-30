@@ -18,7 +18,7 @@ firebase.initializeApp(config)
 
 const db = firebase.firestore()
 const auth = firebase.auth()
-const currentUser = auth.currentUser
+const storage = firebase.storage()
 
 const settings = {
 	timestampsInSnapshots: true
@@ -26,13 +26,20 @@ const settings = {
 
 db.settings(settings)
 
-const bikeTypesCollection = db.collection('Bike Types')
 const usersCollection = db.collection('User Information')
+const bikeTypesCollection = db.collection('Bike Types')
+const historyCollection = db.collection('History')
+const bikesCollection = db.collection('Bikes')
+const ordersCollection = db.collection('Orders')
+const stationsCollection = db.collection('Lock Booths')
 
 export {
 	db,
 	auth,
-	currentUser,
+	storage,
+	usersCollection,
 	bikeTypesCollection,
-	usersCollection
+	historyCollection,
+	ordersCollection,
+	bikesCollection
 }

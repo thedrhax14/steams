@@ -1,29 +1,16 @@
 <template>
-  <body>
-  <div class="wrap" style="margin-top: 50px;">
-    <h2> Payement methods</h2>
-    <hr>
-    <br/>
-    <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action ">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1"><i class="fas fa-credit-card"></i> &nbsp;Credit Card: ending in **39</h5>
-      <small>Mastercard</small>
-    </div>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1"><i class="fas fa-credit-card"></i> &nbsp;Credit/Debit Card: ending in **52</h5>
-      <small class="text-muted">Visa</small>
-    </div>
-  </a>
-</div>
-    <hr>
-    <a href="newPayement.html" style="text-decoration:none;"><button type="button" class="btn btn-danger btn-lg btn-block"><i class="fas fa-plus"></i> &nbsp;Add a payement method</button></a>
-   </div>
-
-<br/>
-<br/>
-
-</body>
+	<b-jumbotron bg-variant="light" class="sm-8 md-8">
+		<PaymentMethods :DisplayAddButton='true'/>
+	</b-jumbotron>
 </template>
+
+<script>
+import PaymentMethods from '@/components/PaymentMethods.vue'
+
+export default {
+	name: 'PaymentInfo',
+	components: {
+		PaymentMethods
+	}
+}
+</script>

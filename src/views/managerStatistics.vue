@@ -1,4 +1,5 @@
 <template>
+
   <div class="charts">
     <div class="b">
       <button @click="hours">Busy Hours</button>
