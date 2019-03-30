@@ -46,7 +46,8 @@
 						<b-row>
 							<p> <i class="fas fa-credit-card"></i>&nbsp;
 		 				 Payment method:
-		 				 Card ending in ** {{ this.$store.state.userInfo.PaymentMethods[this.$store.state.userInfo.SelectedPaymentMethod]['Card number'].slice(14,16) }} </p>
+		 				 Card ending in ** {{ this.$store.state.userInfo.PaymentMethods[this.$store.state.userInfo.SelectedPaymentMethod]['Card number'].slice(14,16) }}
+					 </p>
 						</b-row>
 						<b-row>
 							<p v-if='AvailableBikeAtLocationByBikeTypeID'>

@@ -20,7 +20,6 @@
 					aria-describedby="inputLiveHelp inputLiveFeedback"
 					placeholder="you@email.com"
 				/>
-				<!-- This will only be shown if the preceeding input has an invalid state -->
 
 				<label for="inputLive">Passsword:</label>
 				<b-form-input
