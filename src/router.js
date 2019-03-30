@@ -183,7 +183,7 @@ const router = new Router({
 		}
 	]
 })
-
+//Allows for requiresAuth restrictions only therefore it was replaced with the code under
 /* router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
 	const currentUser = firebase.auth().currentUser
@@ -196,6 +196,7 @@ const router = new Router({
 	}
 }) */
 
+//Creates requiresAuth and requiresGuest restrictions
 router.beforeEach((to, from, next) => {
 	if (to.matched.some(x => x.meta.requiresAuth)) {
 		if (!firebase.auth().currentUser) {
