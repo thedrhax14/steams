@@ -104,9 +104,6 @@ export default {
 		},
 	  cvvState (){
 			return this.NewCardData.cvv.length == 3 ? true : false
-		},
-		expState (){
-			return this.ExpireDate!= null? true : false
 		}
  },
 	methods: {
