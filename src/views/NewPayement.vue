@@ -41,18 +41,14 @@
 					<br/>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="inputLive">Expiry date:</label>
-							<b-form-input
-								id="inputLive"
-								v-model.trim='NewCardData["Expire date"]'
-								trim
-								required
-								type="month"
-								:state="expDate"
-								aria-describedby="inputLiveHelp inputLiveFeedback"
-								placeholder="e.g. 06/23"
-							/>
-							<b-form-text id="input-live-help">in Month-YYYY format</b-form-text>
+							<label for="inputDate">Expiry date</label>
+							<input v-model='ExpireDate'
+							 type="date"
+							 class="form-control"
+							 required
+							 id="inputDate"
+							 placeholder="e.g. 06/23">
+							 <small class="text-muted">in DD-MMM-YYYY format</small>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="inputLive">CVV</label>
@@ -68,10 +64,10 @@
 							/>
 						</div>
 					</div>
+					<b-button :disabled='!IsFormComplete' @click="addNewCard" block variant="info"><i class="fas fa-save">
+						</i>&nbsp;Save card
+					</b-button>
 				</div>
-				<b-button :disabled='!IsFormComplete' @click="addNewCard" block variant="info"><i class="fas fa-save">
-					</i>&nbsp;Save card
-				</b-button>
 			</div>
 			</b-container>
 		</b-container>
@@ -95,24 +91,21 @@ export default {
 	computed: {
 		IsFormComplete () {
 			this.NewCardData['Expire date'] = new Date(this.ExpireDate + 'T00:00:00Z')
-			return this.NewCardData['Card holder'].length > 2 &&
+			return this.NewCardData['Card holder'].length > 5 &&
 			this.NewCardData['Card number'].length == 16 &&
-			this.NewCardData['Expire date'] != null &&
+			this.ExpireDate != null &&
 			this.NewCardData.cvv.length == 3
 		},
 		nameState () {
-			return this.NewCardData['Card holder'].length > 2 ? true : null
+			return this.NewCardData['Card holder'].length > 5 ? true : null
 		},
 		cNumberState () {
 			return this.NewCardData['Card number'].length == 16 ? true : false
 		},
-		expDate () {
-			return this.NewCardData['Expire date']!= null ? true : false
-		},
 	  cvvState (){
 			return this.NewCardData.cvv.length == 3 ? true : false
 		}
-	},
+ },
 	methods: {
 		addNewCard () {
 			this.$store.commit('addUserPaymentMethod', this.NewCardData)
