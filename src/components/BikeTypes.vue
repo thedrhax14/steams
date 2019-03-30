@@ -41,7 +41,7 @@
 				 <h4>Booking summary:</h4>
 				 <p> <i class="fas fa-credit-card"></i>&nbsp;
 				 Payment method:
-				 Card ending in ** {{ this.$store.state.userInfo.PaymentMethods[this.$store.state.userInfo.SelectedPaymentMethod]['Card number'].slice(14, 16) }} </p>
+				 Card ending in ** {{ this.$store.state.userInfo.PaymentMethods[this.$store.state.userInfo.SelectedPaymentMethod]['Card number'] }} </p>
 				<p v-if='AvailableBikeAtLocationByBikeTypeID'>
 					Bike type: {{ BikeType.data['Type name'] }}
 				</p>

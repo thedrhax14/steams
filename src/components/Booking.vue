@@ -37,14 +37,20 @@
 							<strong> Start time: </strong>
 							<b-form-input type="time" v-model='StartTime'/>
 						</b-row>
+						<hr>
 						<b-row>
 							<h4>
 								Booking summary:
 							</h4>
 						</b-row>
 						<b-row>
+							<p> <i class="fas fa-credit-card"></i>&nbsp;
+		 				 Payment method:
+		 				 Card ending in ** {{ this.$store.state.userInfo.PaymentMethods[this.$store.state.userInfo.SelectedPaymentMethod]['Card number'].slice(14,16) }} </p>
+						</b-row>
+						<b-row>
 							<p v-if='AvailableBikeAtLocationByBikeTypeID'>
-								Bike ID: {{ AvailableBikeAtLocationByBikeTypeID.id }}
+								Bike type: {{ BikeType.data['Type name'] }}
 							</p>
 							<p v-else>
 								...
@@ -68,7 +74,7 @@
 						</b-row>
 						<b-row>
 							<p v-if='BikeType'>
-								TOTAL: {{ BikeType.data.Price }} €
+								TOTAL: {{ BikeType.data.Price }} £
 							</p>
 						</b-row>
 						<b-row v-if='IsPaymentMethodSelected == false'>
