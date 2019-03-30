@@ -42,12 +42,15 @@
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputDate">Expiry date</label>
-							<input v-model='ExpireDate'
-							 type="date"
-							 class="form-control"
-							 required
-							 id="inputDate"
-							 placeholder="e.g. 06/23">
+							<b-form-input
+								id="inputLive"
+								v-model.trim='NewCardData.ExpireDate'
+								trim
+								required
+								type="date"
+								:state="expState"
+								aria-describedby="inputLiveHelp inputLiveFeedback"
+							/>
 							 <small class="text-muted">in DD-MMM-YYYY format</small>
 						</div>
 						<div class="form-group col-md-6">
@@ -62,6 +65,7 @@
 								aria-describedby="inputLiveHelp inputLiveFeedback"
 								placeholder="CVV"
 							/>
+							<b-form-text id="input-live-help">CVV-Please provide the 3-digit pin on the back of your card</b-form-text>
 						</div>
 					</div>
 					<b-button :disabled='!IsFormComplete' @click="addNewCard" block variant="info"><i class="fas fa-save">
@@ -83,7 +87,7 @@ export default {
 			NewCardData: {
 				'Card holder': '',
 				'Card number': '',
-				'Expire date': null,
+				ExpireDate: null,
 				cvv: ''
 			}
 		}
@@ -104,6 +108,9 @@ export default {
 		},
 	  cvvState (){
 			return this.NewCardData.cvv.length == 3 ? true : false
+		},
+		expState () {
+			return this.NewCardData.ExpireDate != null? true : false
 		}
  },
 	methods: {
